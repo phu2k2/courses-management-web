@@ -1,0 +1,50 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    container_name: internship-app
+    depends_on:
+      - mysql
+      - redis
+      - mailpit
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www/html
+
+  mysql:
+    image: mysql:8.1
+    container_name: internship-mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: internship-2023
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - internship-db:/var/lib/mysql/
+
+  # redis service
+  redis:
+    image: redis:alpine
+    container_name: internship-redis
+    ports:
+      - "6379:6379"
+
+  # mailpit - mail service
+  mailpit:
+    image: axllent/mailpit
+    container_name: internship-mailpit
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+networks:
+  laravel-exa:
+    driver: bridge
+
+volumes:
+  internship-db:
+    driver: local
