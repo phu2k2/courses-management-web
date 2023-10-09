@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('introduction');
             $table->decimal('price', 5, 2);
             $table->tinyInteger('discount');
-            $table->tinyInteger('category_id');
+            $table->tinyInteger('category_id')->unsigned();
             $table->integer('instructor_id');
             $table->string('trailer_url');
             $table->decimal('average_rating', 3, 1);

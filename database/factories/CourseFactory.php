@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,7 +24,9 @@ class CourseFactory extends Factory
             'introduction' => fake()->paragraph,
             'price' => fake()->randomFloat(2, 10, 100),
             'discount' => fake()->numberBetween(0, 50),
-            'category_id' => fake()->numberBetween(1, 5),
+            'category_id'  => function () {
+                return Category::factory()->create()->id;
+            },
             'instructor_id' => fake()->numberBetween(1, 10),
             'trailer_url' => fake()->url,
             'average_rating' => fake()->randomFloat(1, 1, 5),
