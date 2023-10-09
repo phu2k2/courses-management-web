@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'courses';
 
@@ -30,5 +31,4 @@ class Course extends Model
         'description',
         'is_active',
     ];
-
 }
