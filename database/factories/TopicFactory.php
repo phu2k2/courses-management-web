@@ -16,7 +16,7 @@ class TopicFactory extends Factory
      * @return array<string, mixed>
      */
     protected $model = Topic::class;
-    
+
     public function definition(): array
     {
         return [
