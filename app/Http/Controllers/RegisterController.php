@@ -9,7 +9,7 @@ class RegisterController extends Controller
 {
     public function show(): View
     {
-        return view('user.auth.login');
+        return view('user.auth.register');
     }
 
     public function store(): RedirectResponse
