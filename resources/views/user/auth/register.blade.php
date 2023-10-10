@@ -36,7 +36,7 @@
                                                 <label for="modalSignupEmail1">
                                                     Email
                                                 </label>
-                                                <input type="email" class="form-control" id="modalSignupEmail1"
+                                                <input type="email" name="email" class="form-control" id="modalSignupEmail1"
                                                     placeholder="johndoe@creativelayers.com" value="{{ old('email') }}">
                                                 @error('email')
                                                     <span class="text-alizarin fst-italic">{{ $message }}</span>
@@ -48,7 +48,7 @@
                                                 <label for="modalSignupPassword3">
                                                     Password
                                                 </label>
-                                                <input type="password" class="form-control" id="modalSignupPassword3"
+                                                <input type="password" name="password" class="form-control" id="modalSignupPassword3"
                                                     placeholder="**********" value="{{ old('password') }}">
                                                 @error('password')
                                                     <span class="text-alizarin fst-italic">{{ $message }}</span>
@@ -65,7 +65,7 @@
                                         <!-- Text -->
                                         <p class="mb-0 font-size-sm text-center">
                                             Already have an account? <a class="text-underline fw-semi-bold"
-                                                href="{{ route('login') }}">Log In</a>
+                                                href="{{ route('login.show') }}">Log In</a>
                                         </p>
                                     </div>
                                 </div>
