@@ -19,7 +19,7 @@ class CourseService
     }
 
     /**
-     * @return LengthAwarePaginator<Course> 
+     * @return LengthAwarePaginator<Course>
      */
     public function getListCourses(): LengthAwarePaginator
     {
