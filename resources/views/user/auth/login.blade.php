@@ -64,7 +64,7 @@
                                         <!-- Text -->
                                         <p class="mb-0 font-size-sm text-center">
                                             Don't have an account? <a class="text-underline fw-semi-bold"
-                                                href="{{ route('register') }}">Sign up</a>
+                                                href="{{ route('register.show') }}">Sign up</a>
                                         </p>
                                     </div>
                                 </div>
