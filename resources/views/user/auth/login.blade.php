@@ -16,29 +16,30 @@
                                         <h3 class="mb-6 text-center">Log In to Your Skola Account!</h3>
 
                                         <!-- Form Login -->
-                                        <form class="mb-5" action="{{route('login.auth')}}" method="POST">
+                                        <form class="mb-5" action="{{ route('login') }}" method="POST">
+                                            @csrf
                                             <!-- Email -->
                                             <div class="form-group mb-5">
                                                 <label for="modalSigninEmail1">
-                                                    Email
-                                                    @error('email')
-                                                        <span class="text-alizarin fst-italic">{{ $message }}</span>
-                                                    @enderror
+                                                    Email    
                                                 </label>
-                                                <input type="email" class="form-control" id="modalSigninEmail1"
+                                                <input name="email" type="email" class="form-control" id="modalSigninEmail1"
                                                     placeholder="johndoe@creativelayers.com" value="{{ old('email') }}">
+                                                @error('email')
+                                                    <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                                @enderror
                                             </div>
 
                                             <!-- Password -->
                                             <div class="form-group mb-5">
                                                 <label for="modalSigninPassword1">
-                                                    Password
-                                                    @error('password')
-                                                        <span class="text-alizarin fst-italic">{{ $message }}</span>
-                                                    @enderror
+                                                    Password         
                                                 </label>
-                                                <input type="password" class="form-control" id="modalSigninPassword1"
+                                                <input name="password" type="password" class="form-control" id="modalSigninPassword1"
                                                     placeholder="**********" value="{{ old('password') }}">
+                                                    @error('password')
+                                                    <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                                @enderror
                                             </div>
 
                                             <div class="d-flex align-items-center mb-5 font-size-sm">
