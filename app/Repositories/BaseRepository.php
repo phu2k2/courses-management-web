@@ -40,6 +40,7 @@ abstract class BaseRepository implements RepositoryInterface
     {
         return $this->model->all();
     }
+
     /**
      * Find a record by its primary key.
      *
@@ -48,48 +49,40 @@ abstract class BaseRepository implements RepositoryInterface
      */
     public function find($id)
     {
-        $result = $this->model->find($id);
-
-        return $result;
+        return $this->model->find($id);
     }
 
+    /**
+     * Create a new record in the database with the given attributes.
+     *
+     * @param array $attributes The attributes to populate the new record.
+     * @return \Illuminate\Database\Eloquent\Model The created model instance.
+     */
     public function create($attributes = [])
     {
         return $this->model->create($attributes);
     }
+
     /**
      * Update a record by its primary key.
      *
      * @param int $id The primary key value.
      * @param array $attributes The data to update.
-     * @return bool Whether the update was successful or not.
+     * @return int|bool Whether the update was successful or not.
      */
     public function update($id, $attributes = [])
     {
-        $result = $this->find($id);
-        if ($result) {
-            $result->update($attributes);
-
-            return true;
-        }
-
-        return false;
+        return $this->model->where('id', $id)->update($attributes);
     }
+
     /**
      * Delete a record by its primary key.
      *
      * @param int $id The primary key value.
-     * @return bool True if the deletion was successful, false otherwise.
+     * @return int|bool True if the deletion was successful, false otherwise.
      */
     public function delete($id)
     {
-        $result = $this->find($id);
-        if ($result) {
-            $result->delete();
-
-            return true;
-        }
-
-        return false;
+        return $this->model->destroy($id);
     }
 }
