@@ -14,6 +14,8 @@ class CartFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Cart::class;
+
     public function definition(): array
     {
         return [
