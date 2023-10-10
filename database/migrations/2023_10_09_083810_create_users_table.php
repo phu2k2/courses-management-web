@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('username', 30);
             $table->string('email', 50);
             $table->string('password');
-            $table->enum('is_active', ['true', 'false']);
-            $table->tinyInteger('role_id');
+            $table->TinyInteger('is_active')->length(1)->unsigned();
+            $table->TinyInteger('role_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
