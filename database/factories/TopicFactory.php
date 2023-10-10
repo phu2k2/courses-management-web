@@ -21,6 +21,7 @@ class TopicFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->word,
+            'course_id' => $this->faker->randomNumber()
         ];
     }
 }
