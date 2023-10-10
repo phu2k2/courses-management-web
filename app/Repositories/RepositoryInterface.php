@@ -24,6 +24,7 @@ interface RepositoryInterface
      * @return mixed
      */
     public function create($attributes = []);
+    
     /**
      * Update a record by its primary key.
      *
