@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('profiles', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+        Schema::create('topics', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger('course_id');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('profiles', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('topics');
     }
 };

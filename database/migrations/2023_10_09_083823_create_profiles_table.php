@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('first_name', 15);
-            $table->string('last_name', 30);
+            $table->string('last_name', 50);
             $table->string('avatar');
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
