@@ -18,6 +18,7 @@ class ProfileFactory extends Factory
     public function definition(): array
     {
         $user = User::all()->random();
+
         return [
             'user_id' => $user->id,
             'first_name' => fake()->firstName(),
