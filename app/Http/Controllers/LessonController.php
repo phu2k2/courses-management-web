@@ -6,7 +6,7 @@ use Illuminate\Contracts\View\View;
 
 class LessonController extends Controller
 {
-    public function index(int $lessonId): View
+    public function index(): View
     {
         return view('user.lesson.index');
     }

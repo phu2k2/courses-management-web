@@ -12,12 +12,12 @@ class CartController extends Controller
         return view('user.cart.index');
     }
 
-    public function store(int $courseId): RedirectResponse
+    public function store(): RedirectResponse
     {
         return redirect()->back();
     }
 
-    public function destroy(int $cartId): RedirectResponse
+    public function destroy(): RedirectResponse
     {
         return redirect()->back();
     }

@@ -11,7 +11,7 @@ class CourseController extends Controller
         return view('user.course.index');
     }
 
-    public function show(int $courseId): View
+    public function show(): View
     {
         return view('user.course.show');
     }
