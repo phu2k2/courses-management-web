@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->decimal('lesson_duration', 6, 2);
-            $table->integer('topic_id');
+            $table->unsignedBigInteger('topic_id');
             $table->string('lesson_url');
             $table->softDeletes();
             $table->timestamps();
