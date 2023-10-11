@@ -1,11 +1,11 @@
-@extends('user.layouts.app')
+@extends('layouts.app')
 @section('title', 'course')
 @section('style')
-    <link rel="stylesheet" href="assets/libs/aos/dist/aos.css">
+    <link rel="stylesheet" href="{{ asset('assets/libs/aos/dist/aos.css') }}">
 @endsection
 @section('content')
     <header class="py-8 py-lg-12 mb-8 overlay overlay-primary overlay-80"
-        style="background-image: url(assets/img/covers/cover-19.jpg);">
+        style="background-image: url({{ asset('assets/img/covers/cover-19.jpg')}} );">
         <div class="container text-center py-xl-5">
             <h1 class="display-4 fw-semi-bold mb-0 text-white">Courses</h1>
             <nav aria-label="breadcrumb">
@@ -25,7 +25,7 @@
         <img class="d-none img-fluid" src="...html" alt="...">
     </header>
     {{-- Recommender courses --}}
-    @include('user.recommend.index')
+    @include('common.recommend')
     <!-- CONTROL BAR
                         ================================================== -->
     <div class="container mb-6 mb-xl-8 z-index-2">
@@ -437,7 +437,7 @@
                                 <a href="instructors-single.html" class="">
                                     <div
                                         class="avatar avatar-xl sk-fade-right badge-float position-absolute top-0 right-0 mt-n6 me-5 rounded-circle shadow border border-white border-w-lg">
-                                        <img src="assets/img/avatars/avatar-2.jpg" alt="..."
+                                        <img src="asset('assets/img/avatars/avatar-2.jpg')" alt="..."
                                             class="avatar-img rounded-circle">
                                     </div>
                                 </a>
@@ -513,7 +513,6 @@
                     </div>
                 </div>
                 {{-- END COURSE --}}
-
                 <!-- PAGINATION ================================================== -->
                 <nav class="mb-11" aria-label="Page navigationa">
                     <ul class="pagination justify-content-center">
@@ -532,12 +531,7 @@
                         </li>
                     </ul>
                 </nav>
-
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script src="assets/libs/aos/dist/aos.js"></script>
 @endsection
