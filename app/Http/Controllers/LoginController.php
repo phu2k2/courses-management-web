@@ -21,7 +21,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->route('home');
+            return redirect()->route('home', ['id' => Auth::id()]);
         }
 
         return redirect()->back()->with('error', config('define.login.error'));
