@@ -32,7 +32,7 @@ class Course extends Model
         'description',
         'is_active',
     ];
-    
+
     /**
      * @return BelongsTo<Category, Course>
      */
