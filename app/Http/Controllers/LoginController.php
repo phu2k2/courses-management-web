@@ -24,6 +24,6 @@ class LoginController extends Controller
             return redirect()->route('home');
         }
 
-        return redirect()->back()->with('error', 'Email or Password does not match');
+        return redirect()->back()->with('error', config('define.login.error'));
     }
 }
