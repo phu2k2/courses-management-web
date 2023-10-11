@@ -1,5 +1,5 @@
 @extends('user.layouts.app')
-@section('title', 'course')
+@section('title', 'Course')
 @section('style')
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.png">
@@ -434,7 +434,8 @@
 
             <div class="col-xl-8">
                 <div class="row row-cols-md-2 mb-3 ">
-                    {{-- START COURSE --}}
+                {{-- START COURSE --}}
+                @foreach ($listCourses as $course)
                     <div class="col-md pb-4 pb-md-7">
                         <!-- Card -->
                         <div class="card border shadow p-2 lift sk-fade">
@@ -463,8 +464,7 @@
                                 <!-- Heading -->
                                 <div class="position-relative">
                                     <a href="course-single-v5.html" class="d-block stretched-link">
-                                        <h4 class="line-clamp-2 h-md-48 h-lg-58 me-md-6 me-lg-10 me-xl-4 mb-2">Cubase Pro
-                                            10 Essential Training: Advanced</h4>
+                                        <h4 class="line-clamp-2 h-md-48 h-lg-58 me-md-6 me-lg-10 me-xl-4 mb-2">{{ $course->title}}</h4>
                                     </a>
 
                                     <div class="d-lg-flex align-items-end flex-wrap mb-n1">
@@ -473,7 +473,7 @@
                                         </div>
 
                                         <div class="font-size-sm">
-                                            <span>5.45 (5.8k+ reviews)</span>
+                                            <span>{{$course->average_rating}} (5.8k+ reviews)</span>
                                         </div>
                                     </div>
 
@@ -492,7 +492,7 @@
                                                             </svg>
 
                                                         </div>
-                                                        <div class="font-size-sm">5 lessons</div>
+                                                        <div class="font-size-sm">{{$course->total_lessons}} lessons</div>
                                                     </div>
                                                 </li>
                                                 <li class="nav-item px-3">
@@ -510,24 +510,24 @@
                                                             </svg>
 
                                                         </div>
-                                                        <div class="font-size-sm">8h 12m</div>
+                                                        <div class="font-size-sm">{{$course->total_time}}h</div>
                                                     </div>
                                                 </li>
                                             </ul>
                                         </div>
 
                                         <div class="col-auto px-2 text-right">
-                                            <del class="font-size-sm">$959</del>
-                                            <ins class="h4 mb-0 d-block mb-lg-n1">$21.99</ins>
+                                            <del class="font-size-sm">${{$course->price}}</del>
+                                            <ins class="h4 mb-0 d-block mb-lg-n1">${{$course->price*(1-$course->discount/100)}}</ins>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
+                    {{-- END COURSE --}}
                 </div>
-                {{-- END COURSE --}}
-
                 <!-- PAGINATION ================================================== -->
                 <nav class="mb-11" aria-label="Page navigationa">
                     <ul class="pagination justify-content-center">
