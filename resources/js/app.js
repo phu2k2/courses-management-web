@@ -20,6 +20,8 @@ import * as bootstrap from 'bootstrap';
 // // Import other JavaScript files
 // import '@fancyapps/fancybox/dist/jquery.fancybox.min.js';
 // import 'aos/dist/aos.js';
+import AOS from "aos";
+window.AOS = AOS;
 // import 'choices.js/public/assets/scripts/choices.min.js';
 // import 'countup.js/dist/countUp.min.js';
 // import 'dropzone/dist/dropzone-min.js';
