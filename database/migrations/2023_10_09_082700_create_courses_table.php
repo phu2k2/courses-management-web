@@ -20,7 +20,7 @@ return new class extends Migration
             $table->tinyInteger('category_id')->unsigned();
             $table->integer('instructor_id');
             $table->string('trailer_url');
-            $table->decimal('average_rating', 3, 1);
+            $table->decimal('average_rating', 2, 1);
             $table->integer('total_students');
             $table->integer('total_lessons');
             $table->tinyInteger('languages');
