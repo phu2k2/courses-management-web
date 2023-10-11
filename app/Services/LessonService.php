@@ -20,9 +20,9 @@ class LessonService
     /**
      * @return Collection
      */
-    public function getAllLesson(): Collection
+    public function getLessonByTopic(int $id): Collection
     {
-        $lesson = $this->lessonRepository->getAllLesson();
+        $lesson = $this->lessonRepository->getLessonByTopic($id);
 
         return $lesson;
     }

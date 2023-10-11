@@ -17,8 +17,10 @@ class LessonRepository extends BaseRepository implements LessonRepositoryInterfa
     /**
      * @return Collection
      */
-    public function getAllLesson(): Collection
+    public function getLessonByTopic(int $topic): Collection
     {
-        return $this->model->all();
+        $test = $this->model->where('topic_id', $topic)->get();
+
+        return $test;
     }
 }

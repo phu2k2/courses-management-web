@@ -17,15 +17,15 @@ class LessonController extends Controller
         $this->lessonService = $lessonService;
     }
 
-    public function index(): View
-    {
-        $lessons = $this->lessonService->getAllLesson();
-
-        return view('user.lesson.index', compact('lessons'));
-    }
-
     public function show(): View
     {
         return view('user.lesson.show');
+    }
+
+    public function getLessonTopic(int $id): View
+    {
+        $lesson = $this->lessonService->getLessonByTopic($id);
+
+        return view('user.lesson.index', compact('lesson'));
     }
 }

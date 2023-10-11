@@ -10,5 +10,5 @@ interface LessonRepositoryInterface extends RepositoryInterface
     /**
      * @return Collection
      */
-    public function getAllLesson(): Collection;
+    public function getLessonByTopic(int $id): Collection;
 }
