@@ -11,8 +11,6 @@ class Cart extends Model
     use SoftDeletes;
     use HasFactory;
 
-    protected $table = 'carts';
-
     protected $fillable = [
         'user_id',
         'course_id'
