@@ -8,11 +8,11 @@ class LessonController extends Controller
 {
     public function index(): View
     {
-        return view('user.lesson.index');
+        return view('lesson.index');
     }
 
     public function show(): View
     {
-        return view('user.lesson.show');
+        return view('lesson.show');
     }
 }

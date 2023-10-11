@@ -9,7 +9,7 @@ class ProfileController extends Controller
 {
     public function edit(): View
     {
-        return view('user.account.profile');
+        return view('account.profile');
     }
 
     public function update(): RedirectResponse

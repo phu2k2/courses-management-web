@@ -21,7 +21,7 @@ class RegisterController extends Controller
 
     public function show(): View
     {
-        return view('user.auth.register');
+        return view('auth.register');
     }
 
     public function store(RegisterRequest $request): RedirectResponse

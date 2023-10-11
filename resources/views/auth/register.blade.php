@@ -1,4 +1,4 @@
-@extends('user.layouts.app')
+@extends('layouts.app')
 @section('title', 'Register account')
 @section('content')
     <!-- REGISTER
