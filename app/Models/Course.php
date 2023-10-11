@@ -31,6 +31,8 @@ class Course extends Model
         'poster_url',
         'total_time',
         'description',
+        'learns_description',
+        'requirements_description',
         'is_active',
     ];
 

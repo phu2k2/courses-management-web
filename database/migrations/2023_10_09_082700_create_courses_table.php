@@ -29,6 +29,8 @@ return new class extends Migration
             $table->string('poster_url');
             $table->decimal('total_time', 4, 1);
             $table->text('description');
+            $table->text('learns_description');
+            $table->text('requirements_description');
             $table->enum('is_active', ['true', 'false']);
             $table->timestamp('created_at');
             $table->timestamp('updated_at');

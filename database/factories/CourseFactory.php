@@ -38,6 +38,8 @@ class CourseFactory extends Factory
             'poster_url' => fake()->imageUrl(300, 200),
             'total_time' => fake()->randomFloat(2, 1, 100),
             'description' => fake()->paragraphs(3, true),
+            'learns_description' => fake()->paragraphs(3, true),
+            'requirements_description' => fake()->paragraphs(3, true),
             'is_active' => fake()->randomElement(['true', 'false']),
         ];
     }
