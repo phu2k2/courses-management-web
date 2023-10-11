@@ -27,9 +27,8 @@
                                                 <label for="modalSigninEmail1">
                                                     Email
                                                 </label>
-                                                <input type="email" name="email" class="form-control"
-                                                    id="modalSigninEmail1" placeholder="johndoe@creativelayers.com"
-                                                    value="{{ old('email') }}">
+                                                <input type="email" name="email" class="form-control" id="modalSigninEmail1"
+                                                    placeholder="johndoe@creativelayers.com" value="{{ old('email') }}">
                                                 @error('email')
                                                     <span class="text-alizarin fst-italic">{{ $message }}</span>
                                                 @enderror
@@ -40,9 +39,8 @@
                                                 <label for="modalSigninPassword1">
                                                     Password
                                                 </label>
-                                                <input type="password" name="password" class="form-control"
-                                                    id="modalSigninPassword1" placeholder="**********"
-                                                    value="{{ old('password') }}">
+                                                <input type="password" name="password" class="form-control" id="modalSigninPassword1"
+                                                    placeholder="**********" value="{{ old('password') }}">
                                                 @error('password')
                                                     <span class="text-alizarin fst-italic">{{ $message }}</span>
                                                 @enderror
