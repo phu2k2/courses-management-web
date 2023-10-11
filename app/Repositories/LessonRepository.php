@@ -19,6 +19,6 @@ class LessonRepository extends BaseRepository implements LessonRepositoryInterfa
      */
     public function getAllLesson(): Collection
     {
-        return $this->model->select('*')->get();
+        return $this->model->all();
     }
 }
