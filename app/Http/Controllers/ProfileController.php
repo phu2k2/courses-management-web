@@ -21,8 +21,8 @@ class ProfileController extends Controller
 
     public function show(Request $request): View
     {
-        $profile = $this->userService->getInfor($request->id);
-        return view('account.profile', compact('profile'));
+        $user = $this->userService->getInfor($request->id);
+        return view('account.profile', compact('user'));
     }
 
     public function update(): RedirectResponse
