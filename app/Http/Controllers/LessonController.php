@@ -24,8 +24,8 @@ class LessonController extends Controller
 
     public function getLessonTopic(int $id): View
     {
-        $lesson = $this->lessonService->getLessonByTopic($id);
+        $lessons = $this->lessonService->getLessonByTopic($id);
 
-        return view('user.lesson.index', compact('lesson'));
+        return view('user.lesson.index', compact('lessons'));
     }
 }
