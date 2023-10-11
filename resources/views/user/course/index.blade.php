@@ -459,7 +459,7 @@
 
                                 <!-- Preheading -->
                                 <a href="course-single-v5.html"><span
-                                        class="mb-1 d-inline-block text-gray-800">Development</span></a>
+                                        class="mb-1 d-inline-block text-gray-800">{{$course->category->name}}</span></a>
 
                                 <!-- Heading -->
                                 <div class="position-relative">
@@ -473,7 +473,7 @@
                                         </div>
 
                                         <div class="font-size-sm">
-                                            <span>{{$course->average_rating}} (5.8k+ reviews)</span>
+                                            <span>{{$course->average_rating}} ({{convertToK($course->num_reviews)}} reviews)</span>
                                         </div>
                                     </div>
 
