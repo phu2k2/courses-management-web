@@ -6,7 +6,7 @@
     <section class="">
         <div class="flickity-button-outset-long flickity-page-dots-white flickity-page-dots-43">
             <div class="w-100">
-                <div class="py-10 overlay overlay-custom-left" style="background-image: url(assets/img/covers/cover-16.jpg)">
+                <div class="py-10 overlay overlay-custom-left" style="background-image: url(/assets/img/covers/cover-16.jpg)">
                     <div class="container">
                         <div class="row align-items-center py-md-5 gx-0">
                             <div class="container py-9">
