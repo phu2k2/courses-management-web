@@ -15,7 +15,7 @@
                     <!-- Image -->
                     <div class="card-zoom position-relative">
                         <a href="course-single-v5.html" class="card-img sk-thumbnail img-ratio-3 d-block">
-                            <img class="rounded shadow-light-lg" src="assets/img/products/product-13.jpg" alt="...">
+                            <img class="rounded shadow-light-lg" src="https://cdn.hackr.io/uploads/posts/large/16740391159XHYBw4Oab.png" alt="...">
                         </a>
 
                         <span class="sk-fade-right badge-float bottom-0 right-0 mb-2 me-2">
