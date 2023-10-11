@@ -3,11 +3,9 @@
 @section('style')
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.png">
-
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&amp;family=Lora:wght@400;700&amp;family=Montserrat:wght@400;500;600;700&amp;family=Nunito:wght@400;700&amp;display=swap" rel="stylesheet">
-
     <!-- Libs CSS -->
     <link rel="stylesheet" href="assets/fonts/fontawesome/fontawesome.css">
     <link rel="stylesheet" href="assets/libs/%40fancyapps/fancybox/dist/jquery.fancybox.min.css">
@@ -577,5 +575,4 @@
     <script src="assets/libs/typed.js/lib/typed.min.js"></script>
     <script src='../../../api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
     <script src="assets/js/theme.min.js"></script>
-
 @endsection
