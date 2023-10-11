@@ -9,7 +9,7 @@ class LoginController extends Controller
 {
     public function show(): View
     {
-        return view('user.auth.login');
+        return view('auth.login');
     }
 
     public function auth(): RedirectResponse
