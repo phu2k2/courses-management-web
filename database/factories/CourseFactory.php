@@ -30,6 +30,7 @@ class CourseFactory extends Factory
             'instructor_id' => fake()->numberBetween(1, 10),
             'trailer_url' => fake()->url,
             'average_rating' => fake()->randomFloat(1, 1, 5),
+            'num_reviews' => fake()->numberBetween(1, 1000),
             'total_students' => fake()->numberBetween(10, 1000),
             'total_lessons' => fake()->numberBetween(5, 50),
             'languages' => fake()->numberBetween(1, 3),

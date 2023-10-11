@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
@@ -22,6 +23,7 @@ class Course extends Model
         'instructor_id',
         'trailer_url',
         'average_rating',
+        'num_reviews',
         'total_students',
         'total_lessons',
         'languages',
@@ -31,4 +33,12 @@ class Course extends Model
         'description',
         'is_active',
     ];
+
+    /**
+     * @return BelongsTo<Category, Course>
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 }
