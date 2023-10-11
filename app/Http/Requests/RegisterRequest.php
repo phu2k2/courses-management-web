@@ -33,7 +33,7 @@ class RegisterRequest extends FormRequest
                 'required',
                 'email',
                 'max:50',
-                'regex:/^[a-z@.]+$/',
+                'regex:/^[a-z0-9@.]+$/',
                 'unique:users,email'
             ],
             'password' => [
