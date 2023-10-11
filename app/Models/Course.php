@@ -23,6 +23,7 @@ class Course extends Model
         'instructor_id',
         'trailer_url',
         'average_rating',
+        'num_reviews',
         'total_students',
         'total_lessons',
         'languages',

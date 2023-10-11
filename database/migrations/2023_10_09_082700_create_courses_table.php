@@ -21,12 +21,13 @@ return new class extends Migration
             $table->integer('instructor_id');
             $table->string('trailer_url');
             $table->decimal('average_rating', 2, 1);
+            $table->integer('num_reviews');
             $table->integer('total_students');
             $table->integer('total_lessons');
             $table->tinyInteger('languages');
             $table->tinyInteger('level');
             $table->string('poster_url');
-            $table->decimal('total_time', 4, 2);
+            $table->decimal('total_time', 4, 1);
             $table->text('description');
             $table->enum('is_active', ['true', 'false']);
             $table->timestamp('created_at');
