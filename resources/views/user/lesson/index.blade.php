@@ -1,4 +1,4 @@
-@extends('user.lesson.header')
+@extends('layouts.lesson')
 @section('title', 'lesson')
 
 @section('content')
@@ -17,7 +17,8 @@
                         </svg>
 
                     </div>
-                    <img class="rounded shadow-light-lg" src="assets/img/products/product-2.jpg" alt="...">
+                    <img class="rounded shadow-light-lg" src="{{ asset('assets/img/products/product-2.jpg') }}"
+                        alt="...">
                 </a>
 
                 <h3 class="text-white">Course Description</h3>
@@ -56,7 +57,8 @@
                 <ul class="list-unstyled pt-2">
                     <li class="media d-flex">
                         <div class="avatar avatar-xxl me-3 me-md-6 flex-shrink-0">
-                            <img src="assets/img/avatars/avatar-1.jpg" alt="..." class="avatar-img rounded-circle">
+                            <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
+                                class="avatar-img rounded-circle">
                         </div>
                         <div class="media-body flex-grow-1">
                             <div class="d-md-flex align-items-center mb-5">
@@ -77,7 +79,8 @@
                     </li>
                     <li class="media d-flex">
                         <div class="avatar avatar-xxl me-3 me-md-6 flex-shrink-0">
-                            <img src="assets/img/avatars/avatar-1.jpg" alt="..." class="avatar-img rounded-circle">
+                            <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
+                                class="avatar-img rounded-circle">
                         </div>
                         <div class="media-body flex-grow-1">
                             <div class="d-md-flex align-items-center mb-5">
