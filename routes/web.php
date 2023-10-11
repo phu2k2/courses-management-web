@@ -29,7 +29,7 @@ Route::prefix('register')->name('register.')->group(function () {
     Route::get('show', [RegisterController::class, 'show'])->name('show');
     Route::post('store', [RegisterController::class, 'store'])->name('store');
 });
-Route::resource('profiles', ProfileController::class)->only(['edit', 'update']);
+Route::resource('profiles', ProfileController::class)->only(['show', 'update']);
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
 Route::resource('lessons', LessonController::class)->only(['index', 'show']);
 Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
