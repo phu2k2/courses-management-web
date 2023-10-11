@@ -19,9 +19,9 @@ class LessonController extends Controller
 
     public function index(): View
     {
-        $lesson = $this->lessonService->getAllLesson();
+        $lessons = $this->lessonService->getAllLesson();
 
-        dd($lesson);
+        return view('user.lesson.index', compact('lessons'));
     }
 
     public function show(): View
