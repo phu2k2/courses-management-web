@@ -44,4 +44,17 @@ class RegisterRequest extends FormRequest
             ]
         ];
     }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'username' => is_string($this->username)
+                ? strtolower($this->username) : $this->username,
+        ]);
+    }
 }
