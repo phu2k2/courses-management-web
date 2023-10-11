@@ -442,7 +442,7 @@
                             <!-- Image -->
                             <div class="card-zoom position-relative">
                                 <a href="course-single-v5.html" class="card-img sk-thumbnail d-block">
-                                    <img class="rounded shadow-light-lg" src="https://cdn.hackr.io/uploads/posts/large/16740391159XHYBw4Oab.png"
+                                    <img class="rounded shadow-light-lg" src="{{$course->poster_url}}"
                                         alt="...">
                                 </a>
                             </div>
