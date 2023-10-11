@@ -19,7 +19,7 @@ class LessonController extends Controller
 
     public function show(): View
     {
-        return view('user.lesson.show');
+        return view('lesson.show');
     }
 
     public function getLessonTopic(int $id): View
