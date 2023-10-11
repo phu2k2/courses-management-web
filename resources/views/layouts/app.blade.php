@@ -24,11 +24,11 @@
 </head>
 
 <body class="bg-white">
-    @include('user.layouts.header')
+    @include('layouts.header')
 
     @yield('content')
 
-    @include('user.layouts.footer')
+    @include('layouts.footer')
 
     <!-- Theme JS -->
     <script type="module" src="{{ asset('assets/js/theme.min.js') }}"></script>

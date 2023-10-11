@@ -9,7 +9,7 @@ class CartController extends Controller
 {
     public function index(): View
     {
-        return view('user.cart.index');
+        return view('cart.index');
     }
 
     public function store(): RedirectResponse
