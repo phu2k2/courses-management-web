@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Course;
-use App\Repositories\Course\CourseRepositoryInterface;
+use App\Repositories\Interfaces\CourseRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class CourseService
