@@ -21,17 +21,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::resource('profiles', ProfileController::class)->only(['edit', 'update']);
-Route::resource('courses', CourseController::class)->only(['index', 'show']);
-Route::resource('lessons', LessonController::class)->only(['index', 'show']);
-Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
-
 Route::prefix('login')->name('login.')->group(function () {
     Route::get('show', [LoginController::class, 'show'])->name('show');
     Route::post('auth', [LoginController::class, 'auth'])->name('auth');
 });
-
 Route::prefix('register')->name('register.')->group(function () {
-    Route::get('show', [LoginController::class, 'show'])->name('show');
-    Route::post('store', [LoginController::class, 'store'])->name('store');
+    Route::get('show', [RegisterController::class, 'show'])->name('show');
+    Route::post('store', [RegisterController::class, 'store'])->name('store');
 });
+Route::resource('profiles', ProfileController::class)->only(['edit', 'update']);
+Route::resource('courses', CourseController::class)->only(['index', 'show']);
+Route::resource('lessons', LessonController::class)->only(['index', 'show']);
+Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);

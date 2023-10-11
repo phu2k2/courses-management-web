@@ -1,8 +1,8 @@
-@extends('user.layouts.app')
+@extends('layouts.app')
 @section('title', 'Register account')
 @section('content')
     <!-- REGISTER
-                ================================================== -->
+                    ================================================== -->
     <section class="">
         <div class="flickity-button-outset-long flickity-page-dots-white flickity-page-dots-43">
             <div class="w-100">
@@ -17,7 +17,7 @@
 
                                         <!-- Form Register -->
                                         <form class="mb-5" method="POST" action="{{ route('register.store') }}">
-
+                                            @csrf
                                             <!-- Username -->
                                             <div class="form-group mb-5">
                                                 <label for="modalSignupUsername1">
@@ -36,8 +36,9 @@
                                                 <label for="modalSignupEmail1">
                                                     Email
                                                 </label>
-                                                <input type="email" name="email" class="form-control" id="modalSignupEmail1"
-                                                    placeholder="johndoe@creativelayers.com" value="{{ old('email') }}">
+                                                <input type="email" name="email" class="form-control"
+                                                    id="modalSignupEmail1" placeholder="johndoe@creativelayers.com"
+                                                    value="{{ old('email') }}">
                                                 @error('email')
                                                     <span class="text-alizarin fst-italic">{{ $message }}</span>
                                                 @enderror
@@ -48,8 +49,9 @@
                                                 <label for="modalSignupPassword3">
                                                     Password
                                                 </label>
-                                                <input type="password" name="password" class="form-control" id="modalSignupPassword3"
-                                                    placeholder="**********" value="{{ old('password') }}">
+                                                <input type="password" name="password" class="form-control"
+                                                    id="modalSignupPassword3" placeholder="**********"
+                                                    value="{{ old('password') }}">
                                                 @error('password')
                                                     <span class="text-alizarin fst-italic">{{ $message }}</span>
                                                 @enderror
