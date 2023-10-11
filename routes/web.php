@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::prefix('user')->group(function () {
+    Route::get('/lessons', function () {
+        return view('user.lesson.index');
+    })->name('user.lessons');
+});
