@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
                 'string',
                 'regex:/^\S*$/u',
                 'max:30',
-                'unique:users.username'
+                'unique:users,username'
             ],
             'email' => [
                 'required',
