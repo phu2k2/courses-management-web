@@ -2,7 +2,7 @@
 @section('title', 'Login account')
 @section('content')
     <!-- REGISTER
-                ================================================== -->
+                    ================================================== -->
     <section class="">
         <div class="flickity-button-outset-long flickity-page-dots-white flickity-page-dots-43">
             <div class="w-100">
@@ -14,9 +14,14 @@
                                     <div class="col-md-8 col-xl-4 py-5 px-5 mx-auto bg-white accordion-body rounded-3">
                                         <!-- Login -->
                                         <h3 class="mb-6 text-center">Log In to Your Skola Account!</h3>
-
+                                        @if (session('error'))
+                                            <div class="alert alert-danger">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
                                         <!-- Form Login -->
                                         <form class="mb-5" action="{{ route('login.auth') }}" method="POST">
+                                            @csrf
                                             <!-- Email -->
                                             <div class="form-group mb-5">
                                                 <label for="modalSigninEmail1">

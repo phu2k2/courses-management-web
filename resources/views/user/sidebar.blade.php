@@ -4,7 +4,7 @@
             <h5 class="card-title mb-0">Profile Settings</h5>
         </div>
         <div class="list-group list-group-flush" role="tablist">
-            <a class="list-group-item list-group-item-action px-3 active" data-toggle="list" href="{{ route('user.profile') }}"
+            <a class="list-group-item list-group-item-action px-3 active" data-toggle="list" href="{{ route('users.profile') }}"
                 role="tab">
                 Account
             </a>
