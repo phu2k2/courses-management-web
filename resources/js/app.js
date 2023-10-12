@@ -3,8 +3,6 @@ import * as bootstrap from 'bootstrap';
 // import 'font-awesome/css/font-awesome.css';
 // // Import FancyBox CSS
 // import '@fancyapps/fancybox/dist/jquery.fancybox.min.css';
-// // Import AOS CSS
-// import 'aos/dist/aos.css';
 // // Import Choices.js CSS
 // import 'choices.js/public/assets/styles/choices.min.css';
 // // Import Flickity CSS
@@ -19,7 +17,6 @@ import * as bootstrap from 'bootstrap';
 // import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 // // Import other JavaScript files
 // import '@fancyapps/fancybox/dist/jquery.fancybox.min.js';
-// import 'aos/dist/aos.js';
 import AOS from "aos";
 window.AOS = AOS;
 // import 'choices.js/public/assets/scripts/choices.min.js';
