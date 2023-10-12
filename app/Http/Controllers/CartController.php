@@ -19,6 +19,10 @@ class CartController extends Controller
         $this->cartService = $cartService;
     }
 
+    /**
+     * show list course of cart by user
+     * @return View
+     */
     public function index(): View
     {
         $cartByUser = $this->cartService->getCartByUser((int)Auth::id());
