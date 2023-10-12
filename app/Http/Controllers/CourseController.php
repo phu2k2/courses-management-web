@@ -33,6 +33,6 @@ class CourseController extends Controller
     {
         $course = $this->courseService->getCourseDetail($id);
 
-        return View('user.course.detail', compact('course'));
+        return view('course.show', compact('course'));
     }
 }

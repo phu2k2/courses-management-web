@@ -15,10 +15,9 @@
             <div class="col-lg-8 mb-6 mb-lg-0 position-relative">
                 <div class="course-single-white">
                     <h1 class="me-xl-14 text-white">
-                        Learn Figma: User Interface Design Essentials - UI/UX Design
+                        {{ $course->title }}
                     </h1>
-                    <p class="me-xl-13 mb-5 text-white">Master Figma app to get a job in UI Design, User Interface, User
-                        Experience design, Web Design & UX design.</p>
+                    <p class="me-xl-13 mb-5 text-white">{{ $course->introduction }}</p>
 
                     <a href="#"
                         class="badge badge-lg badge-rounded-circle badge-secondary font-size-base badge-float badge-float-inside top-0 text-white">
@@ -42,7 +41,7 @@
 
                     <div class="mb-4 mb-md-0 me-md-8 me-lg-4 me-xl-8">
                         <h6 class="mb-0 text-white">Categories</h6>
-                        <a href="#" class="font-size-sm text-white">Design</a>
+                        <a href="#" class="font-size-sm text-white">{{ ucfirst($course->category->name) }}</a>
                     </div>
 
                     <div class="mb-4 mb-md-0 me-md-6 me-lg-4 me-xl-6">
@@ -53,7 +52,7 @@
                             </div>
 
                             <div class="font-size-sm ms-lg-3 text-white">
-                                <span>9.45 (9.8k+ reviews)</span>
+                                <span>{{ $course->average_rating }} (9.8k+ reviews)</span>
                             </div>
                         </div>
                     </div>
@@ -71,7 +70,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="pills-instructor-tab" data-bs-toggle="pill" href="#pills-instructor"
-                            role="tab" aria-controls="pills-instructor" aria-selected="false">Curriculum</a>
+                            role="tab" aria-controls="pills-instructor" aria-selected="false">Instructor</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="pills-reviews-tab" data-bs-toggle="pill" href="#pills-reviews"
@@ -83,18 +82,7 @@
                     <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
                         aria-labelledby="pills-overview-tab">
                         <h3 class="">Course Description</h3>
-                        <p class="mb-6 line-height-md">Do you want to become a UI/UX designer but you don't know where to
-                            start? This course will allow you to develop your user interface design skills and you can add
-                            UI designer to your CV and start getting clients for your skills.</p>
-                        <p class="mb-6 line-height-md">Hi everyone. I'm Arash and I'm a UI/UX designer. In this course, I
-                            will help you learn and master Figma app comprehensively from scratch. Figma is an innovative
-                            and brilliant tool for User Interface design. It's used by everyone from entrepreneurs and
-                            start-ups to Apple, Airbnb, Facebook, etc.</p>
-                        <p class="collapse mb-6 line-height-md" id="readcollapseExample">Anim pariatur cliche reprehenderit,
-                            enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft
-                            beer labore wes anderson cred nesciunt sapiente I will help you learn and master Figma app
-                            comprehensively from scratch. Figma is an innovative and brilliant tool for User Interface
-                            design. It's used by everyone from entrepreneurs ea proident.</p>
+                        {{ $course->description }}
                         <a class="text-teal read-more h6 d-inline-block mb-8" data-bs-toggle="collapse"
                             href="#readcollapseExample" role="button" aria-expanded="false"
                             aria-controls="readcollapseExample">
@@ -114,20 +102,9 @@
                             </span>
                         </a>
 
-                        <a href="https://www.youtube.com/watch?v=9I-Y6VQ6tyI" class="d-block sk-thumbnail rounded mb-8"
-                            data-fancybox>
-                            <div
-                                class="h-90p w-90p rounded-circle bg-white size-30-all d-inline-flex align-items-center justify-content-center position-absolute center z-index-1">
-                                <!-- Icon -->
-                                <svg width="14" height="16" viewBox="0 0 14 16" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M12.8704 6.15374L3.42038 0.328572C2.73669 -0.0923355 1.9101 -0.109836 1.20919 0.281759C0.508282 0.673291 0.0898438 1.38645 0.0898438 2.18929V13.7866C0.0898438 15.0005 1.06797 15.9934 2.27016 16C2.27344 16 2.27672 16 2.27994 16C2.65563 16 3.04713 15.8822 3.41279 15.6591C3.70694 15.4796 3.79991 15.0957 3.62044 14.8016C3.44098 14.5074 3.05697 14.4144 2.76291 14.5939C2.59188 14.6982 2.42485 14.7522 2.27688 14.7522C1.82328 14.7497 1.33763 14.3611 1.33763 13.7866V2.18933C1.33763 1.84492 1.51713 1.53907 1.81775 1.3711C2.11841 1.20314 2.47294 1.21064 2.76585 1.39098L12.2159 7.21615C12.4999 7.39102 12.6625 7.68262 12.6618 8.01618C12.6611 8.34971 12.4974 8.64065 12.2118 8.81493L5.37935 12.9983C5.08548 13.1783 4.9931 13.5623 5.17304 13.8562C5.35295 14.1501 5.73704 14.2424 6.03092 14.0625L12.8625 9.87962C13.5166 9.48059 13.9081 8.78496 13.9096 8.01868C13.9112 7.25249 13.5226 6.55524 12.8704 6.15374Z"
-                                        fill="currentColor" />
-                                </svg>
-
-                            </div>
-                            <img class="rounded shadow-light-lg" src="{{ asset('assets/img/products/product-2.jpg') }}" alt="...">
-                        </a>
+                        <div class="rounded mb-8">
+                            <iframe width="750" height="470" src="{{$course->trailer_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
 
                         <h3 class="mb-5">What you'll learn</h3>
                         <div class="row row-cols-lg-2 mb-8">
@@ -960,14 +937,14 @@
                             </svg>
 
                         </div>
-                        <img class="rounded shadow-light-lg" src="{{ asset('assets/img/products/product-2.jpg') }}" alt="...">
+                        <img class="rounded shadow-light-lg" src="{{ $course->poster_url }}" alt="...">
                     </a>
 
                     <div class="pt-5 pb-4 px-5 px-lg-3 px-xl-5">
                         <div class="d-flex align-items-center mb-2">
-                            <ins class="h2 mb-0">$89.99</ins>
-                            <del class="ms-3">339.99</del>
-                            <div class="badge badge-lg badge-purple text-white ms-auto fw-normal">91% Off</div>
+                            <ins class="h2 mb-0">${{ $course->discounted_price }}</ins>
+                            <del class="ms-3">{{ $course->price }}</del>
+                            <div class="badge badge-lg badge-purple text-white ms-auto fw-normal">{{ $course->discount }}% Off</div>
                         </div>
 
                         <div class="d-flex align-items-center text-alizarin mb-6">
@@ -1016,7 +993,7 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Duration</h6>
-                                <span>43 weeks</span>
+                                <span>{{ $course->total_time }} hours</span>
                             </li>
                             <li class="list-group-item d-flex align-items-center py-3">
                                 <div class="text-secondary d-flex icon-uxs">
@@ -1030,7 +1007,7 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Lectures</h6>
-                                <span>32</span>
+                                <span>{{ $course->total_lessons }}</span>
                             </li>
                             <li class="list-group-item d-flex align-items-center py-3">
                                 <div class="text-secondary d-flex icon-uxs">
@@ -1044,7 +1021,7 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Enrolled</h6>
-                                <span>1982 students</span>
+                                <span>{{ $course->total_students }} students</span>
                             </li>
                             <li class="list-group-item d-flex align-items-center py-3">
                                 <div class="text-secondary d-flex icon-uxs">
@@ -1064,7 +1041,7 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Language</h6>
-                                <span>English</span>
+                                <span>{{ $course->language }}</span>
                             </li>
                             <li class="list-group-item d-flex align-items-center py-3">
                                 <div class="text-secondary d-flex icon-uxs">
@@ -1084,39 +1061,7 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Skill level</h6>
-                                <span>beginner</span>
-                            </li>
-                            <li class="list-group-item d-flex align-items-center py-3">
-                                <div class="text-secondary d-flex icon-uxs">
-                                    <!-- Icon -->
-                                    <svg width="16" height="16" viewBox="0 0 16 16"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M15.7188 9.8575V3.1875C15.7188 2.41209 15.0879 1.78125 14.3125 1.78125H12.4688V1.25C12.4688 0.991125 12.2589 0.78125 12 0.78125C11.7411 0.78125 11.5312 0.991125 11.5312 1.25V1.78125H8.46875V1.25C8.46875 0.991125 8.25887 0.78125 8 0.78125C7.74113 0.78125 7.53125 0.991125 7.53125 1.25V1.78125H4.46875V1.25C4.46875 0.991125 4.25887 0.78125 4 0.78125C3.74113 0.78125 3.53125 0.991125 3.53125 1.25V1.78125H1.40625C0.630844 1.78125 0 2.41209 0 3.1875V11.8125C0 12.5879 0.630844 13.2188 1.40625 13.2188H8.68531C9.35484 14.4112 10.6317 15.2188 12.0938 15.2188C14.2477 15.2188 16 13.4664 16 11.3125C16 10.7985 15.9 10.3074 15.7188 9.8575ZM12.5625 8.38087C13.8248 8.58197 14.8243 9.58144 15.0254 10.8438H12.5625V8.38087ZM1.40625 12.2812C1.14778 12.2812 0.9375 12.071 0.9375 11.8125V3.1875C0.9375 2.92903 1.14778 2.71875 1.40625 2.71875H3.53125V3.28125C3.53125 3.54012 3.74113 3.75 4 3.75C4.25887 3.75 4.46875 3.54012 4.46875 3.28125V2.71875H7.53125V3.28125C7.53125 3.54012 7.74113 3.75 8 3.75C8.25887 3.75 8.46875 3.54012 8.46875 3.28125V2.71875H11.5312V3.28125C11.5312 3.54012 11.7411 3.75 12 3.75C12.2589 3.75 12.4688 3.54012 12.4688 3.28125V2.71875H14.3125C14.571 2.71875 14.7812 2.92903 14.7812 3.1875V8.48034C14.0805 7.81506 13.134 7.40625 12.0938 7.40625C9.93984 7.40625 8.1875 9.15859 8.1875 11.3125C8.1875 11.6468 8.22978 11.9713 8.30916 12.2812H1.40625ZM12.0938 14.2812C10.4568 14.2812 9.125 12.9495 9.125 11.3125C9.125 9.83503 10.21 8.60631 11.625 8.38087V11.3125C11.625 11.5714 11.8349 11.7812 12.0938 11.7812H15.0254C14.7999 13.1962 13.5712 14.2812 12.0938 14.2812Z"
-                                            fill="currentColor" />
-                                        <path
-                                            d="M3.25 5.78125H2.5C2.24112 5.78125 2.03125 5.99112 2.03125 6.25C2.03125 6.50888 2.24112 6.71875 2.5 6.71875H3.25C3.50888 6.71875 3.71875 6.50888 3.71875 6.25C3.71875 5.99112 3.50888 5.78125 3.25 5.78125Z"
-                                            fill="currentColor" />
-                                        <path
-                                            d="M6 5.78125H5.25C4.99112 5.78125 4.78125 5.99112 4.78125 6.25C4.78125 6.50888 4.99112 6.71875 5.25 6.71875H6C6.25888 6.71875 6.46875 6.50888 6.46875 6.25C6.46875 5.99112 6.25888 5.78125 6 5.78125Z"
-                                            fill="currentColor" />
-                                        <path
-                                            d="M6 7.78125H5.25C4.99112 7.78125 4.78125 7.99112 4.78125 8.25C4.78125 8.50888 4.99112 8.71875 5.25 8.71875H6C6.25888 8.71875 6.46875 8.50888 6.46875 8.25C6.46875 7.99112 6.25888 7.78125 6 7.78125Z"
-                                            fill="currentColor" />
-                                        <path
-                                            d="M3.25 7.78125H2.5C2.24112 7.78125 2.03125 7.99112 2.03125 8.25C2.03125 8.50888 2.24112 8.71875 2.5 8.71875H3.25C3.50888 8.71875 3.71875 8.50888 3.71875 8.25C3.71875 7.99112 3.50888 7.78125 3.25 7.78125Z"
-                                            fill="currentColor" />
-                                        <path
-                                            d="M3.25 9.78125H2.5C2.24112 9.78125 2.03125 9.99112 2.03125 10.25C2.03125 10.5089 2.24112 10.7188 2.5 10.7188H3.25C3.50888 10.7188 3.71875 10.5089 3.71875 10.25C3.71875 9.99112 3.50888 9.78125 3.25 9.78125Z"
-                                            fill="currentColor" />
-                                        <path
-                                            d="M6 9.78125H5.25C4.99112 9.78125 4.78125 9.99112 4.78125 10.25C4.78125 10.5089 4.99112 10.7188 5.25 10.7188H6C6.25888 10.7188 6.46875 10.5089 6.46875 10.25C6.46875 9.99112 6.25888 9.78125 6 9.78125Z"
-                                            fill="currentColor" />
-                                    </svg>
-
-                                </div>
-                                <h6 class="mb-0 ms-3 me-auto">Deadline</h6>
-                                <span>06 April 2020</span>
+                                <span>{{ $course->levels }}</span>
                             </li>
                             <li class="list-group-item d-flex align-items-center py-3">
                                 <div class="text-secondary d-flex icon-uxs">

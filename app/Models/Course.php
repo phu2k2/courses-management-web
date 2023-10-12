@@ -43,4 +43,41 @@ class Course extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+
+    /**
+     * @return float
+     */
+    public function getDiscountedPriceAttribute()
+    {
+        return $this->price * (1 - $this->discount / 100);
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguageAttribute()
+    {
+        $language = match ((int) $this->languages) {
+            1 => 'English',
+            2 => 'Vietnamese',
+            default => throw new \Exception('Unexpected case'),
+        };
+
+        return $language;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLevelsAttribute()
+    {
+        $levels = match ((int) $this->level) {
+            1 => 'Beginner',
+            2 => 'Intermediate',
+            3 => 'Advanced',
+            default => throw new \Exception('Unexpected case'),
+        };
+
+        return $levels;
+    }
 }
