@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Cart;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\CartRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class CartRepository extends BaseRepository implements CartRepositoryInterface
 {
@@ -16,10 +17,10 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     /**
      * Add courses into cart
      * @param array $data
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Model
      */
-    public function addToCart($data): bool
+    public function addToCart($data): Model
     {
-        return $this->model->insert($data);
+        return $this->model->create($data);
     }
 }

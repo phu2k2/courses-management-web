@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Interfaces\CartRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class CartService
 {
@@ -19,9 +20,9 @@ class CartService
     /**
      * Add courses into cart
      * @param array $data
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Model
      */
-    public function addToCart($data): bool
+    public function addToCart($data): Model
     {
         return $this->cartRepo->addToCart($data);
     }
