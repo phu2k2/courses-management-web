@@ -20,9 +20,13 @@ class ProfileController extends Controller
         $this->userService = $userService;
     }
 
+    /**
+     * Get information about logged in user with id
+     */
     public function show(): View
     {
         $user = $this->userService->getInfor(Auth::id());
+
         return view('user.profile', compact('user'));
     }
 
