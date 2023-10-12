@@ -31,5 +31,8 @@ Route::prefix('register')->name('register.')->group(function () {
 });
 Route::resource('profiles', ProfileController::class)->only(['edit', 'update']);
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
-Route::resource('lessons', LessonController::class)->only(['index', 'show']);
+// Route::resource('lessons', LessonController::class)->only(['index', 'show']);
 Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
+
+
+Route::get('/lessons/{courseId}/{lessonId}', [LessonController::class, 'getLessonTopic']);

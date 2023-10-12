@@ -20,10 +20,17 @@ class LessonService
     /**
      * @return Collection
      */
-    public function getLessonByTopic(int $id): Collection
+    public function getLessonByTopic(int $courseId, int $topicId): Collection
     {
-        $lesson = $this->lessonRepository->getLessonByTopic($id);
+        return $this->lessonRepository->getLessonByTopic($courseId, $topicId);
+    }
 
-        return $lesson;
+
+    /**
+     * @return Collection
+     */
+    public function getLessonByCourseId(int $courseId): Collection
+    {
+        return $this->lessonRepository->getAllLessonByCourseId($courseId);
     }
 }

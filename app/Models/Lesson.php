@@ -21,11 +21,11 @@ class Lesson extends Model
         'lesson_url',
     ];
 
-    /**
-     * Get the topic that owns the lesson.
+     /**
+     * @return BelongsTo<Topic, Lesson>
      */
     public function topic(): BelongsTo
     {
-        return $this->belongsTo(Topic::class);
+        return $this->belongsTo(Topic::class, 'topic_id', 'id');
     }
 }
