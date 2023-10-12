@@ -33,7 +33,6 @@ return new class extends Migration
             $table->text('requirements_description');
             $table->enum('is_active', ['true', 'false']);
             $table->timestamps();
-            $table->timestamps();
             $table->softDeletes();
             $table->foreign('category_id')->references('id')->on('categories');
         });
