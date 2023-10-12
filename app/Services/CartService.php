@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Repositories\Interfaces\CartRepositoryInterface;
-use Illuminate\Database\Eloquent\Model;
 
 class CartService
 {
