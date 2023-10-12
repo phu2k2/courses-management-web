@@ -33,9 +33,8 @@ class CartController extends Controller
         $data = $request->validated();
         if (!$this->cartService->addToCart($data)) {
             session()->flash('error', 'Failed to add to cart!');
-        } else {
+        } else
             session()->flash('message', 'Added to cart successfully!');
-        }
 
         return redirect()->back();
     }

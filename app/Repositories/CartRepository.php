@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Course;
+use App\Models\Cart;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\CartRepositoryInterface;
 
@@ -10,7 +10,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
 {
     public function getModel(): string
     {
-        return Course::class;
+        return Cart::class;
     }
 
     /**
