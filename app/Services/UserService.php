@@ -38,4 +38,15 @@ class UserService
     {
         return $this->userRepository->getInfor($userId);
     }
+
+    /**
+     * @param mixed $userId
+     * @param array $data
+     *
+     * @return mixed
+     */
+    public function updateUser($userId, array $data)
+    {
+        return $this->userRepository->updateUser($userId, $data);
+    }
 }

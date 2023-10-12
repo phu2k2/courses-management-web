@@ -12,4 +12,11 @@ interface UserRepositoryInterface extends RepositoryInterface
      * @return mixed
      */
     public function getInfor(mixed $userId);
+
+    /**
+     * @param string $userId
+     *
+     * @return mixed
+     */
+    public function updateUser($userId, array $data);
 }

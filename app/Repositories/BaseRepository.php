@@ -76,6 +76,18 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
+     * Update or create a record by its primary key.
+     *
+     * @param int $id The primary key value.
+     * @param array $attributes The data to update or create.
+     * @return int|bool Whether the update or create was successful or not.
+     */
+    public function updateOrCreate($id, $attributes = [])
+    {
+        return $this->model->where('id', $id)->updateOrCreate($attributes);
+    }
+
+    /**
      * Delete a record by its primary key.
      *
      * @param int $id The primary key value.

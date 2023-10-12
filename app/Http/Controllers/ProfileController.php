@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ProfileService;
 use App\Services\UserService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -12,22 +13,34 @@ class ProfileController extends Controller
 {
     /**
      * @var UserService
+     * @var ProfileService
      */
     protected $userService;
 
-    public function __construct(UserService $userService)
+    protected $profileService;
+
+    public function __construct(UserService $userService, ProfileService $profileService)
     {
         $this->userService = $userService;
+        $this->profileService = $profileService;
     }
 
     public function show(): View
     {
-        $user = $this->userService->getInfor(Auth::id());
+        $user = $this->userService->getInfor(21);
         return view('user.profile', compact('user'));
     }
 
-    public function update(): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
-        return redirect()->back();
+        $userId = $request->input('id');
+
+        $user = $request->only('username', 'email');
+        $profile = $request->only('first_name', 'last_name', 'description');
+
+        $this->userService->updateUser($userId, $user);
+        $this->profileService->updateProfile($userId, $profile);
+
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 }

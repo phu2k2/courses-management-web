@@ -16,8 +16,13 @@
                                 <h5 class="card-title mb-0">Profile Information</h5>
                             </div>
                             <div class="card-body">
-                                <form>
+                                <form method="POST" action="{{ route('user.update') }}">
+                                    @csrf
                                     <div class="row">
+
+                                        <input type="hidden" class="form-control" id="inputUsername" name="id"
+                                            value="{{ $user->id }}">
+
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="inputUsername">Username</label>
@@ -28,10 +33,10 @@
                                                 <label for="inputUsername">Description</label>
                                                 <textarea rows="2" class="form-control" id="inputBio" name="description">
                                                     @if (!empty($user->profile))
-                                                        {{ $user->profile->description }}
-                                                    @else
-                                                        Tell something about yourself
-                                                    @endif
+{{ $user->profile->description }}
+@else
+Tell something about yourself
+@endif
                                                 </textarea>
                                             </div>
                                         </div>
