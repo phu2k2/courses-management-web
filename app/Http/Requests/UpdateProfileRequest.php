@@ -23,22 +23,37 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'username' => [
+                'bail',
                 'required',
                 'string',
                 'regex:/^\S*$/u',
                 'max:30',
                 'unique:users,username,' . $this->id . ',id'
             ],
-            'description',
-            'first_name',
-            'last_name',
+            'description' => ['bail', 'nullable', 'string'],
+            'first_name' => ['bail', 'nullable', 'string', 'max:15'],
+            'last_name' => ['bail', 'nullable', 'string', 'max:50'],
             'email' => [
+                'bail',
                 'required',
                 'email',
                 'max:50',
                 'regex:/^[a-z0-9@.]+$/',
-                'unique:users,email'
+                'unique:users,email,' . $this->id . ',id'
             ],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'username' => is_string($this->username)
+                ? strtolower($this->username) : $this->username,
+        ]);
     }
 }

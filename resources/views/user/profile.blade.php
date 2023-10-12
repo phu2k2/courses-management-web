@@ -19,6 +19,7 @@
                                 <form>
                                     <div class="row">
                                         <div class="col-md-8">
+                                            <input type="hidden" name="id" value="{{ $user->id }}">
                                             <div class="form-group">
                                                 <label for="inputUsername">Username</label>
                                                 <input type="text" class="form-control" id="inputUsername"
