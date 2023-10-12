@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('courses', function (Blueprint $table) {
-            $table->foreign('category_id')->references('id')->on('categories');
+        Schema::create('categories', function (Blueprint $table) {
+            $table->tinyIncrements('id');
+            $table->string('name');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('courses', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('categories');
     }
 };
