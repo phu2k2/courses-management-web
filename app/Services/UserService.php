@@ -30,4 +30,14 @@ class UserService
         $attribute['password'] = Hash::make($request['password']);
         $this->userRepository->create($attribute);
     }
+
+    /**
+     * @param mixed $userId
+     *
+     * @return mixed
+     */
+    public function getInfor($userId)
+    {
+        return $this->userRepository->getInfor($userId);
+    }
 }
