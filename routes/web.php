@@ -29,7 +29,7 @@ Route::prefix('register')->name('register.')->group(function () {
     Route::get('show', [RegisterController::class, 'show'])->name('show');
     Route::post('store', [RegisterController::class, 'store'])->name('store');
 });
-Route::prefix('user')->name('user.')->group(function () {
+Route::prefix('users')->name('users.')->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile');
     Route::post('profile', [ProfileController::class, 'update'])->name('update');
 });

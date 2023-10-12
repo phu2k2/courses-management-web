@@ -33,10 +33,10 @@
                                                 <label for="inputUsername">Description</label>
                                                 <textarea rows="2" class="form-control" id="inputBio" name="description">
                                                     @if (!empty($user->profile))
-{{ $user->profile->description }}
-@else
-Tell something about yourself
-@endif
+                                                        {{ $user->profile->description }}
+                                                    @else
+                                                        Tell something about yourself
+                                                    @endif
                                                 </textarea>
                                             </div>
                                         </div>
@@ -59,13 +59,13 @@ Tell something about yourself
                                             <label for="inputFirstName">First name</label>
                                             <input type="text" class="form-control" id="inputFirstName"
                                                 placeholder="First name" name="first_name"
-                                                value="{{ !empty($user->profile) ? $user->profile->first_name : '' }}">
+                                                value="{{ $user->profile?->first_name }}">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputLastName">Last name</label>
                                             <input type="text" class="form-control" id="inputLastName"
                                                 placeholder="Last name" name="last_name"
-                                                value="{{ !empty($user->profile) ? $user->profile->last_name : '' }}">
+                                                value="{{ $user->profile?->last_name }}">
                                         </div>
                                     </div>
                                     <div class="form-group pb-3">
