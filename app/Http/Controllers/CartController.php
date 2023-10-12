@@ -31,10 +31,11 @@ class CartController extends Controller
     public function store(StoreCartRequest $request): RedirectResponse
     {
         $data = $request->validated();
+        session()->flash('message', 'Added to cart successfully!');
         if (!$this->cartService->addToCart($data)) {
+            session()->forget('message');
             session()->flash('error', 'Failed to add to cart!');
-        } else
-            session()->flash('message', 'Added to cart successfully!');
+        }
 
         return redirect()->back();
     }
