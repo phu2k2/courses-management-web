@@ -2,7 +2,7 @@
 @section('title', 'Login account')
 @section('content')
     <!-- REGISTER
-                    ================================================== -->
+                        ================================================== -->
     <section class="">
         <div class="flickity-button-outset-long flickity-page-dots-white flickity-page-dots-43">
             <div class="w-100">
@@ -12,23 +12,40 @@
                             <div class="container py-9">
                                 <div class="row gx-0">
                                     <div class="col-md-8 col-xl-4 py-5 px-5 mx-auto bg-white accordion-body rounded-3">
-                                        <!-- Login -->
-                                        <h3 class="mb-6 text-center">Log In to Your Skola Account!</h3>
-                                        @if (session('error'))
-                                            <div class="alert alert-danger">
-                                                {{ session('error') }}
+                                        @if (session()->has('message'))
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
+                                                <span class="alert-text"><strong>{{ __('label_success') }}</strong><br>
+                                                    {{ session()->get('message') }}</span>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close">
+                                                </button>
                                             </div>
                                         @endif
+                                        @if (session()->has('error'))
+                                            <div class="alert alert-alizarin alert-dismissible fade show" role="alert">
+                                                <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
+                                                <span class="alert-text"><strong>{{ __('label_error') }}</strong><br>
+                                                    {{ session()->get('error') }}</span>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close">
+                                                </button>
+                                            </div>
+                                        @endif
+                                        <!-- Login -->
+                                        <h3 class="mb-6 text-center">{{ __('login_title') }}</h3>
+
                                         <!-- Form Login -->
                                         <form class="mb-5" action="{{ route('login.auth') }}" method="POST">
                                             @csrf
                                             <!-- Email -->
                                             <div class="form-group mb-5">
                                                 <label for="modalSigninEmail1">
-                                                    Email
+                                                    {{ __('label_email') }}
                                                 </label>
-                                                <input type="email" name="email" class="form-control" id="modalSigninEmail1"
-                                                    placeholder="johndoe@creativelayers.com" value="{{ old('email') }}">
+                                                <input type="email" name="email" class="form-control"
+                                                    id="modalSigninEmail1" placeholder="johndoe@creativelayers.com"
+                                                    value="{{ old('email') }}">
                                                 @error('email')
                                                     <span class="text-alizarin fst-italic">{{ $message }}</span>
                                                 @enderror
@@ -37,10 +54,11 @@
                                             <!-- Password -->
                                             <div class="form-group mb-5">
                                                 <label for="modalSigninPassword1">
-                                                    Password
+                                                    {{ __('label_password') }}
                                                 </label>
-                                                <input type="password" name="password" class="form-control" id="modalSigninPassword1"
-                                                    placeholder="**********" value="{{ old('password') }}">
+                                                <input type="password" name="password" class="form-control"
+                                                    id="modalSigninPassword1" placeholder="**********"
+                                                    value="{{ old('password') }}">
                                                 @error('password')
                                                     <span class="text-alizarin fst-italic">{{ $message }}</span>
                                                 @enderror
@@ -51,25 +69,25 @@
                                                     <input class="form-check-input text-gray-800" type="checkbox"
                                                         id="autoSizingCheck1">
                                                     <label class="form-check-label text-gray-800" for="autoSizingCheck1">
-                                                        Remember me
+                                                        {{ __('label_remember') }}
                                                     </label>
                                                 </div>
 
                                                 <div class="ms-auto">
-                                                    <a class="text-gray-800" href="">Forgot Password</a>
+                                                    <a class="text-gray-800" href="">{{ __('label_forgot') }}</a>
                                                 </div>
                                             </div>
 
                                             <!-- Submit -->
                                             <button class="btn btn-block btn-primary" type="submit">
-                                                LOGIN
+                                                {{ strtoupper(__('btn_login')) }}
                                             </button>
                                         </form>
 
                                         <!-- Text -->
                                         <p class="mb-0 font-size-sm text-center">
-                                            Don't have an account? <a class="text-underline fw-semi-bold"
-                                                href="{{ route('register.show') }}">Sign up</a>
+                                            {{ __('txt_login') }} <a class="text-underline fw-semi-bold"
+                                                href="{{ route('register.show') }}">{{ __('btn_register') }}</a>
                                         </p>
                                     </div>
                                 </div>

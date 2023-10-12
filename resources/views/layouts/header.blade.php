@@ -23,7 +23,7 @@
                             </svg>
 
                         </div>
-                        <span class="text-white fw-medium me-1">Categories</span>
+                        <span class="text-white fw-medium me-1">{{ __('page_categories') }}</span>
                     </div>
                 </a>
 
@@ -438,7 +438,7 @@
                     </button>
                 </div>
                 <input class="form-control form-control-sm border-0 ps-0" type="search"
-                    placeholder="What do you want to learn ?" aria-label="Search">
+                    placeholder="{{ __('placeholder_search') }}" aria-label="Search">
             </div>
         </form>
 
@@ -462,32 +462,32 @@
             <!-- Navigation -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown dropdown-full-width">
-                    <a class="nav-link" id="navbarLandings" href="">
-                        Home
+                    <a class="nav-link" id="navbarLandings" href="{{ route('home') }}">
+                        {{ __('page_home') }}
                     </a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="navbarInstructors" href="#">
-                        Instructors
+                        {{ __('page_instructors') }}
                     </a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="navbarCourses" href="">
-                        My Courses
+                        {{ __('page_courses') }}
                     </a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="navbarFavorites" href="">
-                        My Favorites
+                        {{ __('page_favorites') }}
                     </a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="navbarAboutUs" href="#">
-                        About Us
+                        {{ __('page_about') }}
                     </a>
                 </li>
             </ul>
@@ -550,8 +550,7 @@
                 </div>
             </li>
             <li class="nav-item border-0 px-0">
-                <a href=""
-                    class="nav-link d-flex px-3 px-md-4 position-relative text-secondary icon-xs">
+                <a href="#" class="nav-link d-flex px-3 px-md-4 position-relative text-secondary icon-xs">
                     <span class="badge badge-alizarin rounded-circle fw-bold badge-float mt-n1 ms-n2 px-0 w-16"
                         style="font-size: 8px;">2</span>
                     <!-- Icon -->
@@ -564,16 +563,28 @@
             </li>
 
             <li class="nav-item border-0 px-0">
-                @if (session('user'))
-                    <a href="" class="nav-link d-flex px-3 px-md-4 text-secondary icon-xs">
+                @if (Auth::user())
+                    <a class="nav-link d-flex px-3 px-md-4" data-bs-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
                         <!-- Avatar -->
                         <div class="avatar avatar-sm">
                             <img src="{{ asset('assets/img/avatars/avatar-1.jpg') }}" alt="..."
                                 class="avatar-img rounded-circle">
                         </div>
                     </a>
+                    <ul class="dropdown-menu dropdown-menu-wd-end border-xl" aria-labelledby="navbarBlog">
+                        <li class="dropdown-item">
+                            <a class="dropdown-link" href="{{route('users.profile')}}">
+                                {{ __('page_profile') }}
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a class="dropdown-link" href="#">
+                                {{ __('page_logout') }}
+                            </a>
+                        </li>
+                    </ul>
                 @else
-                    <a href="" class="nav-link d-flex px-3 px-md-4 text-secondary icon-xs">
+                    <a href="{{route('login')}}" class="nav-link d-flex px-3 px-md-4 text-secondary icon-xs">
                         <!-- Icon -->
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
