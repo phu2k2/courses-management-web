@@ -8,7 +8,7 @@
                 role="tab">
                 Account
             </a>
-            <a class="list-group-item list-group-item-action px-3" data-toggle="list" href=""
+            <a class="list-group-item list-group-item-action px-3" data-toggle="list" href="#"
                 role="tab">
                 Password
             </a>
