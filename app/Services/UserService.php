@@ -14,7 +14,7 @@ class UserService
     }
 
     /**
-     * @param string $userId
+     * @param mixed $userId
      *
      * @return mixed
      */

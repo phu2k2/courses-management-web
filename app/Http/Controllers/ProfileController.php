@@ -6,6 +6,7 @@ use App\Services\UserService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -19,10 +20,10 @@ class ProfileController extends Controller
         $this->userService = $userService;
     }
 
-    public function show(Request $request): View
+    public function show(): View
     {
-        $user = $this->userService->getInfor($request->id);
-        return view('account.profile', compact('user'));
+        $user = $this->userService->getInfor(Auth::id());
+        return view('user.profile', compact('user'));
     }
 
     public function update(): RedirectResponse
