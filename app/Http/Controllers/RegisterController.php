@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
-use App\Services\RegisterService;
+use App\Services\UserService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class RegisterController extends Controller
 {
     /**
-     * @var RegisterService
+     * @var UserService
      */
-    protected $registerService;
+    protected $userService;
 
-    public function __construct(RegisterService $registerService)
+    public function __construct(UserService $userService)
     {
-        $this->registerService = $registerService;
+        $this->userService = $userService;
     }
 
     public function show(): View
@@ -26,8 +26,8 @@ class RegisterController extends Controller
 
     public function store(RegisterRequest $request): RedirectResponse
     {
-        $this->registerService->create($request->validated());
-        session()->flash('message', config('define.register.success'));
+        $this->userService->create($request->validated());
+        session()->flash('message', __('messages.flash.register.success'));
         return redirect()->route('login.show');
     }
 }

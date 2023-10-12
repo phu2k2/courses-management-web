@@ -2,20 +2,20 @@
 
 namespace App\Services;
 
-use App\Repositories\Interfaces\RegisterRepositoryInterface;
+use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 
-class RegisterService
+class UserService
 {
     /**
-     * @var RegisterRepositoryInterface
+     * @var userRepositoryInterface
      */
-    protected $registerRepository;
+    protected $userRepository;
 
-    public function __construct(RegisterRepositoryInterface $registerRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
-        $this->registerRepository = $registerRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -26,6 +26,6 @@ class RegisterService
         $attribute = Arr::except($request, ['password', 'username']);
         $attribute['username'] = strtolower($request['username']);
         $attribute['password'] = Hash::make($request['password']);
-        $this->registerRepository->create($attribute);
+        $this->userRepository->create($attribute);
     }
 }

@@ -4,9 +4,9 @@ namespace App\Repositories;
 
 use App\Models\User;
 use App\Repositories\BaseRepository;
-use App\Repositories\Interfaces\RegisterRepositoryInterface;
+use App\Repositories\Interfaces\UserRepositoryInterface;
 
-class RegisterRepository extends BaseRepository implements RegisterRepositoryInterface
+class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
     /**
      * @return string
