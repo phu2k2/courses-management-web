@@ -19,6 +19,7 @@ class UserService
     }
 
     /**
+     * @param array $request
      * @return void
      */
     public function create(array $request)
