@@ -29,8 +29,8 @@ class CartController extends Controller
 
         if ($this->cartService->addToCart($data)) {
             session()->flash('message', 'Added to cart successfully!');
-        }
-        session()->flash('error', 'Failed to add to cart!');
+        } else
+            session()->flash('error', 'Failed to add to cart!');
 
         return redirect()->back();
     }
