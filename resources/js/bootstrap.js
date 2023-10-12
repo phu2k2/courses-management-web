@@ -5,7 +5,7 @@
  */
 
 import $ from 'jquery/dist/jquery';
-window.$ = $;
+window.$ = window.jQuery = $;
 import axios from 'axios';
 window.axios = axios;
 

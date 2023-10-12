@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class CourseFactory extends Factory
 {
     protected $model = Course::class;
+
     /**
      * Define the model's default state.
      *
@@ -30,6 +31,7 @@ class CourseFactory extends Factory
             'instructor_id' => fake()->numberBetween(1, 10),
             'trailer_url' => fake()->url,
             'average_rating' => fake()->randomFloat(1, 1, 5),
+            'num_reviews' => fake()->numberBetween(1, 1000),
             'total_students' => fake()->numberBetween(10, 1000),
             'total_lessons' => fake()->numberBetween(5, 50),
             'languages' => fake()->numberBetween(1, 3),
@@ -37,6 +39,8 @@ class CourseFactory extends Factory
             'poster_url' => fake()->imageUrl(300, 200),
             'total_time' => fake()->randomFloat(2, 1, 100),
             'description' => fake()->paragraphs(3, true),
+            'learns_description' => fake()->paragraphs(3, true),
+            'requirements_description' => fake()->paragraphs(3, true),
             'is_active' => fake()->randomElement(['true', 'false']),
         ];
     }

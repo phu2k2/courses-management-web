@@ -24,6 +24,7 @@ class Course extends Model
         'instructor_id',
         'trailer_url',
         'average_rating',
+        'num_reviews',
         'total_students',
         'total_lessons',
         'languages',
@@ -31,6 +32,8 @@ class Course extends Model
         'poster_url',
         'total_time',
         'description',
+        'learns_description',
+        'requirements_description',
         'is_active',
     ];
 
@@ -42,6 +45,9 @@ class Course extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    /**
+     * @return HasMany<Cart, Course>
+     */
     public function carts(): HasMany
     {
         return $this->hasMany(Cart::class, 'course_id', 'id');
