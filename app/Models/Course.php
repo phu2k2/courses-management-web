@@ -46,7 +46,7 @@ class Course extends Model
     }
 
     /**
-     * @return HasMany<Cart, Course>
+     * @return HasMany<Cart>
      */
     public function carts(): HasMany
     {
