@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedInteger('course_id');
+            $table->unsignedBigInteger('course_id');
             $table->softDeletes();
             $table->unique(['user_id', 'course_id']);
             $table->timestamps();
