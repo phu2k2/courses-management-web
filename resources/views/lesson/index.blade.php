@@ -253,7 +253,8 @@
                                                 class="d-flex align-items-center overflow-auto overflow-md-visible flex-shrink-all">
                                                 <div
                                                     class="badge btn-orange-soft text-white-70 me-5 font-size-sm fw-normal py-2">
-                                                    30 min</div>
+                                                    {{ $items['lesson_duration'] }}
+                                                </div>
                                                 <a href="#" class="text-secondary d-flex">
                                                     <!-- Icon -->
                                                     <svg width="14" height="16" viewBox="0 0 14 16"
