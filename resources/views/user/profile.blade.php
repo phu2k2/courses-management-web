@@ -11,16 +11,21 @@
             <div class="col-md-7 col-xl-8">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="account" role="tabpanel">
+                        @if (session()->has('message'))
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <span class="alert-text"><strong>Success!</strong> {{ session()->get('message') }}</span>
+                            </div>
+                        @endif
                         <div class="card rounded-3">
                             <div class="card-header">
                                 <h5 class="card-title mb-0">Profile Information</h5>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="{{ route('user.update') }}">
+                                <form method="POST" action="{{ route('users.update') }}">
                                     @csrf
                                     <div class="row">
 
-                                        <input type="hidden" class="form-control" id="inputUsername" name="id"
+                                        <input type="hidden" class="form-control" name="id"
                                             value="{{ $user->id }}">
 
                                         <div class="col-md-8">
@@ -33,11 +38,7 @@
                                             <div class="form-group">
                                                 <label for="inputUsername">Description</label>
                                                 <textarea rows="2" class="form-control" id="inputBio" name="description">
-                                                    @if (!empty($user->profile))
-                                                        {{ $user->profile->description }}
-                                                    @else
-                                                        Tell something about yourself
-                                                    @endif
+                                                    {{ $user->profile?->description }}
                                                 </textarea>
                                             </div>
                                         </div>
