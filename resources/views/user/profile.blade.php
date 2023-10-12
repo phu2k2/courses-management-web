@@ -29,8 +29,6 @@
                                                 <textarea rows="2" class="form-control" id="inputBio" name="description">
                                                     @if (!empty($user->profile))
                                                         {{ $user->profile->description }}
-                                                    @else
-                                                        Tell something about yourself
                                                     @endif
                                                 </textarea>
                                             </div>
