@@ -1,4 +1,4 @@
-@extends('user.layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Edit frofile')
 @section('style')
@@ -7,13 +7,13 @@
 @section('content')
     <div class="container py-4 bg-white-ice">
         <div class="row">
-            @include('user.account.sidebar')
+            @include('user.sidebar')
             <div class="col-md-7 col-xl-8">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="account" role="tabpanel">
                         <div class="card rounded-3">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Profile info</h5>
+                                <h5 class="card-title mb-0">Profile Information</h5>
                             </div>
                             <div class="card-body">
                                 <form>
@@ -22,11 +22,17 @@
                                             <div class="form-group">
                                                 <label for="inputUsername">Username</label>
                                                 <input type="text" class="form-control" id="inputUsername"
-                                                    placeholder="Username">
+                                                    placeholder="Username" name="username" value="{{ $user->username }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputUsername">Description</label>
-                                                <textarea rows="2" class="form-control" id="inputBio" placeholder="Tell something about yourself"></textarea>
+                                                <textarea rows="2" class="form-control" id="inputBio" name="description">
+                                                    @if (!empty($user->profile))
+                                                        {{ $user->profile->description }}
+                                                    @else
+                                                        Tell something about yourself
+                                                    @endif
+                                                </textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -47,23 +53,26 @@
                                         <div class="form-group col-md-6">
                                             <label for="inputFirstName">First name</label>
                                             <input type="text" class="form-control" id="inputFirstName"
-                                                placeholder="First name">
+                                                placeholder="First name" name="first_name"
+                                                value="{{ !empty($user->profile) ? $user->profile->first_name : '' }}">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputLastName">Last name</label>
                                             <input type="text" class="form-control" id="inputLastName"
-                                                placeholder="Last name">
+                                                placeholder="Last name" name="last_name"
+                                                value="{{ !empty($user->profile) ? $user->profile->last_name : '' }}">
                                         </div>
                                     </div>
                                     <div class="form-group pb-3">
                                         <label for="inputEmail4">Email</label>
-                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
+                                            name="email" value="{{ $user->email }}">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                 </form>
                             </div>
                         </div>
-              
+
                     </div>
                 </div>
             </div>
