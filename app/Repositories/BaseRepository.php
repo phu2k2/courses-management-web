@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Repositories\RepositoryInterface;
+use App\Repositories\Interfaces\RepositoryInterface;
 
 abstract class BaseRepository implements RepositoryInterface
 {
@@ -20,7 +20,7 @@ abstract class BaseRepository implements RepositoryInterface
     /**
      * Get the model instance for the repository.
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return string
      */
     abstract public function getModel();
 
