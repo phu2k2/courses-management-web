@@ -14,6 +14,11 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    /**
+     * Login and redirect.
+     *
+     * @return RedirectResponse
+     */
     public function auth(LoginRequest $request): RedirectResponse
     {
         $credentials = $request->validated();
@@ -24,6 +29,6 @@ class LoginController extends Controller
             return redirect()->route('home', ['id' => Auth::id()]);
         }
 
-        return redirect()->back()->with('error', config('define.login.error'));
+        return redirect()->back()->with('error', __('messages.user.error.login'));
     }
 }
