@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Services\CartService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCartRequest;
-use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class CartController extends Controller
 {
@@ -21,13 +21,18 @@ class CartController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @return View
+     * @return RedirectResponse
      */
-    public function store(StoreCartRequest $request): View
+    public function store(StoreCartRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $this->cartService->addToCart($data);
 
-        return View('lesson.index');
+        if ($this->cartService->addToCart($data)) {
+            session()->flash('message', 'Added to cart successfully!');
+        } else {
+            session()->flash('error', 'Failed to add to cart!');
+        }
+
+        return redirect()->back();
     }
 }

@@ -20,10 +20,10 @@ class CartService
     /**
      * Add courses into cart
      * @param array $data
-     * @return void
+     * @return bool
      */
-    public function addToCart($data)
+    public function addToCart($data): bool
     {
-        $this->cartRepo->addToCart($data);
+        return $this->cartRepo->addToCart($data);
     }
 }
