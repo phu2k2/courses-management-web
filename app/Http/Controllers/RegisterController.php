@@ -27,7 +27,7 @@ class RegisterController extends Controller
     public function store(RegisterRequest $request): RedirectResponse
     {
         $this->userService->create($request->validated());
-        session()->flash('message', __('messages.flash.register.success'));
+        session()->flash('message', __('messages.user.success.create'));
         return redirect()->route('login.show');
     }
 }
