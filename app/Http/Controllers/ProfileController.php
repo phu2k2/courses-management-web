@@ -7,6 +7,7 @@ use App\Services\ProfileService;
 use App\Services\UserService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -31,7 +32,7 @@ class ProfileController extends Controller
      */
     public function show(): View
     {
-        $user = $this->userService->getInfor(21);
+        $user = $this->userService->getInfor(Auth::id());
 
         return view('user.profile', compact('user'));
     }
