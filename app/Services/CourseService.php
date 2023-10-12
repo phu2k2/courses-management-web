@@ -30,7 +30,7 @@ class CourseService
     }
 
     /**
-     * @param int
+     * @param int $id
      * @return Model|null
      */
     public function getCourseDetail(int $id): Model|null

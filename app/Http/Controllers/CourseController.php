@@ -26,7 +26,7 @@ class CourseController extends Controller
     }
 
     /**
-     * @param int
+     * @param int $id
      * @return View
      */
     public function show(int $id): View
