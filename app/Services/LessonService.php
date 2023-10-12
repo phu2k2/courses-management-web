@@ -25,7 +25,6 @@ class LessonService
         return $this->lessonRepository->getLessonByTopic($courseId, $topicId);
     }
 
-
     /**
      * @return Collection
      */

@@ -23,7 +23,6 @@ class LessonController extends Controller
 
         $lessons = $this->lessonService->getLessonByCourseId($courseId);
 
-        // dd($lesson, $lessons);
         return view('lesson.index', compact('lessons', 'lesson'));
     }
 }
