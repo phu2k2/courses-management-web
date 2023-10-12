@@ -16,8 +16,16 @@ class ProfileService
         $this->profileRepositoryInterface = $profileRepositoryInterface;
     }
 
-    public function updateProfile($profileId, array $data)
+    /**
+     * Update or create profile by user id
+     *
+     * @param mixed $id
+     * @param array $data
+     *
+     * @return mixed
+     */
+    public function updateProfile($id, array $data)
     {
-        return $this->profileRepositoryInterface->updateOrCreateProfile($profileId, $data);
+        return $this->profileRepositoryInterface->updateOrCreateProfile($id, $data);
     }
 }

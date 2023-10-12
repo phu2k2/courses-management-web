@@ -14,9 +14,9 @@ interface UserRepositoryInterface extends RepositoryInterface
     public function getInfor(mixed $userId);
 
     /**
-     * @param string $userId
+     * @param int $userId
      *
      * @return mixed
      */
-    public function updateUser($userId, array $data);
+    public function updateUser(int $userId, array $data);
 }

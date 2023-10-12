@@ -13,10 +13,12 @@ class ProfileController extends Controller
 {
     /**
      * @var UserService
-     * @var ProfileService
      */
     protected $userService;
 
+    /**
+     * @var ProfileService
+     */
     protected $profileService;
 
     public function __construct(UserService $userService, ProfileService $profileService)
@@ -27,7 +29,7 @@ class ProfileController extends Controller
 
     public function show(): View
     {
-        $user = $this->userService->getInfor(21);
+        $user = $this->userService->getInfor(Auth::user());
         return view('user.profile', compact('user'));
     }
 

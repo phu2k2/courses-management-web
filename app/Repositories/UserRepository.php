@@ -26,19 +26,15 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return $this->model->with('profile')->find($userId);
     }
 
-
     /**
-     * @param string $userId
-     * @param array $data
+     * Update a record by its primary key.
      *
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static[]|static|null
+     * @param int $userId The primary key value.
+     * @param array $data The data to update.
+     * @return int|bool Whether the update was successful or not.
      */
-    public function updateUser($userId, array $data)
+    public function updateUser(int $userId, array $data)
     {
-        $user = $this->model->with('profile')->find($userId);
-
-        $user->update($data);
-
-        return $user;
+        return $this->update($userId, $data);
     }
 }
