@@ -23,6 +23,7 @@ class Course extends Model
         'instructor_id',
         'trailer_url',
         'average_rating',
+        'num_reviews',
         'total_students',
         'total_lessons',
         'languages',
@@ -30,6 +31,8 @@ class Course extends Model
         'poster_url',
         'total_time',
         'description',
+        'learns_description',
+        'requirements_description',
         'is_active',
     ];
 
