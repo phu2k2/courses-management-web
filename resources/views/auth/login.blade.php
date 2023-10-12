@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Login account')
 @section('content')
-    <!-- REGISTER
-                        ================================================== -->
     <section class="">
         <div class="flickity-button-outset-long flickity-page-dots-white flickity-page-dots-43">
             <div class="w-100">
