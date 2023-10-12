@@ -1,8 +1,12 @@
 <?php
 
 return [
-    'welcome' => 'Welcome to our application!',
-    'login' => 'Log in',
-    'logout' => 'Log out',
-    'forgot_password' => 'Forgot your password?',
+    'user' => [
+        'success' => [
+            'create' => 'Register account was successful',
+        ],
+        'error' => [
+            'login' => 'Login error, please check your email or password'
+        ]
+    ],
 ];
