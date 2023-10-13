@@ -19,7 +19,7 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     /**
      * @return LengthAwarePaginator<\Illuminate\Database\Eloquent\Model>
      */
-    public function getListCourses(): LengthAwarePaginator
+    public function getCourses(): LengthAwarePaginator
     {
         return $this->model->with('category')->paginate(self::PAGESIZE);
     }

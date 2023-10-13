@@ -21,9 +21,9 @@ class CourseService
     /**
      * @return LengthAwarePaginator<\Illuminate\Database\Eloquent\Model>
      */
-    public function getListCourses(): LengthAwarePaginator
+    public function getCourses(): LengthAwarePaginator
     {
-        $listCourses = $this->courseRepo->getListCourses();
+        $listCourses = $this->courseRepo->getCourses();
 
         return $listCourses;
     }

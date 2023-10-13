@@ -10,5 +10,5 @@ interface CourseRepositoryInterface extends RepositoryInterface
     /**
      * @return LengthAwarePaginator<\Illuminate\Database\Eloquent\Model>
      */
-    public function getListCourses(): LengthAwarePaginator;
+    public function getCourses(): LengthAwarePaginator;
 }

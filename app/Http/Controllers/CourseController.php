@@ -27,6 +27,6 @@ class CourseController extends Controller
 
     public function show(): View
     {
-        return view('course.show');
+        return View('course.show');
     }
 }
