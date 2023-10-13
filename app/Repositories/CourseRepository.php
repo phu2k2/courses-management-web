@@ -33,6 +33,6 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      */
     public function find($id): Model|null
     {
-        return $this->model->with(['category', 'topics.lessons'])->find($id);
+        return $this->model->with(['category:id,name', 'topics.lessons:id,topic_id,title'])->find($id);
     }
 }
