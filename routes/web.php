@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +20,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::prefix('login')->name('login.')->group(function () {
+    Route::get('show', [LoginController::class, 'show'])->name('show');
+    Route::post('auth', [LoginController::class, 'auth'])->name('auth');
 });
+Route::prefix('register')->name('register.')->group(function () {
+    Route::get('show', [RegisterController::class, 'show'])->name('show');
+    Route::post('store', [RegisterController::class, 'store'])->name('store');
+});
+Route::prefix('users')->name('users.')->group(function () {
+    Route::get('profile', [ProfileController::class, 'show'])->name('profile');
+});
+Route::resource('courses', CourseController::class)->only(['index', 'show']);
+Route::resource('lessons', LessonController::class)->only(['index', 'show']);
+Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
