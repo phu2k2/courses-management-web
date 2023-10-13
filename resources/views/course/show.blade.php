@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'course')
+@section('title', 'Course')
 
 @section('content')
     <!-- PAGE HEADER ================================================== -->
@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="font-size-sm ms-lg-3 text-white">
-                                <span>{{ $course->average_rating }} (9.8k+ reviews)</span>
+                                <span>{{ $course->average_rating }} ({{ $course->num_reviews }} reviews)</span>
                             </div>
                         </div>
                     </div>
@@ -83,9 +83,8 @@
                         aria-labelledby="pills-overview-tab">
                         <h3 class="">Course Description</h3>
                         {!! $course->description !!}
-                        <a class="text-teal read-more h6 d-inline-block mb-8" data-bs-toggle="collapse"
-                            href="#readcollapseExample" role="button" aria-expanded="false"
-                            aria-controls="readcollapseExample">
+                        <a class="text-teal read-more h6 d-inline-block mb-8" data-bs-toggle="collapse" href="#readcollapseExample"
+                            role="button" aria-expanded="false" aria-controls="readcollapseExample">
                             <span class="d-inline-flex align-items-center more">
                                 Read More
                                 <span

@@ -102,7 +102,7 @@ class Course extends Model
     /**
      * @return array
      */
-    public function getLearnContentsAttribute(): array
+    public function getLearnContentsAttribute()
     {
         $learns = explode('. ', $this->learns_description);
         return $learns;
