@@ -8,8 +8,7 @@ interface ProfileRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param string $userId
-     *
      * @return mixed
      */
-    public function findByUserId(mixed $userId);
+    public function findUser($userId);
 }

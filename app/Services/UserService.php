@@ -49,6 +49,6 @@ class UserService
      */
     public function updateUser($userId, array $data)
     {
-        return $this->userRepository->updateUser($userId, $data);
+        return $this->userRepository->update($userId, $data);
     }
 }
