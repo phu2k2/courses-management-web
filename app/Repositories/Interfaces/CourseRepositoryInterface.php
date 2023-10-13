@@ -7,5 +7,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface CourseRepositoryInterface extends RepositoryInterface
 {
-    public function getListCourses(): LengthAwarePaginator;
+    /**
+     * @return LengthAwarePaginator<\Illuminate\Database\Eloquent\Model>
+     */
+    public function getCourses(): LengthAwarePaginator;
 }

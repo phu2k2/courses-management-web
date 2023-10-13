@@ -22,15 +22,19 @@ class CourseController extends Controller
      */
     public function index(): View
     {
-        $listCourses = $this->courseService->getListCourses();
+        $listCourses = $this->courseService->getCourses();
 
         return view('course.index', compact('listCourses'));
     }
+
     /**
+     * @param $id
      * @return View
      */
-    public function show(): View
+    public function show(int $id): View
     {
-        return view('course.show');
+        $course = $this->courseService->getCourseDetail($id);
+
+        return View('course.show', compact('course'));
     }
 }

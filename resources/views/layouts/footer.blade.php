@@ -6,7 +6,7 @@
             <div class="col-12 col-md-4 col-lg-4">
 
                 <!-- Brand -->
-                <img src="/assets/img/brand.svg" alt="..." class="footer-brand img-fluid mb-4 h-60p">
+                <img src="{{ asset('assets/img/brand.svg') }}" alt="..." class="footer-brand img-fluid mb-4 h-60p">
 
                 <!-- Text -->
                 <p class="text-gray-800 mb-4 font-size-sm-alone">
@@ -369,8 +369,7 @@
                             class="form-select form-select-sm font-size-sm-alone shadow min-width-140 text-left mb-4 mb-md-0"
                             data-choices>
                             <option>English</option>
-                            <option>Tamil</option>
-                            <option>French</option>
+                            <option>Vietnamese</option>
                         </select>
                     </div>
                 </div>
