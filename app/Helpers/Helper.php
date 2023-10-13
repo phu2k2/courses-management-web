@@ -1,11 +1,12 @@
 <?php
 
-if (!function_exists('formatNumberToShort')) {
+if (!function_exists('convert_to_short_form')) {
 
     /**
+     * @param int $number
      * @return string
      */
-    function formatNumberToShort(int $number): string
+    function convert_to_short_form(int $number): string
     {
         if ($number < 1000) {
             return (string)$number;
