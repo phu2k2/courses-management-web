@@ -514,10 +514,6 @@
                     @endforeach
                     {{-- END COURSE --}}
                 </div>
-<<<<<<< HEAD:resources/views/user/course/index.blade.php
-=======
-                {{-- END COURSE --}}
->>>>>>> 732c108c12e52c631fadd8b1db3bdbaceffc5990:resources/views/course/index.blade.php
                 <!-- PAGINATION ================================================== -->
                 <nav class="mb-11" aria-label="Page navigationa">
                     <ul class="pagination justify-content-center">
