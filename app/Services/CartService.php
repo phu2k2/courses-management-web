@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\Interfaces\CartRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class CartService
 {
@@ -25,5 +26,14 @@ class CartService
     public function addToCart($data): Model
     {
         return $this->cartRepo->addToCart($data);
+    }
+
+    /**
+     * @param int $id of user
+     * @return Collection
+     */
+    public function getCartByUser(int $id): Collection
+    {
+        return $this->cartRepo->getCartByUser($id);
     }
 }
