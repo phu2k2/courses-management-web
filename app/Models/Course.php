@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
@@ -45,6 +46,14 @@ class Course extends Model
     }
 
     /**
+     * @return HasMany
+     */
+    public function topics(): HasMany
+    {
+        return $this->hasMany(Topic::class, 'course_id', 'id');
+    }
+
+    /**
      * @return float
      */
     public function getDiscountedPriceAttribute()
@@ -60,7 +69,7 @@ class Course extends Model
         $language = match ((int) $this->languages) {
             1 => 'English',
             2 => 'Vietnamese',
-            default => throw new \Exception('Unexpected case'),
+            default => '',
         };
 
         return $language;
@@ -75,9 +84,27 @@ class Course extends Model
             1 => 'Beginner',
             2 => 'Intermediate',
             3 => 'Advanced',
-            default => throw new \Exception('Unexpected case'),
+            default => '',
         };
 
         return $levels;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRequirementsAttribute()
+    {
+        $requirements = explode('\n', $this->requirements_description);
+        return $requirements;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLearnContentsAttribute(): array
+    {
+        $learns = explode('. ', $this->learns_description);
+        return $learns;
     }
 }
