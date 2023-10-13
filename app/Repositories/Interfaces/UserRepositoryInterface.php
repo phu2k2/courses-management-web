@@ -6,4 +6,10 @@ use App\Repositories\RepositoryInterface;
 
 interface UserRepositoryInterface extends RepositoryInterface
 {
+    /**
+     * @param string $userId
+     *
+     * @return mixed
+     */
+    public function getInfor(mixed $userId);
 }
