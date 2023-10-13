@@ -42,7 +42,7 @@
                                         </thead>
 
                                         <tbody>
-                                            @foreach ($cartByUser as $item)
+                                            @foreach ($cart as $item)
                                                 <tr class="woocommerce-cart-form__cart-item cart_item">
                                                     <td class="product-name" data-title="Product">
                                                         <div class="d-flex align-items-center">
