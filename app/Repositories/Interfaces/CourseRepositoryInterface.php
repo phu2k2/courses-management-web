@@ -15,7 +15,7 @@ interface CourseRepositoryInterface extends RepositoryInterface
 
     /**
      * @param int $id
-     * @return @return Model
+     * @return Model
      */
     public function findOrFail(int $id): Model;
 }
