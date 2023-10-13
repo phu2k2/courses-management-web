@@ -13,7 +13,7 @@
                                         @if (session()->has('message'))
                                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                                 <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
-                                                <span class="alert-text"><strong>{{ __('label_success') }}</strong><br>
+                                                <span class="alert-text"><strong>{{ __('success') }}</strong><br>
                                                     {{ session()->get('message') }}</span>
                                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                                     aria-label="Close">
@@ -23,7 +23,7 @@
                                         @if (session()->has('error'))
                                             <div class="alert alert-alizarin alert-dismissible fade show" role="alert">
                                                 <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
-                                                <span class="alert-text"><strong>{{ __('label_error') }}</strong><br>
+                                                <span class="alert-text"><strong>{{ __('error') }}</strong><br>
                                                     {{ session()->get('error') }}</span>
                                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                                     aria-label="Close">
@@ -39,7 +39,7 @@
                                             <!-- Email -->
                                             <div class="form-group mb-5">
                                                 <label for="modalSigninEmail1">
-                                                    {{ __('label_email') }}
+                                                    {{ __('email') }}
                                                 </label>
                                                 <input type="email" name="email" class="form-control"
                                                     id="modalSigninEmail1" placeholder="johndoe@creativelayers.com"
@@ -52,7 +52,7 @@
                                             <!-- Password -->
                                             <div class="form-group mb-5">
                                                 <label for="modalSigninPassword1">
-                                                    {{ __('label_password') }}
+                                                    {{ __('password') }}
                                                 </label>
                                                 <input type="password" name="password" class="form-control"
                                                     id="modalSigninPassword1" placeholder="**********"
@@ -67,25 +67,25 @@
                                                     <input class="form-check-input text-gray-800" type="checkbox"
                                                         id="autoSizingCheck1">
                                                     <label class="form-check-label text-gray-800" for="autoSizingCheck1">
-                                                        {{ __('label_remember') }}
+                                                        {{ __('remember') }}
                                                     </label>
                                                 </div>
 
                                                 <div class="ms-auto">
-                                                    <a class="text-gray-800" href="">{{ __('label_forgot') }}</a>
+                                                    <a class="text-gray-800" href="">{{ __('forgot') }}</a>
                                                 </div>
                                             </div>
 
                                             <!-- Submit -->
                                             <button class="btn btn-block btn-primary" type="submit">
-                                                {{ strtoupper(__('btn_login')) }}
+                                                {{ strtoupper(__('login')) }}
                                             </button>
                                         </form>
 
                                         <!-- Text -->
                                         <p class="mb-0 font-size-sm text-center">
-                                            {{ __('txt_login') }} <a class="text-underline fw-semi-bold"
-                                                href="{{ route('register.show') }}">{{ __('btn_register') }}</a>
+                                            {{ __('login_label') }} <a class="text-underline fw-semi-bold"
+                                                href="{{ route('register.show') }}">{{ __('register') }}</a>
                                         </p>
                                     </div>
                                 </div>

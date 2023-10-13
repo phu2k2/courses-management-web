@@ -20,7 +20,7 @@
                                             <!-- Username -->
                                             <div class="form-group mb-5">
                                                 <label for="modalSignupUsername1">
-                                                    {{ __('label_username') }}
+                                                    {{ __('username') }}
                                                 </label>
                                                 <input type="text" name="username" class="form-control"
                                                     id="modalSignupUsername1" placeholder="John"
@@ -33,7 +33,7 @@
                                             <!-- Email -->
                                             <div class="form-group mb-5">
                                                 <label for="modalSignupEmail1">
-                                                    {{ __('label_email') }}
+                                                    {{ __('email') }}
                                                 </label>
                                                 <input type="email" name="email" class="form-control"
                                                     id="modalSignupEmail1" placeholder="johndoe@creativelayers.com"
@@ -46,7 +46,7 @@
                                             <!-- Password -->
                                             <div class="form-group mb-5">
                                                 <label for="modalSignupPassword3">
-                                                    {{ __('label_password') }}
+                                                    {{ __('password') }}
                                                 </label>
                                                 <input type="password" name="password" class="form-control"
                                                     id="modalSignupPassword3" placeholder="**********"
@@ -58,15 +58,15 @@
 
                                             <!-- Submit -->
                                             <button class="btn btn-block btn-primary" type="submit">
-                                                {{ strtoupper(__('btn_register')) }}
+                                                {{ strtoupper(__('register')) }}
                                             </button>
 
                                         </form>
 
                                         <!-- Text -->
                                         <p class="mb-0 font-size-sm text-center">
-                                            {{ __('txt_register') }} <a class="text-underline fw-semi-bold"
-                                                href="{{ route('login.show') }}">{{ __('btn_login') }}</a>
+                                            {{ __('register_label') }} <a class="text-underline fw-semi-bold"
+                                                href="{{ route('login.show') }}">{{ __('login') }}</a>
                                         </p>
                                     </div>
                                 </div>

@@ -23,7 +23,7 @@
                             </svg>
 
                         </div>
-                        <span class="text-white fw-medium me-1">{{ __('page_categories') }}</span>
+                        <span class="text-white fw-medium me-1">{{ __('categories') }}</span>
                     </div>
                 </a>
 
@@ -463,31 +463,31 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown dropdown-full-width">
                     <a class="nav-link" id="navbarLandings" href="{{ route('home') }}">
-                        {{ __('page_home') }}
+                        {{ __('home') }}
                     </a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="navbarInstructors" href="#">
-                        {{ __('page_instructors') }}
+                        {{ __('instructors') }}
                     </a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="navbarCourses" href="">
-                        {{ __('page_courses') }}
+                        {{ __('courses') }}
                     </a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="navbarFavorites" href="">
-                        {{ __('page_favorites') }}
+                        {{ __('favorites') }}
                     </a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="navbarAboutUs" href="#">
-                        {{ __('page_about') }}
+                        {{ __('about') }}
                     </a>
                 </li>
             </ul>
@@ -574,17 +574,17 @@
                     <ul class="dropdown-menu dropdown-menu-wd-end border-xl" aria-labelledby="navbarBlog">
                         <li class="dropdown-item">
                             <a class="dropdown-link" href="{{route('users.profile')}}">
-                                {{ __('page_profile') }}
+                                {{ __('profile') }}
                             </a>
                         </li>
                         <li class="dropdown-item">
                             <a class="dropdown-link" href="#">
-                                {{ __('page_logout') }}
+                                {{ __('logout') }}
                             </a>
                         </li>
                     </ul>
                 @else
-                    <a href="{{route('login')}}" class="nav-link d-flex px-3 px-md-4 text-secondary icon-xs">
+                    <a href="{{route('login.show')}}" class="nav-link d-flex px-3 px-md-4 text-secondary icon-xs">
                         <!-- Icon -->
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
