@@ -37,8 +37,7 @@
                                                 <th class="product-name">Product</th>
                                                 <th class="product-price">Price</th>
                                                 <th class="product-quantity">Quantity</th>
-                                                {{-- <th class="product-subtotal">Subtotal</th> --}}
-                                                <th class="product-remove">&nbsp;</th>
+                                                <th class="product-remove">Action</th>
                                             </tr>
                                         </thead>
 
