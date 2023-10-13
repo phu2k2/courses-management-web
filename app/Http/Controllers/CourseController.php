@@ -31,8 +31,8 @@ class CourseController extends Controller
      */
     public function show(int $id): View
     {
-        $course = $this->courseService->getCourseDetail($id);
+        $course = $this->courseService->getCourse($id);
 
-        return View('user.course.detail', compact('course'));
+        return view('course.show', compact('course'));
     }
 }
