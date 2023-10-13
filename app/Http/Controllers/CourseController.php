@@ -24,7 +24,7 @@ class CourseController extends Controller
     {
         $listCourses = $this->courseService->getListCourses();
 
-        return View('course.index', compact('listCourses'));
+        return view('course.index', compact('listCourses'));
     }
     /**
      * @return View
