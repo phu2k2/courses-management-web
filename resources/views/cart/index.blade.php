@@ -21,7 +21,7 @@
         <img class="d-none img-fluid" src="...html" alt="...">
     </header>
     <!-- SHOP CART
-                            ================================================== -->
+                                ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             <div id="primary" class="content-area">
@@ -37,123 +37,51 @@
                                                 <th class="product-name">Product</th>
                                                 <th class="product-price">Price</th>
                                                 <th class="product-quantity">Quantity</th>
-                                                {{-- <th class="product-subtotal">Subtotal</th> --}}
-                                                <th class="product-remove">&nbsp;</th>
+                                                <th class="product-remove">Action</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <tr class="woocommerce-cart-form__cart-item cart_item">
-                                                <td class="product-name" data-title="Product">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="shop-single.html">
-                                                            <img src="assets/img/products/product-25.jpg"
-                                                                class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                                                alt="">
-                                                        </a>
-                                                        <div class="ms-6">
-                                                            <a href="shop-single.html">Album</a>
+                                            @foreach ($cartByUser as $item)
+                                                <tr class="woocommerce-cart-form__cart-item cart_item">
+                                                    <td class="product-name" data-title="Product">
+                                                        <div class="d-flex align-items-center">
+                                                            <a href="shop-single.html">
+                                                                <img src="{{ $item->course->poster_url }}"
+                                                                    class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
+                                                                    alt="">
+                                                            </a>
+                                                            <div class="ms-6">
+                                                                <a href="shop-single.html">{{ $item->course->title }}</a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
+                                                    </td>
 
-                                                <td class="product-price" data-title="Price">
-                                                    <span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">$</span>298</span>
-                                                </td>
+                                                    <td class="product-price" data-title="Price">
+                                                        <span class="woocommerce-Price-amount amount"><span
+                                                                class="woocommerce-Price-currencySymbol">$</span>{{ $item->course->price }}</span>
+                                                    </td>
 
-                                                <td class="product-quantity" data-title="Quantity">
-                                                    <!-- Quantity -->
-                                                    <div class="border rounded mw-70p">
-                                                        <input class="form-control form-control-sm border-0 quantity px-2"
-                                                            readonly name="quantity" value="1" type="number">
+                                                    <td class="product-quantity" data-title="Quantity">
+                                                        <!-- Quantity -->
+                                                        <div class="border rounded mw-70p">
+                                                            <input
+                                                                class="form-control form-control-sm border-0 quantity px-2"
+                                                                readonly name="quantity" value="1" type="number">
 
-                                                    </div>
-                                                    <!-- End Quantity -->
-                                                </td>
-
-
-                                                <td class="product-remove">
-                                                    <a href="#" class="remove btn btn-danger font-size-sm"
-                                                        aria-label="Remove this item">
-                                                        Delete
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr class="woocommerce-cart-form__cart-item cart_item">
-                                                <td class="product-name" data-title="Product">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="shop-single.html">
-                                                            <img src="assets/img/products/product-25.jpg"
-                                                                class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                                                alt="">
-                                                        </a>
-                                                        <div class="ms-6">
-                                                            <a href="shop-single.html">Album</a>
                                                         </div>
-                                                    </div>
-                                                </td>
-
-                                                <td class="product-price" data-title="Price">
-                                                    <span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">$</span>298</span>
-                                                </td>
-
-                                                <td class="product-quantity" data-title="Quantity">
-                                                    <!-- Quantity -->
-                                                    <div class="border rounded mw-70p">
-                                                        <input class="form-control form-control-sm border-0 quantity px-2"
-                                                            readonly name="quantity" value="1" type="number">
-
-                                                    </div>
-                                                    <!-- End Quantity -->
-                                                </td>
+                                                        <!-- End Quantity -->
+                                                    </td>
 
 
-                                                <td class="product-remove">
-                                                    <a href="#" class="remove btn btn-danger font-size-sm"
-                                                        aria-label="Remove this item">
-                                                        Delete
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr class="woocommerce-cart-form__cart-item cart_item">
-                                                <td class="product-name" data-title="Product">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="shop-single.html">
-                                                            <img src="assets/img/products/product-25.jpg"
-                                                                class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                                                alt="">
+                                                    <td class="product-remove">
+                                                        <a href="#" class="remove btn btn-danger font-size-sm"
+                                                            aria-label="Remove this item">
+                                                            Delete
                                                         </a>
-                                                        <div class="ms-6">
-                                                            <a href="shop-single.html">Album</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-
-                                                <td class="product-price" data-title="Price">
-                                                    <span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">$</span>298</span>
-                                                </td>
-
-                                                <td class="product-quantity" data-title="Quantity">
-                                                    <!-- Quantity -->
-                                                    <div class="border rounded mw-70p">
-                                                        <input class="form-control form-control-sm border-0 quantity px-2"
-                                                            readonly name="quantity" value="1" type="number">
-
-                                                    </div>
-                                                    <!-- End Quantity -->
-                                                </td>
-
-                                                <td class="product-remove">
-                                                    <a href="#" class="remove btn btn-danger font-size-sm"
-                                                        aria-label="Remove this item">
-                                                        Delete
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                             <tr>
                                                 <td colspan="5" class="actions">
                                                     <div class="coupon">
