@@ -21,7 +21,7 @@ class Lesson extends Model
         'lesson_url',
     ];
 
-     /**
+    /**
      * @return BelongsTo<Topic, Lesson>
      */
     public function topic(): BelongsTo

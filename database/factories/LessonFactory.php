@@ -17,7 +17,7 @@ class LessonFactory extends Factory
      */
     public function definition(): array
     {
-        $topics = Topic::all()->random();
+        $topics = Topic::all('id')->random();
 
         return [
             'title' => fake()->title(),

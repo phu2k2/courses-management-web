@@ -2,34 +2,27 @@
 
 namespace App\Services;
 
-use App\Repositories\LessonRepository;
-use Illuminate\Support\Collection;
+use App\Repositories\Interfaces\LessonRepositoryInterface;
 
 class LessonService
 {
     /**
-     * @var LessonRepository
+     * @var lessonRepositoryInterface
      */
     protected $lessonRepository;
 
-    public function __construct(LessonRepository $lessonRepository)
+    public function __construct(LessonRepositoryInterface $lessonRepository)
     {
         $this->lessonRepository = $lessonRepository;
     }
 
     /**
-     * @return Collection
+     * @param int $lessonId
+     *
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static[]|static|null
      */
-    public function getLessonByTopic(int $courseId, int $topicId): Collection
+    public function getLessonById($lessonId)
     {
-        return $this->lessonRepository->getLessonByTopic($courseId, $topicId);
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getLessonByCourseId(int $courseId): Collection
-    {
-        return $this->lessonRepository->getAllLessonByCourseId($courseId);
+        return $this->lessonRepository->getLessonById($lessonId);
     }
 }
