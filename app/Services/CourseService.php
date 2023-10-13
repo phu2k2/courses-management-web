@@ -19,7 +19,7 @@ class CourseService
     }
 
     /**
-     * @return LengthAwarePaginator<\Illuminate\Database\Eloquent\Model>
+     * @return LengthAwarePaginator<Model>
      */
     public function getCourses(): LengthAwarePaginator
     {
@@ -28,7 +28,7 @@ class CourseService
 
     /**
      * @param int $id
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function getCourse(int $id): Model
     {
