@@ -33,14 +33,6 @@ class UpdateProfileRequest extends FormRequest
             'description' => ['bail', 'nullable', 'string'],
             'first_name' => ['bail', 'nullable', 'string', 'max:15'],
             'last_name' => ['bail', 'nullable', 'string', 'max:50'],
-            'email' => [
-                'bail',
-                'required',
-                'email',
-                'max:50',
-                'regex:/^[a-z0-9@.]+$/',
-                'unique:users,email,' . $this->id . ',id'
-            ],
         ];
     }
 
