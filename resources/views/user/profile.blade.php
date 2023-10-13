@@ -22,13 +22,20 @@
                                             <div class="form-group">
                                                 <label for="inputUsername">Username</label>
                                                 <input type="text" class="form-control" id="inputUsername"
-                                                    placeholder="Username" name="username" value="{{ $user->username }}">
+                                                    placeholder="Username" name="username"
+                                                    value="{{ old('username', $user->username) }}">
+                                                @error('username')
+                                                    <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputUsername">Description</label>
                                                 <textarea rows="2" class="form-control" id="inputBio" name="description">
-                                                        {{ $user->profile?->description }}
+                                                        {{ old('description', $user->profile?->description) }}
                                                 </textarea>
+                                                @error('description')
+                                                    <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -50,19 +57,28 @@
                                             <label for="inputFirstName">First name</label>
                                             <input type="text" class="form-control" id="inputFirstName"
                                                 placeholder="First name" name="first_name"
-                                                value="{{ $user->profile?->first_name }}">
+                                                value="{{ old('first_name', $user->profile?->first_name) }}">
+                                            @error('first_name')
+                                                <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputLastName">Last name</label>
                                             <input type="text" class="form-control" id="inputLastName"
                                                 placeholder="Last name" name="last_name"
-                                                value="{{ $user->profile?->last_name }}">
+                                                value="{{ old('last_name', $user->profile?->last_name) }}">
+                                            @error('last_name')
+                                                <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group pb-3">
                                         <label for="inputEmail4">Email</label>
                                         <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
-                                            name="email" value="{{ $user->email }}">
+                                            name="email" value="{{ old('email', $user->email) }}" disabled>
+                                        @error('email')
+                                            <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                 </form>
