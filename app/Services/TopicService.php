@@ -9,20 +9,19 @@ class TopicService
     /**
      * @var TopicRepositoryInterface
      */
-    protected $topicRepository;
+    protected $topicRepo;
 
-    public function __construct(TopicRepositoryInterface $topicRepository)
+    public function __construct(TopicRepositoryInterface $topicRepo)
     {
-        $this->topicRepository = $topicRepository;
+        $this->topicRepo = $topicRepo;
     }
 
     /**
-     * @param int $CourseId
-     *
-     * @return array
+     * @param int $courseId
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static[]|static|null
      */
-    public function getTopicsWithLessons($CourseId)
+    public function getTopicsWithLessons($courseId)
     {
-        return $this->topicRepository->getTopicsWithLessons($CourseId);
+        return $this->topicRepo->getTopicsWithLessons($courseId);
     }
 }

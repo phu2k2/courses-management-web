@@ -19,6 +19,14 @@ interface RepositoryInterface
     public function find($id);
 
     /**
+     * Find a record by its primary key.
+     *
+     * @param int $id The primary key value.
+     * @return \Illuminate\Database\Eloquent\Model|null The found model or null if not found.
+     */
+    public function findOrFail($id);
+
+    /**
      * Create
      * @param array $attributes
      * @return mixed

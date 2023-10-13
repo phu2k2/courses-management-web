@@ -9,20 +9,19 @@ class LessonService
     /**
      * @var lessonRepositoryInterface
      */
-    protected $lessonRepository;
+    protected $lessonRepo;
 
-    public function __construct(LessonRepositoryInterface $lessonRepository)
+    public function __construct(LessonRepositoryInterface $lessonRepo)
     {
-        $this->lessonRepository = $lessonRepository;
+        $this->lessonRepo = $lessonRepo;
     }
 
     /**
      * @param int $lessonId
-     *
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static[]|static|null
+     * @return \Illuminate\Database\Eloquent\Model
      */
-    public function getLessonById($lessonId)
+    public function findLesson($lessonId)
     {
-        return $this->lessonRepository->getLessonById($lessonId);
+        return $this->lessonRepo->findOrFail($lessonId);
     }
 }

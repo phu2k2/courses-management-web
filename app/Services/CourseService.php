@@ -9,20 +9,19 @@ class CourseService
     /**
      * @var CourseRepositoryInterface
      */
-    protected $courseRepository;
+    protected $courseRepo;
 
-    public function __construct(CourseRepositoryInterface $courseRepository)
+    public function __construct(CourseRepositoryInterface $courseRepo)
     {
-        $this->courseRepository = $courseRepository;
+        $this->courseRepo = $courseRepo;
     }
 
     /**
-     * @param int $CourseId
-     *
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static[]|static|null
+     * @param int $courseId
+     * @return \Illuminate\Database\Eloquent\Model
      */
-    public function getCourseById($CourseId)
+    public function findCourse($courseId)
     {
-        return $this->courseRepository->getCourseById($CourseId);
+        return $this->courseRepo->findOrFail($courseId);
     }
 }

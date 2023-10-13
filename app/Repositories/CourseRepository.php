@@ -12,14 +12,4 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     {
         return Course::class;
     }
-
-    /**
-     * @param int $courseId.
-     *
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static[]|static|null
-     */
-    public function getCourseById($courseId)
-    {
-        return $this->find($courseId);
-    }
 }

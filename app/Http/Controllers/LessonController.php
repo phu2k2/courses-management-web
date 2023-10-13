@@ -33,13 +33,13 @@ class LessonController extends Controller
 
     /**
      * @param int $courseId
-     *
      * @param int $lessonId
+     * @return View
      */
     public function show(int $courseId, int $lessonId): View
     {
-        $course = $this->courseService->getCourseById($courseId);
-        $lesson = $this->lessonService->getLessonById($lessonId);
+        $course = $this->courseService->findCourse($courseId);
+        $lesson = $this->lessonService->findLesson($lessonId);
         $topics = $this->topicService->getTopicsWithLessons($courseId);
 
         return view('lesson.index', compact('course', 'lesson', 'topics'));
