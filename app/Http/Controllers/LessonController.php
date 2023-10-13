@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CourseService;
 use App\Services\LessonService;
+use App\Services\TopicService;
 use Illuminate\Contracts\View\View;
 
 class LessonController extends Controller
@@ -12,17 +14,34 @@ class LessonController extends Controller
      */
     protected $lessonService;
 
-    public function __construct(LessonService $lessonService)
+    /**
+     * @var CourseService
+     */
+    protected $courseService;
+
+    /**
+     * @var TopicService
+     */
+    protected $topicService;
+
+    public function __construct(LessonService $lessonService, CourseService $courseService, TopicService $topicService)
     {
         $this->lessonService = $lessonService;
+        $this->courseService = $courseService;
+        $this->topicService = $topicService;
     }
 
-    public function getLessonTopic(int $courseId, int $lessonId): View
+    /**
+     * @param int $courseId
+     *
+     * @param int $lessonId
+     */
+    public function show(int $courseId, int $lessonId): View
     {
-        $lesson = $this->lessonService->getLessonByTopic($courseId, $lessonId);
+        $course = $this->courseService->getCourseById($courseId);
+        $lesson = $this->lessonService->getLessonById($lessonId);
+        $topics = $this->topicService->getTopicsWithLessons($courseId);
 
-        $lessons = $this->lessonService->getLessonByCourseId($courseId);
-
-        return view('lesson.index', compact('lessons', 'lesson'));
+        return view('lesson.index', compact('course', 'lesson', 'topics'));
     }
 }

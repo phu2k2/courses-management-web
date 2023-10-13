@@ -20,7 +20,7 @@ class TopicFactory extends Factory
 
     public function definition(): array
     {
-        $course = Course::all()->random();
+        $course = Course::all('id')->random();
 
         return [
             'name' => $this->faker->unique()->word,

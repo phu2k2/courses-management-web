@@ -33,8 +33,8 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile');
 });
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
-// Route::resource('lessons', LessonController::class)->only(['index', 'show']);
 Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
 
-
-Route::get('/lessons/{courseId}/{lessonId}', [LessonController::class, 'getLessonTopic']);
+Route::prefix('lessons')->name('lessons.')->group(function () {
+    Route::get('show/{courseId}/{lessonId}', [LessonController::class, 'show'])->name('lessons');
+});
