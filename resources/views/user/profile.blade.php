@@ -73,7 +73,7 @@
                                     <div class="form-group pb-3">
                                         <label for="inputEmail4">Email</label>
                                         <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
-                                            name="email" value="{{ $user->email }}">
+                                            name="email" value="{{ $user->email }}" disabled>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                 </form>

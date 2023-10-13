@@ -32,7 +32,7 @@ class ProfileController extends Controller
      */
     public function show(): View
     {
-        $user = $this->userService->getInfor(Auth::id());
+        $user = $this->userService->getInfor(21);
 
         return view('user.profile', compact('user'));
     }
@@ -41,7 +41,7 @@ class ProfileController extends Controller
     {
         $userId = $request->input('id');
 
-        $user = $request->only('username', 'email');
+        $user = $request->only('username');
         $profile = $request->only('first_name', 'last_name', 'description');
 
         $this->userService->updateUser($userId, $user);
