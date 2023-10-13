@@ -22,7 +22,7 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      */
     public function getCourses(): LengthAwarePaginator
     {
-        return $this->model->with('category')->paginate(self::PAGESIZE);
+        return $this->model->with('category:id,name')->paginate(self::PAGESIZE);
     }
 
     /**
@@ -33,6 +33,6 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      */
     public function find($id): Model|null
     {
-        return $this->model->with('category')->find($id);
+        return $this->model->with('category:id,name')->findOrFail($id);
     }
 }
