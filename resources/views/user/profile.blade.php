@@ -24,10 +24,6 @@
                                 <form method="POST" action="{{ route('users.update') }}">
                                     @csrf
                                     <div class="row">
-
-                                        <input type="hidden" class="form-control" name="id"
-                                            value="{{ $user->id }}">
-
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="inputUsername">Username</label>
