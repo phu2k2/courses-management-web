@@ -1,11 +1,11 @@
 <?php
 
-if (!function_exists('convertToK')) {
+if (!function_exists('formatNumberToShort')) {
 
     /**
      * @return string
      */
-    function convertToK(int $number): string
+    function formatNumberToShort(int $number): string
     {
         if ($number < 1000) {
             return (string)$number;
