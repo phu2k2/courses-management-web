@@ -26,26 +26,13 @@ class UpdateProfileRequest extends FormRequest
                 'bail',
                 'required',
                 'string',
-                'regex:/^\S*$/u',
+                'regex:/^[a-z]+[a-z\d]*$/u',
                 'max:30',
-                'unique:users,username,' . $this->id . ',id'
+                'unique:users,username,' . auth()->id() . ',id'
             ],
             'description' => ['bail', 'nullable', 'string'],
             'first_name' => ['bail', 'nullable', 'string', 'max:15'],
             'last_name' => ['bail', 'nullable', 'string', 'max:50'],
         ];
-    }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'username' => is_string($this->username)
-                ? strtolower($this->username) : $this->username,
-        ]);
     }
 }
