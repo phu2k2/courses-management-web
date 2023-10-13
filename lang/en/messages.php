@@ -8,6 +8,7 @@ return [
         ],
         'error' => [
             'create_cart' => 'Failed to add to cart!',
+            'login' => 'Login error, please check your email or password'
         ]
     ],
 ];
