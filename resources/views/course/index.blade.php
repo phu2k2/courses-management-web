@@ -1,25 +1,11 @@
-@extends('user.layouts.app')
-@section('title', 'Course')
+@extends('layouts.app')
+@section('title', 'course')
 @section('style')
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.png">
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&amp;family=Lora:wght@400;700&amp;family=Montserrat:wght@400;500;600;700&amp;family=Nunito:wght@400;700&amp;display=swap" rel="stylesheet">
-    <!-- Libs CSS -->
-    <link rel="stylesheet" href="assets/fonts/fontawesome/fontawesome.css">
-    <link rel="stylesheet" href="assets/libs/%40fancyapps/fancybox/dist/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="assets/libs/aos/dist/aos.css">
-    <link rel="stylesheet" href="assets/libs/choices.js/public/assets/styles/choices.min.css">
-    <link rel="stylesheet" href="assets/libs/flickity-fade/flickity-fade.css">
-    <link rel="stylesheet" href="assets/libs/flickity/dist/flickity.min.css">
-    <link rel="stylesheet" href="assets/libs/highlightjs/styles/vs2015.css">
-    <link rel="stylesheet" href="assets/libs/jarallax/dist/jarallax.css">
-    <link rel="stylesheet" href="assets/libs/quill/dist/quill.core.css" />
+    <link rel="stylesheet" href="{{ asset('assets/libs/aos/dist/aos.css') }}">
 @endsection
 @section('content')
     <header class="py-8 py-lg-12 mb-8 overlay overlay-primary overlay-80"
-        style="background-image: url(assets/img/covers/cover-19.jpg);">
+        style="background-image: url({{ asset('assets/img/covers/cover-19.jpg')}} );">
         <div class="container text-center py-xl-5">
             <h1 class="display-4 fw-semi-bold mb-0 text-white">Courses</h1>
             <nav aria-label="breadcrumb">
@@ -39,7 +25,7 @@
         <img class="d-none img-fluid" src="...html" alt="...">
     </header>
     {{-- Recommender courses --}}
-    @include('user.recommend.index')
+    @include('common.recommend')
     <!-- CONTROL BAR
                         ================================================== -->
     <div class="container mb-6 mb-xl-8 z-index-2">
@@ -452,7 +438,7 @@
                                 <a href="instructors-single.html" class="">
                                     <div
                                         class="avatar avatar-xl sk-fade-right badge-float position-absolute top-0 right-0 mt-n6 me-5 rounded-circle shadow border border-white border-w-lg">
-                                        <img src="assets/img/avatars/avatar-2.jpg" alt="..."
+                                        <img src="{{ asset('assets/img/avatars/avatar-2.jpg') }}" alt="..."
                                             class="avatar-img rounded-circle">
                                     </div>
                                 </a>
@@ -528,6 +514,10 @@
                     @endforeach
                     {{-- END COURSE --}}
                 </div>
+<<<<<<< HEAD:resources/views/user/course/index.blade.php
+=======
+                {{-- END COURSE --}}
+>>>>>>> 732c108c12e52c631fadd8b1db3bdbaceffc5990:resources/views/course/index.blade.php
                 <!-- PAGINATION ================================================== -->
                 <nav class="mb-11" aria-label="Page navigationa">
                     <ul class="pagination justify-content-center">
@@ -546,33 +536,7 @@
                         </li>
                     </ul>
                 </nav>
-
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-        <!-- Libs JS -->
-    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/%40fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
-    <script src="assets/libs/aos/dist/aos.js"></script>
-    <script src="assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
-    <script src="assets/libs/countup.js/dist/countUp.min.js"></script>
-    <script src="assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-    <script src="assets/libs/flickity/dist/flickity.pkgd.min.js"></script>
-    <script src="assets/libs/flickity-fade/flickity-fade.js"></script>
-    <script src="assets/libs/highlightjs/highlight.pack.min.js"></script>
-    <script src="assets/libs/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/libs/isotope-layout/dist/isotope.pkgd.min.js"></script>
-    <script src="assets/libs/jarallax/dist/jarallax.min.js"></script>
-    <script src="assets/libs/jarallax/dist/jarallax-video.min.js"></script>
-    <script src="assets/libs/jarallax/dist/jarallax-element.min.js"></script>
-    <script src="assets/libs/parallax-js/dist/parallax.min.js"></script>
-    <script src="assets/libs/quill/dist/quill.min.js"></script>
-    <script src="assets/libs/smooth-scroll/dist/smooth-scroll.min.js"></script>
-    <script src="assets/libs/typed.js/lib/typed.min.js"></script>
-    <script src='../../../api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
-    <script src="assets/js/theme.min.js"></script>
 @endsection

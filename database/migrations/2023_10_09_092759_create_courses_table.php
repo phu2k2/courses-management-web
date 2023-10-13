@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('title');
             $table->string('introduction');
             $table->decimal('price', 5, 2);
             $table->tinyInteger('discount');
             $table->tinyInteger('category_id')->unsigned();
-            $table->integer('instructor_id');
+            $table->integer('instructor_id')->unsigned();
             $table->string('trailer_url');
             $table->decimal('average_rating', 2, 1);
             $table->integer('num_reviews');
@@ -29,10 +29,12 @@ return new class extends Migration
             $table->string('poster_url');
             $table->decimal('total_time', 4, 1);
             $table->text('description');
+            $table->text('learns_description');
+            $table->text('requirements_description');
             $table->enum('is_active', ['true', 'false']);
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
             $table->softDeletes();
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

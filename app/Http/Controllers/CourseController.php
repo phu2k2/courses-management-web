@@ -26,4 +26,11 @@ class CourseController extends Controller
 
         return View('user.course.index', compact('listCourses'));
     }
+    /**
+     * @return View
+     */
+    public function show(): View
+    {
+        return view('course.show');
+    }
 }
