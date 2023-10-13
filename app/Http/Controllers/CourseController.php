@@ -2,17 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CourseService;
 use Illuminate\Contracts\View\View;
 
 class CourseController extends Controller
 {
-    public function index(): View
+    /**
+     * @var CourseService
+     */
+    protected $courseService;
+
+    public function __construct(CourseService $courseService)
     {
-        return view('course.index');
+        $this->courseService = $courseService;
     }
 
-    public function show(): View
+    /**
+     * @return View
+     */
+    public function index(): View
     {
-        return view('course.show');
+        $courses = $this->courseService->getCourses();
+
+        return view('course.index', compact('courses'));
+    }
+
+    /**
+     * @param int $id
+     * @return View
+     */
+    public function show(int $id): View
+    {
+        $course = $this->courseService->getCourse($id);
+
+        return view('course.show', compact('course'));
     }
 }

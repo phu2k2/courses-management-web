@@ -52,4 +52,12 @@ class Course extends Model
     {
         return $this->hasMany(Topic::class);
     }
+
+    /**
+     * @return HasMany<Cart>
+     */
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class, 'course_id', 'id');
+    }
 }
