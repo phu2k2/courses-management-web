@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\CourseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
+use App\Repositories\CartRepository;
+use App\Repositories\Interfaces\CartRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             CourseRepositoryInterface::class,
             CourseRepository::class,
+        );
+
+        $this->app->singleton(
+            CartRepositoryInterface::class,
+            CartRepository::class,
         );
     }
 

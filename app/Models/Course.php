@@ -107,4 +107,12 @@ class Course extends Model
         $learns = explode('. ', $this->learns_description);
         return $learns;
     }
+
+    /**
+     * @return HasMany<Cart>
+     */
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class, 'course_id', 'id');
+    }
 }
