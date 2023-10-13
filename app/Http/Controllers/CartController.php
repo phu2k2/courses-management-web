@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Services\CartService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -25,9 +24,9 @@ class CartController extends Controller
      */
     public function index(): View
     {
-        $cartByUser = $this->cartService->getCartByUser((int)Auth::id());
+        $cart = $this->cartService->getCartByUser((int)auth()->id());
 
-        return view('cart.index', compact('cartByUser'));
+        return view('cart.index', compact('cart'));
     }
 
     public function store(): RedirectResponse

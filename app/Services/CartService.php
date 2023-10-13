@@ -18,6 +18,7 @@ class CartService
     }
 
     /**
+     * @param int $id of user
      * @return Collection
      */
     public function getCartByUser(int $id): Collection
