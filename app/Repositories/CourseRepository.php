@@ -18,20 +18,20 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     }
 
     /**
-     * @return LengthAwarePaginator<\Illuminate\Database\Eloquent\Model>
+     * @return LengthAwarePaginator<Model>
      */
-    public function getListCourses(): LengthAwarePaginator
+    public function getCourses(): LengthAwarePaginator
     {
-        return $this->model->with('category')->paginate(self::PAGESIZE);
+        return $this->model->with('category:id,name')->paginate(self::PAGESIZE);
     }
 
     /**
      * Find a record by its primary key.
      *
      * @param int $id The primary key value.
-     * @return \Illuminate\Database\Eloquent\Model|null The found model or null if not found.
+     * @return Model
      */
-    public function find($id): Model|null
+    public function findOrFail($id): Model
     {
         return $this->model->with(['category:id,name', 'topics.lessons:id,topic_id,title'])->find($id);
     }

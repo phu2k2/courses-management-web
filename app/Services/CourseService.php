@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Course;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
@@ -20,21 +19,19 @@ class CourseService
     }
 
     /**
-     * @return LengthAwarePaginator<\Illuminate\Database\Eloquent\Model>
+     * @return LengthAwarePaginator<Model>
      */
-    public function getListCourses(): LengthAwarePaginator
+    public function getCourses(): LengthAwarePaginator
     {
-        $listCourses = $this->courseRepo->getListCourses();
-
-        return $listCourses;
+        return $this->courseRepo->getCourses();
     }
 
     /**
      * @param int $id
-     * @return Model|null
+     * @return Model
      */
-    public function getCourseDetail(int $id): Model|null
+    public function getCourse(int $id): Model
     {
-        return $this->courseRepo->find($id);
+        return $this->courseRepo->findOrFail($id);
     }
 }
