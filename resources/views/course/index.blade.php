@@ -459,7 +459,7 @@
                                         </div>
 
                                         <div class="font-size-sm">
-                                            <span>{{$course->average_rating}} ({{formatNumberToShort($course->num_reviews)}} reviews)</span>
+                                            <span>{{$course->average_rating}} ({{ formatNumberToShort($course->num_reviews) }} reviews)</span>
                                         </div>
                                     </div>
 

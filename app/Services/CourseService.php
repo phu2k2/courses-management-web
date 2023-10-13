@@ -24,16 +24,14 @@ class CourseService
      */
     public function getCourses(): LengthAwarePaginator
     {
-        $listCourses = $this->courseRepo->getCourses();
-
-        return $listCourses;
+        return $this->courseRepo->getCourses();
     }
 
     /**
      * @param int $id
      * @return Model|null
      */
-    public function getCourseDetail(int $id): Model|null
+    public function getCourse(int $id): Model|null
     {
         return $this->courseRepo->find($id);
     }
