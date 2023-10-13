@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Interfaces\TopicRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class TopicService
 {
@@ -18,7 +19,7 @@ class TopicService
 
     /**
      * @param int $courseId
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static[]|static|null
+     * @return Model|\Illuminate\Database\Eloquent\Collection|static[]|static|null
      */
     public function getTopicsWithLessons($courseId)
     {

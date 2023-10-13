@@ -20,7 +20,7 @@ class CourseService
 
     /**
      * @param int $courseId
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model|null
      */
     public function findCourse($courseId)
     {

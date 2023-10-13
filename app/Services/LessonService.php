@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Interfaces\LessonRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class LessonService
 {
@@ -18,7 +19,7 @@ class LessonService
 
     /**
      * @param int $lessonId
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model|null
      */
     public function findLesson($lessonId)
     {
