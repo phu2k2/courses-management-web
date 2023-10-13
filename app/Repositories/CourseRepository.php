@@ -18,7 +18,7 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     }
 
     /**
-     * @return LengthAwarePaginator<\Illuminate\Database\Eloquent\Model>
+     * @return LengthAwarePaginator<Model>
      */
     public function getCourses(): LengthAwarePaginator
     {
@@ -29,9 +29,9 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      * Find a record by its primary key.
      *
      * @param int $id The primary key value.
-     * @return \Illuminate\Database\Eloquent\Model|null The found model or null if not found.
+     * @return Model
      */
-    public function find($id): Model|null
+    public function findOrFail($id): Model
     {
         return $this->model->with('category:id,name')->findOrFail($id);
     }
