@@ -9,23 +9,28 @@ class ProfileService
     /**
      * @var profileRepositoryInterface
      */
-    protected $profileRepositoryInterface;
+    protected $profileRepository;
 
-    public function __construct(ProfileRepositoryInterface $profileRepositoryInterface)
+    public function __construct(ProfileRepositoryInterface $profileRepository)
     {
-        $this->profileRepositoryInterface = $profileRepositoryInterface;
+        $this->profileRepository = $profileRepository;
     }
 
     /**
      * Update or create profile by user id
      *
-     * @param mixed $id
+     * @param mixed $userId
      * @param array $data
      *
      * @return mixed
      */
-    public function updateProfile($id, array $data)
+    public function updateOrCreateProfile($userId, array $data)
     {
-        return $this->profileRepositoryInterface->updateOrCreateProfile($id, $data);
+        $profile = $this->profileRepository->findByUserId($userId);
+
+        if (!$profile) {
+            return $this->profileRepository->create($data);
+        }
+        return $this->profileRepository->update($userId, $data);
     }
 }

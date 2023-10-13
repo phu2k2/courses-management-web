@@ -39,14 +39,16 @@ class ProfileController extends Controller
 
     public function update(UpdateProfileRequest $request): RedirectResponse
     {
-        $userId = $request->input('id');
+        $userId = auth()->id();
 
         $user = $request->only('username');
         $profile = $request->only('first_name', 'last_name', 'description');
 
         $this->userService->updateUser($userId, $user);
-        $this->profileService->updateProfile($userId, $profile);
+        $this->profileService->updateOrCreateProfile($userId, $profile);
 
-        return redirect()->back()->with('message', __('messages.profile.success.update'));
+        session()->flash('message', __('messages.profile.success.update'));
+
+        return redirect()->route('users.profile');
     }
 }

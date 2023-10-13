@@ -19,13 +19,12 @@ class ProfileRepository extends BaseRepository implements ProfileRepositoryInter
     /**
      * Update or create profile by user id
      *
-     * @param string $id
-     * @param array $data
+     * @param string $userId
      *
      * @return mixed
      */
-    public function updateOrCreateProfile($id, $data)
+    public function findByUserId($userId)
     {
-        return $this->model->with('user')->updateOrCreate(['user_id' => $id], $data);
+        return $this->model->where("user_id", $userId)->get();
     }
 }

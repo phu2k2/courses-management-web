@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class UpdateProfileRequest extends FormRequest
 {
@@ -29,7 +28,7 @@ class UpdateProfileRequest extends FormRequest
                 'string',
                 'regex:/^\S*$/u',
                 'max:30',
-                'unique:users,username,' . Auth::id() . ',id'
+                'unique:users,username,' . auth()->id() . ',id'
             ],
             'description' => ['bail', 'nullable', 'string'],
             'first_name' => ['bail', 'nullable', 'string', 'max:15'],
