@@ -19,6 +19,7 @@
     <!-- Theme CSS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('assets/css/theme.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
     @yield('style')
     <title> @yield('title') </title>
 </head>
@@ -32,6 +33,7 @@
 
     <!-- Theme JS -->
     <script type="module" src="{{ asset('assets/js/theme.min.js') }}"></script>
+    <script type="module" src="{{ asset('assets/js/toast.js') }}"></script>
     @yield('script')
 </body>
 

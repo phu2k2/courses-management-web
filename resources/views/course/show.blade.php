@@ -11,6 +11,22 @@
     </div>
     <!-- COURSE ================================================== -->
     <div class="container">
+        @if (session()->has('message'))
+            <div class="notification-toast toast-success">
+                <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
+                <span class="alert-text"><strong>{{ __('success') }}</strong><br>{{ session()->get('message') }}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if (session()->has('error'))
+            <div class="notification-toast toast-error">
+                <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
+                <span class="alert-text"><strong>{{ __('error') }}</strong><br>{{ session()->get('error') }}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         <div class="row mb-8">
             <div class="col-lg-8 mb-6 mb-lg-0 position-relative">
                 <div class="course-single-white">
@@ -335,13 +351,19 @@
                             </div>
                         </div>
 
-                        <p class="mb-6 line-height-md">I am a UI/UX designer and an iOS developer with having almost six
-                            years of experience in application development and also ten years of graphic design and User
+                        <p class="mb-6 line-height-md">I am a UI/UX designer and an iOS developer with having
+                            almost six
+                            years of experience in application development and also ten years of graphic design and
+                            User
                             Interface design.</p>
-                        <p class="mb-6 line-height-md">My passion is helping people to learn new skills in a short-term
-                            course and achieve their goals. I've been designing for more than ten years and developing iOS
-                            apps for four years. It's my honor if I could help you learn to program in a simple word. I
-                            currently am teaching iOS 13, Swift 5, ARKit 3, Sketch 5, Illustrator, Photoshop, Cinema 4D,
+                        <p class="mb-6 line-height-md">My passion is helping people to learn new skills in a
+                            short-term
+                            course and achieve their goals. I've been designing for more than ten years and
+                            developing iOS
+                            apps for four years. It's my honor if I could help you learn to program in a simple
+                            word. I
+                            currently am teaching iOS 13, Swift 5, ARKit 3, Sketch 5, Illustrator, Photoshop, Cinema
+                            4D,
                             HTML, CSS, JavaScript, etc.</p>
                     </div>
 
@@ -456,10 +478,14 @@
                                             <div class="rating" style="width:100%;"></div>
                                         </div>
                                     </div>
-                                    <p class="mb-6 line-height-md">This course was well organized and covered a lot more
-                                        details than any other Figma courses. I really enjoy it. One suggestion is that it
-                                        can be much better if we could complete the prototype together. Since we created 24
-                                        frames, I really want to test it on Figma mirror to see all the connections. Could
+                                    <p class="mb-6 line-height-md">This course was well organized and covered a lot
+                                        more
+                                        details than any other Figma courses. I really enjoy it. One suggestion is
+                                        that it
+                                        can be much better if we could complete the prototype together. Since we
+                                        created 24
+                                        frames, I really want to test it on Figma mirror to see all the connections.
+                                        Could
                                         you please let me take a look at the complete prototype?</p>
                                 </div>
                             </li>
@@ -545,7 +571,8 @@
                         <div class="d-flex align-items-center mb-2">
                             <ins class="h2 mb-0">${{ $course->discounted_price }}</ins>
                             <del class="ms-3">{{ $course->price }}</del>
-                            <div class="badge badge-lg badge-purple text-white ms-auto fw-normal">{{ $course->discount }}%
+                            <div class="badge badge-lg badge-purple text-white ms-auto fw-normal">
+                                {{ $course->discount }}%
                                 Off</div>
                         </div>
 
@@ -575,7 +602,8 @@
                             <span class="ms-2">2 days left at this price!</span>
                         </div>
 
-                        <button class="btn btn-primary btn-block mb-3" type="button" name="button">BUY NOW</button>
+                        <button class="btn btn-primary btn-block mb-3" type="button" name="button">BUY
+                            NOW</button>
                         <form action="{{ route('carts.store') }}" method="POST">
                             @csrf
                             <input type = "hidden" name="course_id" value = "{{ $course->id }}">
@@ -741,7 +769,8 @@
                                 </a>
                                 <div class="media-body flex-grow-1">
                                     <a href="course-single-v5.html" class="d-block">
-                                        <h6 class="line-clamp-2 mb-3">The Complete Cyber Security Course : Hackers </h6>
+                                        <h6 class="line-clamp-2 mb-3">The Complete Cyber Security Course : Hackers
+                                        </h6>
                                     </a>
                                     <del class="font-size-sm me-2">$959</del>
                                     <ins class="h6 mb-0 ">$415.99</ins>
@@ -769,7 +798,8 @@
                                 </a>
                                 <div class="media-body flex-grow-1">
                                     <a href="course-single-v5.html" class="d-block">
-                                        <h6 class="line-clamp-2 mb-3">The Complete Financial Analyst Course 2020</h6>
+                                        <h6 class="line-clamp-2 mb-3">The Complete Financial Analyst Course 2020
+                                        </h6>
                                     </a>
                                     <del class="font-size-sm me-2">$959</del>
                                     <ins class="h6 mb-0 ">$415.99</ins>
