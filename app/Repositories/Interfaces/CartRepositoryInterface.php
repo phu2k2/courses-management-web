@@ -3,10 +3,8 @@
 namespace App\Repositories\Interfaces;
 
 use App\Repositories\RepositoryInterface;
-use Brick\Math\BigInteger;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
-use Ramsey\Uuid\Type\Integer;
 
 interface CartRepositoryInterface extends RepositoryInterface
 {

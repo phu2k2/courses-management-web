@@ -54,6 +54,14 @@ class Course extends Model
     }
 
     /**
+     * @return HasMany<Cart>
+     */
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class, 'course_id', 'id');
+    }
+
+    /**
      * @return float
      */
     public function getDiscountedPriceAttribute()
