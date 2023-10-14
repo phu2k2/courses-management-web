@@ -22,7 +22,9 @@ class CourseController extends Controller
      */
     public function index(): View
     {
-        return view('course.index');
+        $courses = $this->courseService->getCourses();
+
+        return view('course.index', compact('courses'));
     }
 
     /**
