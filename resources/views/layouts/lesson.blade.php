@@ -35,8 +35,8 @@
 
                 <!-- Lesson Title -->
                 <div class="mx-auto mb-5 mb-md-0">
-                    <h3 class="mb-0 line-clamp-2 text-white">Learn Figma: User Interface Design Essentials - UI/UX
-                        Design
+                    <h3 class="mb-0 line-clamp-2 text-white">
+                        {{ $lesson['title'] }}
                     </h3>
                 </div>
 
