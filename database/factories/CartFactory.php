@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use App\Models\Course;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,13 +16,15 @@ class CartFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    protected $model = Cart::class;
-
     public function definition(): array
     {
         return [
-            'user_id' => fake()->randomNumber(),
-            'course_id' => fake()->randomNumber(),
+            'user_id'  => function () {
+                return User::factory()->create()->id;
+            },
+            'course_id'  => function () {
+                return Course::factory()->create()->id;
+            },
         ];
     }
 }
