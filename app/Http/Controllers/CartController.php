@@ -38,9 +38,8 @@ class CartController extends Controller
     public function store(Request $request): RedirectResponse
     {
         try {
-            $data = $request->all();
-            $userId = auth()->id;
-            $this->cartService->addToCart($data, $userId, $data['course_id']);
+            $data = $request->only('user_id', 'course_id');
+            $this->cartService->addToCart($data, $data['user_id'], $data['course_id']);
             session()->flash('message', __('messages.user.success.create_cart'));
         } catch (Exception $e) {
             session()->flash('error', __('messages.user.error.create_cart'));
