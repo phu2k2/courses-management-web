@@ -13,6 +13,24 @@
     <div class="container">
         <div class="row mb-8">
             <div class="col-lg-8 mb-6 mb-lg-0 position-relative">
+                @if (session()->has('message'))
+                    <div class="notification-toast toast-success">
+                        <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
+                        <span
+                            class="alert-text"><strong>{{ __('success') }}</strong><br>{{ session()->get('message') }}</span>
+                        <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                @if (session()->has('error'))
+                    <div class="notification-toast toast-error">
+                        <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
+                        <span
+                            class="alert-text"><strong>{{ __('error') }}</strong><br>{{ session()->get('error') }}</span>
+                        <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 <div class="course-single-white">
                     <h1 class="me-xl-14 text-white">
                         {{ $course->title }}
@@ -568,7 +586,13 @@
                         </div>
 
                         <button class="btn btn-primary btn-block mb-3" type="button" name="button">BUY NOW</button>
-                        <button class="btn btn-orange btn-block mb-6" type="button" name="button">ADD TO CART</button>
+                        <form action="{{ route('carts.store') }}" method="POST">
+                            @csrf
+                            <input type = "hidden" name="course_id" value = "{{ $course->id }}">
+                            <input type = "hidden" name="user_id" value= "">
+                            <button class="btn btn-orange btn-block mb-6" type="submit" name="button">ADD TO
+                                CART</button>
+                        </form>
 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex align-items-center py-3">
