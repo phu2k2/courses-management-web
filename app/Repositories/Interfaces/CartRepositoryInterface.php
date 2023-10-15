@@ -10,7 +10,6 @@ interface CartRepositoryInterface extends RepositoryInterface
 {
     public function getCartByUser(int $id): Collection;
     /**
-     * Store a newly created resource in storage.
      * @param array $data
      * @return \Illuminate\Database\Eloquent\Model
      */
