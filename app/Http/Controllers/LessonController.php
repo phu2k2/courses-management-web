@@ -13,6 +13,6 @@ class LessonController extends Controller
 
     public function show(): View
     {
-        return view('lesson.detail');
+        return view('lesson.show');
     }
 }
