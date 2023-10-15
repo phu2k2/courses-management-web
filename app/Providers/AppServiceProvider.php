@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(
             CartRepositoryInterface::class,
-            CartRepository::class,
+            CartRepository::class
         );
     }
 
