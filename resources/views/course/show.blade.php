@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Course')
+@section('title', 'Course: ' . $course->title)
 
 @section('content')
     <!-- PAGE HEADER ================================================== -->
@@ -82,7 +82,7 @@
                     <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
                         aria-labelledby="pills-overview-tab">
                         <h3 class="">Course Description</h3>
-                        {!! $course->description !!}
+                        <p>{!! $course->description !!}</p>
                         <a class="text-teal read-more h6 d-inline-block mb-8" data-bs-toggle="collapse"
                             href="#readcollapseExample" role="button" aria-expanded="false"
                             aria-controls="readcollapseExample">
@@ -112,19 +112,11 @@
                         <h3 class="mb-5">What you'll learn</h3>
                         <div class="row row-cols-lg-2 mb-8">
                             @foreach ($course->learn_contents as $key => $content)
-                                @if ($key <= count($course->learn_contents))
-                                    <div class="col-md">
-                                        <ul class="list-style-v1 list-unstyled">
-                                            <li>{{ $content }}</li>
-                                        </ul>
-                                    </div>
-                                @else
-                                    <div class="col-md">
-                                        <ul class="list-style-v1 list-unstyled ms-xl-6">
-                                            <li>{{ $content }}</li>
-                                        </ul>
-                                    </div>
-                                @endif
+                                <div class="col-md">
+                                    <ul class="list-style-v1 list-unstyled">
+                                        <li>{{ $content }}</li>
+                                    </ul>
+                                </div>
                             @endforeach
                         </div>
 
@@ -576,13 +568,8 @@
                         </div>
 
                         <button class="btn btn-primary btn-block mb-3" type="button" name="button">BUY NOW</button>
-                        <form action="{{ route('carts.store') }}" method="POST">
-                            @csrf
-                            <input type = "hidden" name="course_id" value = "{{ $course->id }}">
-                            <input type = "hidden" name="user_id" value=3>
-                            <button class="btn btn-orange btn-block mb-6" type="submit" name="button">ADD TO
-                                CART</button>
-                        </form>
+                        <button class="btn btn-orange btn-block mb-6" type="button" name="button">ADD TO CART</button>
+
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex align-items-center py-3">
                                 <div class="text-secondary d-flex icon-uxs">
