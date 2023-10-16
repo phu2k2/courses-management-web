@@ -32,7 +32,6 @@
 
     <!-- Theme JS -->
     <script type="module" src="{{ asset('assets/js/theme.min.js') }}"></script>
-    <script type="module" src="{{ asset('assets/js/toast.js') }}"></script>
     @yield('script')
 </body>
 

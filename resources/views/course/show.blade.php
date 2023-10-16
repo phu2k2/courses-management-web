@@ -3,6 +3,9 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
 @endsection
+@section('script')
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
+@endsection
 @section('content')
     <!-- PAGE HEADER ================================================== -->
     <div class="position-relative pt-8 pt-xl-11">
@@ -590,7 +593,7 @@
                         <form action="{{ route('carts.store') }}" method="POST">
                             @csrf
                             <input type = "hidden" name="course_id" value = "{{ $course->id }}">
-                            <input type = "hidden" name="user_id" value= "{{ auth()->id() }}">
+                            {{-- <input type = "hidden" name="user_id" value= "{{ auth()->id() }}"> --}}
                             <button class="btn btn-orange btn-block mb-6" type="submit" name="button">ADD TO
                                 CART</button>
                         </form>

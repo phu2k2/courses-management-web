@@ -21,16 +21,6 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     }
 
     /**
-     * Add courses into cart
-     * @param array $data
-     * @return \Illuminate\Database\Eloquent\Model
-     */
-    public function addToCart($data): Model
-    {
-        return $this->model->create($data);
-    }
-
-    /**
      * Check the presence of courses whether are in cart or not.
      * @param int $userId
      * @param int $courseId
