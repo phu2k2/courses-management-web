@@ -679,7 +679,7 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Skill level</h6>
-                                <span>{{ $course->levels }}</span>
+                                <span>{{ $course->level_course }}</span>
                             </li>
                             <li class="list-group-item d-flex align-items-center py-3">
                                 <div class="text-secondary d-flex icon-uxs">
