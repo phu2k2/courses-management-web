@@ -593,7 +593,6 @@
                         <form action="{{ route('carts.store') }}" method="POST">
                             @csrf
                             <input type = "hidden" name="course_id" value = "{{ $course->id }}">
-                            {{-- <input type = "hidden" name="user_id" value= "{{ auth()->id() }}"> --}}
                             <button class="btn btn-orange btn-block mb-6" type="submit" name="button">ADD TO
                                 CART</button>
                         </form>

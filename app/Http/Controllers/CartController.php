@@ -39,7 +39,7 @@ class CartController extends Controller
     {
         try {
             $courseId = $request->input('course_id');
-            $userId = (int)auth()->id();
+            $userId = (int) auth()->id();
             $this->cartService->addToCart($userId, $courseId);
             session()->flash('message', __('messages.user.success.create_cart'));
         } catch (Exception $e) {
