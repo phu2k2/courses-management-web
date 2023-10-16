@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="font-size-sm ms-lg-3 text-white">
-                                <span>{{ $course->average_rating }} ({{ $course->num_reviews }} reviews)</span>
+                                <span>{{ $course->average_rating }} ({{ convert_to_short_form($course->num_reviews) }} reviews)</span>
                             </div>
                         </div>
                     </div>
