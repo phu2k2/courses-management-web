@@ -25,12 +25,12 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(
             UserRepositoryInterface::class,
-            UserRepository::class,
+            UserRepository::class
         );
 
         $this->app->singleton(
             CartRepositoryInterface::class,
-            CartRepository::class,
+            CartRepository::class
         );
 
         $this->app->singleton('AmazonS3', function () {

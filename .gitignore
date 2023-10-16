@@ -8,6 +8,7 @@
 /public/mix-manifest.json
 /storage/*.key
 /vendor
+/public/assets/libs
 .env
 .env.backup
 .env.production
