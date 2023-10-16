@@ -7,7 +7,7 @@
     <div class="container container-wd">
         <div class="row pt-8 pb-10">
             <div class="col-lg-8">
-                <a href="{{ $lesson['lesson_url'] }}" class="d-block sk-thumbnail rounded mb-8" data-fancybox>
+                <a href="{{ $lesson->lesson_url }}" class="d-block sk-thumbnail rounded mb-8" data-fancybox>
                     <div
                         class="h-90p w-90p rounded-circle bg-white size-30-all d-inline-flex align-items-center justify-content-center position-absolute center z-index-1">
                         <!-- Icon -->
@@ -24,7 +24,7 @@
 
                 <h3 class="text-white">Course Description</h3>
 
-                <p class="mb-6 line-height-md">{{ $course['description'] }}</p>
+                <p class="mb-6 line-height-md">{{ $course->description }}</p>
                 <a class="text-teal read-more h6 d-inline-block mb-8" data-bs-toggle="collapse" href="#readcollapseExample"
                     role="button" aria-expanded="false" aria-controls="readcollapseExample">
                     <span class="d-inline-flex align-items-center more">
@@ -210,7 +210,7 @@
                                                 </svg>
                                             </span>
 
-                                            {{ $topic['name'] }}
+                                            {{ $topic->name }}
                                         </button>
                                     </h5>
                                 </div>
@@ -242,7 +242,7 @@
                                                     </svg>
                                                 </div>
                                                 <div class="ms-4">
-                                                    {{ $lesson['title'] }}
+                                                    {{ $lesson->title }}
                                                 </div>
                                             </div>
 
@@ -250,7 +250,7 @@
                                                 class="d-flex align-items-center overflow-auto overflow-md-visible flex-shrink-all">
                                                 <div
                                                     class="badge btn-orange-soft text-white-70 me-5 font-size-sm fw-normal py-2">
-                                                    {{ $lesson['lesson_duration'] }}
+                                                    {{ $lesson->lesson_duration }}
                                                 </div>
                                                 <a href="#" class="text-secondary d-flex">
                                                     <!-- Icon -->

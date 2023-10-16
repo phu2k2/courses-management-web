@@ -35,6 +35,6 @@ Route::prefix('users')->name('users.')->group(function () {
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
 Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
 
-Route::prefix('lessons')->name('lessons.')->group(function () {
-    Route::get('show/{courseId}/{lessonId}', [LessonController::class, 'show'])->name('lessons');
+Route::prefix('courses')->name('courses.')->group(function () {
+    Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show');
 });

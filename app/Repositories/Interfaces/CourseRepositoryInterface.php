@@ -17,5 +17,5 @@ interface CourseRepositoryInterface extends RepositoryInterface
      * @param int $id
      * @return Model
      */
-    public function findOrFailCourse(int $id): Model;
+    public function findWithCategory(int $id): Model;
 }

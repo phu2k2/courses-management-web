@@ -56,7 +56,7 @@ abstract class BaseRepository implements RepositoryInterface
      * Find a record by its primary key.
      *
      * @param int $id The primary key value.
-     * @return \Illuminate\Database\Eloquent\Model|null The found model or null if not found.
+     * @return \Illuminate\Database\Eloquent\Model The found model.
      */
     public function findOrFail($id)
     {

@@ -19,7 +19,7 @@ class LessonService
 
     /**
      * @param int $lessonId
-     * @return Model|null
+     * @return Model
      */
     public function findLesson($lessonId)
     {

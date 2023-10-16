@@ -31,7 +31,7 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      * @param int $id The primary key value.
      * @return Model
      */
-    public function findOrFailCourse($id): Model
+    public function findWithCategory($id): Model
     {
         return $this->model->with('category:id,name')->findOrFail($id);
     }

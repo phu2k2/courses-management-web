@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Topic;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\TopicRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class TopicRepository extends BaseRepository implements TopicRepositoryInterface
 {
@@ -16,7 +17,7 @@ class TopicRepository extends BaseRepository implements TopicRepositoryInterface
     /**
      * @param int $courseId
      *
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static[]|static|null
+     * @return Collection
      */
     public function getTopicsWithLessons($courseId)
     {
