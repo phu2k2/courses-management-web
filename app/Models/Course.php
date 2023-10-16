@@ -78,16 +78,16 @@ class Course extends Model
     /**
      * @return string
      */
-    public function getLevelsAttribute()
+    public function getLevelCourseAttribute()
     {
-        $levels = match ((int) $this->level) {
+        $levelCourse = match ((int) $this->level) {
             1 => 'Beginner',
             2 => 'Intermediate',
             3 => 'Advanced',
             default => '',
         };
 
-        return $levels;
+        return $levelCourse;
     }
 
     /**
@@ -96,6 +96,7 @@ class Course extends Model
     public function getRequirementsAttribute()
     {
         $requirements = explode('\n', $this->requirements_description);
+
         return $requirements;
     }
 
@@ -105,6 +106,7 @@ class Course extends Model
     public function getLearnContentsAttribute()
     {
         $learns = explode('. ', $this->learns_description);
+
         return $learns;
     }
 

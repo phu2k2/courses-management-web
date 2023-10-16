@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Course;
 use App\Models\User;
+use App\Models\Course;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +16,6 @@ class CartFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    protected $model = Cart::class;
-
     public function definition(): array
     {
         return [
