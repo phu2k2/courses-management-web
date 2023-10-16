@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Helpers\AmazonS3;
 use App\Repositories\CourseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use App\Repositories\CartRepository;
@@ -31,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
             CartRepositoryInterface::class,
             CartRepository::class,
         );
+
+        $this->app->singleton('AmazonS3', function () {
+            return new AmazonS3();
+        });
     }
 
     /**
