@@ -4,7 +4,6 @@ namespace App\Helpers;
 
 use Aws\S3\S3Client;
 use Aws\CommandInterface;
-use Illuminate\Support\Facades\Storage;
 
 class AmazonS3
 {
