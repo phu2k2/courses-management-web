@@ -19,6 +19,9 @@
     <!-- Theme CSS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('assets/css/theme.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/scrollbar.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     @yield('style')
     <title> @yield('title') </title>
 </head>
