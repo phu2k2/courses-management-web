@@ -32,6 +32,8 @@ Route::prefix('register')->name('register.')->group(function () {
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile');
     Route::put('profile', [ProfileController::class, 'update'])->name('update');
+    Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
+    Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
 });
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
 Route::resource('lessons', LessonController::class)->only(['index', 'show']);

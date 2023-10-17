@@ -47,12 +47,16 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="text-center">
-                                                <img alt="Andrew Jones"
+                                                <img alt="Andrew Jones" id="imageDisplay"
                                                     src="https://bootdey.com/img/Content/avatar/avatar1.png"
                                                     class="rounded-circle img-responsive mt-2" width="128"
                                                     height="128">
                                                 <div class="mt-2">
-                                                    <span class="btn btn-primary"><i class="fa fa-upload"></i></span>
+                                                    <input class="w-75" id="imageInput" type="file" name="image"
+                                                        accept="image/png, image/gif, image/jpeg" />
+                                                    <span class="btn btn-sm btn-primary uploadImage">
+                                                        Save image
+                                                    </span>
                                                 </div>
                                                 <small>For best results, use an image at least 128px by 128px in .jpg
                                                     format</small>
@@ -97,4 +101,55 @@
             </div>
         </div>
     </div>
+    <script>
+        const imageInput = document.getElementById("imageInput");
+        const imageDisplay = document.getElementById("imageDisplay");
+        const uploadImage = document.querySelector('.uploadImage');
+        //display image when user choose file done
+        imageInput.addEventListener("change", function(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const imageDataURL = e.target.result;
+                    imageDisplay.src = imageDataURL;
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                imageDisplay.src = "";
+            }
+        });
+
+        //click save image
+        uploadImage.addEventListener('click', async () => {
+            const selectedFile = imageInput.files[0];
+
+            if (selectedFile) {
+                try {
+                    const responseUrlUpload = await axios.get("{{ route('users.getUploadUrl') }}");
+                    const url = responseUrlUpload.data.url;
+
+                    //save image to minio server
+                    await axios.put(url, selectedFile, {
+                        headers: {
+                            'Content-Type': 'application/octet-stream',
+                        },
+                    });
+                } catch (error) {
+                    alert('Error uploading image');
+                } finally {
+                    //save path image to database
+                    await axios.put("{{ route('users.updateImage') }}");
+                    alert('Image save successfully');
+                }
+
+            } else {
+                alert('You have not selected a file')
+            }
+        });
+    </script>
+
 @endsection

@@ -8,6 +8,7 @@ use App\Services\UserService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use AmazonS3;
 
 class ProfileController extends Controller
 {
@@ -50,5 +51,33 @@ class ProfileController extends Controller
         session()->flash('message', __('messages.profile.success.update'));
 
         return redirect()->route('users.profile');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateImage()
+    {
+        $userId = auth()->id();
+        $imagePath = "profile/{$userId}/avatar.jpg";
+
+        $this->profileService->updateOrCreateProfile($userId, ['avatar' => $imagePath]);
+
+        return response()->json(['success' => __('messages.profile.success.update')]);
+    }
+
+    /**
+     * Generate and return a pre-signed upload URL for a user's profile image.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getUploadUrl()
+    {
+        $userId = auth()->id();
+        $path = "profile/{$userId}/avatar.jpg";
+        $url = AmazonS3::getPreSignedUploadUrl($path);
+
+        return response()->json(['url' => $url]);
     }
 }
