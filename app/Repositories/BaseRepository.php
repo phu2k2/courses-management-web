@@ -53,6 +53,17 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
+     * Find a record by its primary key.
+     *
+     * @param int $id The primary key value.
+     * @return \Illuminate\Database\Eloquent\Model The found model.
+     */
+    public function findOrFail($id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    /**
      * Create a new record in the database with the given attributes.
      *
      * @param array $attributes The attributes to populate the new record.

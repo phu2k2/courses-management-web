@@ -18,12 +18,9 @@ class CommentFactory extends Factory
      */
     public function definition(): array
     {
-        $user = User::all('id')->random();
-        $lesson = Lesson::all('id')->random();
-
         return [
-            'lesson_id' => $lesson->id,
-            'user_id' => $user->id,
+            'lesson_id' => Lesson::all('id')->random(),
+            'user_id' => User::all('id')->random(),
             'parent_id' => fake()->numberBetween(0, 5),
             'content' => fake()->paragraph(),
         ];
