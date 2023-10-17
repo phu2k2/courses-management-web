@@ -17,13 +17,19 @@ class Topic extends Model
 
     protected $fillable = ['name'];
 
+    /**
+     * @return BelongsTo<Course, Topic>
+     */
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 
+    /**
+     * @return HasMany<Lesson>
+     */
     public function lessons(): HasMany
     {
-        return $this->hasMany(Lesson::class, 'topic_id', 'id');
+        return $this->hasMany(Lesson::class);
     }
 }

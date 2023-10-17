@@ -21,6 +21,9 @@ class Lesson extends Model
         'lesson_url',
     ];
 
+    /**
+     * @return BelongsTo<Topic, Lesson>
+     */
     public function topic(): BelongsTo
     {
         return $this->belongsTo(Topic::class, 'topic_id', 'id');
