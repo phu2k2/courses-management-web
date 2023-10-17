@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Topic;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,10 +17,12 @@ class LessonFactory extends Factory
      */
     public function definition(): array
     {
+        $topics = Topic::all('id')->random();
+
         return [
             'title' => fake()->title(),
             'lesson_duration' => fake()->randomFloat(2, 0.01, 300.99),
-            'topic_id' => fake()->randomNumber(),
+            'topic_id' => $topics->id,
             'lesson_url' => fake()->unique()->url()
         ];
     }
