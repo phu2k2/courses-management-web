@@ -31,7 +31,11 @@ Route::prefix('register')->name('register.')->group(function () {
 });
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile');
+    Route::put('profile', [ProfileController::class, 'update'])->name('update');
 });
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
-Route::resource('lessons', LessonController::class)->only(['index', 'show']);
 Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
+
+Route::prefix('courses')->name('courses.')->group(function () {
+    Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show');
+});

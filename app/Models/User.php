@@ -62,4 +62,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Enrollment::class, 'user_id');
     }
+
+    /**
+     * @return HasMany<Comment>
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'user_id');
+    }
 }

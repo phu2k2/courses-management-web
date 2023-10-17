@@ -19,6 +19,15 @@ class CourseService
     }
 
     /**
+     * @param int $courseId
+     * @return Model|null
+     */
+    public function findCourse($courseId)
+    {
+        return $this->courseRepo->findOrFail($courseId);
+    }
+
+    /**
      * @return LengthAwarePaginator<Model>
      */
     public function getCourses(): LengthAwarePaginator
