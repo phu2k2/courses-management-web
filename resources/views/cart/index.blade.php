@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('title', 'cart')
+@section('script')
+    <script src="{{ asset('assets/js/checkbox.js') }}"></script>
+@endsection
 @section('content')
     <header class="py-8 py-md-10" style="background-image: none;">
         <div class="container text-center py-xl-2">
@@ -21,7 +24,7 @@
         <img class="d-none img-fluid" src="...html" alt="...">
     </header>
     <!-- SHOP CART
-                                ================================================== -->
+                                                        ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             <div id="primary" class="content-area">
@@ -34,6 +37,7 @@
                                     <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents">
                                         <thead>
                                             <tr>
+                                                <th></th>
                                                 <th class="product-name">Product</th>
                                                 <th class="product-price">Price</th>
                                                 <th class="product-quantity">Quantity</th>
@@ -42,8 +46,20 @@
                                         </thead>
 
                                         <tbody>
+                                            @php $total = 0; @endphp
+
                                             @foreach ($cart as $item)
+                                                @php
+                                                    $total += $item->course->price;
+                                                @endphp
                                                 <tr class="woocommerce-cart-form__cart-item cart_item">
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input flexCheckDefault" type="checkbox"
+                                                                data-price="{{ $item->course->price }}"
+                                                                onchange="calculateTotal()">
+                                                        </div>
+                                                    </td>
                                                     <td class="product-name" data-title="Product">
                                                         <div class="d-flex align-items-center">
                                                             <a href="shop-single.html">
@@ -115,7 +131,8 @@
                                 <tr class="order-total">
                                     <th>Total</th>
                                     <td data-title="Total"><strong><span class="woocommerce-Price-amount amount"><span
-                                                    class="woocommerce-Price-currencySymbol">£</span>109.95</span></strong>
+                                                    class="woocommerce-Price-currencySymbol">£</span>
+                                                {{ $total }}</span></strong>
                                     </td>
                                 </tr>
                             </tbody>
