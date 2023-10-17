@@ -23,8 +23,8 @@
         <!-- Img -->
         <img class="d-none img-fluid" src="...html" alt="...">
     </header>
-    <!-- SHOP CART
-                                                            ================================================== -->
+     <!-- SHOP CART
+                                ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             <div id="primary" class="content-area">
@@ -39,7 +39,8 @@
                                             <tr>
                                                 <th>
                                                     <div class="form-check">
-                                                        <input class="form-check-input header-checkbox" type="checkbox" onchange="handleCheckboxClick()">
+                                                        <input class="form-check-input header-checkbox" type="checkbox"
+                                                            onchange="handleCheckboxClick()">
                                                     </div>
                                                 </th>
                                                 <th class="product-name">Product</th>
