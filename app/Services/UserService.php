@@ -44,10 +44,9 @@ class UserService
     /**
      * @param mixed $userId
      * @param array $data
-     *
-     * @return mixed
+     * @return int|bool
      */
-    public function updateUser($userId, array $data)
+    public function updateUser($userId, $data)
     {
         return $this->userRepository->update($userId, $data);
     }

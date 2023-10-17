@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Interfaces\ProfileRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class ProfileService
 {
@@ -21,15 +22,15 @@ class ProfileService
      *
      * @param mixed $userId
      * @param array $data
-     * @return mixed
+     * @return int|bool|Model
      */
-    public function updateOrCreateProfile($userId, array $data)
+    public function updateOrCreateProfile($userId, $data)
     {
         $profile = $this->profileRepo->findUser($userId);
-
         if (!$profile) {
-            return $this->profileRepo->create($data);
+            return $this->profileRepo->create(array_merge(['user_id' => $userId], $data));
         }
-        return $this->profileRepo->update($userId, $data);
+
+        return $this->profileRepo->updateProfile($userId, $data);
     }
 }
