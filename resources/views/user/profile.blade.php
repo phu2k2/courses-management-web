@@ -1,4 +1,4 @@
-@extends('user.layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Edit frofile')
 @section('style')
@@ -7,13 +7,13 @@
 @section('content')
     <div class="container py-4 bg-white-ice">
         <div class="row">
-            @include('user.account.sidebar')
+            @include('user.sidebar')
             <div class="col-md-7 col-xl-8">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="account" role="tabpanel">
                         <div class="card rounded-3">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Profile info</h5>
+                                <h5 class="card-title mb-0">Profile Information</h5>
                             </div>
                             <div class="card-body">
                                 <form>
@@ -22,11 +22,20 @@
                                             <div class="form-group">
                                                 <label for="inputUsername">Username</label>
                                                 <input type="text" class="form-control" id="inputUsername"
-                                                    placeholder="Username">
+                                                    placeholder="Username" name="username"
+                                                    value="{{ old('username', $user->username) }}">
+                                                @error('username')
+                                                    <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputUsername">Description</label>
-                                                <textarea rows="2" class="form-control" id="inputBio" placeholder="Tell something about yourself"></textarea>
+                                                <textarea rows="2" class="form-control" id="inputBio" name="description">
+                                                        {{ old('description', $user->profile?->description) }}
+                                                </textarea>
+                                                @error('description')
+                                                    <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -47,23 +56,35 @@
                                         <div class="form-group col-md-6">
                                             <label for="inputFirstName">First name</label>
                                             <input type="text" class="form-control" id="inputFirstName"
-                                                placeholder="First name">
+                                                placeholder="First name" name="first_name"
+                                                value="{{ old('first_name', $user->profile?->first_name) }}">
+                                            @error('first_name')
+                                                <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputLastName">Last name</label>
                                             <input type="text" class="form-control" id="inputLastName"
-                                                placeholder="Last name">
+                                                placeholder="Last name" name="last_name"
+                                                value="{{ old('last_name', $user->profile?->last_name) }}">
+                                            @error('last_name')
+                                                <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group pb-3">
                                         <label for="inputEmail4">Email</label>
-                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
+                                            name="email" value="{{ old('email', $user->email) }}" disabled>
+                                        @error('email')
+                                            <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                 </form>
                             </div>
                         </div>
-              
+
                     </div>
                 </div>
             </div>

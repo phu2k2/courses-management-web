@@ -1,8 +1,14 @@
 <?php
 
 return [
-    'welcome' => 'Welcome to our application!',
-    'login' => 'Log in',
-    'logout' => 'Log out',
-    'forgot_password' => 'Forgot your password?',
+    'user' => [
+        'success' => [
+            'create' => 'Register account was successful',
+            'create_cart' => 'Added to cart successfully!'
+        ],
+        'error' => [
+            'create_cart' => 'Failed to add to cart!',
+            'login' => 'Login error, please check your email or password'
+        ]
+    ],
 ];
