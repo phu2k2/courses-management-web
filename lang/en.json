@@ -12,7 +12,6 @@
     "register": "Sign Up",
     "login_label": "Don't have an account?",
     "register_label": "Already have an account?",
-    "logout_title": "Log out Account",
     "logout_label": "Do you really want to log out?",
     "cancel": "Cancel",
     "submit": "Submit",
