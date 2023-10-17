@@ -23,8 +23,8 @@ class CartService
      * Add courses into cart
      * @param int $userId
      * @param int $courseId
-     * @return \Illuminate\Database\Eloquent\Model
-     * @throws \Exception
+     * @return Model
+     * @throws Exception
      */
     public function addToCart($userId, $courseId): Model
     {
