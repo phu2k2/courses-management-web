@@ -17,6 +17,9 @@ use App\Repositories\TopicRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -46,10 +49,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             ProfileRepositoryInterface::class,
             ProfileRepository::class,
-        );
-        $this->app->singleton(
-            CourseRepositoryInterface::class,
-            CourseRepository::class,
         );
 
         $this->app->singleton(
