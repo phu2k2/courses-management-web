@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCartRequest;
 use App\Services\CartService;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -26,7 +27,6 @@ class CartController extends Controller
     public function index(): View
     {
         $cart = $this->cartService->getCartByUser((int)auth()->id());
-
         return view('cart.index', compact('cart'));
     }
 
@@ -46,11 +46,19 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+
     /**
+     * Remove the specified resource from storage.
      * @return RedirectResponse
      */
-    public function destroy()
+    public function destroy(Request $request, string $id): RedirectResponse
     {
+        if ($this->cartService->deleteCart($id)) {
+            session()->flash('message', __('messages.cart.success.delete'));
+        } else {
+            session()->flash('error', __('messages.cart.error.delete'));
+        }
+
         return redirect()->back();
     }
 }

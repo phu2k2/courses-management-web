@@ -15,4 +15,12 @@ interface CartRepositoryInterface extends RepositoryInterface
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function addToCart($data): Model;
+
+    /**
+     * Delete a record by course id.
+     *
+     * @param string $id .
+     * @return bool True if the deletion was successful, false otherwise.
+     */
+    public function deleteCart($id);
 }

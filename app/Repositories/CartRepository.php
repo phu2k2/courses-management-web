@@ -38,4 +38,15 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     {
         return $this->model->with('course:id,title,price,poster_url')->where('user_id', $id)->get();
     }
+
+    /**
+     * Delete a record by course id.
+     *
+     * @param string $id .
+     * @return bool True if the deletion was successful, false otherwise.
+     */
+    public function deleteCart($id)
+    {
+        return $this->model->where('course_id', $id)->delete();
+    }
 }
