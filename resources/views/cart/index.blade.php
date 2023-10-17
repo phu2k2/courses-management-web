@@ -23,8 +23,8 @@
         <!-- Img -->
         <img class="d-none img-fluid" src="...html" alt="...">
     </header>
-     <!-- SHOP CART
-                                ================================================== -->
+    <!-- SHOP CART
+                                                    ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             <div id="primary" class="content-area">
@@ -51,13 +51,18 @@
                                         </thead>
 
                                         <tbody>
-                                            @php $total = 0; @endphp
+
                                             @foreach ($cart as $item)
+                                                @php
+                                                    $total = 0;
+                                                    $discountAmount = $item->course->price * ($item->course->discount / 100);
+                                                    $discountedPrice = $item->course->price - $discountAmount;
+                                                @endphp
                                                 <tr class="woocommerce-cart-form__cart-item cart_item">
                                                     <td>
                                                         <div class="form-check">
                                                             <input class="form-check-input flexCheckDefault" type="checkbox"
-                                                                data-price="{{ $item->course->price }}"
+                                                                data-price="{{ $discountedPrice }}"
                                                                 onchange="calculateTotal()">
                                                         </div>
                                                     </td>
@@ -76,7 +81,7 @@
 
                                                     <td class="product-price" data-title="Price">
                                                         <span class="woocommerce-Price-amount amount"><span
-                                                                class="woocommerce-Price-currencySymbol">$</span>{{ $item->course->price }}</span>
+                                                                class="woocommerce-Price-currencySymbol">$</span>{{ $discountedPrice }}</span>
                                                     </td>
 
                                                     <td class="product-quantity" data-title="Quantity">
