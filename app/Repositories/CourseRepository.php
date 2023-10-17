@@ -33,6 +33,6 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      */
     public function findOrFail($id): Model
     {
-        return $this->model->with('category:id,name')->findOrFail($id);
+        return $this->model->with(['category:id,name', 'topics.lessons:id,topic_id,title'])->findOrFail($id);
     }
 }
