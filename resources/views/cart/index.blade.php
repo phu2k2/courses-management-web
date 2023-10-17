@@ -24,7 +24,7 @@
         <img class="d-none img-fluid" src="...html" alt="...">
     </header>
     <!-- SHOP CART
-                                                        ================================================== -->
+                                                            ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             <div id="primary" class="content-area">
@@ -37,7 +37,11 @@
                                     <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents">
                                         <thead>
                                             <tr>
-                                                <th></th>
+                                                <th>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input header-checkbox" type="checkbox" onchange="handleCheckboxClick()">
+                                                    </div>
+                                                </th>
                                                 <th class="product-name">Product</th>
                                                 <th class="product-price">Price</th>
                                                 <th class="product-quantity">Quantity</th>
@@ -47,11 +51,7 @@
 
                                         <tbody>
                                             @php $total = 0; @endphp
-
                                             @foreach ($cart as $item)
-                                                @php
-                                                    $total += $item->course->price;
-                                                @endphp
                                                 <tr class="woocommerce-cart-form__cart-item cart_item">
                                                     <td>
                                                         <div class="form-check">
