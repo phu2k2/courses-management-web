@@ -23,10 +23,10 @@ class CartService
      * Add courses into cart
      * @param int $userId
      * @param int $courseId
-     * @return \Illuminate\Database\Eloquent\Model
-     * @throws \Exception
+     * @return Model
+     * @throws Exception
      */
-    public function addToCart($userId, $courseId): Model
+    public function addToCart(int $userId, int $courseId): Model
     {
         if ($this->cartRepo->hasCourseInCart($userId, $courseId)) {
             throw new Exception();

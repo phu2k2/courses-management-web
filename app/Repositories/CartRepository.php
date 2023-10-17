@@ -26,7 +26,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      * @param int $courseId
      * @return bool
      */
-    public function hasCourseInCart($userId, $courseId): bool
+    public function hasCourseInCart(int $userId, int $courseId): bool
     {
         return $this->model->where('user_id', $userId)->where('course_id', $courseId)->exists();
     }
