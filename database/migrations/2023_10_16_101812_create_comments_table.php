@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('lesson_id');
             $table->unsignedBigInteger('user_id');
-            $table->bigInteger('parent_id');
+            $table->unsignedBigInteger('parent_id');
             $table->text('content', 500);
             $table->softDeletes();
             $table->timestamps();
