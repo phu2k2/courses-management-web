@@ -26,7 +26,7 @@ class CartService
      * @return Model
      * @throws Exception
      */
-    public function addToCart($userId, $courseId): Model
+    public function addToCart(int $userId, int $courseId): Model
     {
         if ($this->cartRepo->hasCourseInCart($userId, $courseId)) {
             throw new Exception();
