@@ -41,6 +41,6 @@ class CourseService
      */
     public function getCourse(int $id): Model
     {
-        return $this->courseRepo->findWithCategory($id);
+        return $this->courseRepo->findOrFail($id);
     }
 }
