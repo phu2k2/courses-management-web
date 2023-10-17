@@ -19,7 +19,7 @@ interface CartRepositoryInterface extends RepositoryInterface
     /**
      * Delete a record by course id.
      *
-     * @param string $id .
+     * @param int $id .
      * @return bool True if the deletion was successful, false otherwise.
      */
     public function deleteCart($id);

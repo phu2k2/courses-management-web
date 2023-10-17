@@ -51,7 +51,7 @@ class CartController extends Controller
      * Remove the specified resource from storage.
      * @return RedirectResponse
      */
-    public function destroy(Request $request, string $id): RedirectResponse
+    public function destroy(Request $request, int $id): RedirectResponse
     {
         if ($this->cartService->deleteCart($id)) {
             session()->flash('message', __('messages.cart.success.delete'));
