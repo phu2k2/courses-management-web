@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Course;
 use App\Models\Topic;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,9 +20,11 @@ class TopicFactory extends Factory
 
     public function definition(): array
     {
+        $course = Course::all('id')->random();
+
         return [
             'name' => $this->faker->unique()->word,
-            'course_id' => $this->faker->randomNumber()
+            'course_id' => $course->id
         ];
     }
 }

@@ -46,6 +46,14 @@ class Course extends Model
     }
 
     /**
+     * @return HasMany<Topic>
+     */
+    public function topics(): HasMany
+    {
+        return $this->hasMany(Topic::class);
+    }
+
+    /**
      * @return HasMany<Cart>
      */
     public function carts(): HasMany
