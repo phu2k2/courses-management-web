@@ -30,7 +30,7 @@ class CourseService
 
     /**
      * @param Request $request
-     * @return LengthAwarePaginator<Model>
+     * @return LengthAwarePaginator<App\Models\Course>
      */
     public function getCourses(Request $request): LengthAwarePaginator
     {
