@@ -74,7 +74,7 @@
                             </div>
 
                             <div class="font-size-sm ms-lg-3 text-white">
-                                <span>{{ $course->average_rating }} ({{ $course->num_reviews }} reviews)</span>
+                                <span>{{ $course->average_rating }} ({{ convert_to_short_form($course->num_reviews) }} reviews)</span>
                             </div>
                         </div>
                     </div>
@@ -132,21 +132,15 @@
                         </div>
 
                         <h3 class="mb-5">What you'll learn</h3>
-                        <div class="row row-cols-lg-2 mb-8">
-                            @foreach ($course->learn_contents as $key => $content)
-                                <div class="col-md">
-                                    <ul class="list-style-v1 list-unstyled">
-                                        <li>{{ $content }}</li>
-                                    </ul>
-                                </div>
-                            @endforeach
+                        <div class="row mb-8">
+                            <ul class="list-style-v1 list-unstyled">
+                                {!! $course->learns_description !!}
+                            </ul>
                         </div>
 
                         <h3 class="mb-5">Requirements</h3>
                         <ul class="list-style-v2 list-unstyled">
-                            @foreach ($course->requirements as $requirement)
-                                <li>{{ $requirement }}</li>
-                            @endforeach
+                            {!! $course->requirements_description !!}
                         </ul>
                     </div>
 

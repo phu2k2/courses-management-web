@@ -12,6 +12,9 @@
     "register": "Sign Up",
     "login_label": "Don't have an account?",
     "register_label": "Already have an account?",
+    "logout_label": "Do you really want to log out?",
+    "cancel": "Cancel",
+    "submit": "Submit",
 
     "home": "Home",
     "categories": "Categories",
@@ -21,5 +24,12 @@
     "about": "About Us",
     "profile": "Profile",
     "logout": "Log Out",
-    "placeholder_search": "What do you want to learn?"
+    "placeholder_search": "What do you want to learn?",
+
+    "beginner_level": "Beginner",
+    "intermediate_level": "Intermediate",
+    "advanced_level": "Advanced",
+
+    "english_lang": "English",
+    "vietnamese_lang": "Vietnamese"
 }

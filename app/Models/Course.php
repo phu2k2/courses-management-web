@@ -46,11 +46,11 @@ class Course extends Model
     }
 
     /**
-     * @return HasMany
+     * @return HasMany<Topic>
      */
     public function topics(): HasMany
     {
-        return $this->hasMany(Topic::class, 'course_id', 'id');
+        return $this->hasMany(Topic::class);
     }
 
     /**
@@ -66,13 +66,11 @@ class Course extends Model
      */
     public function getLanguageAttribute()
     {
-        $language = match ((int) $this->languages) {
-            1 => 'English',
-            2 => 'Vietnamese',
+        return match ((int) $this->languages) {
+            1 => __('english_lang'),
+            2 => __('vietnamese_lang'),
             default => '',
         };
-
-        return $language;
     }
 
     /**
@@ -80,34 +78,12 @@ class Course extends Model
      */
     public function getLevelCourseAttribute()
     {
-        $levelCourse = match ((int) $this->level) {
-            1 => 'Beginner',
-            2 => 'Intermediate',
-            3 => 'Advanced',
+        return  match ((int) $this->level) {
+            1 => __('beginner_level'),
+            2 => __('intermediate_level'),
+            3 => __('advanced_level'),
             default => '',
         };
-
-        return $levelCourse;
-    }
-
-    /**
-     * @return array
-     */
-    public function getRequirementsAttribute()
-    {
-        $requirements = explode('\n', $this->requirements_description);
-
-        return $requirements;
-    }
-
-    /**
-     * @return array
-     */
-    public function getLearnContentsAttribute()
-    {
-        $learns = explode('. ', $this->learns_description);
-
-        return $learns;
     }
 
     /**
@@ -116,5 +92,21 @@ class Course extends Model
     public function carts(): HasMany
     {
         return $this->hasMany(Cart::class, 'course_id', 'id');
+    }
+
+    /**
+     * @return HasMany<Order>
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'course_id', 'id');
+    }
+
+    /**
+     * @return HasMany<Enrollment>
+     */
+    public function enrollments(): HasMany
+    {
+        return $this->hasMany(Enrollment::class, 'course_id', 'id');
     }
 }

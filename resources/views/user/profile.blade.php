@@ -11,12 +11,19 @@
             <div class="col-md-7 col-xl-8">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="account" role="tabpanel">
+                        @if (session()->has('message'))
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <span class="alert-text"><strong>Success!</strong> {{ session()->get('message') }}</span>
+                            </div>
+                        @endif
                         <div class="card rounded-3">
                             <div class="card-header">
                                 <h5 class="card-title mb-0">Profile Information</h5>
                             </div>
                             <div class="card-body">
-                                <form>
+                                <form method="POST" action="{{ route('users.update') }}">
+                                    @method('PUT')
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
