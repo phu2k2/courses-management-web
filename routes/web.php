@@ -34,8 +34,10 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::put('profile', [ProfileController::class, 'update'])->name('update');
 });
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
-Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
+Route::resource('carts', CartController::class)->only(['index', 'store']);
 
 Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show');
 });
+
+Route::delete('carts/delete-cart', [CartController::class, 'deleteMutilCarts'])->name('carts.delete-cart');

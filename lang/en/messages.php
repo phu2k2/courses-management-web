@@ -19,4 +19,12 @@ return [
             'update' => 'Update profile was fail'
         ],
     ],
+    'cart' => [
+        'success' => [
+            'delete' => 'successfully removed the course from the shopping cart',
+        ],
+        'error' => [
+            'delete' => 'Removing course from cart failed'
+        ]
+    ]
 ];

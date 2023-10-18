@@ -36,4 +36,13 @@ class CartService
     {
         return $this->cartRepo->getCartByUser($id);
     }
+
+    /**
+     * @param array $id
+     * @return bool
+     */
+    public function deleteMultipleCart($id)
+    {
+        return $this->cartRepo->deleteMultiple($id);
+    }
 }

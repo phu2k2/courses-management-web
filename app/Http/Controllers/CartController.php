@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCartRequest;
 use App\Services\CartService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -51,6 +52,21 @@ class CartController extends Controller
      */
     public function destroy()
     {
+        return redirect()->back();
+    }
+
+    /**
+     * @return RedirectResponse
+     */
+    public function deleteMutilCarts(Request $request)
+    {
+        $ids = $request->all();
+        session()->flash('message', __('messages.user.success.create_cart'));
+        if (!$this->cartService->deleteMultipleCart($ids)) {
+            session()->forget('message');
+            session()->flash('error', __('messages.user.error.create_cart'));
+        }
+
         return redirect()->back();
     }
 }

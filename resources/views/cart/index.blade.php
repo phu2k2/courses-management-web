@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('title', 'cart')
+@section('script')
+    <script type="module" src="{{ asset('assets/js/cart.js') }}"></script>
+@endsection
 @section('content')
     <header class="py-8 py-md-10" style="background-image: none;">
         <div class="container text-center py-xl-2">
@@ -30,10 +33,15 @@
                         <!-- .entry-header -->
                         <div class="entry-content">
                             <div class="woocommerce">
-                                <form class="woocommerce-cart-form table-responsive" action="#" method="post">
+                                <form class="woocommerce-cart-form table-responsive"
+                                    action="{{ route('carts.delete-cart') }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
                                     <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents">
                                         <thead>
                                             <tr>
+                                                <th class=""> <input type="checkbox" id="checkAll"> Select All
+                                                </th>
                                                 <th class="product-name">Product</th>
                                                 <th class="product-price">Price</th>
                                                 <th class="product-quantity">Quantity</th>
@@ -44,6 +52,10 @@
                                         <tbody>
                                             @foreach ($cart as $item)
                                                 <tr class="woocommerce-cart-form__cart-item cart_item">
+                                                    <td class="">
+                                                        <input name='ids[]' type="checkbox" id="checkItem"
+                                                            value="{{ $item->course->id }}">
+                                                    </td>
                                                     <td class="product-name" data-title="Product">
                                                         <div class="d-flex align-items-center">
                                                             <a href="shop-single.html">
@@ -94,6 +106,9 @@
 
                                                     <input type="submit" class="button" name="update_cart"
                                                         value="Update cart">
+                                                    <input class="button" type="submit" name="submit"
+                                                        value="Remove All Cart"
+                                                        onclick="return confirm('Are you sure you want to delete?')" />
                                                 </td>
                                             </tr>
                                         </tbody>

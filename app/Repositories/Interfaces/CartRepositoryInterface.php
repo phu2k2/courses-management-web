@@ -15,4 +15,10 @@ interface CartRepositoryInterface extends RepositoryInterface
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function addToCart($data): Model;
+
+    /**
+     * @param array $id
+     * @return bool
+     */
+    public function deleteMultiple($id);
 }
