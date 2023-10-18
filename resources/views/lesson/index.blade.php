@@ -61,8 +61,7 @@
                                             <div class="me-auto mb-4 mb-md-0">
                                                 <h5 class="text-white mb-1 fw-semi-bold">
                                                     {{ $comment->user->profile?->full_name }}
-                                                    <span
-                                                        class="font-size-sm text-blue">{{ '@' . $comment->user->username }}</span>
+                                                    <span class="font-size-sm text-blue">{{ '@' . $comment->user->username }}</span>
                                                 </h5>
                                                 <p class="font-size-sm font-italic">
                                                     {{ format_time_difference($comment->created_at) }}
@@ -113,10 +112,10 @@
                                         @if (count($comments->where('parent_id', $comment->id)) != 0)
                                             <div class="mb-4">
                                                 <span class="show-reply {{ $comment->id }}"
-                                                    data-parentId="{{ $comment->id }}"><i
-                                                        class="fa-solid fa-chevron-down"></i>
-                                                    Show {{ count($comments->where('parent_id', $comment->id)) }}
-                                                    replys</span>
+                                                    data-parentId="{{ $comment->id }}">
+                                                    <i class="fa-solid fa-chevron-down"></i>
+                                                    Show {{ count($comments->where('parent_id', $comment->id)) }} replys
+                                                </span>
                                             </div>
                                         @endif
                                     </div>
@@ -134,8 +133,8 @@
                                                         <div class="d-md-flex align-items-center mb-1">
                                                             <div class="me-auto mb-4 mb-md-0">
                                                                 <h5 class="text-white mb-1 fw-semi-bold">
-                                                                    {{ $childComment->user->profile?->full_name }} <span
-                                                                        class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span>
+                                                                    {{ $childComment->user->profile?->full_name }}
+                                                                    <span class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span>
                                                                 </h5>
                                                                 <p class="font-size-sm font-italic">
                                                                     {{ format_time_difference($childComment->created_at) }}
