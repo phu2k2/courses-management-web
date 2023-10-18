@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->unsignedBigInteger('course_id')->unique();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('course_id');
+            $table->unique(['user_id', 'course_id']);
             $table->unsignedTinyInteger('payment_method');
             $table->decimal('price', 10, 2);
             $table->unsignedTinyInteger('status');
