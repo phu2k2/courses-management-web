@@ -40,9 +40,9 @@
                             data-choices>
                             <option>Default</option>
                             <option>New Courses</option>
-                            <option>Price Low to High</option>
-                            <option>Price High to Low</option>
+                            <option>Most Reviewed</option>
                             <option>Highest Rated</option>
+                            <option>Highest Student</option>834
                         </select>
                     </div>
                 </div>
@@ -54,6 +54,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-4 mb-5 mb-xl-0">
+                <form action="{{ route('courses.index') }}" method="GET" id="filter-form">
                 <!-- SIDEBAR FILTER================================================== -->
                 <div class=" vertical-scroll" id="courseSidebar">
                     <div class="border rounded mb-6 @@widgetBG">
@@ -64,7 +65,7 @@
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse1"
                                     aria-expanded="true" aria-controls="coursefiltercollapse1">
-                                    Category
+                                    Languages
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
                                         <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -85,36 +86,16 @@
 
                         <div id="coursefiltercollapse1" class="collapse show mt-n2 px-6 pb-6"
                             aria-labelledby="coursefilter1" data-parent="#courseSidebar">
-                            <ul class="list-unstyled list-group list-checkbox">
+                            <ul class="list-unstyled list-group list-checkbox list-checkbox-limit">
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheckone">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheckone">Art
-                                        (8)</label>
+                                    <input type="checkbox" class="custom-control-input" id="languagescustomcheck1" name="language[]" value="1">
+                                    <label class="custom-control-label font-size-base" 
+                                        for="languagescustomcheck1">English</label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck2">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck2">Exercise
-                                        (8)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck3">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck3">Material
-                                        Design (7)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck4">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck4">Software
-                                        Development (6)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck5">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck5">Music
-                                        (6)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck6">
+                                    <input type="checkbox" class="custom-control-input" id="languagescustomcheck2" name="language[]" value="2">
                                     <label class="custom-control-label font-size-base"
-                                        for="categorycustomcheck6">Photography (6)</label>
+                                        for="languagescustomcheck2">Vietnamese</label>
                                 </li>
                             </ul>
                         </div>
@@ -128,7 +109,7 @@
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse2"
                                     aria-expanded="true" aria-controls="coursefiltercollapse2">
-                                    Instructors
+                                    Category
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
                                         <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -173,39 +154,22 @@
                                     </div>
                                 </div>
                             </form>
+                            @php
+                                $categoryGroups = [];
+                                foreach ($courses->groupBy('name') as $category => $group) {
+                                    $categoryGroups[$category] = $group->count();
+                                }
+                            @endphp
+                                <ul class="list-unstyled list-group list-checkbox">
 
-                            <ul class="list-unstyled list-group list-checkbox list-checkbox-limit">
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="instructorscustomcheck1">
-                                    <label class="custom-control-label font-size-base" for="instructorscustomcheck1">Chris
-                                        Convrse (03)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="instructorscustomcheck2">
-                                    <label class="custom-control-label font-size-base"
-                                        for="instructorscustomcheck2">Morten Rand (15)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="instructorscustomcheck3">
-                                    <label class="custom-control-label font-size-base" for="instructorscustomcheck3">Rayi
-                                        Villalobos (125)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="instructorscustomcheck4">
-                                    <label class="custom-control-label font-size-base" for="instructorscustomcheck4">James
-                                        William (1.584)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="instructorscustomcheck5">
-                                    <label class="custom-control-label font-size-base"
-                                        for="instructorscustomcheck5">Villalobos (584)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="instructorscustomcheck6">
-                                    <label class="custom-control-label font-size-base" for="instructorscustomcheck6">Rand
-                                        joe (44)</label>
-                                </li>
-                            </ul>
+                                    @foreach($categoryGroups as $category => $count)
+                                    <li class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="categorycustomcheck{{ $loop->index }}" name="category[]" value="{{ $category }}">
+                                        <label class="custom-control-label font-size-base" for="categorycustomcheck{{ $loop->index }}">{{ $category }} ({{ $count }})</label>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            
                         </div>
                     </div>
 
@@ -216,7 +180,7 @@
                                 <button
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse3"
-                                    aria-expanded="true" aria-controls="coursefiltercollapse3">
+                                    aria-expanded="false" aria-controls="coursefiltercollapse3">
                                     Price
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
@@ -236,24 +200,24 @@
                             </h4>
                         </div>
 
-                        <div id="coursefiltercollapse3" class="collapse show mt-n2 px-6 pb-6"
+                        <div id="coursefiltercollapse3" class="collapse  mt-n2 px-6 pb-6"
                             aria-labelledby="coursefilter3" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" id="pricecustomradio1" name="customRadio"
-                                        class="custom-control-input">
+                                    <input type="radio" id="pricecustomradio1" name="price"
+                                        class="custom-control-input" value ="all">
                                     <label class="custom-control-label font-size-base" for="pricecustomradio1">All
                                         (18)</label>
                                 </li>
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" id="pricecustomradio2" name="customRadio"
-                                        class="custom-control-input">
+                                    <input type="radio" id="pricecustomradio2" name="price"
+                                        class="custom-control-input" value = "free">
                                     <label class="custom-control-label font-size-base" for="pricecustomradio2">Free
                                         (3)</label>
                                 </li>
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" id="pricecustomradio3" name="customRadio"
-                                        class="custom-control-input">
+                                    <input type="radio" id="pricecustomradio3" name="price"
+                                        class="custom-control-input" value ="paid">
                                     <label class="custom-control-label font-size-base" for="pricecustomradio3">Paid
                                         (15)</label>
                                 </li>
@@ -268,7 +232,7 @@
                                 <button
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse4"
-                                    aria-expanded="true" aria-controls="coursefiltercollapse4">
+                                    aria-expanded="false" aria-controls="coursefiltercollapse4">
                                     Level
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
@@ -288,22 +252,74 @@
                             </h4>
                         </div>
 
-                        <div id="coursefiltercollapse4" class="collapse show mt-n2 px-6 pb-6"
+                        <div id="coursefiltercollapse4" class="collapse mt-n2 px-6 pb-6"
                             aria-labelledby="coursefilter4" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck1">
+                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck1" name="level[]" value="1" >
                                     <label class="custom-control-label font-size-base" for="levelcustomcheck1">Beginner
                                         (03)</label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck2">
+                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck2" name="level[]" value="2" >
                                     <label class="custom-control-label font-size-base"
                                         for="levelcustomcheck2">Intermediate (15)</label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck3">
+                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck3" name="level[]" value="3" >
                                     <label class="custom-control-label font-size-base" for="levelcustomcheck3">Advanced
+                                        (126)</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="border rounded mb-6 @widgetBG">
+                        <!-- Heading -->
+                        <div id="coursefilter4">
+                            <h4 class="mb-0">
+                                <button class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one" type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse4" aria-expanded="true" aria-controls="coursefiltercollapse4">
+                                    Video Duration
+                                    <span class="ms-auto text-dark d-flex">
+                                        <!-- Icon -->
+                                        <svg width="15" height="2" viewBox="0 0 15 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="15" height="2" fill="currentColor"></rect>
+                                        </svg>
+
+                                        <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0 7H15V9H0V7Z" fill="currentColor"></path>
+                                            <path d="M6 16L6 8.74228e-08L8 0L8 16H6Z" fill="currentColor"></path>
+                                        </svg>
+
+                                    </span>
+                                </button>
+                            </h4>
+                        </div>
+
+                        <div id="coursefiltercollapse4" class="collapse show mt-n2 px-6 pb-6" aria-labelledby="coursefilter4" data-parent="#courseSidebar">
+                            <ul class="list-unstyled list-group list-checkbox">
+                                <li class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck1" name="duration[]" value="extraShort">
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck1">0-1 Hours
+                                        (03)</label>
+                                </li>
+                                <li class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck2" name="duration[]" value="short">
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck2">1-3 Hours (15)</label>
+                                </li>
+                                <li class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck3" name="duration[]" value="medium">
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck3">3-6 Hours
+                                        (126)</label>
+                                </li>
+                                <li class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="ldurationcustomcheck4" name="duration[]" value="long">
+                                    <label class="custom-control-label font-size-base" for="ldurationcustomcheck4">6-17 Hours
+                                        (126)</label>
+                                </li>
+                                <li class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck5" name="duration[]" value="extraLong">
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck5">17+ Hours
                                         (126)</label>
                                 </li>
                             </ul>
@@ -340,12 +356,12 @@
                         <div id="coursefiltercollapse5" class="collapse show mt-n2 px-6 pb-6"
                             aria-labelledby="coursefilter5" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="ratingcustomcheck1">
-                                    <label class="custom-control-label font-size-base" for="ratingcustomcheck1">
+                                <li class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion1" name ="rating" value="4.5">
+                                    <label class="custom-control-label font-size-base" for="ratingcustomradion1">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
-                                                <span class="rating" style="width:90%;"></span>
+                                                <span class="rating" style="width:92%;"></span>
                                             </span>
 
                                             <span class="ms-3">
@@ -354,12 +370,12 @@
                                         </span>
                                     </label>
                                 </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="ratingcustomcheck2">
-                                    <label class="custom-control-label font-size-base" for="ratingcustomcheck2">
+                                <li class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion2" name ="rating" value="4">
+                                    <label class="custom-control-label font-size-base" for="ratingcustomradion2">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
-                                                <span class="rating" style="width:70%;"></span>
+                                                <span class="rating" style="width:80%;"></span>
                                             </span>
 
                                             <span class="ms-3">
@@ -368,40 +384,40 @@
                                         </span>
                                     </label>
                                 </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="ratingcustomcheck3">
-                                    <label class="custom-control-label font-size-base" for="ratingcustomcheck3">
+                                <li class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion3" name ="rating" value="3.5">
+                                    <label class="custom-control-label font-size-base" for="ratingcustomradion3">
+                                        <span class="d-flex align-items-end">
+                                            <span class="star-rating">
+                                                <span class="rating" style="width:72%;"></span>
+                                            </span>
+
+                                            <span class="ms-3">
+                                                <span>& up</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </li>
+                                <li class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion4" name ="rating" value="3">
+                                    <label class="custom-control-label font-size-base" for="ratingcustomradion4">
+                                        <span class="d-flex align-items-end">
+                                            <span class="star-rating">
+                                                <span class="rating" style="width:60%;"></span>
+                                            </span>
+
+                                            <span class="ms-3">
+                                                <span>& up</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </li>
+                                <li class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion5" name ="rating" value="2.5">
+                                    <label class="custom-control-label font-size-base" for="ratingcustomradion5">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
                                                 <span class="rating" style="width:50%;"></span>
-                                            </span>
-
-                                            <span class="ms-3">
-                                                <span>& up</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="ratingcustomcheck4">
-                                    <label class="custom-control-label font-size-base" for="ratingcustomcheck4">
-                                        <span class="d-flex align-items-end">
-                                            <span class="star-rating">
-                                                <span class="rating" style="width:35%;"></span>
-                                            </span>
-
-                                            <span class="ms-3">
-                                                <span>& up</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="ratingcustomcheck5">
-                                    <label class="custom-control-label font-size-base" for="ratingcustomcheck5">
-                                        <span class="d-flex align-items-end">
-                                            <span class="star-rating">
-                                                <span class="rating" style="width:10%;"></span>
                                             </span>
 
                                             <span class="ms-3">
@@ -414,10 +430,13 @@
                         </div>
                     </div>
 
-                    <a href="#" class="btn btn-primary btn-block mb-10">FILTER RESULTS</a>
+                    {{-- <a href="#" type="" class="btn btn-primary btn-block mb-10">FILTER RESULTS</a> --}}
+                    <button type="submit" class="btn btn-primary btn-block mb-10">FILTER RESULTS</button>
                 </div>
+            </form>
             </div>
-
+            
+            
             <div class="col-xl-8">
                 <div class="row row-cols-md-2 mb-3 ">
                 {{-- START COURSE --}}
@@ -455,7 +474,7 @@
 
                                     <div class="d-lg-flex align-items-end flex-wrap mb-n1">
                                         <div class="star-rating mb-2 mb-lg-0 me-lg-3">
-                                            <div class="rating" style="width:50%;"></div>
+                                            <div class="rating" style="width:{{ ($course->average_rating - 1) / 3.6 * 100 }}%;"></div>
                                         </div>
 
                                         <div class="font-size-sm">
