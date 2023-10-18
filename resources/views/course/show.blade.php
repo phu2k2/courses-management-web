@@ -427,28 +427,27 @@
 
                         <ul class="list-unstyled pt-2">
                             {{-- START COMMENT --}}
+                            @foreach ($reviews as $review)         
                             <li class="media d-flex">
                                 <div class="avatar avatar-xxl me-3 me-md-6 flex-shrink-0">
-                                    <img src="{{ asset('assets/img/avatars/avatar-1.jpg') }}" alt="..."
+                                    <img src="{{ $review->user->profile?->avatar }}" alt="..."
                                         class="avatar-img rounded-circle">
                                 </div>
                                 <div class="media-body flex-grow-1">
                                     <div class="d-md-flex align-items-center mb-5">
                                         <div class="me-auto mb-4 mb-md-0">
-                                            <h5 class="mb-0">Oscar Cafeo</h5>
-                                            <p class="font-size-sm font-italic">Beautiful courses</p>
+                                            <h5 class="mb-0">{{ $review->user->profile?->full_name ??  $review->user->username}}</h5>
                                         </div>
                                         <div class="star-rating">
-                                            <div class="rating" style="width:100%;"></div>
+                                            <div class="rating" style="width:{{ convert_to_percent($review->rating) }}%;"></div>
                                         </div>
                                     </div>
-                                    <p class="mb-6 line-height-md">This course was well organized and covered a lot more
-                                        details than any other Figma courses. I really enjoy it. One suggestion is that it
-                                        can be much better if we could complete the prototype together. Since we created 24
-                                        frames, I really want to test it on Figma mirror to see all the connections. Could
-                                        you please let me take a look at the complete prototype?</p>
+                                    <p class="mb-6 line-height-md">
+                                        {{ $review->review }}
+                                    </p>
                                 </div>
                             </li>
+                            @endforeach
                             {{-- END COMMENT --}}
                         </ul>
 

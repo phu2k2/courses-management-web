@@ -17,3 +17,15 @@ if (!function_exists('convert_to_short_form')) {
         return number_format($number / 1000000, 1) . 'M';
     }
 }
+
+if (!function_exists('convert_to_percent')) {
+
+    /**
+     * @param mixed
+     * @return int
+     */
+    function convert_to_percent($number): int
+    {
+        return ($number / 5) * 100;
+    }
+}
