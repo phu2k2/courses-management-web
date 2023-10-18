@@ -17,6 +17,9 @@ use App\Repositories\TopicRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**
