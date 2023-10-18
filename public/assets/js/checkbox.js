@@ -23,6 +23,7 @@ function calculateTotal() {
         totalElement.textContent = '$' + total.toFixed(2);
     }
 }
+
 function handleDeleteButtonClick() {
     var modalBody = document.querySelector('.modal-body.delete_item');
     modalBody.innerHTML = '';
@@ -37,8 +38,3 @@ function handleDeleteButtonClick() {
     });
     document.getElementById('selectedItemsInput').value = idsString;
 }
-
-
-
-
-
