@@ -23,6 +23,6 @@ class CommentRepository extends BaseRepository implements CommentRepositoryInter
      */
     public function getByLesson($lessonId): Collection
     {
-        return $this->model->with('user')->where('lesson_id', $lessonId)->get();
+        return $this->model->with('user.profile')->where('lesson_id', $lessonId)->get();
     }
 }
