@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->unsignedBigInteger('course_id')->unique();
             $table->unsignedTinyInteger('payment_method');
             $table->decimal('price', 10, 2);
             $table->unsignedTinyInteger('status');
+            $table->timestamps();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('course_id')->references('id')->on('courses');
-            $table->softDeletes();
-            $table->timestamps();
         });
     }
 

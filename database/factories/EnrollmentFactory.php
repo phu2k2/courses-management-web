@@ -18,12 +18,13 @@ class EnrollmentFactory extends Factory
      */
     public function definition(): array
     {
-        $users = User::all('id')->random();
-        $courses = Course::all('id')->random();
-
         return [
-            'user_id' => $users->id,
-            'course_id' => $courses->id,
+            'user_id'  => function () {
+                return User::factory()->create()->id;
+            },
+            'course_id'  => function () {
+                return Course::factory()->create()->id;
+            },
             'title' => fake()->sentence,
             'brief' => fake()->paragraph,
         ];

@@ -18,12 +18,13 @@ class OrderFactory extends Factory
      */
     public function definition(): array
     {
-        $users = User::all('id')->random();
-        $courses = Course::all('id')->random();
-
         return [
-            'user_id' => $users->id,
-            'course_id' => $courses->id,
+            'user_id'  => function () {
+                return User::factory()->create()->id;
+            },
+            'course_id'  => function () {
+                return Course::factory()->create()->id;
+            },
             'payment_method' => fake()->randomElement([0, 1]),
             'price' => fake()->randomFloat(2, 10, 100),
             'status' => fake()->randomElement([0, 1, 2]),
