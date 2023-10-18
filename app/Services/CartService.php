@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Interfaces\CartRepositoryInterface;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -20,12 +21,22 @@ class CartService
 
     /**
      * Add courses into cart
-     * @param array $data
-     * @return \Illuminate\Database\Eloquent\Model
+     * @param int $userId
+     * @param int $courseId
+     * @return Model
+     * @throws Exception
      */
-    public function addToCart($data): Model
+    public function addToCart(int $userId, int $courseId): Model
     {
-        return $this->cartRepo->addToCart($data);
+        if ($this->cartRepo->hasCourseInCart($userId, $courseId)) {
+            throw new Exception();
+        }
+        $data = [
+            'user_id' => $userId,
+            'course_id' => $courseId,
+        ];
+
+        return $this->cartRepo->create($data);
     }
 
     /**
