@@ -37,6 +37,9 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      */
     public function getCartByUser(int $id): Collection
     {
-        return $this->model->with('course:id,title,price,poster_url')->where('user_id', $id)->get();
+        return $this->model
+            ->with('course:id,title,price,poster_url,discount')
+            ->where('user_id', $id)
+            ->get();
     }
 }
