@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCartRequest;
 use App\Services\CartService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -46,13 +47,15 @@ class CartController extends Controller
     }
 
     /**
+     * @param int $id
      * Remove the specified resource from storage.
      * @return RedirectResponse
      */
     public function destroy(int $id): RedirectResponse
     {
-        session()->flash('message', __('messages.cart.success.delete'));
-        if (!$this->cartService->deleteCart($id)) {
+        if ($this->cartService->deleteCart($id)) {
+            session()->flash('message', __('messages.cart.success.delete'));
+        } else {
             session()->flash('error', __('messages.cart.error.delete'));
         }
 
