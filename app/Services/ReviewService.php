@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 class ReviewService
 {
     /**
-     * @var CartRepositoryInterface
+     * @var ReviewRepositoryInterface
      */
     protected $reviewRepo;
 
