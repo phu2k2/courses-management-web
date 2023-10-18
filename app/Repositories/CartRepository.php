@@ -22,13 +22,14 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     }
 
     /**
-     * Add courses into cart
-     * @param array $data
-     * @return \Illuminate\Database\Eloquent\Model
+     * Check the presence of courses whether are in cart or not.
+     * @param int $userId
+     * @param int $courseId
+     * @return bool
      */
-    public function addToCart($data): Model
+    public function hasCourseInCart(int $userId, int $courseId): bool
     {
-        return $this->model->create($data);
+        return $this->model->where('user_id', $userId)->where('course_id', $courseId)->exists();
     }
 
     /**
@@ -37,7 +38,10 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      */
     public function getCartByUser(int $id): Collection
     {
-        return $this->model->with('course:id,title,price,poster_url')->where('user_id', $id)->get();
+        return $this->model
+            ->with('course:id,title,price,poster_url,discount')
+            ->where('user_id', $id)
+            ->get();
     }
 
     /**

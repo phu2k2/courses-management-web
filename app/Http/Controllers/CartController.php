@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCartRequest;
 use App\Services\CartService;
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -35,15 +35,16 @@ class CartController extends Controller
      * Store a newly created resource in storage.
      * @return RedirectResponse
      */
-    public function store(StoreCartRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $data = $request->all();
-        session()->flash('message', __('messages.user.success.create_cart'));
-        if (!$this->cartService->addToCart($data)) {
-            session()->forget('message');
+        try {
+            $courseId = $request->input('course_id');
+            $userId = (int) auth()->id();
+            $this->cartService->addToCart($userId, $courseId);
+            session()->flash('message', __('messages.user.success.create_cart'));
+        } catch (Exception $e) {
             session()->flash('error', __('messages.user.error.create_cart'));
         }
-
         return redirect()->back();
     }
 

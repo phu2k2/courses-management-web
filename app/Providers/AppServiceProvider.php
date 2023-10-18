@@ -47,11 +47,6 @@ class AppServiceProvider extends ServiceProvider
             ProfileRepository::class,
         );
         $this->app->singleton(
-            CourseRepositoryInterface::class,
-            CourseRepository::class,
-        );
-
-        $this->app->singleton(
             CartRepositoryInterface::class,
             CartRepository::class
         );

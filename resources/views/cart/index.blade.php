@@ -2,6 +2,7 @@
 @section('title', 'cart')
 @section('script')
     <script type="module" src="{{ asset('assets/js/cart.js') }}"></script>
+    <script src="{{ asset('assets/js/checkbox.js') }}"></script>
 @endsection
 @section('content')
     <header class="py-8 py-md-10" style="background-image: none;">
@@ -24,7 +25,7 @@
         <img class="d-none img-fluid" src="...html" alt="...">
     </header>
     <!-- SHOP CART
-                                ================================================== -->
+                                                        ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             <div id="primary" class="content-area">
@@ -41,6 +42,11 @@
                                         <thead>
                                             <tr>
                                                 <th class=""> <input type="checkbox" id="checkAll"> Select All
+                                                <th>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input header-checkbox" type="checkbox"
+                                                            onchange="handleCheckboxClick()">
+                                                    </div>
                                                 </th>
                                                 <th class="product-name">Product</th>
                                                 <th class="product-price">Price</th>
@@ -50,11 +56,23 @@
                                         </thead>
 
                                         <tbody>
+
                                             @foreach ($cart as $item)
+                                                @php
+                                                    $total = 0;
+                                                    $discountAmount = $item->course->price * ($item->course->discount / 100);
+                                                    $discountedPrice = $item->course->price - $discountAmount;
+                                                @endphp
                                                 <tr class="woocommerce-cart-form__cart-item cart_item">
                                                     <td class="">
                                                         <input name='ids[]' type="checkbox" id="checkItem"
                                                             value="{{ $item->course->id }}">
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input flexCheckDefault" type="checkbox"
+                                                                data-price="{{ $discountedPrice }}"
+                                                                onchange="calculateTotal()">
+                                                        </div>
                                                     </td>
                                                     <td class="product-name" data-title="Product">
                                                         <div class="d-flex align-items-center">
@@ -71,7 +89,7 @@
 
                                                     <td class="product-price" data-title="Price">
                                                         <span class="woocommerce-Price-amount amount"><span
-                                                                class="woocommerce-Price-currencySymbol">$</span>{{ $item->course->price }}</span>
+                                                                class="woocommerce-Price-currencySymbol">$</span>{{ $discountedPrice }}</span>
                                                     </td>
 
                                                     <td class="product-quantity" data-title="Quantity">
@@ -130,7 +148,8 @@
                                 <tr class="order-total">
                                     <th>Total</th>
                                     <td data-title="Total"><strong><span class="woocommerce-Price-amount amount"><span
-                                                    class="woocommerce-Price-currencySymbol">£</span>109.95</span></strong>
+                                                    class="woocommerce-Price-currencySymbol">£</span>
+                                                {{ $total }}</span></strong>
                                     </td>
                                 </tr>
                             </tbody>
