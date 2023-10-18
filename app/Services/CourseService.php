@@ -6,6 +6,7 @@ use App\Repositories\Interfaces\CourseRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\Course;
 
 class CourseService
 {
@@ -30,7 +31,7 @@ class CourseService
 
     /**
      * @param Request $request
-     * @return LengthAwarePaginator<App\Models\Course>
+     * @return LengthAwarePaginator<Course>
      */
     public function getCourses(Request $request): LengthAwarePaginator
     {
