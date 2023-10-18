@@ -59,15 +59,20 @@
                                     <div class="media-body flex-grow-1">
                                         <div class="d-md-flex align-items-center mb-1">
                                             <div class="me-auto mb-4 mb-md-0">
-                                                <h5 class="text-white mb-1 fw-semi-bold">{{ $comment->user->full_name }} <span
-                                                        class="font-size-sm text-blue">{{'@' . $comment->user->username }}</span></h5>
-                                                <p class="font-size-sm font-italic">{{ format_time_difference($comment->created_at) }}</p>
+                                                <h5 class="text-white mb-1 fw-semi-bold">
+                                                    {{ $comment->user->profile?->full_name }}
+                                                    <span
+                                                        class="font-size-sm text-blue">{{ '@' . $comment->user->username }}</span>
+                                                </h5>
+                                                <p class="font-size-sm font-italic">
+                                                    {{ format_time_difference($comment->created_at) }}
+                                                </p>
                                             </div>
                                             @auth
                                                 @if (auth()->id() == $comment->user->id)
                                                     <div class="me-0 sidenav-right">
-                                                        <button class="btn" data-bs-toggle="dropdown" href="#" aria-haspopup="true"
-                                                            aria-expanded="false">
+                                                        <button class="btn" data-bs-toggle="dropdown" href="#"
+                                                            aria-haspopup="true" aria-expanded="false">
                                                             <i class="fa-solid fa-ellipsis-vertical"></i>
                                                         </button>
                                                         <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
@@ -89,7 +94,8 @@
                                         </div>
                                         <p class="mb-2 line-height-md">{{ $comment->content }}</p>
                                         <div class="mb-4">
-                                            <button class="btn fa-solid fa-reply btn-reply" data-parentId="{{ $comment->id }}"></button>Reply
+                                            <button class="btn fa-solid fa-reply btn-reply"
+                                                data-parentId="{{ $comment->id }}"></button>Reply
                                             <button class="btn fa-regular fa-flag"></button>Report (To Do)
                                         </div>
                                         @auth
@@ -104,35 +110,43 @@
                                                 </div>
                                             </div>
                                         @endauth
-                                        @if (count($comments->where("parent_id", $comment->id)) != 0)
+                                        @if (count($comments->where('parent_id', $comment->id)) != 0)
                                             <div class="mb-4">
-                                                <span class="show-reply {{ $comment->id }}" data-parentId="{{ $comment->id }}"><i class="fa-solid fa-chevron-down"></i>
-                                                    Show {{ count($comments->where("parent_id", $comment->id)) }} replys</span>
+                                                <span class="show-reply {{ $comment->id }}"
+                                                    data-parentId="{{ $comment->id }}"><i
+                                                        class="fa-solid fa-chevron-down"></i>
+                                                    Show {{ count($comments->where('parent_id', $comment->id)) }}
+                                                    replys</span>
                                             </div>
                                         @endif
                                     </div>
                                 </li>
-                                @if (count($comments->where("parent_id", $comment->id)) != 0)
+                                @if (count($comments->where('parent_id', $comment->id)) != 0)
                                     <div class="offset-1 col-md-11 media reply-wrap {{ $comment->id }}">
                                         @foreach ($comments as $childComment)
                                             @if ($childComment->parent_id == $comment->id)
                                                 <li class="d-flex">
                                                     <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
-                                                        <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
-                                                            class="avatar-img rounded-circle">
+                                                        <img src="{{ asset('assets/img/products/product-2.jpg') }}"
+                                                            alt="..." class="avatar-img rounded-circle">
                                                     </div>
                                                     <div class="media-body flex-grow-1">
                                                         <div class="d-md-flex align-items-center mb-1">
                                                             <div class="me-auto mb-4 mb-md-0">
-                                                                <h5 class="text-white mb-1 fw-semi-bold">{{ $childComment->user->full_name }} <span
-                                                                        class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span></h5>
-                                                                <p class="font-size-sm font-italic">{{ format_time_difference($childComment->created_at) }}</p>
+                                                                <h5 class="text-white mb-1 fw-semi-bold">
+                                                                    {{ $childComment->user->profile?->full_name }} <span
+                                                                        class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span>
+                                                                </h5>
+                                                                <p class="font-size-sm font-italic">
+                                                                    {{ format_time_difference($childComment->created_at) }}
+                                                                </p>
                                                             </div>
                                                             @auth
                                                                 @if (auth()->id() == $childComment->user->id)
                                                                     <div class="me-0 sidenav-right">
-                                                                        <button class="btn" data-bs-toggle="dropdown" href="#"
-                                                                            aria-haspopup="true" aria-expanded="false">
+                                                                        <button class="btn" data-bs-toggle="dropdown"
+                                                                            href="#" aria-haspopup="true"
+                                                                            aria-expanded="false">
                                                                             <i class="fa-solid fa-ellipsis-vertical"></i>
                                                                         </button>
                                                                         <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
@@ -143,7 +157,8 @@
                                                                                 </a>
                                                                             </li>
                                                                             <li class="dropdown-item">
-                                                                                <a class="dropdown-link text-alizarin" href="#">
+                                                                                <a class="dropdown-link text-alizarin"
+                                                                                    href="#">
                                                                                     Delete
                                                                                 </a>
                                                                             </li>
@@ -161,8 +176,10 @@
                                             @endif
                                         @endforeach
                                         <div class="md-6">
-                                            <span class="hide-reply {{ $comment->id }}" data-parentId="{{ $comment->id }}"><i class="fa-solid fa-chevron-up"></i> Hide
-                                                comments</span>
+                                            <span class="hide-reply {{ $comment->id }}"
+                                                data-parentId="{{ $comment->id }}">
+                                                <i class="fa-solid fa-chevron-up"></i> Hide comments
+                                            </span>
                                         </div>
                                     </div>
                                 @endif
@@ -254,7 +271,8 @@
                                 </div>
                                 @foreach ($topic->lessons as $lesson)
                                     <div id="Curriculumcollapse{{ $key }}" class="collapse show"
-                                        aria-labelledby="curriculumheading{{ $key }}" data-parent="#accordionCurriculum">
+                                        aria-labelledby="curriculumheading{{ $key }}"
+                                        data-parent="#accordionCurriculum">
 
                                         <div
                                             class="border-top px-5 border-color-20 py-4 min-height-70 d-md-flex align-items-center">
