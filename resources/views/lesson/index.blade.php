@@ -271,8 +271,7 @@
                                 </div>
                                 @foreach ($topic->lessons as $lesson)
                                     <div id="Curriculumcollapse{{ $key }}" class="collapse show"
-                                        aria-labelledby="curriculumheading{{ $key }}"
-                                        data-parent="#accordionCurriculum">
+                                        aria-labelledby="curriculumheading{{ $key }}" data-parent="#accordionCurriculum">
 
                                         <div
                                             class="border-top px-5 border-color-20 py-4 min-height-70 d-md-flex align-items-center">
