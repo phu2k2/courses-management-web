@@ -21,10 +21,12 @@ if (!function_exists('convert_to_short_form')) {
 if (!function_exists('convert_to_percent')) {
 
     /**
-     * @param mixed
-     * @return int
+     * Convert a numeric value in the range of 0 to 5 to a percentage in the range of 0% to 100%.
+     *
+     * @param float $number The numeric value to be converted.
+     * @return float The converted percentage value.
      */
-    function convert_to_percent($number): int
+    function convert_to_percent(float $number): float
     {
         return ($number / 5) * 100;
     }
