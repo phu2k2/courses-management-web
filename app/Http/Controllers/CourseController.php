@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\CourseService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
@@ -20,10 +21,10 @@ class CourseController extends Controller
     /**
      * @return View
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $courses = $this->courseService->getCourses();
-
+        $courses = $this->courseService->getCourses($request);
+        
         return view('course.index', compact('courses'));
     }
 
