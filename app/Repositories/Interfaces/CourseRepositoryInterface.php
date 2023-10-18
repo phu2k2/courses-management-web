@@ -9,9 +9,10 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface CourseRepositoryInterface extends RepositoryInterface
 {
     /**
+     * @param array $filters
      * @return LengthAwarePaginator<Model>
      */
-    public function getCourses(): LengthAwarePaginator;
+    public function getCourses(array $filters): LengthAwarePaginator;
 
     /**
      * @param int $id
