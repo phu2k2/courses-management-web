@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('carts', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+        Schema::table('profiles', function (Blueprint $table) {
+            $table->string('avatar')->nullable()->change();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('carts', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
+        Schema::table('profiles', function (Blueprint $table) {
+            $table->string('avatar')->change();
         });
     }
 };

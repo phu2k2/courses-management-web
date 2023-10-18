@@ -21,5 +21,12 @@
     "about": "About Us",
     "profile": "Profile",
     "logout": "Log Out",
-    "placeholder_search": "What do you want to learn?"
+    "placeholder_search": "What do you want to learn?",
+
+    "beginner_level": "Beginner",
+    "intermediate_level": "Intermediate",
+    "advanced_level": "Advanced",
+
+    "english_lang": "English",
+    "vietnamese_lang": "Vietnamese"
 }
