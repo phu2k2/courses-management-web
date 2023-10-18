@@ -73,7 +73,7 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
             });
         })
         ->when(isset($filters['sort']), function ($query) use ($filters) {
-            return $query->orderBy('courses.'.$filters['sort'], 'desc');
+            return $query->orderBy('courses.' . $filters['sort'], 'desc');
         })
         ->whereNull('categories.deleted_at')
         ->paginate(self::PAGESIZE);
