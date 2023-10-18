@@ -1,3 +1,4 @@
+@include('layouts.modal')
 <!-- NAVBAR
 ================================================== -->
 <header class="navbar navbar-expand-xl navbar-light bg-white border-bottom py-2 py-xl-4">
@@ -578,7 +579,7 @@
                             </a>
                         </li>
                         <li class="dropdown-item">
-                            <a class="dropdown-link" href="#">
+                            <a class="dropdown-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogout">
                                 {{ __('logout') }}
                             </a>
                         </li>
