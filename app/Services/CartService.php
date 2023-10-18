@@ -2,19 +2,30 @@
 
 namespace App\Services;
 
-use App\Repositories\CartRepository;
+use App\Repositories\Interfaces\CartRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 
 class CartService
 {
     /**
-     * @var CartRepository
+     * @var CartRepositoryInterface
      */
-    private $cartRepository;
+    protected $cartRepo;
 
-    public function __construct(CartRepository $cartRepository)
+    public function __construct(CartRepositoryInterface $cartRepo)
     {
-        $this->cartRepository = $cartRepository;
+        $this->cartRepo = $cartRepo;
+    }
+
+    /**
+     * Add courses into cart
+     * @param array $data
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function addToCart($data): Model
+    {
+        return $this->cartRepo->addToCart($data);
     }
 
     /**
@@ -23,6 +34,6 @@ class CartService
      */
     public function getCartByUser(int $id): Collection
     {
-        return $this->cartRepository->getCartByUser($id);
+        return $this->cartRepo->getCartByUser($id);
     }
 }

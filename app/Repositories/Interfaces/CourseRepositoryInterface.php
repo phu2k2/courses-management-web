@@ -13,10 +13,4 @@ interface CourseRepositoryInterface extends RepositoryInterface
      * @return LengthAwarePaginator<Model>
      */
     public function getCourses(array $filters): LengthAwarePaginator;
-
-    /**
-     * @param int $id
-     * @return Model
-     */
-    public function findOrFail(int $id): Model;
 }

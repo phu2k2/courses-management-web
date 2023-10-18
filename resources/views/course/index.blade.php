@@ -427,7 +427,7 @@
                         <div class="card border shadow p-2 lift sk-fade">
                             <!-- Image -->
                             <div class="card-zoom position-relative">
-                                <a href="course-single-v5.html" class="card-img sk-thumbnail d-block">
+                                <a href="{{ route('courses.show', ['course' => $course->id]) }}" class="card-img sk-thumbnail d-block">
                                     <img class="rounded shadow-light-lg" src="{{ $course->poster_url }}"
                                         alt="...">
                                 </a>
@@ -444,12 +444,12 @@
                                 </a>
 
                                 <!-- Preheading -->
-                                <a href="course-single-v5.html"><span
+                                <a href="{{ route('courses.show', ['course' => $course->id]) }}"><span
                                         class="mb-1 d-inline-block text-gray-800">{{ $course->name }}</span></a>
 
                                 <!-- Heading -->
                                 <div class="position-relative">
-                                    <a href="course-single-v5.html" class="d-block stretched-link">
+                                    <a href="{{ route('courses.show', ['course' => $course->id]) }}" class="d-block stretched-link">
                                         <h4 class="line-clamp-2 h-md-48 h-lg-58 me-md-6 me-lg-10 me-xl-4 mb-2">{{ $course->title }}</h4>
                                     </a>
 
@@ -517,19 +517,7 @@
                 <!-- PAGINATION ================================================== -->
                 <nav class="mb-11" aria-label="Page navigationa">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
-                            </a>
-                        </li>
+                        {!! $courses->links('pagination::bootstrap-4') !!}
                     </ul>
                 </nav>
             </div>
