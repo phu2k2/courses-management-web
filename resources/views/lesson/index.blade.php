@@ -308,16 +308,16 @@
                                 placeholder="Search item" aria-label="Search">
                         </div>
                     </form>
-                    @foreach ($topics as $topic)
+                    @foreach ($topics as $key => $topic)
                         <div id="accordionCurriculum" class="">
                             <div class="overflow-hidden bg-dark rounded mb-6">
-                                <div class="d-flex align-items-center" id="curriculumheadingOne">
+                                <div class="d-flex align-items-center" id="curriculumheading{{ $key }}">
                                     <h5 class="mb-0 w-100">
                                         <button
                                             class="d-flex align-items-center p-5 min-height-80 text-white fw-medium collapse-accordion-toggle line-height-one"
                                             type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#CurriculumcollapseOne" aria-expanded="true"
-                                            aria-controls="CurriculumcollapseOne">
+                                            data-bs-target="#Curriculumcollapse{{ $key }}" aria-expanded="true"
+                                            aria-controls="Curriculumcollapse{{ $key }}">
                                             <span class="me-4 text-white d-flex">
                                                 <!-- Icon -->
                                                 <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -337,8 +337,8 @@
                                     </h5>
                                 </div>
                                 @foreach ($topic->lessons as $lesson)
-                                    <div id="CurriculumcollapseOne" class="collapse show"
-                                        aria-labelledby="curriculumheadingOne" data-parent="#accordionCurriculum">
+                                    <div id="Curriculumcollapse{{ $key }}" class="collapse show"
+                                        aria-labelledby="curriculumheading{{ $key }}" data-parent="#accordionCurriculum">
 
                                         <div
                                             class="border-top px-5 border-color-20 py-4 min-height-70 d-md-flex align-items-center">
