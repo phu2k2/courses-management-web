@@ -95,6 +95,14 @@ class Course extends Model
     }
 
     /**
+     * @return HasMany<Review>
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'course_id');
+    }
+
+    /**
      * @return HasMany<Order>
      */
     public function orders(): HasMany
