@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\BadgeService;
 use App\Services\CartService;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -15,9 +16,15 @@ class CartController extends Controller
      */
     private $cartService;
 
-    public function __construct(CartService $cartService)
+    /**
+     * @var BadgeService
+     */
+    protected $badgeService;
+
+    public function __construct(CartService $cartService, BadgeService $badgeService)
     {
         $this->cartService = $cartService;
+        $this->badgeService = $badgeService;
     }
 
     /**
@@ -42,6 +49,8 @@ class CartController extends Controller
             $userId = (int) auth()->id();
             $this->cartService->addToCart($userId, $courseId);
             session()->flash('message', __('messages.user.success.create_cart'));
+            $cart = $this->badgeService->getCountCart($userId);
+            session()->put('cart', $cart);
         } catch (Exception $e) {
             session()->flash('error', __('messages.user.error.create_cart'));
         }

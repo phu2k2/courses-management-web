@@ -552,8 +552,10 @@
             </li>
             <li class="nav-item border-0 px-0">
                 <a href="#" class="nav-link d-flex px-3 px-md-4 position-relative text-secondary icon-xs">
-                    <span class="badge badge-alizarin rounded-circle fw-bold badge-float mt-n1 ms-n2 px-0 w-16"
-                        style="font-size: 8px;">2</span>
+                    @if (session()->has('cart'))
+                        <span class="badge badge-alizarin rounded-circle fw-bold badge-float mt-n1 ms-n2 px-0 w-16" id="badgeCart"
+                        style="font-size: 8px;">{{ session()->get('cart') }}</span>
+                    @endif
                     <!-- Icon -->
                     <svg width="13" height="15" viewBox="0 0 13 15" xmlns="http://www.w3.org/2000/svg">
                         <path
