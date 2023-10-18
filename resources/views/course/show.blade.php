@@ -17,24 +17,7 @@
     <div class="container">
         <div class="row mb-8">
             <div class="col-lg-8 mb-6 mb-lg-0 position-relative">
-                @if (session()->has('message'))
-                    <div class="notification-toast toast-success">
-                        <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
-                        <span
-                            class="alert-text"><strong>{{ __('success') }}</strong><br>{{ session()->get('message') }}</span>
-                        <button type="button" class="btn-close" aria-label="Close"></button>
-                    </div>
-                @endif
-
-                @if (session()->has('error'))
-                    <div class="notification-toast toast-error">
-                        <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
-                        <span
-                            class="alert-text"><strong>{{ __('error') }}</strong><br>{{ session()->get('error') }}</span>
-                        <button type="button" class="btn-close" aria-label="Close"></button>
-                    </div>
-                @endif
-
+                @include('layouts.message')
                 <div class="course-single-white">
                     <h1 class="me-xl-14 text-white">
                         {{ $course->title }}
@@ -74,7 +57,8 @@
                             </div>
 
                             <div class="font-size-sm ms-lg-3 text-white">
-                                <span>{{ $course->average_rating }} ({{ convert_to_short_form($course->num_reviews) }} reviews)</span>
+                                <span>{{ $course->average_rating }} ({{ convert_to_short_form($course->num_reviews) }}
+                                    reviews)</span>
                             </div>
                         </div>
                     </div>
@@ -587,10 +571,8 @@
                         <form action="{{ route('carts.store') }}" method="POST">
                             @csrf
                             <input type = "hidden" name="course_id" value = "{{ $course->id }}">
-                            <button class="btn btn-orange btn-block mb-6" type="submit" name="button">ADD TO
-                                CART</button>
+                            <button class="btn btn-orange btn-block mb-6" type="submit" name="button">ADD TO CART</button>
                         </form>
-
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex align-items-center py-3">
                                 <div class="text-secondary d-flex icon-uxs">
