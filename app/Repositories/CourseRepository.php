@@ -18,62 +18,38 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     }
 
     /**
+     * Retrieve a paginated list of courses based on the provided filters.
+     *
      * @param array $filters
-     * @return LengthAwarePaginator<Model>
+     * @return LengthAwarePaginator<Course>
      */
-    public function getCourses($filters): LengthAwarePaginator
+    public function getCourses(array $filters): LengthAwarePaginator
     {
         return Course::query()
         ->join('categories', 'courses.category_id', '=', 'categories.id')
         ->when(isset($filters['search']), function ($query) use ($filters) {
-            $searchTerm = $filters['search'];
-            return $query->where(function ($query) use ($searchTerm) {
-                $query->where('title', 'like', "%$searchTerm%")
-                    ->orWhere('description', 'like', "%$searchTerm%");
-            });
+            $query->filterBySearchTerm($filters['search']);
         })
         ->when(isset($filters['category']), function ($query) use ($filters) {
-            $query->whereIn('categories.name', $filters['category']);
+            $query->filterByCategory($filters['category']);
         })
         ->when(isset($filters['rating']), function ($query) use ($filters) {
-            $query->where('average_rating', '>=', $filters['rating']);
+            $query->filterByRating($filters['rating']);
         })
         ->when(isset($filters['language']), function ($query) use ($filters) {
-            $query->whereIn('languages', $filters['language']);
+            $query->filterByLanguage($filters['language']);
         })
         ->when(isset($filters['level']), function ($query) use ($filters) {
-            $query->whereIn('level', $filters['level']);
+            $query->filterByLevel($filters['level']);
         })
         ->when(isset($filters['price']), function ($query) use ($filters) {
-            if ($filters['price'] === 'free') {
-                return $query->where('price', 0);
-            } elseif ($filters['price'] === 'paid') {
-                return $query->where('price', '>', 0);
-            }
+            $query->filterByPrice($filters['price']);
         })
         ->when(isset($filters['duration']), function ($query) use ($filters) {
-            $durations = $filters['duration'];
-
-            return $query->where(function ($query) use ($durations) {
-                if (in_array('extraShort', $durations)) {
-                    $query->orWhereBetween('total_time', [0, 1]);
-                }
-                if (in_array('short', $durations)) {
-                    $query->orWhereBetween('total_time', [1, 3]);
-                }
-                if (in_array('medium', $durations)) {
-                    $query->orWhereBetween('total_time', [3, 6]);
-                }
-                if (in_array('long', $durations)) {
-                    $query->orWhereBetween('total_time', [6, 17]);
-                }
-                if (in_array('extraLong', $durations)) {
-                    $query->orWhere('total_time', '>', 17);
-                }
-            });
+            $query->filterByDuration($filters['duration']);
         })
         ->when(isset($filters['sort']), function ($query) use ($filters) {
-            return $query->orderBy('courses.' . $filters['sort'], 'desc');
+            $query->filterBySort($filters['sort']);
         })
         ->whereNull('categories.deleted_at')
         ->paginate(self::PAGESIZE);

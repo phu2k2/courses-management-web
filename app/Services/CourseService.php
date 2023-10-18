@@ -36,7 +36,7 @@ class CourseService
     {
         $filters = $request->all();
 
-        $validSortOptions = ['num_reviewed', 'total_students', 'average_rating', 'created_at'];
+        $validSortOptions = ['num_reviews', 'total_students', 'average_rating', 'created_at'];
 
         if (isset($filters['sort']) && !in_array($filters['sort'], $validSortOptions)) {
             $filters['sort'] = 'created_at';
