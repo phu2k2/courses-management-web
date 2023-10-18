@@ -1,4 +1,4 @@
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $(".reply-comment").hide();
     $(".btn-reply").on("click", function () {
         var parentId = $(this).attr('data-parentId');

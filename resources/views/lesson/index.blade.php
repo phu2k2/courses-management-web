@@ -2,8 +2,7 @@
 @section('title', 'Lesson: ' . $lesson->title)
 
 @section('script')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="{{ asset('assets/js/comment.js') }}"></script>
+    <script type="module" src="{{ asset('assets/js/comment.js') }}"></script>
 @endsection
 @section('content')
     <!-- COURSE ================================================== -->
