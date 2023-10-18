@@ -48,6 +48,22 @@ class User extends Authenticatable
     }
 
     /**
+     * @return HasMany<Order>
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'user_id');
+    }
+
+    /**
+     * @return HasMany<Enrollment>
+     */
+    public function enrollments(): HasMany
+    {
+        return $this->hasMany(Enrollment::class, 'user_id');
+    }
+
+    /**
      * @return HasMany<Comment>
      */
     public function comments(): HasMany
