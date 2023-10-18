@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Repositories\CourseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use App\Repositories\CartRepository;
+use App\Repositories\CommentRepository;
 use App\Repositories\Interfaces\CartRepositoryInterface;
+use App\Repositories\Interfaces\CommentRepositoryInterface;
 use App\Repositories\Interfaces\LessonRepositoryInterface;
 use App\Repositories\Interfaces\ProfileRepositoryInterface;
 use App\Repositories\Interfaces\TopicRepositoryInterface;
@@ -16,6 +18,9 @@ use App\Repositories\TopicRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -54,6 +59,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             CartRepositoryInterface::class,
             CartRepository::class
+        );
+
+        $this->app->singleton(
+            CommentRepositoryInterface::class,
+            CommentRepository::class
         );
     }
 
