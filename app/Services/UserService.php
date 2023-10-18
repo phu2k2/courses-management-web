@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
+use AmazonS3;
+use App\Helpers\AmazonS3 as HelpersAmazonS3;
 
 class UserService
 {
@@ -31,6 +33,17 @@ class UserService
         $this->userRepository->create($attribute);
     }
 
+     /**
+     * Gennerate presigned upload url has expried time.
+     *
+     * @param string $path of image
+     * @return string
+     */
+    public function getImageFromMinio(string $path)
+    {
+        return AmazonS3::getObjectUrl($path);
+    }
+
     /**
      * @param mixed $userId
      *
@@ -38,7 +51,10 @@ class UserService
      */
     public function getInfor($userId)
     {
-        return $this->userRepository->getInfor($userId);
+        $user = $this->userRepository->getInfor($userId);
+        $user->profile->avatar = $this->getImageFromMinio($user->profile->avatar);
+
+        return $user;
     }
 
     /**
