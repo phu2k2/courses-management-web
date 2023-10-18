@@ -17,8 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('course_id');
             $table->decimal('rating', 2, 1);
             $table->text('review', 500);
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->unique(['user_id', 'course_id']);
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('course_id')->references('id')->on('courses');
