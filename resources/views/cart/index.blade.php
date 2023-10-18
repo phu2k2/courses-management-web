@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'cart')
 @section('script')
-    <script type="module" src="{{ asset('assets/js/cart.js') }}"></script>
     <script src="{{ asset('assets/js/checkbox.js') }}"></script>
 @endsection
 @section('content')
@@ -25,7 +24,7 @@
         <img class="d-none img-fluid" src="...html" alt="...">
     </header>
     <!-- SHOP CART
-                                                        ================================================== -->
+                                                                                                        ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             <div id="primary" class="content-area">
@@ -41,11 +40,11 @@
                                     <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents">
                                         <thead>
                                             <tr>
-                                                <th class=""> <input type="checkbox" id="checkAll"> Select All
                                                 <th>
                                                     <div class="form-check">
                                                         <input class="form-check-input header-checkbox" type="checkbox"
                                                             onchange="handleCheckboxClick()">
+                                                        Select All
                                                     </div>
                                                 </th>
                                                 <th class="product-name">Product</th>
@@ -56,7 +55,9 @@
                                         </thead>
 
                                         <tbody>
-
+                                            @php
+                                                $total = 0;
+                                            @endphp
                                             @foreach ($cart as $item)
                                                 @php
                                                     $total = 0;
@@ -65,13 +66,11 @@
                                                 @endphp
                                                 <tr class="woocommerce-cart-form__cart-item cart_item">
                                                     <td class="">
-                                                        <input name='ids[]' type="checkbox" id="checkItem"
-                                                            value="{{ $item->course->id }}">
-                                                    <td>
                                                         <div class="form-check">
                                                             <input class="form-check-input flexCheckDefault" type="checkbox"
                                                                 data-price="{{ $discountedPrice }}"
-                                                                onchange="calculateTotal()">
+                                                                onchange="calculateTotal()" name='ids[]' type="checkbox"
+                                                                id="checkItem" value="{{ $item->course->id }}">
                                                         </div>
                                                     </td>
                                                     <td class="product-name" data-title="Product">
