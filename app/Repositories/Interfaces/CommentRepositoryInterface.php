@@ -12,5 +12,5 @@ interface CommentRepositoryInterface extends RepositoryInterface
      *
      * @return Collection
      */
-    public function getCommentsByLessonId($lessonId): Collection;
+    public function getByLesson($lessonId): Collection;
 }

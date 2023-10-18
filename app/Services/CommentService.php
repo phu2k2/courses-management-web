@@ -22,8 +22,8 @@ class CommentService
      *
      * @return Collection
      */
-    public function getCommentsByLessonId($lessonId): Collection
+    public function getByLesson($lessonId): Collection
     {
-        return $this->commentRepo->getCommentsByLessonId($lessonId);
+        return $this->commentRepo->getByLesson($lessonId);
     }
 }

@@ -52,8 +52,8 @@ class LessonController extends Controller
         $course = $this->courseService->findCourse($courseId);
         $lesson = $this->lessonService->findLesson($lessonId);
         $topics = $this->topicService->getTopicsWithLessons($courseId);
-        $comments = $this->commentService->getCommentsByLessonId($lessonId);
+        $comments = $this->commentService->getByLesson($lessonId);
 
-        return view('lesson.index', compact('course', 'lesson', 'topics'));
+        return view('lesson.index', compact('course', 'lesson', 'topics', 'comments'));
     }
 }
