@@ -134,7 +134,7 @@
                     //save image to minio server
                     await axios.put(url, selectedFile, {
                         headers: {
-                            'Content-Type': 'application/image/jpeg',
+                            'Content-Type': 'image/jpeg',
                         },
                     });
 
