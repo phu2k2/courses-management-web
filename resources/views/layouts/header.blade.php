@@ -552,7 +552,7 @@
             </li>
             <li class="nav-item border-0 px-0">
                 <a href="#" class="nav-link d-flex px-3 px-md-4 position-relative text-secondary icon-xs">
-                    @if (session()->has('cart'))
+                    @if (session('cart') > 0)
                         <span class="badge badge-alizarin rounded-circle fw-bold badge-float mt-n1 ms-n2 px-0 w-16" id="badgeCart"
                         style="font-size: 8px;">{{ session()->get('cart') }}</span>
                     @endif
