@@ -96,6 +96,30 @@ class Course extends Model
     }
 
     /**
+     * @return HasMany<Review>
+    */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'course_id');
+    }
+
+    /**
+     * @return HasMany<Order>
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'course_id', 'id');
+    }
+
+    /**
+     * @return HasMany<Enrollment>
+     */
+    public function enrollments(): HasMany
+    {
+        return $this->hasMany(Enrollment::class, 'course_id', 'id');
+    }
+
+        /**
      * Scope the query to filter courses by category.
      *
      * @param  Builder  $query
@@ -104,7 +128,7 @@ class Course extends Model
      */
     public function scopeFilterByCategory(Builder $query, array $category): Builder
     {
-        return $query->whereIn('categories.name', $category);
+        return $query->whereIn('category_id', $category);
     }
 
     /**
@@ -118,7 +142,8 @@ class Course extends Model
     {
         return $query->where(function (Builder $query) use ($searchTerm) {
             $query->where('title', 'like', "%$searchTerm%")
-                ->orWhere('description', 'like', "%$searchTerm%");
+                ->orWhere('description', 'like', "%$searchTerm%")
+                ->orWhere('learns_description', 'like', "%$searchTerm%");
         });
     }
 

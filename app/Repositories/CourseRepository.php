@@ -25,8 +25,7 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      */
     public function getCourses(array $filters): LengthAwarePaginator
     {
-        return Course::query()
-        ->join('categories', 'courses.category_id', '=', 'categories.id')
+        return Course::with('category')
         ->when(isset($filters['search']), function ($query) use ($filters) {
             $query->filterBySearchTerm($filters['search']);
         })
@@ -51,7 +50,6 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
         ->when(isset($filters['sort']), function ($query) use ($filters) {
             $query->filterBySort($filters['sort']);
         })
-        ->whereNull('categories.deleted_at')
         ->paginate(self::PAGESIZE);
     }
 
