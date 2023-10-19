@@ -67,12 +67,12 @@ class CartController extends Controller
      */
     public function deleteMutilCarts(Request $request)
     {
-        $ids = $request->all();
-        session()->flash('message', __('messages.user.success.create_cart'));
-        if (!$this->cartService->deleteMultipleCart($ids)) {
-            session()->forget('message');
-            session()->flash('error', __('messages.user.error.create_cart'));
+        $ids = explode(',', $request->selected_items);
+        if ($this->cartService->deleteMultipleCart($ids)) {
+            session()->flash('message', __('messages.cart.success.delete'));
+            return redirect()->back();
         }
+        session()->flash('message', __('messages.cart.error.delete'));
 
         return redirect()->back();
     }

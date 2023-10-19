@@ -45,13 +45,11 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     }
 
     /**
-     * @param array $id
+     * @param mixed $id
      * @return bool
      */
     public function deleteMultiple($id)
     {
-        $ids = Arr::get($id, 'ids', []);
-
-        return $this->model->whereIn('course_id', $ids)->delete();
+        return $this->model->whereIn('id', $id)->delete();
     }
 }

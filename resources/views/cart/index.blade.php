@@ -10,8 +10,9 @@
     <script src="{{ asset('assets/js/toast.js') }}"></script>
 @endsection
 @section('content')
-    <form action="#" method="post">
+    <form class="woocommerce-cart-form table-responsive" action="{{ route('carts.delete-cart') }}" method="post">
         @csrf
+        @method('DELETE')
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -51,13 +52,12 @@
         @include('layouts.message')
     </header>
     <!-- SHOP CART
-                                                                                                                ================================================== -->
+                                                                                                                                                                    ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             <div id="primary" class="content-area">
                 <main id="main" class="site-main ">
                     <div class="page type-page status-publish hentry">
-                        <!-- .entry-header -->
                         <div class="entry-content">
                             <div class="woocommerce">
                                 <div class="woocommerce-cart-form table-responsive">
@@ -93,8 +93,9 @@
                                                             <div class="form-check">
                                                                 <input class="form-check-input flexCheckDefault"
                                                                     type="checkbox" data-price="{{ $discountedPrice }}"
-                                                                    data-id="{{ $item->course->title }}"
-                                                                    onchange="calculateTotal()">
+                                                                    data-id="{{ $item->id }}"
+                                                                    onchange="calculateTotal()" name='ids[]'
+                                                                    id="checkItem" value="{{ $item->id }}">
                                                             </div>
                                                         </td>
                                                         <td class="product-name" data-title="Product">
@@ -154,11 +155,15 @@
                                                         <input class="button" data-bs-toggle="modal"
                                                             data-bs-target="#exampleModal" value="Delete cart"
                                                             onclick="handleDeleteButtonClick()">
+                                                        <input class="button" type="submit" name="submit"
+                                                            value="Remove All Cart"
+                                                            onclick="return confirm('Are you sure you want to delete?')" />
                                                     </td>
                                                 </tr>
                                             @else
                                                 <tr>
                                                     <td colspan="5" class="text-center">Empty courses!</td>
+
                                                 </tr>
                                             @endif
                                         </tbody>

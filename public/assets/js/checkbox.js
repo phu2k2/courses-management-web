@@ -38,3 +38,7 @@ function handleDeleteButtonClick() {
     });
     document.getElementById('selectedItemsInput').value = idsString;
 }
+
+setTimeout(() => {
+    $(".notification-toast").hide();
+}, 2000);

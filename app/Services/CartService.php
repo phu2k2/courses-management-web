@@ -49,7 +49,7 @@ class CartService
     }
 
     /**
-     * @param array $id
+     * @param mixed $id
      * @return bool
      */
     public function deleteMultipleCart($id)
