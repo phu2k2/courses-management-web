@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('course_id');
-            $table->decimal('rating', 2, 1);
-            $table->text('review', 500);
+            $table->unique(['user_id', 'course_id']);
+            $table->string('title');
+            $table->string('brief');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->unique(['user_id', 'course_id']);
-
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('course_id')->references('id')->on('courses');
         });
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('enrollments');
     }
 };
