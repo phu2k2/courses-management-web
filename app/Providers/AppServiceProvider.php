@@ -50,10 +50,9 @@ class AppServiceProvider extends ServiceProvider
             ProfileRepositoryInterface::class,
             ProfileRepository::class,
         );
-
         $this->app->singleton(
             CartRepositoryInterface::class,
-            CartRepository::class
+            CartRepository::class,
         );
 
         $this->app->singleton('AmazonS3', function () {
