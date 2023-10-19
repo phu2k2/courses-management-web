@@ -101,4 +101,20 @@ class Course extends Model
     {
         return $this->hasMany(Review::class, 'course_id');
     }
+
+    /**
+     * @return HasMany<Order>
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'course_id', 'id');
+    }
+
+    /**
+     * @return HasMany<Enrollment>
+     */
+    public function enrollments(): HasMany
+    {
+        return $this->hasMany(Enrollment::class, 'course_id', 'id');
+    }
 }

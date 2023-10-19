@@ -1,7 +1,11 @@
 @extends('layouts.app')
-
 @section('title', 'Course: ' . $course->title)
-
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
+@endsection
+@section('script')
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
+@endsection
 @section('content')
     <!-- PAGE HEADER ================================================== -->
     <div class="position-relative pt-8 pt-xl-11">
@@ -13,6 +17,7 @@
     <div class="container">
         <div class="row mb-8">
             <div class="col-lg-8 mb-6 mb-lg-0 position-relative">
+                @include('layouts.message')
                 <div class="course-single-white">
                     <h1 class="me-xl-14 text-white">
                         {{ $course->title }}
@@ -52,7 +57,8 @@
                             </div>
 
                             <div class="font-size-sm ms-lg-3 text-white">
-                                <span>{{ $course->average_rating }} ({{ convert_to_short_form($course->num_reviews) }} reviews)</span>
+                                <span>{{ $course->average_rating }} ({{ convert_to_short_form($course->num_reviews) }}
+                                    reviews)</span>
                             </div>
                         </div>
                     </div>
@@ -561,8 +567,11 @@
                         </div>
 
                         <button class="btn btn-primary btn-block mb-3" type="button" name="button">BUY NOW</button>
-                        <button class="btn btn-orange btn-block mb-6" type="button" name="button">ADD TO CART</button>
-
+                        <form action="{{ route('carts.store') }}" method="POST">
+                            @csrf
+                            <input type = "hidden" name="course_id" value = "{{ $course->id }}">
+                            <button class="btn btn-orange btn-block mb-6" type="submit" name="button">ADD TO CART</button>
+                        </form>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex align-items-center py-3">
                                 <div class="text-secondary d-flex icon-uxs">
