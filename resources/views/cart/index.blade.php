@@ -11,9 +11,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Do you want to delete</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <h5 class="modal-title" id="exampleModalLabel">Do you want to delete ?</h5>
                         </button>
                     </div>
                     <div class="modal-body delete_item">
@@ -47,7 +45,7 @@
         <img class="d-none img-fluid" src="...html" alt="...">
     </header>
     <!-- SHOP CART
-                                                            ================================================== -->
+                                                                ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             <div id="primary" class="content-area">
