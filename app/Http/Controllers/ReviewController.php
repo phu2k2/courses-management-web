@@ -32,9 +32,9 @@ class ReviewController extends Controller
             $request->validated()
         );
 
-        session()->flash('success', __('messages.user.success.create_review'));
+        session()->flash('message', __('messages.user.success.create_review'));
         if (!$this->reviewService->addReview($data)) {
-            session()->forget('success');
+            session()->forget('message');
             session()->flash('error', __('messages.user.error.create_review'));
         }
 
