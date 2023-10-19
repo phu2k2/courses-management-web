@@ -16,15 +16,9 @@ class CartController extends Controller
      */
     private $cartService;
 
-    /**
-     * @var BadgeService
-     */
-    protected $badgeService;
-
-    public function __construct(CartService $cartService, BadgeService $badgeService)
+    public function __construct(CartService $cartService)
     {
         $this->cartService = $cartService;
-        $this->badgeService = $badgeService;
     }
 
     /**
@@ -48,8 +42,6 @@ class CartController extends Controller
             $userId = (int) auth()->id();
             $this->cartService->addToCart($userId, $courseId);
             session()->flash('message', __('messages.user.success.create_cart'));
-            $cart = $this->badgeService->getCountCart($userId);
-            session()->put('cart', $cart);
         } catch (Exception $e) {
             session()->flash('error', __('messages.user.error.create_cart'));
         }
@@ -64,8 +56,6 @@ class CartController extends Controller
     public function destroy(int $id): RedirectResponse
     {
         if ($this->cartService->deleteCart($id)) {
-            $cart = $this->badgeService->getCountCart((int) auth()->id());
-            session()->put('cart', $cart);
             session()->flash('message', __('messages.cart.success.delete'));
             return redirect()->back();
         }
