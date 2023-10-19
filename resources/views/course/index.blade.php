@@ -445,7 +445,7 @@
 
                                 <!-- Preheading -->
                                 <a href="{{ route('courses.show', ['course' => $course->id]) }}"><span
-                                        class="mb-1 d-inline-block text-gray-800">{{ $course->name }}</span></a>
+                                        class="mb-1 d-inline-block text-gray-800">{{ $course->category->name }}</span></a>
 
                                 <!-- Heading -->
                                 <div class="position-relative">

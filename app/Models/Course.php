@@ -104,7 +104,7 @@ class Course extends Model
      */
     public function scopeFilterByCategory(Builder $query, array $category): Builder
     {
-        return $query->whereIn('categories.name', $category);
+        return $query->whereIn('category_id', $category);
     }
 
     /**
@@ -118,7 +118,8 @@ class Course extends Model
     {
         return $query->where(function (Builder $query) use ($searchTerm) {
             $query->where('title', 'like', "%$searchTerm%")
-                ->orWhere('description', 'like', "%$searchTerm%");
+                ->orWhere('description', 'like', "%$searchTerm%")
+                ->orWhere('learns_description', 'like', "%$searchTerm%");
         });
     }
 
