@@ -25,7 +25,7 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      */
     public function getCourses(array $filters): LengthAwarePaginator
     {
-        return $this->model->with('category')
+        return Course::with('category')
         ->when(isset($filters['search']), function ($query) use ($filters) {
             $query->filterBySearchTerm($filters['search']);
         })
