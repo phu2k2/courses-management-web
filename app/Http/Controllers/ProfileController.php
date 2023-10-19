@@ -8,7 +8,7 @@ use App\Services\UserService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use AmazonS3;
+use S3;
 
 class ProfileController extends Controller
 {
@@ -75,6 +75,6 @@ class ProfileController extends Controller
         $userId = auth()->id();
         $path = "profile/{$userId}/avatar.jpg";
 
-        return response()->json(['url' => AmazonS3::getPreSignedUploadUrl($path)]);
+        return response()->json(['url' => S3::getPreSignedUploadUrl($path)]);
     }
 }
