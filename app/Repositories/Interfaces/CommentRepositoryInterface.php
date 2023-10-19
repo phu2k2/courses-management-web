@@ -15,9 +15,9 @@ interface CommentRepositoryInterface extends RepositoryInterface
     public function getByLesson($lessonId): Collection;
 
     /**
-     * @param int $parentId
+     * @param int $id
      *
      * @return int|bool
      */
-    public function destroyByParentId($parentId);
+    public function destroy($id);
 }

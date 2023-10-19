@@ -27,12 +27,12 @@ class CommentRepository extends BaseRepository implements CommentRepositoryInter
     }
 
     /**
-     * @param int $parentId
+     * @param int $id
      *
      * @return int|bool
      */
-    public function destroyByParentId($parentId)
+    public function destroy($id)
     {
-        return $this->model->where('parent_id', $parentId)->delete();
+        return $this->model->where('id', $id)->orWhere('parent_id', $id)->delete();
     }
 }

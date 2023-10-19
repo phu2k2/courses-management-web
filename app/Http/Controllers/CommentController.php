@@ -26,15 +26,11 @@ class CommentController extends Controller
     public function destroy(DeleteCommentRequest $request): RedirectResponse
     {
         $commentId = $request->id;
-        $comment = $this->commentService->getComment($commentId);
-        if ($comment) {
-            $this->commentService->destroyByParentId($commentId);
-            if ($this->commentService->delete($commentId)) {
-                session()->flash('message', __('messages.comment.success.delete'));
-                return redirect()->back();
-            }
-            session()->flash('error', __('messages.comment.error.delete'));
+        if ($this->commentService->delete($commentId)) {
+            session()->flash('message', __('messages.comment.success.delete'));
+            return redirect()->back();
         }
+        session()->flash('error', __('messages.comment.error.delete'));
 
         return redirect()->back();
     }
