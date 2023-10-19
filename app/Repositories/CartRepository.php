@@ -45,7 +45,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     }
 
     /**
-     * @param mixed $id
+     * @param array $id
      * @return bool
      */
     public function deleteMultiple($id)
