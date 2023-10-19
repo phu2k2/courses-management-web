@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\BadgeService;
 use App\Services\CartService;
 use Exception;
 use Illuminate\Contracts\View\View;
