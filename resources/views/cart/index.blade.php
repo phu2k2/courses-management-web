@@ -3,6 +3,12 @@
 @section('script')
     <script src="{{ asset('assets/js/checkbox.js') }}"></script>
 @endsection
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
+@endsection
+@section('script')
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
+@endsection
 @section('content')
     <form action="#" method="post">
         @csrf
@@ -42,10 +48,10 @@
             </nav>
         </div>
         <!-- Img -->
-        <img class="d-none img-fluid" src="...html" alt="...">
+        @include('layouts.message')
     </header>
     <!-- SHOP CART
-                                                                ================================================== -->
+                                                                                                                ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             <div id="primary" class="content-area">
@@ -120,10 +126,18 @@
                                                             <!-- End Quantity -->
                                                         </td>
                                                         <td class="product-remove">
-                                                            <a href="#" class="remove btn btn-danger font-size-sm"
-                                                                aria-label="Remove this item">
-                                                                Delete
-                                                            </a>
+                                                            <form method="POST"
+                                                                action="{{ route('carts.destroy', $item->id) }}"
+                                                                onsubmit="return confirm('Are you sure you want to delete')">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $item->id }}">
+                                                                <button type="submit" class="btn btn-danger"
+                                                                    style="padding: 0.7rem 1.5rem">
+                                                                    Delete
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @endforeach
