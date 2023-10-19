@@ -31,6 +31,7 @@ Route::prefix('register')->name('register.')->group(function () {
     Route::get('show', [RegisterController::class, 'show'])->name('show');
     Route::post('store', [RegisterController::class, 'store'])->name('store');
 });
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile');
     Route::put('profile', [ProfileController::class, 'update'])->name('update');

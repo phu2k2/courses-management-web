@@ -10,12 +10,6 @@
                             <div class="container py-9">
                                 <div class="row gx-0">
                                     <div class="col-md-8 col-xl-4 py-5 px-5 mx-auto bg-white accordion-body rounded-3">
-                                        <!-- Success Notification -->
-                                        @if (session('status'))
-                                            <div class="alert alert-success">
-                                                {{ session('status') }}
-                                            </div>
-                                        @endif
                                         <!-- Login -->
                                         <h3 class="mb-6 text-center">{{ __('reset_title') }}</h3>
                                         <!-- Form Login -->

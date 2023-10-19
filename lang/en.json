@@ -15,6 +15,9 @@
     "register_label": "Already have an account?",
     "send_link_reset": "Send Password Reset Link",
 
+    "logout_label": "Do you really want to log out?",
+    "cancel": "Cancel",
+    "submit": "Submit",
 
     "home": "Home",
     "categories": "Categories",

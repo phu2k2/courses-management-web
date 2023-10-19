@@ -1,8 +1,16 @@
 @extends('layouts.app')
 @section('title', 'Forgot Password')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
+@endsection
+@section('script')
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
+@endsection
 @section('content')
     <section class="">
         <div class="flickity-button-outset-long flickity-page-dots-white flickity-page-dots-43">
+            <!-- Success Notification -->
+            @include('layouts.message')
             <div class="w-100">
                 <div class="py-10 overlay overlay-custom-left" style="background-image: url(/assets/img/covers/cover-16.jpg)">
                     <div class="container">
@@ -10,12 +18,7 @@
                             <div class="container py-9">
                                 <div class="row gx-0">
                                     <div class="col-md-8 col-xl-4 py-5 px-5 mx-auto bg-white accordion-body rounded-3">
-                                        <!-- Success Notification -->
-                                        @if (session('status'))
-                                            <div class="alert alert-success">
-                                                {{ session('status') }}
-                                            </div>
-                                        @endif
+
                                         <!-- Login -->
                                         <h3 class="mb-6 text-center">{{ __('forgot_title') }}</h3>
                                         <!-- Form Login -->
