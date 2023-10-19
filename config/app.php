@@ -184,7 +184,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
-        'S3' =>  App\Facades\S3Facade::class,
+        'AmazonS3' =>  App\Facades\S3Facade::class,
     ])->toArray(),
 
 ];
