@@ -19,8 +19,3 @@
         <button type="button" class="btn-close" aria-label="Close"></button>
     </div>
 @endif
-{{-- @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-@endif --}}
