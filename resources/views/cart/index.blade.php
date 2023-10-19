@@ -155,9 +155,6 @@
                                                         <input class="button" data-bs-toggle="modal"
                                                             data-bs-target="#exampleModal" value="Delete cart"
                                                             onclick="handleDeleteButtonClick()">
-                                                        <input class="button" type="submit" name="submit"
-                                                            value="Remove All Cart"
-                                                            onclick="return confirm('Are you sure you want to delete?')" />
                                                     </td>
                                                 </tr>
                                             @else
