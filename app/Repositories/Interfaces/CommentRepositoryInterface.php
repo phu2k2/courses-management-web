@@ -13,4 +13,11 @@ interface CommentRepositoryInterface extends RepositoryInterface
      * @return Collection
      */
     public function getByLesson($lessonId): Collection;
+
+    /**
+     * @param int $parentId
+     *
+     * @return int|bool
+     */
+    public function destroyByParentId($parentId);
 }

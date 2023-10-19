@@ -17,4 +17,18 @@ $(document).ready(function () {
         $(`.reply-wrap.${parentId}`).hide();
         $(`.show-reply.${parentId}`).show();
     })
+
+    $("a#commentId").bind("click", function () {
+        var commentId = $(this).attr("data-id");
+        $("#submitDelete").attr("data-id", `${commentId}`);
+    })
+
+    $("#submitDelete").on("click", function () {
+        var commentId = $(this).attr("data-id");
+        $(`#formDelete${commentId}`).trigger("submit");
+    })
+
+    setTimeout(() => {
+        $(".notification-toast").hide();
+    }, 2000);
 });

@@ -27,4 +27,12 @@ return [
             'delete' => 'Delete comment was failed',
         ],
     ],
+    'cart' => [
+        'success' => [
+            'delete' => 'successfully removed the course from the shopping cart',
+        ],
+        'error' => [
+            'delete' => 'Removing course from cart failed'
+        ]
+    ]
 ];

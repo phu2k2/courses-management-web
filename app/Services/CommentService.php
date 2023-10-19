@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\Interfaces\CommentRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class CommentService
 {
@@ -32,7 +33,7 @@ class CommentService
      *
      * @return Model
      */
-    public function getComment($id)
+    public function getComment($id): Model
     {
         return $this->commentRepo->findOrFail($id);
     }
@@ -45,5 +46,15 @@ class CommentService
     public function delete($id)
     {
         return $this->commentRepo->delete($id);
+    }
+
+    /**
+     * @param int $parentId
+     *
+     * @return int|bool
+     */
+    public function destroyByParentId($parentId)
+    {
+        return $this->commentRepo->destroyByParentId($parentId);
     }
 }

@@ -27,6 +27,7 @@
 </head>
 
 <body class="bg-dark">
+    @yield('modal')
     <!-- NAVBAR ================================================== -->
     <header class="bg-portgore py-3">
         <div class="px-5 px-lg-8 w-100">

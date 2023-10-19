@@ -25,4 +25,14 @@ class CommentRepository extends BaseRepository implements CommentRepositoryInter
     {
         return $this->model->with('user.profile')->where('lesson_id', $lessonId)->get();
     }
+
+    /**
+     * @param int $parentId
+     *
+     * @return int|bool
+     */
+    public function destroyByParentId($parentId)
+    {
+        return $this->model->where('parent_id', $parentId)->delete();
+    }
 }

@@ -1,12 +1,35 @@
 @extends('layouts.lesson')
 @section('title', 'Lesson: ' . $lesson->title)
-
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
+@endsection
 @section('script')
     <script type="module" src="{{ asset('assets/js/comment.js') }}"></script>
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
+@endsection
+@section('modal')
+    <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentModalLabel">Delete</h5>
+                    </button>
+                </div>
+                <div class="modal-body delete_item">
+                    Do you really want to delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" id="submitDelete" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('content')
     <!-- COURSE ================================================== -->
-
+    @include('layouts.message')
     <div class="container container-wd">
         <div class="row pt-8 pb-10">
             <div class="col-lg-8">
@@ -49,7 +72,7 @@
                 <h3 class="text-white mb-6">Comment</h3>
                 <ul class="list-unstyled pt-2">
                     @foreach ($comments as $comment)
-                        @if ($comment->parent_id == 0)
+                        @if (empty($comment->parent_id))
                             <div class="row-cols-md-12 mb-6">
                                 <li class="media d-flex">
                                     <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
@@ -64,32 +87,35 @@
                                                     <span class="font-size-sm text-blue">{{ '@' . $comment->user->username }}</span>
                                                 </h5>
                                                 <p class="font-size-sm font-italic">
-                                                    {{ format_time_difference($comment->created_at) }}
+                                                    {{ $comment->created_at->diffForHumans() }}
                                                 </p>
                                             </div>
-                                            @auth
-                                                @if (auth()->id() == $comment->user->id)
-                                                    <div class="me-0 sidenav-right">
-                                                        <button class="btn" data-bs-toggle="dropdown" href="#"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                                                        </button>
-                                                        <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
-                                                            aria-labelledby="navbarActionParent">
-                                                            <li class="dropdown-item">
-                                                                <a class="dropdown-link" href="#">
-                                                                    Edit
-                                                                </a>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <a class="dropdown-link text-alizarin" href="#">
+                                            @if (auth()->id() == $comment->user->id)
+                                                <div class="me-0 sidenav-right">
+                                                    <button class="btn" data-bs-toggle="dropdown" href="#"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
+                                                        aria-labelledby="navbarActionParent">
+                                                        <li class="dropdown-item">
+                                                            <a class="dropdown-link" href="#">
+                                                                Edit
+                                                            </a>
+                                                        </li>
+                                                        <li class="dropdown-item">
+                                                            <form id="formDelete{{ $comment->id }}" action="{{route('comments.destroy', ['comment' => $comment->id])}}" method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <input type="hidden" name="id" value="{{ $comment->id }}">
+                                                                <a class="dropdown-link text-alizarin" id="commentId" data-id="{{ $comment->id }}" href="#" data-bs-toggle="modal" data-bs-target="#commentModal">
                                                                     Delete
                                                                 </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                @endif
-                                            @endauth
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            @endif
                                         </div>
                                         <p class="mb-2 line-height-md">{{ $comment->content }}</p>
                                         <div class="mb-4">
@@ -109,18 +135,18 @@
                                                 </div>
                                             </div>
                                         @endauth
-                                        @if (count($comments->where('parent_id', $comment->id)) != 0)
+                                        @if ($comments->where('parent_id', $comment->id)->count() != 0)
                                             <div class="mb-4">
                                                 <span class="show-reply {{ $comment->id }}"
                                                     data-parentId="{{ $comment->id }}">
                                                     <i class="fa-solid fa-chevron-down"></i>
-                                                    Show {{ count($comments->where('parent_id', $comment->id)) }} replys
+                                                    Show {{ $comments->where('parent_id', $comment->id)->count() }} replys
                                                 </span>
                                             </div>
                                         @endif
                                     </div>
                                 </li>
-                                @if (count($comments->where('parent_id', $comment->id)) != 0)
+                                @if ($comments->where('parent_id', $comment->id)->count() != 0)
                                     <div class="offset-1 col-md-11 media reply-wrap {{ $comment->id }}">
                                         @foreach ($comments as $childComment)
                                             @if ($childComment->parent_id == $comment->id)
@@ -137,34 +163,36 @@
                                                                     <span class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span>
                                                                 </h5>
                                                                 <p class="font-size-sm font-italic">
-                                                                    {{ format_time_difference($childComment->created_at) }}
+                                                                    {{ $childComment->created_at->diffForHumans() }}
                                                                 </p>
                                                             </div>
-                                                            @auth
-                                                                @if (auth()->id() == $childComment->user->id)
-                                                                    <div class="me-0 sidenav-right">
-                                                                        <button class="btn" data-bs-toggle="dropdown"
-                                                                            href="#" aria-haspopup="true"
-                                                                            aria-expanded="false">
-                                                                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                                                                        </button>
-                                                                        <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
-                                                                            aria-labelledby="navbarAction">
-                                                                            <li class="dropdown-item">
-                                                                                <a class="dropdown-link" href="#">
-                                                                                    Edit
-                                                                                </a>
-                                                                            </li>
-                                                                            <li class="dropdown-item">
-                                                                                <a class="dropdown-link text-alizarin"
-                                                                                    href="#">
+                                                            @if (auth()->id() == $childComment->user->id)
+                                                                <div class="me-0 sidenav-right">
+                                                                    <button class="btn" data-bs-toggle="dropdown"
+                                                                        href="#" aria-haspopup="true"
+                                                                        aria-expanded="false">
+                                                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
+                                                                        aria-labelledby="navbarAction">
+                                                                        <li class="dropdown-item">
+                                                                            <a class="dropdown-link" href="#">
+                                                                                Edit
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="dropdown-item">
+                                                                            <form id="formDelete{{ $childComment->id }}" action="{{route('comments.destroy', ['comment' => $childComment->id])}}" method="post">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <input type="hidden" name="id" value="{{ $childComment->id }}">
+                                                                                <a class="dropdown-link text-alizarin" id="commentId" data-id="{{ $childComment->id }}" href="#" data-bs-toggle="modal" data-bs-target="#commentModal">
                                                                                     Delete
                                                                                 </a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                @endif
-                                                            @endauth
+                                                                            </form>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                         <p class="mb-2 line-height-md">{{ $childComment->content }}</p>
                                                         <div class="mb-4">
