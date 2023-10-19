@@ -1,7 +1,5 @@
 <?php
 
-use Carbon\Carbon;
-
 if (!function_exists('convert_to_short_form')) {
 
     /**
@@ -17,18 +15,5 @@ if (!function_exists('convert_to_short_form')) {
         }
 
         return number_format($number / 1000000, 1) . 'M';
-    }
-}
-
-if (!function_exists('format_time_difference')) {
-
-    /**
-     * @param Carbon $datetime
-     *
-     * @return string
-     */
-    function format_time_difference(Carbon $datetime)
-    {
-        return $datetime->diffForHumans();
     }
 }
