@@ -16,12 +16,4 @@ interface CartRepositoryInterface extends RepositoryInterface
      * @return bool
      */
     public function hasCourseInCart(int $userId, int $courseId): bool;
-
-    /**
-     * Delete a record by course id.
-     *
-     * @param int $id .
-     * @return bool True if the deletion was successful, false otherwise.
-     */
-    public function deleteCart($id);
 }

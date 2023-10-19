@@ -56,6 +56,6 @@ class CartService
      */
     public function deleteCart($id)
     {
-        return $this->cartRepo->deleteCart($id);
+        return $this->cartRepo->delete($id);
     }
 }

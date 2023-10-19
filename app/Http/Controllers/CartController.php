@@ -54,12 +54,11 @@ class CartController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
-        session()->flash('error', __('messages.cart.error.delete'));
         if ($this->cartService->deleteCart($id)) {
-            session()->forget('error');
-            session()->flash('success', __('messages.cart.success.delete'));
+            session()->flash('message', __('messages.cart.success.delete'));
+            return redirect()->back();
         }
-
+        session()->flash('error', __('messages.cart.error.delete'));
         return redirect()->back();
     }
 }
