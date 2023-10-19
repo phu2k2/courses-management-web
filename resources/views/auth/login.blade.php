@@ -20,6 +20,11 @@
                                                 </button>
                                             </div>
                                         @endif
+                                        @if (session('status'))
+                                            <div class="alert alert-success">
+                                                {{ session('status') }}
+                                            </div>
+                                        @endif
                                         @if (session()->has('error'))
                                             <div class="alert alert-alizarin alert-dismissible fade show" role="alert">
                                                 <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
