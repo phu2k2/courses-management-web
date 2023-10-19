@@ -27,7 +27,6 @@ class AmazonS3
      * Gennerate presigned url has expried time.
      *
      * @param string $objectKey The key of the object
-     * @param string $contentType
      * @param int $expiration The time at which the URL should expire(minutes).
      *
      * @return string
@@ -35,7 +34,8 @@ class AmazonS3
     public function getPreSignedUploadUrl(string $objectKey, int $expiration = self::EXPIRATION_TIME): string
     {
         return $this->client->temporaryUploadUrl(
-            $objectKey, now()->addMinutes($expiration)
+            $objectKey,
+            now()->addMinutes($expiration)
         )['url'];
     }
 
@@ -50,7 +50,8 @@ class AmazonS3
     public function getObjectUrl(string $objectKey, int $expiration = self::EXPIRATION_TIME): string
     {
         return $this->client->temporaryUrl(
-            $objectKey, now()->addMinutes($expiration)
+            $objectKey,
+            now()->addMinutes($expiration)
         );
     }
 }
