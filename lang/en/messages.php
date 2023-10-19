@@ -19,4 +19,12 @@ return [
             'update' => 'Update profile was fail'
         ],
     ],
+    'comment' => [
+        'success' => [
+            'delete' => 'Delete comment was successful',
+        ],
+        'error' => [
+            'delete' => 'Delete comment was failed',
+        ],
+    ],
 ];
