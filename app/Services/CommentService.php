@@ -33,7 +33,7 @@ class CommentService
      *
      * @return Model
      */
-    public function getComment($id): Model
+    public function getComment($id)
     {
         return $this->commentRepo->findOrFail($id);
     }
