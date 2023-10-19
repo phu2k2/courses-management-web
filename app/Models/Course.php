@@ -95,7 +95,7 @@ class Course extends Model
         return $this->hasMany(Cart::class, 'course_id', 'id');
     }
 
-    /** 
+    /**
      * @return HasMany<Review>
     */
     public function reviews(): HasMany
