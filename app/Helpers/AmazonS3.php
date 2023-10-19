@@ -32,7 +32,7 @@ class AmazonS3
      *
      * @return string
      */
-    public function getPreSignedUploadUrl(string $objectKey, string $contentType = 'image/jpeg', int $expiration = self::EXPIRATION_TIME): string
+    public function getPreSignedUploadUrl(string $objectKey, int $expiration = self::EXPIRATION_TIME): string
     {
         return $this->client->temporaryUploadUrl(
             $objectKey, now()->addMinutes($expiration)
