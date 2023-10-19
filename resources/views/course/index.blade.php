@@ -3,6 +3,9 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/libs/aos/dist/aos.css') }}">
 @endsection
+@section('script')
+    <script src="{{ asset('assets/js/courses.js') }}"></script>
+@endsection
 @section('content')
     <header class="py-8 py-lg-12 mb-8 overlay overlay-primary overlay-80"
         style="background-image: url({{ asset('assets/img/covers/cover-19.jpg')}} );">
@@ -35,21 +38,26 @@
                 <div class="mb-4 mb-lg-0 ms-lg-6">
                     <div class="border rounded d-flex align-items-center choices-label h-50p">
                         <span class="ps-5">Sort by:</span>
-                        <select
-                            class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end"
-                            data-choices>
-                            <option>Default</option>
-                            <option>New Courses</option>
-                            <option>Most Reviewed</option>
-                            <option>Highest Rated</option>
-                            <option>Highest Student</option>834
+                        <select id="sort-select" onchange="handleSortChange()" class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end" data-choices>
+                            <option value="default">Default</option>
+                            <option value="created_at">New Courses</option>
+                            <option value="num_reviews">Most Reviewed</option>
+                            <option value="average_rating">Highest Rated</option>
+                            <option value="total_students">Highest Student</option>
                         </select>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    @php
+        $selectedPrice = request('price', null);
+        $selectedDurations = request('duration', []);
+        $selectedRating = request('rating', null);
+        $selectedLevels = request('level',[]);
+        $selectedLanguages = request('language', []);
+    @endphp
     <!-- COURSE LIST V2 ================================================== -->
     <div class="container">
         <div class="row">
@@ -88,12 +96,14 @@
                             aria-labelledby="coursefilter1" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox list-checkbox-limit">
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="languagescustomcheck1" name="language[]" value="1">
+                                    <input type="checkbox" class="custom-control-input" id="languagescustomcheck1" name="language[]" 
+                                    value="1" @if(in_array('1', $selectedLanguages)) checked @endif>
                                     <label class="custom-control-label font-size-base" 
                                         for="languagescustomcheck1">English</label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="languagescustomcheck2" name="language[]" value="2">
+                                    <input type="checkbox" class="custom-control-input" id="languagescustomcheck2" name="language[]" 
+                                    value="2" @if(in_array('2', $selectedLanguages)) checked @endif>
                                     <label class="custom-control-label font-size-base"
                                         for="languagescustomcheck2">Vietnamese</label>
                                 </li>
@@ -144,7 +154,7 @@
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M8.80758 0C3.95121 0 0 3.95121 0 8.80758C0 13.6642 3.95121 17.6152 8.80758 17.6152C13.6642 17.6152 17.6152 13.6642 17.6152 8.80758C17.6152 3.95121 13.6642 0 8.80758 0ZM8.80758 15.9892C4.8477 15.9892 1.62602 12.7675 1.62602 8.80762C1.62602 4.84773 4.8477 1.62602 8.80758 1.62602C12.7675 1.62602 15.9891 4.8477 15.9891 8.80758C15.9891 12.7675 12.7675 15.9892 8.80758 15.9892Z"
-                                                    fill="currentColor" />
+                                                    fill="currentColor" />short
                                                 <path
                                                     d="M19.762 18.6121L15.1007 13.9509C14.7831 13.6332 14.2687 13.6332 13.9511 13.9509C13.6335 14.2682 13.6335 14.7831 13.9511 15.1005L18.6124 19.7617C18.7712 19.9205 18.9791 19.9999 19.1872 19.9999C19.395 19.9999 19.6032 19.9205 19.762 19.7617C20.0796 19.4444 20.0796 18.9295 19.762 18.6121Z"
                                                     fill="currentColor" />
@@ -156,7 +166,7 @@
                             </form>
                             @php
                                 $categoryGroups = [];
-                                foreach ($courses->groupBy('name') as $category => $group) {
+                                foreach ($courses->groupBy('category.name') as $category => $group) {
                                     $categoryGroups[$category] = $group->count();
                                 }
                             @endphp
@@ -199,25 +209,24 @@
                                 </button>
                             </h4>
                         </div>
-
                         <div id="coursefiltercollapse3" class="collapse  mt-n2 px-6 pb-6"
                             aria-labelledby="coursefilter3" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
                                 <li class="custom-control custom-radio">
                                     <input type="radio" id="pricecustomradio1" name="price"
-                                        class="custom-control-input" value ="all">
+                                        class="custom-control-input" value ="all" @if($selectedPrice == 'all') checked @endif>
                                     <label class="custom-control-label font-size-base" for="pricecustomradio1">All
                                         (18)</label>
                                 </li>
                                 <li class="custom-control custom-radio">
                                     <input type="radio" id="pricecustomradio2" name="price"
-                                        class="custom-control-input" value = "free">
+                                        class="custom-control-input" value = "free" @if($selectedPrice == 'free') checked @endif>
                                     <label class="custom-control-label font-size-base" for="pricecustomradio2">Free
                                         (3)</label>
                                 </li>
                                 <li class="custom-control custom-radio">
                                     <input type="radio" id="pricecustomradio3" name="price"
-                                        class="custom-control-input" value ="paid">
+                                        class="custom-control-input" value ="paid" @if($selectedPrice == 'paid') checked @endif>
                                     <label class="custom-control-label font-size-base" for="pricecustomradio3">Paid
                                         (15)</label>
                                 </li>
@@ -256,17 +265,20 @@
                             aria-labelledby="coursefilter4" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck1" name="level[]" value="1" >
+                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck1" name="level[]" 
+                                    value="1" @if(in_array('1', $selectedLevels)) checked @endif>
                                     <label class="custom-control-label font-size-base" for="levelcustomcheck1">Beginner
                                         (03)</label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck2" name="level[]" value="2" >
+                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck2" name="level[]" 
+                                    value="2" @if(in_array('2', $selectedLevels)) checked @endif>
                                     <label class="custom-control-label font-size-base"
                                         for="levelcustomcheck2">Intermediate (15)</label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck3" name="level[]" value="3" >
+                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck3" name="level[]" 
+                                    value="3" @if(in_array('3', $selectedLevels)) checked @endif>
                                     <label class="custom-control-label font-size-base" for="levelcustomcheck3">Advanced
                                         (126)</label>
                                 </li>
@@ -299,26 +311,31 @@
                         <div id="coursefiltercollapse4" class="collapse show mt-n2 px-6 pb-6" aria-labelledby="coursefilter4" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck1" name="duration[]" value="extraShort">
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck1" name="duration[]" 
+                                    value="extraShort" @if(in_array('extraShort', $selectedDurations)) checked @endif>
                                     <label class="custom-control-label font-size-base" for="durationcustomcheck1">0-1 Hours
                                         (03)</label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck2" name="duration[]" value="short">
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck2" name="duration[]" 
+                                    value="short" @if(in_array('short', $selectedDurations)) checked @endif>
                                     <label class="custom-control-label font-size-base" for="durationcustomcheck2">1-3 Hours (15)</label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck3" name="duration[]" value="medium">
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck3" name="duration[]"
+                                     value="medium" @if(in_array('medium', $selectedDurations)) checked @endif>
                                     <label class="custom-control-label font-size-base" for="durationcustomcheck3">3-6 Hours
                                         (126)</label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="ldurationcustomcheck4" name="duration[]" value="long">
+                                    <input type="checkbox" class="custom-control-input" id="ldurationcustomcheck4" name="duration[]"
+                                     value="long" @if(in_array('long', $selectedDurations)) checked @endif>
                                     <label class="custom-control-label font-size-base" for="ldurationcustomcheck4">6-17 Hours
                                         (126)</label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck5" name="duration[]" value="extraLong">
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck5" name="duration[]"
+                                     value="extraLong" @if(in_array('extraLong', $selectedDurations)) checked @endif>
                                     <label class="custom-control-label font-size-base" for="durationcustomcheck5">17+ Hours
                                         (126)</label>
                                 </li>
@@ -357,7 +374,8 @@
                             aria-labelledby="coursefilter5" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="ratingcustomradion1" name ="rating" value="4.5">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion1" name ="rating" 
+                                    value="4.5" @if($selectedRating == '4.5') checked @endif>
                                     <label class="custom-control-label font-size-base" for="ratingcustomradion1">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
@@ -371,7 +389,8 @@
                                     </label>
                                 </li>
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="ratingcustomradion2" name ="rating" value="4">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion2" name ="rating" 
+                                    value="4" @if($selectedRating == '4') checked @endif>
                                     <label class="custom-control-label font-size-base" for="ratingcustomradion2">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
@@ -385,7 +404,8 @@
                                     </label>
                                 </li>
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="ratingcustomradion3" name ="rating" value="3.5">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion3" name ="rating" 
+                                    value="3.5" @if($selectedRating == '3.5') checked @endif>
                                     <label class="custom-control-label font-size-base" for="ratingcustomradion3">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
@@ -399,7 +419,8 @@
                                     </label>
                                 </li>
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="ratingcustomradion4" name ="rating" value="3">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion4" name ="rating" 
+                                    value="3" @if($selectedPrice == '3') checked @endif>
                                     <label class="custom-control-label font-size-base" for="ratingcustomradion4">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
@@ -413,7 +434,8 @@
                                     </label>
                                 </li>
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="ratingcustomradion5" name ="rating" value="2.5">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion5" name ="rating" 
+                                    value="2.5" @if($selectedPrice == 'all') checked @endif>
                                     <label class="custom-control-label font-size-base" for="ratingcustomradion5">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
