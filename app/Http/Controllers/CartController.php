@@ -64,6 +64,8 @@ class CartController extends Controller
     public function destroy(int $id): RedirectResponse
     {
         if ($this->cartService->deleteCart($id)) {
+            $cart = $this->badgeService->getCountCart((int) auth()->id());
+            session()->put('cart', $cart);
             session()->flash('message', __('messages.cart.success.delete'));
             return redirect()->back();
         }
