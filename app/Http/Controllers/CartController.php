@@ -27,7 +27,6 @@ class CartController extends Controller
     public function index(): View
     {
         $cart = $this->cartService->getCartByUser((int)auth()->id());
-
         return view('cart.index', compact('cart'));
     }
 
@@ -49,10 +48,17 @@ class CartController extends Controller
     }
 
     /**
+     * @param int $id
+     * Remove the specified resource from storage.
      * @return RedirectResponse
      */
-    public function destroy()
+    public function destroy(int $id): RedirectResponse
     {
+        if ($this->cartService->deleteCart($id)) {
+            session()->flash('message', __('messages.cart.success.delete'));
+            return redirect()->back();
+        }
+        session()->flash('error', __('messages.cart.error.delete'));
         return redirect()->back();
     }
 
