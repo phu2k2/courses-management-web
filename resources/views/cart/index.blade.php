@@ -24,12 +24,12 @@
         <img class="d-none img-fluid" src="...html" alt="...">
     </header>
     <!-- SHOP CART
-                                                                                                ================================================== -->
+                                                                                                        ================================================== -->
     <div class="container pb-6 pb-xl-10">
-        @if (session()->has('message'))
+        @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                <span class="alert-text"><strong>Success!</strong> {{ session()->get('message') }}</span>
+                <span class="alert-text"><strong>Success!</strong> {{ session()->get('success') }}</span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif
@@ -118,7 +118,7 @@
                                                         onsubmit="return confirm('Are you sure you want to delete')">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <input style="display: none" name="id"
+                                                        <input type="hidden" name="id"
                                                             value="{{ $item->course->id }}">
                                                         <button type="submit" class="btn btn-danger"
                                                             style="padding: 0.7rem 1.5rem">
