@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Filesystem\AwsS3V3Adapter;
+use Illuminate\Filesystem\FilesystemAdapter;
 
 class AmazonS3
 {
@@ -12,7 +14,7 @@ class AmazonS3
     protected const EXPIRATION_TIME = 60;
 
     /**
-     * @var Illuminate\Filesystem\AwsS3V3Adapter
+     * @var FilesystemAdapter
      */
     protected $client;
 
@@ -32,7 +34,6 @@ class AmazonS3
      */
     public function getPreSignedUploadUrl(string $objectKey, string $contentType = 'image/jpeg', int $expiration = self::EXPIRATION_TIME): string
     {
-        dd($this->client);
         return $this->client->temporaryUploadUrl(
             $objectKey, now()->addMinutes($expiration)
         )['url'];
