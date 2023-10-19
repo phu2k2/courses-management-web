@@ -40,3 +40,7 @@ Route::resource('carts', CartController::class)->only(['index', 'store', 'destro
 Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show');
 });
+
+Route::get('/order', function () {
+    return view('order.index');
+})->name('order.index');
