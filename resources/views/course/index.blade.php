@@ -166,15 +166,18 @@
                             </form>
                             @php
                                 $categoryGroups = [];
+                                $categoryIds = [];
+                                
                                 foreach ($courses->groupBy('category.name') as $category => $group) {
                                     $categoryGroups[$category] = $group->count();
+                                    $categoryIds[$category] = $group->first()->category->id;
                                 }
                             @endphp
                                 <ul class="list-unstyled list-group list-checkbox">
 
                                     @foreach($categoryGroups as $category => $count)
                                     <li class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="categorycustomcheck{{ $loop->index }}" name="category[]" value="{{ $category }}">
+                                        <input type="checkbox" class="custom-control-input" id="categorycustomcheck{{ $loop->index }}" name="category[]" value="{{ $categoryIds[$category] }}">
                                         <label class="custom-control-label font-size-base" for="categorycustomcheck{{ $loop->index }}">{{ $category }} ({{ $count }})</label>
                                     </li>
                                     @endforeach
