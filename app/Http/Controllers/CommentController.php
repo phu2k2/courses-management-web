@@ -29,7 +29,7 @@ class CommentController extends Controller
     public function update(UpdateCommentRequest $request, int $commentId)
     {
         $result = ['error', 'Update comment was failed'];
-        if ($this->commentService->update($commentId, $request->content)) {
+        if ($this->commentService->update($commentId, (int) auth()->id(), $request->content)) {
             $result = ['success', 'Update comment was successful'];
         }
         return response()->json($result);
