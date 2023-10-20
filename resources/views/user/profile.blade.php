@@ -48,7 +48,7 @@
                                         <div class="col-md-4">
                                             <div class="text-center">
                                                 <img alt="Andrew Jones" id="imageDisplay"
-                                                    src="{{ $user->profile?->avatar }}"
+                                                    src="{{ $user->profile->avatar }}"
                                                     class="rounded-circle img-responsive mt-2" width="128"
                                                     height="128">
                                                 <div class="mt-2">
