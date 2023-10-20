@@ -35,13 +35,14 @@ class CommentRepository extends BaseRepository implements CommentRepositoryInter
      */
     public function findComment($id, $userId)
     {
-        return $this->model->where('id', $id)->where('user_id', $userId)->first();
+        /** @phpstan-ignore-next-line */
+        return $this->model->where('id', $id)->owner($userId)->first();
     }
 
     /**
      * @param int $id
      *
-     * @return int|bool
+     * @return bool
      */
     public function destroy($id)
     {

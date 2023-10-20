@@ -18,7 +18,7 @@ interface CommentRepositoryInterface extends RepositoryInterface
     /**
      * @param int $id
      *
-     * @return int|bool
+     * @return bool
      */
     public function destroy($id);
 
