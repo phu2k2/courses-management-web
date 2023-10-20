@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Comment;
 use App\Repositories\Interfaces\CommentRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class CommentRepository extends BaseRepository implements CommentRepositoryInterface
 {
@@ -24,6 +25,17 @@ class CommentRepository extends BaseRepository implements CommentRepositoryInter
     public function getByLesson($lessonId): Collection
     {
         return $this->model->with('user.profile')->where('lesson_id', $lessonId)->get();
+    }
+
+    /**
+     * @param int $id
+     * @param int $userId
+     *
+     * @return Model|null
+     */
+    public function findComment($id, $userId)
+    {
+        return $this->model->where('id', $id)->where('user_id', $userId)->first();
     }
 
     /**
