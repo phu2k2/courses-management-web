@@ -6,7 +6,6 @@ use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use AmazonS3;
-use App\Helpers\AmazonS3 as HelpersAmazonS3;
 
 class UserService
 {
@@ -40,10 +39,7 @@ class UserService
      */
     public function getInfor($userId)
     {
-        $user = $this->userRepository->getInfor($userId);
-        $user->profile->avatar = AmazonS3::getObjectUrl($user->profile->avatar);
-
-        return $user;
+        return  $this->userRepository->getInfor($userId);
     }
 
     /**
