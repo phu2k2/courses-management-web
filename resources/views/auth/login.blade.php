@@ -1,15 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Login account')
-@section('style')
-    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
-@endsection
-@section('script')
-    <script src="{{ asset('assets/js/toast.js') }}"></script>
-@endsection
 @section('content')
     <section class="">
         <div class="flickity-button-outset-long flickity-page-dots-white flickity-page-dots-43">
-            @include('layouts.message')
             <div class="w-100">
                 <div class="py-10 overlay overlay-custom-left" style="background-image: url(/assets/img/covers/cover-16.jpg)">
                     <div class="container">
@@ -25,11 +18,6 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                                     aria-label="Close">
                                                 </button>
-                                            </div>
-                                        @endif
-                                        @if (session('status'))
-                                            <div class="alert alert-success">
-                                                {{ session('status') }}
                                             </div>
                                         @endif
                                         @if (session()->has('error'))

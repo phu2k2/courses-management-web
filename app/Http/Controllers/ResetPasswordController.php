@@ -4,48 +4,63 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Contracts\View\View;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Auth\Events\PasswordReset;
+use App\Services\ResetPasswordService;
+use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
     /**
-     * @param Request $request
+     * @var UserService
+     */
+    protected $userService;
+
+    /**
+     * @var ResetPasswordService
+     */
+    protected $resetPasswordService;
+
+    public function __construct(UserService $userService, ResetPasswordService $resetPasswordService)
+    {
+        $this->userService = $userService;
+        $this->resetPasswordService = $resetPasswordService;
+    }
+
+    /**
      * @param string $token
      * @return View
      */
-    public function showResetPasswordForm(Request $request, $token): View
+    public function showResetPasswordForm($token): View
     {
-        return view('auth.reset-password')->with(
-            ['token' => $token, 'email' => $request->email]
-        );
+        $userData = $this->resetPasswordService->isExpiredToken($token, now());
+
+        if (!$userData) {
+            abort(404);
+        }
+        $email = $userData['email'];
+        return view(('auth.reset-password'), compact('email', 'token'));
     }
 
     /**
      * @param ResetPasswordRequest $request
      * @return RedirectResponse
      */
-    public function updatePassWord(ResetPasswordRequest $request)
+    public function submitResetPasswordForm(ResetPasswordRequest $request)
     {
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user, string $password) {
-                $user->forceFill([
-                    'password' => Hash::make($password)
-                ])->setRememberToken(Str::random(60));
+        //Validate the token
+        $updatePassword = $this->resetPasswordService->isValidToken($request->input('token'), $request->input('email'));
 
-                $user->save();
+        //Check the token
+        if (!$updatePassword) {
+            return redirect()->to(route('password.reset'))->with("error", "Error Token!");
+        }
 
-                event(new PasswordReset($user));
-            }
-        );
-        return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login.show')->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
+        //Hash and update the new password
+        $this->userService->updatePassword($request->input('email'), $request->input('password'));
+
+        //Delete the token
+        $this->resetPasswordService->deleteByEmail($request->input('email'));
+
+        return redirect()->route('login.show')->with('message', 'Reset Password Successfully!');
     }
 }

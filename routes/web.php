@@ -43,6 +43,6 @@ Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show');
 });
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->middleware('guest')->name('password.request');
-Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->middleware('guest')->name('password.email');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->middleware('guest')->name('password.email');
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->middleware('guest')->name('password.reset');
-Route::post('/reset-password', [ResetPasswordController::class, 'updatePassWord'])->middleware('guest')->name('password.update');
+Route::post('/reset-password', [ResetPasswordController::class, 'submitResetPasswordForm'])->middleware('guest')->name('password.update');

@@ -5,11 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ForgotPasswordRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
+use App\Models\ResetPassword;
+use App\Services\ResetPasswordService;
+use App\Services\UserService;
+use Illuminate\Support\Facades\Mail;
 
 class ForgotPasswordController extends Controller
 {
+    /**
+     * @var UserService
+     */
+    protected $userService;
+
+    /**
+     * @var ResetPasswordService
+     */
+    protected $resetPasswordService;
+
+    public function __construct(UserService $userService, ResetPasswordService $resetPasswordService)
+    {
+        $this->userService = $userService;
+        $this->resetPasswordService = $resetPasswordService;
+    }
+
     /**
      * @return View
      */
@@ -22,14 +41,26 @@ class ForgotPasswordController extends Controller
      * @param ForgotPasswordRequest $request
      * @return RedirectResponse
      */
-    public function sendResetLink(ForgotPasswordRequest $request)
+    public function submitForgetPasswordForm(ForgotPasswordRequest $request)
     {
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+        /**
+         * Create a object for 'password_reset_token' table
+         */
+        $this->resetPasswordService->addResetPassWord($request->input('email'), Str::random(60), now(), now()->addMinute());
 
-        return $status === Password::RESET_LINK_SENT
-            ? back()->with(['status' => __($status)])
-            : back()->withErrors(['email' => __($status)]);
+        /**
+         *Get the token just created above
+         */
+        $tokenData = $this->resetPasswordService->getByEmail($request->input('email'));
+
+        /**
+         * Send password reset link to email
+         */
+        Mail::send("email.index", ['token' => $tokenData['token']], function ($message) use ($request) {
+            $message->to($request->input('email'));
+            $message->subject("Reset Password");
+        });
+
+        return redirect()->back()->with('message', 'A reset link has been sent !');
     }
 }

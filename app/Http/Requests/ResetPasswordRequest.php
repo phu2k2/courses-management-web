@@ -22,6 +22,7 @@ class ResetPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'email' => 'required|email|exists:users',
             'token' => 'required',
             'password' => [
                 'required',
@@ -30,6 +31,7 @@ class ResetPasswordRequest extends FormRequest
                 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
                 'confirmed'
             ],
+            'password_confirmation' => 'required'
         ];
     }
 }
