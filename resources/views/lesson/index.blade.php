@@ -1,12 +1,14 @@
 @extends('layouts.lesson')
 @section('title', 'Lesson: ' . $lesson->title)
-
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
+@endsection
 @section('script')
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
     <script type="module" src="{{ asset('assets/js/comment.js') }}"></script>
 @endsection
 @section('content')
-    <!-- COURSE ================================================== -->
-
+    @include('layouts.message')
     <div class="container container-wd">
         <div class="row pt-8 pb-10">
             <div class="col-lg-8">
@@ -45,7 +47,6 @@
                         </span>
                     </span>
                 </a>
-
                 <h3 class="text-white mb-6">Comment</h3>
                 <ul class="list-unstyled pt-2">
                     @foreach ($comments as $comment)
@@ -61,7 +62,8 @@
                                             <div class="me-auto mb-4 mb-md-0">
                                                 <h5 class="text-white mb-1 fw-semi-bold">
                                                     {{ $comment->user->profile?->full_name }}
-                                                    <span class="font-size-sm text-blue">{{ '@' . $comment->user->username }}</span>
+                                                    <span
+                                                        class="font-size-sm text-blue">{{ '@' . $comment->user->username }}</span>
                                                 </h5>
                                                 <p class="font-size-sm font-italic">
                                                     {{ $comment->created_at->diffForHumans() }}
@@ -98,10 +100,13 @@
                                         @auth
                                             <div class="reply-comment {{ $comment->id }}">
                                                 <div class="bg-portgore rounded p-1 p-md-4 mb-4">
-                                                    <form action="" method="POST">
-                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content" name="content" rows="3"
+                                                    <form action="{{ route('comments.store') }}" method="POST">
+                                                        @csrf
+                                                        <input name="lesson_id" type="hidden" value="{{ $lesson->id }}">
+                                                        <input name="parent_id" type="hidden" value="{{ $comment->id }}">
+                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" name="content" rows="3"
                                                             placeholder="Add you comment" data-parentId="{{ $comment->id }}"></textarea>
-                                                        <button type="submit"
+                                                        <button type="submit" id="submit-child"
                                                             class="btn btn-orange btn-block mw-md-300p">SUBMIT</button>
                                                     </form>
                                                 </div>
@@ -132,7 +137,8 @@
                                                             <div class="me-auto mb-4 mb-md-0">
                                                                 <h5 class="text-white mb-1 fw-semi-bold">
                                                                     {{ $childComment->user->profile?->full_name }}
-                                                                    <span class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span>
+                                                                    <span
+                                                                        class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span>
                                                                 </h5>
                                                                 <p class="font-size-sm font-italic">
                                                                     {{ $childComment->created_at->diffForHumans() }}
@@ -186,10 +192,12 @@
                 <div class="bg-portgore rounded p-6 p-md-9 mb-8">
                     <h3 class="text-white mb-2">Add Comment</h3>
                     <div class="">What is it like to Lesson?</div>
-                    <form>
+                    <form action="{{ route('comments.store') }}" method="POST">
+                        @csrf
+                        <input name="lesson_id" type="hidden" value="{{ $lesson->id }}">
                         <div class="form-group mb-6">
-                            <label class="text-white" for="content">Content</label>
-                            <textarea class="form-control placeholder-1 bg-dark border-0" id="content" name="content" rows="5"
+                            <label id="label_content" class="text-white" for="content">Content</label>
+                            <textarea class="form-control placeholder-1 bg-dark border-0" id="content-text" name="content" rows="5"
                                 placeholder="Content"></textarea>
                         </div>
 
@@ -266,7 +274,8 @@
                                 </div>
                                 @foreach ($topic->lessons as $lesson)
                                     <div id="Curriculumcollapse{{ $key }}" class="collapse show"
-                                        aria-labelledby="curriculumheading{{ $key }}" data-parent="#accordionCurriculum">
+                                        aria-labelledby="curriculumheading{{ $key }}"
+                                        data-parent="#accordionCurriculum">
 
                                         <div
                                             class="border-top px-5 border-color-20 py-4 min-height-70 d-md-flex align-items-center">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
@@ -40,3 +41,5 @@ Route::resource('carts', CartController::class)->only(['index', 'store', 'destro
 Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show');
 });
+
+Route::resource('comments', CommentController::class)->only('store');

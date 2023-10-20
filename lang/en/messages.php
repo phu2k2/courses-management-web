@@ -4,10 +4,12 @@ return [
     'user' => [
         'success' => [
             'create' => 'Register account was successful',
-            'create_cart' => 'Added to cart successfully!'
+            'create_cart' => 'Added to cart successfully!',
+            'create_comment' => 'Add comment successfull'
         ],
         'error' => [
             'create_cart' => 'Course is already in cart!',
+            'create_comment' => 'Add comment error!',
             'login' => 'Login error, please check your email or password'
         ]
     ],
