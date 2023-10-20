@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\GetCoursesRequest;
 use App\Models\Course;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
@@ -20,37 +21,43 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     /**
      * Retrieve a paginated list of courses based on the provided filters.
      *
-     * @param array $filters
+     * @param GetCoursesRequest $request
      * @return LengthAwarePaginator<Course>
      */
-    public function getCourses(array $filters): LengthAwarePaginator
+    public function getCourses($request): LengthAwarePaginator
     {
-        return Course::with('category')
-        ->when(isset($filters['search']), function ($query) use ($filters) {
-            $query->filterBySearchTerm($filters['search']);
+        $courses = Course::with('category')
+        ->when($request->filled('search'), function ($query) use ($request) {
+            $query->filterBySearchTerm($request->input('search'));
         })
-        ->when(isset($filters['category']), function ($query) use ($filters) {
-            $query->filterByCategory($filters['category']);
+        ->when($request->filled('category'), function ($query) use ($request) {
+            $query->filterByCategory($request->input('category'));
         })
-        ->when(isset($filters['rating']), function ($query) use ($filters) {
-            $query->filterByRating($filters['rating']);
+        ->when($request->filled('rating'), function ($query) use ($request) {
+            $query->filterByRating($request->input('rating'));
         })
-        ->when(isset($filters['language']), function ($query) use ($filters) {
-            $query->filterByLanguage($filters['language']);
+        ->when($request->filled('language'), function ($query) use ($request) {
+            $query->filterByLanguage($request->input('language'));
         })
-        ->when(isset($filters['level']), function ($query) use ($filters) {
-            $query->filterByLevel($filters['level']);
+        ->when($request->filled('level'), function ($query) use ($request) {
+            $query->filterByLevel($request->input('level'));
         })
-        ->when(isset($filters['price']), function ($query) use ($filters) {
-            $query->filterByPrice($filters['price']);
+        ->when($request->filled('price'), function ($query) use ($request) {
+            $query->filterByPrice($request->input('price'));
         })
-        ->when(isset($filters['duration']), function ($query) use ($filters) {
-            $query->filterByDuration($filters['duration']);
-        })
-        ->when(isset($filters['sort']), function ($query) use ($filters) {
-            $query->filterBySort($filters['sort']);
-        })
-        ->paginate(self::PAGESIZE);
+        ->when($request->filled('duration'), function ($query) use ($request) {
+            $query->filterByDuration($request->input('duration'));
+        });
+
+        list($sortField, $sortType) = ['id', 'ASC'];
+
+        if ($request->filled('sort')) {
+            list($sortField, $sortType) = explode(':', $request->input('sort'));
+        }
+
+        $courses->orderBy($sortField, $sortType);
+
+        return $courses->paginate(self::PAGESIZE);
     }
 
     /**

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GetCoursesRequest;
 use App\Services\CourseService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
@@ -21,7 +21,7 @@ class CourseController extends Controller
     /**
      * @return View
      */
-    public function index(Request $request): View
+    public function index(GetCoursesRequest $request): View
     {
         $courses = $this->courseService->getCourses($request);
 

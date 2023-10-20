@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
+use App\Http\Requests\GetCoursesRequest;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Course;
 
@@ -30,20 +30,13 @@ class CourseService
     }
 
     /**
-     * @param Request $request
+     * @param GetCoursesRequest $request
      * @return LengthAwarePaginator<Course>
      */
-    public function getCourses(Request $request): LengthAwarePaginator
+    public function getCourses(GetCoursesRequest $request): LengthAwarePaginator
     {
-        $filters = $request->all();
-
-        $validSortOptions = ['num_reviews', 'total_students', 'average_rating', 'created_at'];
-
-        if (isset($filters['sort']) && !in_array($filters['sort'], $validSortOptions)) {
-            $filters['sort'] = 'created_at';
-        }
-
-        return $this->courseRepo->getCourses($filters);
+        // dd($this->courseRepo->getCourses($request));
+        return $this->courseRepo->getCourses($request);
     }
 
     /**

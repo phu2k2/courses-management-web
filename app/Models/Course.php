@@ -119,7 +119,7 @@ class Course extends Model
         return $this->hasMany(Enrollment::class, 'course_id', 'id');
     }
 
-        /**
+    /**
      * Scope the query to filter courses by category.
      *
      * @param  Builder  $query
@@ -209,38 +209,32 @@ class Course extends Model
      */
     public function scopeFilterByDuration(Builder $query, array $durations): Builder
     {
+        define('EXTRA_SHORT', [0, 1]);
+        define('SHORT', [1, 3]);
+        define('MEDIUM', [3, 6]);
+        define('LONG', [6, 17]);
+        define('EXTRA_LONG', [17]);
+
         return $query->where(function (Builder $query) use ($durations) {
-            if (in_array('extraShort', $durations)) {
-                $query->orWhereBetween('total_time', [0, 1]);
-            }
+            $query->when(in_array(EXTRA_SHORT, $durations), function ($query) {
+                $query->orWhereBetween('total_time', EXTRA_SHORT);
+            });
 
-            if (in_array('short', $durations)) {
-                $query->orWhereBetween('total_time', [1, 3]);
-            }
+            $query->when(in_array(SHORT, $durations), function ($query) {
+                $query->orWhereBetween('total_time', SHORT);
+            });
 
-            if (in_array('medium', $durations)) {
-                $query->orWhereBetween('total_time', [3, 6]);
-            }
+            $query->when(in_array(MEDIUM, $durations), function ($query) {
+                $query->orWhereBetween('total_time', MEDIUM);
+            });
 
-            if (in_array('long', $durations)) {
-                $query->orWhereBetween('total_time', [6, 17]);
-            }
+            $query->when(in_array(LONG, $durations), function ($query) {
+                $query->orWhereBetween('total_time', LONG);
+            });
 
-            if (in_array('extraLong', $durations)) {
-                $query->orWhere('total_time', '>', 17);
-            }
+            $query->when(in_array(EXTRA_LONG, $durations), function ($query) {
+                $query->orWhere('total_time', '>', EXTRA_LONG[0]);
+            });
         });
-    }
-
-    /**
-     * Scope the query to sort courses in descending order based on the given column.
-     *
-     * @param  Builder  $query
-     * @param  string  $sort
-     * @return Builder
-     */
-    public function scopeFilterBySort(Builder $query, string $sort): Builder
-    {
-        return $query->orderBy($sort, 'desc');
     }
 }
