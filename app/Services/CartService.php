@@ -58,4 +58,14 @@ class CartService
     {
         return $this->cartRepo->delete($id);
     }
+
+    /**
+     * @param int $userId
+     *
+     * @return int
+     */
+    public function getCountCart($userId)
+    {
+        return count($this->cartRepo->getCartByUser($userId));
+    }
 }
