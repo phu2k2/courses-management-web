@@ -27,7 +27,7 @@ class CommentController extends Controller
      */
     public function update(UpdateCommentRequest $request, int $commentId)
     {
-        if ($this->commentService->update($commentId, (int)  $request->user_id, $request->content)) {
+        if ($this->commentService->update($commentId, (int) auth()->id(), $request->content)) {
             return response()->json(['message' => 'Update comment was successful'], 200);
         }
 

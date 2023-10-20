@@ -1,13 +1,11 @@
 function submitForm(id) {
     var formId = document.querySelector("#formEdit" + id);
     var content = document.getElementById("content" + id).value;
-    var userId = document.getElementById("userId").value;
     var baseUrl = formId.dataset.url;
 
     axios.put(baseUrl, {
-        'user_id':userId,
         'content': content,
-    })
+    }, { withCredentials: true })
     .then(function (response) {
         if (response.status == 200) {
             $(`.edit-comment.${id}`).hide();
@@ -18,13 +16,13 @@ function submitForm(id) {
         $(".toast").show();
         setTimeout(() => {
             $(".toast").hide();
-        }, 5000);
+        }, 3000);
     })
     .catch(function (error) {
         $(".toast-body").html(error.data.message);
         $(".toast").show();
         setTimeout(() => {
             $(".toast").hide();
-        }, 5000);
+        }, 3000);
     });
 }

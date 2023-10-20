@@ -73,7 +73,7 @@
                 <h3 class="text-white mb-6">Comment</h3>
                 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
-                        <i class="fa-solid fa-bell"></i>
+                        <i class="fa-solid fa-bell me-2"></i>
                         <strong class="me-auto">Notification</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
@@ -145,8 +145,6 @@
                                                         @method('PUT')
                                                         <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content{{ $comment->id }}" name="content"
                                                             rows="3" placeholder="Add you comment">{{ $comment->content }}</textarea>
-                                                        <input type="hidden" name="user_id" id="userId"
-                                                            value="{{ auth()->id() }}">
                                                         <button type="button" class="btn btn-orange btn-block mw-md-200p"
                                                             onclick="submitForm({{ $comment->id }})">SUBMIT</button>
                                                         <a class="btn btn-gray-200 btn-block mw-md-200p btn-edit"
