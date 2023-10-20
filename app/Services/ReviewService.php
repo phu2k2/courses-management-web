@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\StoreReviewRequest;
 use App\Repositories\Interfaces\ReviewRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -29,11 +30,18 @@ class ReviewService
 
     /**
      * Add review
-     * @param array $data
+     * @param StoreReviewRequest $request
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function addReview($data): Model
+    public function addReview(StoreReviewRequest $request): Model
     {
+        $data = array_merge(
+            [
+                'user_id' => auth()->id(),
+                'course_id' => $request->input('course_id')
+            ],
+            $request->validated()
+        );
         return $this->reviewRepo->create($data);
     }
 }

@@ -24,16 +24,8 @@ class ReviewController extends Controller
      */
     public function store(StoreReviewRequest $request): RedirectResponse
     {
-        $data = array_merge(
-            [
-                'user_id' => auth()->id(),
-                'course_id' => $request->input('course_id')
-            ],
-            $request->validated()
-        );
-
         session()->flash('message', __('messages.user.success.create_review'));
-        if (!$this->reviewService->addReview($data)) {
+        if (!$this->reviewService->addReview($request)) {
             session()->forget('message');
             session()->flash('error', __('messages.user.error.create_review'));
         }
