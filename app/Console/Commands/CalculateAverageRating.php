@@ -23,13 +23,14 @@ class CalculateAverageRating extends Command
 
     /**
      * Execute the console command.
+     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $coursesToUpdate = Course::with('reviews')->whereHas('reviews', function ($query) {
             $query->whereNotNull('rating');
         })->get();
-    
+
         foreach ($coursesToUpdate as $course) {
             $course->update(['average_rating' => $course->reviews->avg('rating')]);
         }
