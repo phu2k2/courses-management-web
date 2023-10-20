@@ -42,4 +42,17 @@ class CommentService
         }
         return $result;
     }
+
+    /**
+     * @param int $id
+     * @param array $request
+     *
+     * @return int|bool
+     */
+    public function update($id, $request)
+    {
+        $data = [];
+        $data['content'] = $request;
+        return $this->commentRepo->update($id, $data);
+    }
 }

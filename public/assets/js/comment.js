@@ -31,4 +31,11 @@ $(document).ready(function () {
     setTimeout(() => {
         $(".notification-toast").hide();
     }, 2000);
+
+    $(".edit-comment").hide();
+    $(".btn-edit").bind("click", function () {
+        var editId = $(this).attr("data-comment-id");
+        $(`.edit-comment.${editId}`).toggle();
+        $(`.comment-content.${editId}`).toggle();
+    })
 });

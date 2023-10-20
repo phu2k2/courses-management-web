@@ -42,4 +42,4 @@ Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show');
 });
 
-Route::resource('comments', CommentController::class)->only(['destroy']);
+Route::resource('comments', CommentController::class)->only(['update', 'destroy']);
