@@ -33,6 +33,10 @@ class Profile extends Model
      */
     public function getFullNameAttribute()
     {
-        return "{$this->last_name} {$this->first_name}";
+        $fullName = '';
+        if (!empty($this->last_name) || !empty($this->first_name)) {
+            $fullName = implode(" ", [$this->last_name, $this->first_name]);
+        }
+        return $fullName;
     }
 }
