@@ -23,5 +23,8 @@ function submitForm(id) {
     .catch(function (error) {
         $(".toast-body").html(error.data.message);
         $(".toast").show();
+        setTimeout(() => {
+            $(".toast").hide();
+        }, 5000);
     });
 }
