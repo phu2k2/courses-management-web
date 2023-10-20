@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class GetCoursesRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class GetCoursesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -32,7 +33,14 @@ class GetCoursesRequest extends FormRequest
             'price' => 'string|in:free,paid,all',
             'duration' => 'array',
             'duration.*' => 'in:extraShort,short,medium,long,extraLong',
-            'sort' => 'string|in:num_reviews,total_students,average_rating,created_at',
+            'sort' => [
+                Rule::in([
+                    'created_at:asc', 'created_at:desc',
+                    'num_reviews:asc', 'num_reviews:desc',
+                    'average_rating:asc', 'average_rating:desc',
+                    'total_students:asc', 'total_students:desc'
+                ]),
+            ],
         ];
     }
 }
