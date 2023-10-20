@@ -251,8 +251,6 @@
                                                                         @method('PUT')
                                                                         <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content{{ $childComment->id }}"
                                                                             name="content" rows="3" placeholder="Add you comment">{{ $childComment->content }}</textarea>
-                                                                        <input type="hidden" name="user_id" id="userId"
-                                                                            value="{{ auth()->id() }}">
                                                                         <button type="button"
                                                                             class="btn btn-orange btn-block mw-md-200p"
                                                                             onclick="submitForm({{ $childComment->id }})">SUBMIT</button>
