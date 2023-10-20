@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DeleteCommentRequest;
-use App\Http\Requests\UpdateCommentRequest;
 use App\Services\CommentService;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 
 class CommentController extends Controller
@@ -18,21 +16,6 @@ class CommentController extends Controller
     public function __construct(CommentService $commentService)
     {
         $this->commentService = $commentService;
-    }
-
-    /**
-     * @param UpdateCommentRequest $request
-     * @param int $commentId
-     *
-     * @return JsonResponse
-     */
-    public function update(UpdateCommentRequest $request, int $commentId)
-    {
-        $result = ['error', 'Update comment was failed'];
-        if ($this->commentService->update($commentId, (int) auth()->id(), $request->content)) {
-            $result = ['success', 'Update comment was successful'];
-        }
-        return response()->json($result);
     }
 
     /**
