@@ -39,13 +39,12 @@
                     <div class="border rounded d-flex align-items-center choices-label h-50p">
                         <span class="ps-5">Sort by:</span>
                         <select id="sort-select" onchange="handleSortChange()" class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end" data-choices>
-                            <option value="default">{{__('messages.course.sort.default')}}</option>
-                            <option value="created_at">{{__('messages.course.sort.option_one')}}</option>
-                            <option value="num_reviews">{{__('messages.course.sort.option_two')}}</option>
-                            <option value="average_rating">{{__('messages.course.sort.option_three')}}</option>
-                            <option value="total_students">{{__('messages.course.sort.option_four')}}</option>
+                            <option value="default" {{ request('sort') == 'default' ? 'selected' : '' }}>{{__('messages.course.sort.default')}}</option>
+                            <option value="created_at" {{ request('sort') == 'created_at' ? 'selected' : '' }}>{{__('messages.course.sort.option_one')}}</option>
+                            <option value="num_reviews" {{ request('sort') == 'num_reviews' ? 'selected' : '' }}>{{__('messages.course.sort.option_two')}}</option>
+                            <option value="average_rating" {{ request('sort') == 'average_rating' ? 'selected' : '' }}>{{__('messages.course.sort.option_three')}}</option>
+                            <option value="total_students" {{ request('sort') == 'total_students' ? 'selected' : '' }}>{{__('messages.course.sort.option_four')}}</option>
                         </select>
-                        
                     </div>
                 </div>
             </div>
@@ -425,7 +424,7 @@
                                 </li>
                                 <li class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" id="ratingcustomradion4" name ="rating" 
-                                    value="3" @if($selectedPrice == '3') checked @endif>
+                                    value="3" @if($selectedRating == '3') checked @endif>
                                     <label class="custom-control-label font-size-base" for="ratingcustomradion4">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
@@ -440,7 +439,7 @@
                                 </li>
                                 <li class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" id="ratingcustomradion5" name ="rating" 
-                                    value="2.5" @if($selectedPrice == 'all') checked @endif>
+                                    value="2.5" @if($selectedRating == '2.5') checked @endif>
                                     <label class="custom-control-label font-size-base" for="ratingcustomradion5">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
