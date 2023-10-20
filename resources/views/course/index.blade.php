@@ -39,7 +39,7 @@
                     <div class="border rounded d-flex align-items-center choices-label h-50p">
                         <span class="ps-5">Sort by:</span>
                         <select id="sort-select" onchange="handleSortChange()" class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end" data-choices>
-                            <option value="default">{{__('messages.course.sort.defaut')}}</option>
+                            <option value="default">{{__('messages.course.sort.default')}}</option>
                             <option value="created_at">{{__('messages.course.sort.option_one')}}</option>
                             <option value="num_reviews">{{__('messages.course.sort.option_two')}}</option>
                             <option value="average_rating">{{__('messages.course.sort.option_three')}}</option>
