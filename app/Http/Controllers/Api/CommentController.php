@@ -31,6 +31,6 @@ class CommentController extends Controller
             return response()->json(['message' => 'Update comment was successful'], 200);
         }
 
-        return response()->json(['message' => 'Update comment was failed'], 500);
+        return response()->json(['message' => 'Update comment was failed'], 400);
     }
 }
