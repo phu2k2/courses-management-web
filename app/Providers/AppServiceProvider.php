@@ -11,10 +11,12 @@ use App\Repositories\Interfaces\CartRepositoryInterface;
 use App\Repositories\Interfaces\CommentRepositoryInterface;
 use App\Repositories\Interfaces\LessonRepositoryInterface;
 use App\Repositories\Interfaces\ProfileRepositoryInterface;
+use App\Repositories\Interfaces\ReviewRepositoryInterface;
 use App\Repositories\Interfaces\TopicRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\LessonRepository;
 use App\Repositories\ProfileRepository;
+use App\Repositories\ReviewRepository;
 use App\Repositories\TopicRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
@@ -42,6 +44,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             CourseRepositoryInterface::class,
             CourseRepository::class
+        );
+        $this->app->singleton(
+            ReviewRepositoryInterface::class,
+            ReviewRepository::class
         );
 
         $this->app->singleton(
