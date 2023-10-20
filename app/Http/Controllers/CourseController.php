@@ -23,9 +23,11 @@ class CourseController extends Controller
      */
     public function index(Request $request): View
     {
-        $courses = $this->courseService->getCourses($request);
+        $data = $this->courseService->getCourses($request);
 
-        return view('course.index', compact('courses'));
+        return view('course.index', ['courses' => $data['courses'],
+            'categoryInfo' => $data['categoryInfo'],
+        ]);
     }
 
     /**

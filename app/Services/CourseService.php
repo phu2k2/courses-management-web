@@ -31,9 +31,9 @@ class CourseService
 
     /**
      * @param Request $request
-     * @return LengthAwarePaginator<Course>
+     * @return array
      */
-    public function getCourses(Request $request): LengthAwarePaginator
+    public function getCourses(Request $request): array
     {
         $filters = $request->all();
 
@@ -43,7 +43,18 @@ class CourseService
             $filters['sort'] = 'created_at';
         }
 
-        return $this->courseRepo->getCourses($filters);
+        $courses = $this->courseRepo->getCourses($filters);
+
+        $categoryInfo = [];
+        foreach ($courses->groupBy('category.name') as $category => $group) {
+            $categoryInfo[] = (object) [
+                'name' => $category,
+                'count' => $group->count(),
+                'id' => $group->first()->category->id,
+            ];
+        }
+
+        return ['courses' => $courses, 'categoryInfo' => $categoryInfo];
     }
 
     /**
