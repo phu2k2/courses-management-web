@@ -57,6 +57,7 @@
         $selectedRating = request('rating', null);
         $selectedLevels = request('level',[]);
         $selectedLanguages = request('language', []);
+        $selectedCategories = request('category', []);
     @endphp
     <!-- COURSE LIST V2 ================================================== -->
     <div class="container">
@@ -177,7 +178,8 @@
 
                                     @foreach($categoryGroups as $category => $count)
                                     <li class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="categorycustomcheck{{ $loop->index }}" name="category[]" value="{{ $categoryIds[$category] }}">
+                                        <input type="checkbox" class="custom-control-input" id="categorycustomcheck{{ $loop->index }}" 
+                                        name="category[]" value="{{ $categoryIds[$category] }}"  @if(in_array($categoryIds[$category], $selectedCategories)) checked @endif>
                                         <label class="custom-control-label font-size-base" for="categorycustomcheck{{ $loop->index }}">{{ $category }} ({{ $count }})</label>
                                     </li>
                                     @endforeach
