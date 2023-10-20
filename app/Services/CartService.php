@@ -52,7 +52,7 @@ class CartService
      * @param array $id
      * @return bool
      */
-    public function deleteMultipleCart($id)
+    public function deleteCarts($id)
     {
         return $this->cartRepo->deleteMultiple($id);
     }

@@ -52,7 +52,7 @@
         @include('layouts.message')
     </header>
     <!-- SHOP CART
-                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                    ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             <div id="primary" class="content-area">
@@ -93,9 +93,8 @@
                                                             <div class="form-check">
                                                                 <input class="form-check-input flexCheckDefault"
                                                                     type="checkbox" data-price="{{ $discountedPrice }}"
-                                                                    data-id="{{ $item->id }}"
-                                                                    onchange="calculateTotal()" name='ids[]'
-                                                                    id="checkItem" value="{{ $item->id }}">
+                                                                    data-id="{{ $item->course->title }}"
+                                                                    onchange="calculateTotal()" value="{{ $item->id }}">
                                                             </div>
                                                         </td>
                                                         <td class="product-name" data-title="Product">

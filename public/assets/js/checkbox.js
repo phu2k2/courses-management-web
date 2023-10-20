@@ -29,14 +29,18 @@ function handleDeleteButtonClick() {
     modalBody.innerHTML = '';
     var checkboxes = document.querySelectorAll('.form-check-input.flexCheckDefault:checked');
     var selectedIds = [];
+    var delectedIds = [];
     checkboxes.forEach(function (checkbox) {
         selectedIds.push(checkbox.getAttribute('data-id'));
+        delectedIds.push(checkbox.getAttribute('value'));
     });
-    var idsString = selectedIds.join(', ');
+    var idsString = selectedIds;
+    var idsString = delectedIds;
     selectedIds.forEach(function (id) {
         modalBody.innerHTML += '<ul><li><strong>' + id + '</strong></li><ul>';
     });
     document.getElementById('selectedItemsInput').value = idsString;
+    document.getElementById('delectedItemsInput').value = idsString;
 }
 
 setTimeout(() => {
