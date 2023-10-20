@@ -30,13 +30,14 @@ class CommentService
 
     /**
      * @param int $id
+     * @param int $userId
      *
      * @return int|bool True if the deletion was successful, false otherwise
      */
-    public function delete($id)
+    public function delete($id, $userId)
     {
         $result = false;
-        $comment = $this->commentRepo->findOrFail($id);
+        $comment = $this->commentRepo->findComment($id, $userId);
         if ($comment) {
             $result = $this->commentRepo->destroy($id);
         }
