@@ -6,7 +6,6 @@ use App\Http\Requests\ForgotPasswordRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
-use App\Models\ResetPassword;
 use App\Services\ResetPasswordService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Mail;
@@ -46,7 +45,7 @@ class ForgotPasswordController extends Controller
         /**
          * Create a object for 'password_reset_token' table
          */
-        $this->resetPasswordService->addResetPassWord($request->input('email'), Str::random(60), now(), now()->addMinute());
+        $this->resetPasswordService->addResetPassWord($request->input('email'), Str::random(60), now(), now()->addMinutes(10));
 
         /**
          *Get the token just created above

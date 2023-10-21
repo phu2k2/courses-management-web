@@ -49,6 +49,15 @@ class ResetPasswordService
     }
 
     /**
+     * @param string $token
+     * @return int|bool True if the deletion was successful, false otherwise.
+     */
+    public function deleteByToken($token)
+    {
+        return $this->resetPasswordRepo->deleteByToken($token);
+    }
+
+    /**
      * @param string $email
      * @param string $token
      * @return mixed

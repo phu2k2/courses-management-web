@@ -14,11 +14,6 @@ interface UserRepositoryInterface extends RepositoryInterface
     public function getInfor($userId);
     /**
      * @param string $email
-     * @return mixed
-     */
-    public function getUserByEmail($email);
-    /**
-     * @param string $email
      * @param string $password
      * @return int|bool
      */

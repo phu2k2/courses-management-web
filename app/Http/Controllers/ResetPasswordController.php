@@ -35,6 +35,7 @@ class ResetPasswordController extends Controller
         $userData = $this->resetPasswordService->isExpiredToken($token, now());
 
         if (!$userData) {
+            $this->resetPasswordService->deleteByToken($token);
             abort(404);
         }
         $email = $userData['email'];

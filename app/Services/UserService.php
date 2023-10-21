@@ -53,15 +53,6 @@ class UserService
 
     /**
      * @param string $email
-     * @return mixed
-     */
-    public function getUserByEmail($email)
-    {
-        return $this->userRepository->getUserByEmail($email);
-    }
-
-    /**
-     * @param string $email
      * @param string $password
      * @return int|bool
      */
