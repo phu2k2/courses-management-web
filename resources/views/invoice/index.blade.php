@@ -13,7 +13,7 @@
                     <div class="modal-body">
 
                         <!-- Close -->
-                        <button type="button" class="close"  data-bs-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
 
@@ -419,10 +419,9 @@
         <div class="container py-8 py-lg-11">
             <div class="row">
                 <div class="col-xl-8 mx-xl-auto">
-                    <div style="display:flex;justify-content: center; align-items:center">
-                        <i class="fa-solid fa-cart-shopping" style="font-size:60px; color: green"></i>
-                    </div>
-                    <h1 class="entry-title my-5">Order List</h1>
+                    <header class="entry-header">
+                        <h1 class="entry-title">Order received</h1>
+                    </header>
 
                     <div class="entry-content">
                         <div class="woocommerce">
@@ -502,7 +501,6 @@
                                         </tfoot>
                                     </table>
                                 </section>
-                                <button class="btn btn-primary btn-wide lift d-none d-lg-inline-block aos-init aos-animate" data-aos-duration="200" data-aos="fade-up" style="width:100%">Pay the order</button>
                             </div>
                         </div>
                     </div>
