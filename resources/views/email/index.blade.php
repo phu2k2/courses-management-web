@@ -23,7 +23,7 @@
 <p>
     Best regards,
     <br/>
-    Your Website
+    SKOLA
 </p>
 </body>
 </html>
