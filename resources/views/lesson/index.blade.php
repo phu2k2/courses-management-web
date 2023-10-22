@@ -1,12 +1,35 @@
 @extends('layouts.lesson')
 @section('title', 'Lesson: ' . $lesson->title)
-
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
+@endsection
 @section('script')
     <script type="module" src="{{ asset('assets/js/comment.js') }}"></script>
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
+@endsection
+@section('modal')
+    <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentModalLabel">Delete</h5>
+                    </button>
+                </div>
+                <div class="modal-body delete_item">
+                    Do you really want to delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" id="submitDelete" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('content')
     <!-- COURSE ================================================== -->
-
+    @include('layouts.message')
     <div class="container container-wd">
         <div class="row pt-8 pb-10">
             <div class="col-lg-8">
@@ -61,7 +84,8 @@
                                             <div class="me-auto mb-4 mb-md-0">
                                                 <h5 class="text-white mb-1 fw-semi-bold">
                                                     {{ $comment->user->profile?->full_name }}
-                                                    <span class="font-size-sm text-blue">{{ '@' . $comment->user->username }}</span>
+                                                    <span
+                                                        class="font-size-sm text-blue">{{ '@' . $comment->user->username }}</span>
                                                 </h5>
                                                 <p class="font-size-sm font-italic">
                                                     {{ $comment->created_at->diffForHumans() }}
@@ -81,9 +105,19 @@
                                                             </a>
                                                         </li>
                                                         <li class="dropdown-item">
-                                                            <a class="dropdown-link text-alizarin" href="#">
-                                                                Delete
-                                                            </a>
+                                                            <form id="formDelete{{ $comment->id }}"
+                                                                action="{{ route('comments.destroy', ['comment' => $comment->id]) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $comment->id }}">
+                                                                <a class="dropdown-link text-alizarin" id="commentId"
+                                                                    data-id="{{ $comment->id }}" href="#"
+                                                                    data-bs-toggle="modal" data-bs-target="#commentModal">
+                                                                    Delete
+                                                                </a>
+                                                            </form>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -132,7 +166,8 @@
                                                             <div class="me-auto mb-4 mb-md-0">
                                                                 <h5 class="text-white mb-1 fw-semi-bold">
                                                                     {{ $childComment->user->profile?->full_name }}
-                                                                    <span class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span>
+                                                                    <span
+                                                                        class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span>
                                                                 </h5>
                                                                 <p class="font-size-sm font-italic">
                                                                     {{ $childComment->created_at->diffForHumans() }}
@@ -153,10 +188,21 @@
                                                                             </a>
                                                                         </li>
                                                                         <li class="dropdown-item">
-                                                                            <a class="dropdown-link text-alizarin"
-                                                                                href="#">
-                                                                                Delete
-                                                                            </a>
+                                                                            <form id="formDelete{{ $childComment->id }}"
+                                                                                action="{{ route('comments.destroy', ['comment' => $childComment->id]) }}"
+                                                                                method="post">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <input type="hidden" name="id"
+                                                                                    value="{{ $childComment->id }}">
+                                                                                <a class="dropdown-link text-alizarin"
+                                                                                    id="commentId"
+                                                                                    data-id="{{ $childComment->id }}"
+                                                                                    href="#" data-bs-toggle="modal"
+                                                                                    data-bs-target="#commentModal">
+                                                                                    Delete
+                                                                                </a>
+                                                                            </form>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -266,7 +312,8 @@
                                 </div>
                                 @foreach ($topic->lessons as $lesson)
                                     <div id="Curriculumcollapse{{ $key }}" class="collapse show"
-                                        aria-labelledby="curriculumheading{{ $key }}" data-parent="#accordionCurriculum">
+                                        aria-labelledby="curriculumheading{{ $key }}"
+                                        data-parent="#accordionCurriculum">
 
                                         <div
                                             class="border-top px-5 border-color-20 py-4 min-height-70 d-md-flex align-items-center">
