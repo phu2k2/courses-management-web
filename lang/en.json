@@ -31,5 +31,27 @@
     "advanced_level": "Advanced",
 
     "english_lang": "English",
-    "vietnamese_lang": "Vietnamese"
+    "vietnamese_lang": "Vietnamese",
+    
+    "course.page_name": "Courses",
+    "course.sort.sort_by": "Sort By",
+    "course.sort.default": "Default",
+    "course.sort.option_one": "New Courses",
+    "course.sort.option_two": "Most Reviewed",
+    "course.sort.option_three": "Highest Rated",
+    "course.sort.option_four": "Highest Student",
+    "course.filter.languages": "Languages",
+    "course.filter.category": "Category",
+    "course.filter.price": "Price",
+    "course.filter.level": "Level",
+    "course.filter.video_duration": "Video Duration",
+    "course.filter.rating": "Rating",
+    "course.filter.name_button_submit": "FILTER RESULTS",
+    "course.level.begin": "Beginner",
+    "course.level.intermediate": "Intermediate",
+    "course.level.advanced": "Advanced",
+    "course.duration_time": "Hours",
+    "course.rating_up": "up",
+    "course.lessons": "lessons",
+    "course.reviews": "reviews"
 }

@@ -31,12 +31,22 @@ class CourseService
 
     /**
      * @param GetCoursesRequest $request
-     * @return LengthAwarePaginator<Course>
+     * @return array
      */
-    public function getCourses(GetCoursesRequest $request): LengthAwarePaginator
+    public function getCourses(GetCoursesRequest $request): array
     {
-        // dd($this->courseRepo->getCourses($request));
-        return $this->courseRepo->getCourses($request);
+        $courses = $this->courseRepo->getCourses($request);
+
+        $categoryInfo = [];
+        foreach ($courses->groupBy('category.name') as $category => $group) {
+            $categoryInfo[] = (object) [
+                'name' => $category,
+                'count' => $group->count(),
+                'id' => $group->first()->category->id,
+            ];
+        }
+
+        return ['courses' => $courses, 'categoryInfo' => $categoryInfo];
     }
 
     /**
