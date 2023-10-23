@@ -27,11 +27,11 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request): RedirectResponse
     {
-        session()->flash('error', __('messages.user.error.create_comment'));
-        if ($this->commentService->create($request->validated(), (int)auth()->id())) {
-            session()->forget('error');
-            session()->flash('message', __('messages.user.success.create_comment'));
+        if ($this->commentService->create($request)) {
+            session()->flash('message', __('messages.comment.success.create'));
+            return redirect()->back();
         }
+        session()->flash('error', __('messages.comment.error.create'));
 
         return redirect()->back();
     }

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\StoreCommentRequest;
 use App\Repositories\Interfaces\CommentRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -29,13 +30,15 @@ class CommentService
     }
 
     /**
-     * @param array $data
-     * @param int $userId
+     * Add comment
+     * @param StoreCommentRequest $request
      * @return Model
      */
-    public function create($data, $userId): Model
+    public function create(StoreCommentRequest $request): Model
     {
-        $data = array_merge(['user_id' => $userId], $data);
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+
         return $this->commentRepo->create($data);
     }
 
