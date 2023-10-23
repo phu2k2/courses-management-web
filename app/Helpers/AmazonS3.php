@@ -2,8 +2,8 @@
 
 namespace App\Helpers;
 
-use Aws\S3\S3Client;
-use Aws\CommandInterface;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Filesystem\FilesystemAdapter;
 
 class AmazonS3
 {
@@ -13,58 +13,35 @@ class AmazonS3
     protected const EXPIRATION_TIME = 60;
 
     /**
-     * @var S3Client
+     * @var FilesystemAdapter
      */
     protected $client;
 
-    public function __construct()
-    {
-        $this->client = new S3Client([
-            'credentials' => [
-                'key'    => env('AWS_ACCESS_KEY_ID'),
-                'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            ],
-            'region'      => env('AWS_DEFAULT_REGION'),
-            'version'     => "latest",
-            'bucket_endpoint' => false,
-            'use_path_style_endpoint' => true,
-            'endpoint' => env('AWS_ENDPOINT'),
-        ]);
-    }
-
     /**
-     * Create a pre-signed URL for the given S3 command object.
+     * Define storage to save
      *
-     * @param CommandInterface $command Command to create a pre-signed
-     *                                               URL for.
-     * @param int $expiration The time at which the URL should expire(minutes).
-     *
-     * @return string
+     * @return $this
      */
-    protected function createPresignedUrl(CommandInterface $command, int $expiration): string
+    public function s3Client()
     {
-        $request = $this->client->createPresignedRequest($command, now()->addMinutes($expiration));
-        return (string) $request->getUri();
+        $this->client = Storage::disk('s3');
+        return $this;
     }
 
     /**
      * Gennerate presigned url has expried time.
      *
      * @param string $objectKey The key of the object
-     * @param string $contentType
      * @param int $expiration The time at which the URL should expire(minutes).
      *
      * @return string
      */
-    public function getPreSignedUploadUrl(string $objectKey, string $contentType = 'image/jpeg', int $expiration = self::EXPIRATION_TIME): string
+    public function getPreSignedUploadUrl(string $objectKey, int $expiration = self::EXPIRATION_TIME): string
     {
-        $command = $this->client->getCommand('PutObject', [
-            'Bucket' => env('AWS_BUCKET'),
-            'Key'    => $objectKey,
-            'ContentType' => $contentType,
-        ]);
-
-        return $this->createPresignedUrl($command, $expiration);
+        return $this->s3Client()->client->temporaryUploadUrl(
+            $objectKey,
+            now()->addMinutes($expiration)
+        )['url'];
     }
 
     /**
@@ -77,11 +54,9 @@ class AmazonS3
      */
     public function getObjectUrl(string $objectKey, int $expiration = self::EXPIRATION_TIME): string
     {
-        $command = $this->client->getCommand('GetObject', [
-            'Bucket' => env('AWS_BUCKET'),
-            'Key'    => $objectKey,
-        ]);
-
-        return $this->createPresignedUrl($command, $expiration);
+        return $this->s3Client()->client->temporaryUrl(
+            $objectKey,
+            now()->addMinutes($expiration)
+        );
     }
 }

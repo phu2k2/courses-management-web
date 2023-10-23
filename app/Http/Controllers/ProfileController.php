@@ -60,11 +60,9 @@ class ProfileController extends Controller
     public function updateImage()
     {
         $userId = auth()->id();
-        $imagePath = "profile/{$userId}/avatar.jpg";
+        $this->profileService->updateOrCreateProfile($userId, ['avatar' => "profile/{$userId}/avatar.jpg"]);
 
-        $this->profileService->updateOrCreateProfile($userId, ['avatar' => $imagePath]);
-
-        return response()->json(['success' => __('messages.profile.success.update')]);
+        return response()->json(['success' => __('messages.profile.success.update_image')]);
     }
 
     /**
@@ -76,8 +74,7 @@ class ProfileController extends Controller
     {
         $userId = auth()->id();
         $path = "profile/{$userId}/avatar.jpg";
-        $url = AmazonS3::getPreSignedUploadUrl($path);
 
-        return response()->json(['url' => $url]);
+        return response()->json(['url' => AmazonS3::getPreSignedUploadUrl($path)]);
     }
 }

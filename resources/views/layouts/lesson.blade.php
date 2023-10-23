@@ -27,6 +27,7 @@
 </head>
 
 <body class="bg-dark">
+    @yield('modal')
     <!-- NAVBAR ================================================== -->
     <header class="bg-portgore py-3">
         <div class="px-5 px-lg-8 w-100">
@@ -55,7 +56,7 @@
 
 
     <!-- Theme JS -->
-    <script src="{{ asset('assets/js/theme.min.js') }}"></script>
+    <script type="module" src="{{ asset('assets/js/theme.min.js') }}"></script>
     @yield('script')
 </body>
 

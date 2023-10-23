@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
@@ -29,6 +30,7 @@ Route::prefix('register')->name('register.')->group(function () {
     Route::get('show', [RegisterController::class, 'show'])->name('show');
     Route::post('store', [RegisterController::class, 'store'])->name('store');
 });
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile');
     Route::put('profile', [ProfileController::class, 'update'])->name('update');
@@ -41,3 +43,5 @@ Route::resource('carts', CartController::class)->only(['index', 'store', 'destro
 Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show');
 });
+
+Route::resource('comments', CommentController::class)->only(['destroy']);

@@ -1,9 +1,36 @@
 @extends('layouts.lesson')
-@section('title', 'lesson')
-
+@section('title', 'Lesson: ' . $lesson->title)
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
+@endsection
+@section('script')
+    <script type="module" src="{{ asset('assets/js/comment.js') }}"></script>
+    <script src="{{ asset('assets/js/submitForm.js') }}"></script>
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
+@endsection
+@section('modal')
+    <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentModalLabel">Delete</h5>
+                    </button>
+                </div>
+                <div class="modal-body delete_item">
+                    Do you really want to delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" id="submitDelete" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 @section('content')
     <!-- COURSE ================================================== -->
-
+    @include('layouts.message')
     <div class="container container-wd">
         <div class="row pt-8 pb-10">
             <div class="col-lg-8">
@@ -44,106 +71,226 @@
                 </a>
 
                 <h3 class="text-white mb-6">Comment</h3>
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <i class="fa-solid fa-bell me-2"></i>
+                        <strong class="me-auto">Notification</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">Toast</div>
+                </div>
                 <ul class="list-unstyled pt-2">
-                    <li class="media d-flex">
-                        <div class="avatar avatar-xxl me-3 me-md-6 flex-shrink-0">
-                            <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
-                                class="avatar-img rounded-circle">
-                        </div>
-                        <div class="media-body flex-grow-1">
-                            <div class="d-md-flex align-items-center mb-5">
-                                <div class="me-auto mb-4 mb-md-0">
-                                    <h5 class="text-white mb-0">Oscar Cafeo</h5>
-                                    <p class="font-size-sm font-italic">Beautiful courses</p>
-                                </div>
-                                <div class="star-rating">
-                                    <div class="rating" style="width:100%;"></div>
-                                </div>
+                    @foreach ($comments as $comment)
+                        @if (empty($comment->parent_id))
+                            <div class="row-cols-md-12 mb-6">
+                                <li class="media d-flex">
+                                    <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
+                                        <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
+                                            class="avatar-img rounded-circle">
+                                    </div>
+                                    <div class="media-body flex-grow-1">
+                                        <div class="d-md-flex align-items-center mb-1">
+                                            <div class="me-auto mb-4 mb-md-0">
+                                                <h5 class="text-white mb-1 fw-semi-bold">
+                                                    {{ $comment->user->profile?->full_name }}
+                                                    <span
+                                                        class="font-size-sm text-blue">{{ '@' . $comment->user->username }}</span>
+                                                </h5>
+                                                <p class="font-size-sm font-italic">
+                                                    {{ $comment->created_at->diffForHumans() }}
+                                                </p>
+                                            </div>
+                                            @if (auth()->id() == $comment->user->id)
+                                                <div class="me-0 sidenav-right">
+                                                    <button class="btn" data-bs-toggle="dropdown" href="#"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
+                                                        aria-labelledby="navbarActionParent">
+                                                        <li class="dropdown-item">
+                                                            <a class="dropdown-link btn-edit" href="javascript:void(0)"
+                                                                data-comment-id="{{ $comment->id }}">
+                                                                Edit
+                                                            </a>
+                                                        </li>
+                                                        <li class="dropdown-item">
+                                                            <form id="formDelete{{ $comment->id }}"
+                                                                action="{{ route('comments.destroy', ['comment' => $comment->id]) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $comment->id }}">
+                                                                <a class="dropdown-link text-alizarin" id="commentId"
+                                                                    data-id="{{ $comment->id }}" href="#"
+                                                                    data-bs-toggle="modal" data-bs-target="#commentModal">
+                                                                    Delete
+                                                                </a>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <p class="mb-2 line-height-md comment-content {{ $comment->id }}">
+                                            {{ $comment->content }}</p>
+                                        @auth
+                                            <div class="edit-comment {{ $comment->id }}">
+                                                <div class="bg-portgore rounded p-1 p-md-4 mb-4">
+                                                    <form
+                                                        data-url="{{ route('comments.update', ['comment' => $comment->id]) }}"
+                                                        id="formEdit{{ $comment->id }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content{{ $comment->id }}" name="content"
+                                                            rows="3" placeholder="Add you comment">{{ $comment->content }}</textarea>
+                                                        <button type="button" class="btn btn-orange btn-block mw-md-200p"
+                                                            onclick="submitForm({{ $comment->id }})">SUBMIT</button>
+                                                        <a class="btn btn-gray-200 btn-block mw-md-200p btn-edit"
+                                                            data-comment-id="{{ $comment->id }}">CANCEL</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endauth
+                                        <div class="mb-4">
+                                            <button class="btn fa-solid fa-reply btn-reply"
+                                                data-parentId="{{ $comment->id }}"></button>Reply
+                                            <button class="btn fa-regular fa-flag"></button>Report (To Do)
+                                        </div>
+                                        @auth
+                                            <div class="reply-comment {{ $comment->id }}">
+                                                <div class="bg-portgore rounded p-1 p-md-4 mb-4">
+                                                    <form action="" method="POST">
+                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content" name="content" rows="3"
+                                                            placeholder="Add you comment" data-parentId="{{ $comment->id }}"></textarea>
+                                                        <button type="submit"
+                                                            class="btn btn-orange btn-block mw-md-300p">SUBMIT</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endauth
+                                        @if ($comments->where('parent_id', $comment->id)->count() != 0)
+                                            <a class="mb-4 btn" href="javascript:void(0)">
+                                                <span class="show-reply {{ $comment->id }}"
+                                                    data-parentId="{{ $comment->id }}">
+                                                    <i class="fa-solid fa-chevron-down"></i>
+                                                    Show {{ $comments->where('parent_id', $comment->id)->count() }} replys
+                                                </span>
+                                            </a>
+                                        @endif
+                                    </div>
+                                </li>
+                                @if ($comments->where('parent_id', $comment->id)->count() != 0)
+                                    <div class="offset-1 col-md-11 media reply-wrap {{ $comment->id }}">
+                                        @foreach ($comments as $childComment)
+                                            @if ($childComment->parent_id == $comment->id)
+                                                <li class="d-flex">
+                                                    <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
+                                                        <img src="{{ asset('assets/img/products/product-2.jpg') }}"
+                                                            alt="..." class="avatar-img rounded-circle">
+                                                    </div>
+                                                    <div class="media-body flex-grow-1">
+                                                        <div class="d-md-flex align-items-center mb-1">
+                                                            <div class="me-auto mb-4 mb-md-0">
+                                                                <h5 class="text-white mb-1 fw-semi-bold">
+                                                                    {{ $childComment->user->profile?->full_name }}
+                                                                    <span
+                                                                        class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span>
+                                                                </h5>
+                                                                <p class="font-size-sm font-italic">
+                                                                    {{ $childComment->created_at->diffForHumans() }}
+                                                                </p>
+                                                            </div>
+                                                            @if (auth()->id() == $childComment->user->id)
+                                                                <div class="me-0 sidenav-right">
+                                                                    <button class="btn" data-bs-toggle="dropdown"
+                                                                        href="#" aria-haspopup="true"
+                                                                        aria-expanded="false">
+                                                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
+                                                                        aria-labelledby="navbarAction">
+                                                                        <li class="dropdown-item">
+                                                                            <a class="dropdown-link btn-edit" href="javascript:void(0)"
+                                                                                data-comment-id="{{ $childComment->id }}">
+                                                                                Edit
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="dropdown-item">
+                                                                            <form id="formDelete{{ $childComment->id }}"
+                                                                                action="{{ route('comments.destroy', ['comment' => $childComment->id]) }}"
+                                                                                method="post">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <input type="hidden" name="id"
+                                                                                    value="{{ $childComment->id }}">
+                                                                                <a class="dropdown-link text-alizarin"
+                                                                                    id="commentId"
+                                                                                    data-id="{{ $childComment->id }}"
+                                                                                    href="#" data-bs-toggle="modal"
+                                                                                    data-bs-target="#commentModal">
+                                                                                    Delete
+                                                                                </a>
+                                                                            </form>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                        <p
+                                                            class="mb-2 line-height-md comment-content {{ $childComment->id }}">
+                                                            {{ $childComment->content }}</p>
+                                                        @auth
+                                                            <div class="edit-comment {{ $childComment->id }}">
+                                                                <div class="bg-portgore rounded p-1 p-md-4 mb-4">
+                                                                    <form
+                                                                        data-url="{{ route('comments.update', ['comment' => $childComment->id]) }}"
+                                                                        id="formEdit{{ $childComment->id }}" method="POST">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content{{ $childComment->id }}"
+                                                                            name="content" rows="3" placeholder="Add you comment">{{ $childComment->content }}</textarea>
+                                                                        <button type="button"
+                                                                            class="btn btn-orange btn-block mw-md-200p"
+                                                                            onclick="submitForm({{ $childComment->id }})">SUBMIT</button>
+                                                                        <a class="btn btn-gray-200 btn-block mw-md-200p btn-edit"
+                                                                            data-comment-id="{{ $childComment->id }}">CANCEL</a>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        @endauth
+                                                        <div class="mb-4">
+                                                            <button class="btn fa-regular fa-flag"></button>Report (To Do)
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                        <a class="mb-6 btn" href="javascript:void(0)">
+                                            <span class="hide-reply {{ $comment->id }}"
+                                                data-parentId="{{ $comment->id }}">
+                                                <i class="fa-solid fa-chevron-up"></i> Hide comments
+                                            </span>
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
-                            <p class="mb-6 line-height-md">This course was well organized and covered a lot more details
-                                than any other Figma courses. I really enjoy it. One suggestion is that it can be much
-                                better if we could complete the prototype together. Since we created 24 frames, I really
-                                want to test it on Figma mirror to see all the connections. Could you please let me take
-                                a
-                                look at the complete prototype?</p>
-                        </div>
-                    </li>
-                    <li class="media d-flex">
-                        <div class="avatar avatar-xxl me-3 me-md-6 flex-shrink-0">
-                            <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
-                                class="avatar-img rounded-circle">
-                        </div>
-                        <div class="media-body flex-grow-1">
-                            <div class="d-md-flex align-items-center mb-5">
-                                <div class="me-auto mb-4 mb-md-0">
-                                    <h5 class="text-white mb-0">Alex Morgan</h5>
-                                    <p class="font-size-sm font-italic">Beautiful courses</p>
-                                </div>
-                                <div class="star-rating">
-                                    <div class="rating" style="width:100%;"></div>
-                                </div>
-                            </div>
-                            <p class="mb-6 line-height-md">This course was well organized and covered a lot more details
-                                than any other Figma courses. I really enjoy it. One suggestion is that it can be much
-                                better if we could complete the prototype together. Since we created 24 frames, I really
-                                want to test it on Figma mirror to see all the connections. Could you please let me take
-                                a
-                                look at the complete prototype?</p>
-                        </div>
-                    </li>
+                        @endif
+                    @endforeach
                 </ul>
 
                 <div class="bg-portgore rounded p-6 p-md-9 mb-8">
-                    <h3 class="text-white mb-2">Add Reviews & Rate</h3>
-                    <div class="">What is it like to Course?</div>
+                    <h3 class="text-white mb-2">Add Comment</h3>
+                    <div class="">What is it like to Lesson?</div>
                     <form>
-                        <div class="clearfix">
-                            <fieldset class="slect-rating mb-3">
-                                <input type="radio" id="star5" name="rating" value="5" />
-                                <label class="full" for="star5" title="Awesome - 5 stars"></label>
-
-                                <input type="radio" id="star4half" name="rating" value="4 and a half" />
-                                <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-
-                                <input type="radio" id="star4" name="rating" value="4" />
-                                <label class="full" for="star4" title="Pretty good - 4 stars"></label>
-
-                                <input type="radio" id="star3half" name="rating" value="3 and a half" />
-                                <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-
-                                <input type="radio" id="star3" name="rating" value="3" />
-                                <label class="full" for="star3" title="Meh - 3 stars"></label>
-
-                                <input type="radio" id="star2half" name="rating" value="2 and a half" />
-                                <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-
-                                <input type="radio" id="star2" name="rating" value="2" />
-                                <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
-
-                                <input type="radio" id="star1half" name="rating" value="1 and a half" />
-                                <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-
-                                <input type="radio" id="star1" name="rating" value="1" />
-                                <label class="full" for="star1" title="Sucks big time - 1 star"></label>
-
-                                <input type="radio" id="starhalf" name="rating" value="half" />
-                                <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                            </fieldset>
-                        </div>
-
                         <div class="form-group mb-6">
-                            <label class="text-white" for="exampleInputTitle1">Review Title</label>
-                            <input type="text" class="form-control placeholder-1 bg-dark border-0"
-                                id="exampleInputTitle1" placeholder="Courses">
-                        </div>
-
-                        <div class="form-group mb-6">
-                            <label class="text-white" for="exampleFormControlTextarea1">Review Content</label>
-                            <textarea class="form-control placeholder-1 bg-dark border-0" id="exampleFormControlTextarea1" rows="6"
+                            <label class="text-white" for="content">Content</label>
+                            <textarea class="form-control placeholder-1 bg-dark border-0" id="content" name="content" rows="5"
                                 placeholder="Content"></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-orange btn-block mw-md-300p">SUBMIT REVIEW</button>
+                        <button type="submit" class="btn btn-orange btn-block mw-md-300p">SUBMIT</button>
                     </form>
                 </div>
 
@@ -186,16 +333,16 @@
                                 placeholder="Search item" aria-label="Search">
                         </div>
                     </form>
-                    @foreach ($topics as $topic)
+                    @foreach ($topics as $key => $topic)
                         <div id="accordionCurriculum" class="">
                             <div class="overflow-hidden bg-dark rounded mb-6">
-                                <div class="d-flex align-items-center" id="curriculumheadingOne">
+                                <div class="d-flex align-items-center" id="curriculumheading{{ $key }}">
                                     <h5 class="mb-0 w-100">
                                         <button
                                             class="d-flex align-items-center p-5 min-height-80 text-white fw-medium collapse-accordion-toggle line-height-one"
                                             type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#CurriculumcollapseOne" aria-expanded="true"
-                                            aria-controls="CurriculumcollapseOne">
+                                            data-bs-target="#Curriculumcollapse{{ $key }}" aria-expanded="true"
+                                            aria-controls="Curriculumcollapse{{ $key }}">
                                             <span class="me-4 text-white d-flex">
                                                 <!-- Icon -->
                                                 <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -215,8 +362,9 @@
                                     </h5>
                                 </div>
                                 @foreach ($topic->lessons as $lesson)
-                                    <div id="CurriculumcollapseOne" class="collapse show"
-                                        aria-labelledby="curriculumheadingOne" data-parent="#accordionCurriculum">
+                                    <div id="Curriculumcollapse{{ $key }}" class="collapse show"
+                                        aria-labelledby="curriculumheading{{ $key }}"
+                                        data-parent="#accordionCurriculum">
 
                                         <div
                                             class="border-top px-5 border-color-20 py-4 min-height-70 d-md-flex align-items-center">

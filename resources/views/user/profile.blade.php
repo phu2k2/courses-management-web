@@ -58,8 +58,7 @@
                                                         Save image
                                                     </span>
                                                 </div>
-                                                <small>For best results, use an image at least 128px by 128px in .jpg
-                                                    format</small>
+                                                <small>Choose image and click save</small>
                                             </div>
                                         </div>
                                     </div>
@@ -135,17 +134,16 @@
                     //save image to minio server
                     await axios.put(url, selectedFile, {
                         headers: {
-                            'Content-Type': 'application/octet-stream',
+                            'Content-Type': 'image/jpeg',
                         },
                     });
+
+                    //save path image to database
+                    const responseUpdate = await axios.put("{{ route('users.updateImage') }}");
+                    alert(responseUpdate.data.success);
                 } catch (error) {
                     alert('Error uploading image');
-                } finally {
-                    //save path image to database
-                    await axios.put("{{ route('users.updateImage') }}");
-                    alert('Image save successfully');
                 }
-
             } else {
                 alert('You have not selected a file')
             }

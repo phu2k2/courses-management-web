@@ -1,3 +1,4 @@
+@include('layouts.modal')
 <!-- NAVBAR
 ================================================== -->
 <header class="navbar navbar-expand-xl navbar-light bg-white border-bottom py-2 py-xl-4">
@@ -551,8 +552,8 @@
             </li>
             <li class="nav-item border-0 px-0">
                 <a href="#" class="nav-link d-flex px-3 px-md-4 position-relative text-secondary icon-xs">
-                    <span class="badge badge-alizarin rounded-circle fw-bold badge-float mt-n1 ms-n2 px-0 w-16"
-                        style="font-size: 8px;">2</span>
+                    <span class="badge badge-alizarin rounded-circle fw-bold badge-float mt-n1 ms-n2 px-0 w-16" id="badgeCart"
+                    style="font-size: 8px;">{{ $countCart }}</span>
                     <!-- Icon -->
                     <svg width="13" height="15" viewBox="0 0 13 15" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -578,7 +579,7 @@
                             </a>
                         </li>
                         <li class="dropdown-item">
-                            <a class="dropdown-link" href="#">
+                            <a class="dropdown-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogout">
                                 {{ __('logout') }}
                             </a>
                         </li>
