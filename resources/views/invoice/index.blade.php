@@ -443,7 +443,7 @@
                                     <li class="woocommerce-order-overview__total total">
                                         Total:
                                         <strong><span class="woocommerce-Price-amount amount"><span
-                                                    class="woocommerce-Price-currencySymbol">£</span>109.95</span></strong>
+                                                    class="woocommerce-Price-currencySymbol">$</span>109.95</span></strong>
                                     </li>
 
                                     <li class="woocommerce-order-overview__payment-method method">
@@ -495,7 +495,7 @@
                                             <tr>
                                                 <th scope="row">Total:</th>
                                                 <td><span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">£</span>109.95</span>
+                                                            class="woocommerce-Price-currencySymbol">$</span>109.95</span>
                                                 </td>
                                             </tr>
                                         </tfoot>
