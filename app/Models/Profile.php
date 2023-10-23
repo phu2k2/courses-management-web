@@ -39,7 +39,7 @@ class Profile extends Model
         return AmazonS3::getObjectUrl($value);
     }
 
-    /** 
+    /**
      * @return string
      */
     public function getFullNameAttribute()
