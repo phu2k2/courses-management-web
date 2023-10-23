@@ -19,6 +19,14 @@ return [
             'update' => 'Update profile was fail'
         ],
     ],
+    'comment' => [
+        'success' => [
+            'delete' => 'Delete comment was successful',
+        ],
+        'error' => [
+            'delete' => 'Delete comment was failed',
+        ],
+    ],
     'cart' => [
         'success' => [
             'delete' => 'successfully removed the course from the shopping cart',

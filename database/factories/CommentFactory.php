@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Comment;
 use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,7 +22,7 @@ class CommentFactory extends Factory
         return [
             'lesson_id' => Lesson::all('id')->random(),
             'user_id' => User::all('id')->random(),
-            'parent_id' => fake()->numberBetween(0, 5),
+            'parent_id' => fake()->optional()->numberBetween(1, 10),
             'content' => fake()->paragraph(),
         ];
     }
