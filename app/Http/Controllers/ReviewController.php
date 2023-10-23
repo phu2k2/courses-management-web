@@ -24,11 +24,11 @@ class ReviewController extends Controller
      */
     public function store(StoreReviewRequest $request): RedirectResponse
     {
-        session()->flash('message', __('messages.user.success.create_review'));
-        if (!$this->reviewService->addReview($request)) {
-            session()->forget('message');
-            session()->flash('error', __('messages.user.error.create_review'));
+        if ($this->reviewService->addReview($request)) {
+            session()->flash('message', __('messages.review.success.create'));
+            return redirect()->back();
         }
+        session()->flash('error', __('messages.review.error.create'));
 
         return redirect()->back();
     }

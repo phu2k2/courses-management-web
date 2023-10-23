@@ -443,7 +443,9 @@
                                         <div class="d-md-flex align-items-center mb-5">
                                             <div class="me-auto mb-4 mb-md-0">
                                                 <h5 class="mb-0">
-                                                    {{ $review->user->profile?->full_name ?? $review->user->username }}
+                                                    {{ $review->user->profile?->full_name }}
+                                                    <span
+                                                        class="font-size-sm text-blue">{{ '@' . $review->user->username }}</span>
                                                 </h5>
                                             </div>
                                             <div class="star-rating">
@@ -461,7 +463,7 @@
                         </ul>
 
                         @auth
-                            @if ($reviews->where('user_id', auth()->id())->where('course_id', $course->id)->count() == 0)
+                            @if ($reviews->where('user_id', auth()->id())->where('course_id', $course->id)->isEmpty())
                                 <div class="border shadow rounded p-6 p-md-9">
                                     <h3 class="mb-2">Add Reviews & Rate</h3>
                                     <div class="">What is it like to Course?</div>
@@ -578,25 +580,25 @@
                         <span class="ms-2">2 days left at this price!</span>
                     </div>
 
-                        <button class="btn btn-primary btn-block mb-3" type="button" name="button">BUY NOW</button>
-                        <form action="{{ route('carts.store') }}" method="POST">
-                            @csrf
-                            <input type = "hidden" name="course_id" value = "{{ $course->id }}">
-                            <button class="btn btn-orange btn-block mb-6" type="submit" name="button">ADD TO CART</button>
-                        </form>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex align-items-center py-3">
-                                <div class="text-secondary d-flex icon-uxs">
-                                    <!-- Icon -->
-                                    <svg width="16" height="16" viewBox="0 0 16 16"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M14.3164 4.20996C13.985 4.37028 13.8464 4.76904 14.0067 5.10026C14.4447 6.00505 14.6667 6.98031 14.6667 8C14.6667 11.6759 11.6759 14.6667 8 14.6667C4.32406 14.6667 1.33333 11.6759 1.33333 8C1.33333 4.32406 4.32406 1.33333 8 1.33333C9.52328 1.33333 10.9543 1.83073 12.1387 2.77165C12.4259 3.00098 12.846 2.95296 13.0754 2.66471C13.3047 2.37663 13.2567 1.95703 12.9683 1.72803C11.5661 0.613607 9.8016 0 8 0C3.58903 0 0 3.58903 0 8C0 12.411 3.58903 16 8 16C12.411 16 16 12.411 16 8C16 6.77767 15.7331 5.60628 15.2067 4.51969C15.0467 4.18766 14.6466 4.04932 14.3164 4.20996Z"
-                                            fill="currentColor" />
-                                        <path
-                                            d="M7.99967 2.66663C7.63167 2.66663 7.33301 2.96529 7.33301 3.33329V7.99996C7.33301 8.36796 7.63167 8.66663 7.99967 8.66663H11.333C11.701 8.66663 11.9997 8.36796 11.9997 7.99996C11.9997 7.63196 11.701 7.33329 11.333 7.33329H8.66634V3.33329C8.66634 2.96529 8.36768 2.66663 7.99967 2.66663Z"
-                                            fill="currentColor" />
-                                    </svg>
+                    <button class="btn btn-primary btn-block mb-3" type="button" name="button">BUY NOW</button>
+                    <form action="{{ route('carts.store') }}" method="POST">
+                        @csrf
+                        <input type = "hidden" name="course_id" value = "{{ $course->id }}">
+                        <button class="btn btn-orange btn-block mb-6" type="submit" name="button">ADD TO CART</button>
+                    </form>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex align-items-center py-3">
+                            <div class="text-secondary d-flex icon-uxs">
+                                <!-- Icon -->
+                                <svg width="16" height="16" viewBox="0 0 16 16"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M14.3164 4.20996C13.985 4.37028 13.8464 4.76904 14.0067 5.10026C14.4447 6.00505 14.6667 6.98031 14.6667 8C14.6667 11.6759 11.6759 14.6667 8 14.6667C4.32406 14.6667 1.33333 11.6759 1.33333 8C1.33333 4.32406 4.32406 1.33333 8 1.33333C9.52328 1.33333 10.9543 1.83073 12.1387 2.77165C12.4259 3.00098 12.846 2.95296 13.0754 2.66471C13.3047 2.37663 13.2567 1.95703 12.9683 1.72803C11.5661 0.613607 9.8016 0 8 0C3.58903 0 0 3.58903 0 8C0 12.411 3.58903 16 8 16C12.411 16 16 12.411 16 8C16 6.77767 15.7331 5.60628 15.2067 4.51969C15.0467 4.18766 14.6466 4.04932 14.3164 4.20996Z"
+                                        fill="currentColor" />
+                                    <path
+                                        d="M7.99967 2.66663C7.63167 2.66663 7.33301 2.96529 7.33301 3.33329V7.99996C7.33301 8.36796 7.63167 8.66663 7.99967 8.66663H11.333C11.701 8.66663 11.9997 8.36796 11.9997 7.99996C11.9997 7.63196 11.701 7.33329 11.333 7.33329H8.66634V3.33329C8.66634 2.96529 8.36768 2.66663 7.99967 2.66663Z"
+                                        fill="currentColor" />
+                                </svg>
 
                             </div>
                             <h6 class="mb-0 ms-3 me-auto">Duration</h6>

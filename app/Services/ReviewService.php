@@ -35,13 +35,9 @@ class ReviewService
      */
     public function addReview(StoreReviewRequest $request): Model
     {
-        $data = array_merge(
-            [
-                'user_id' => auth()->id(),
-                'course_id' => $request->input('course_id')
-            ],
-            $request->validated()
-        );
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+
         return $this->reviewRepo->create($data);
     }
 }
