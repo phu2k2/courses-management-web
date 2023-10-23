@@ -39,7 +39,7 @@ class UserService
      */
     public function getInfor($userId)
     {
-        return  $this->userRepository->getInfor($userId);
+        return $this->userRepository->getInfor($userId);
     }
 
     /**
