@@ -35,5 +35,10 @@ return [
         'error' => [
             'delete' => 'Removing course from cart failed'
         ]
+    ],
+    'checkout' => [
+        'error' => [
+            'save' => 'Please choose at least one course'
+        ]
     ]
 ];

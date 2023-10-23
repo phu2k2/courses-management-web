@@ -68,4 +68,13 @@ class CartService
     {
         return count($this->cartRepo->getCartByUser($userId));
     }
+
+    /**
+     * @param int $id
+     * @return Collection
+     */
+    public function findSelectCart($id)
+    {
+        return $this->cartRepo->getCourseToCart($id);
+    }
 }
