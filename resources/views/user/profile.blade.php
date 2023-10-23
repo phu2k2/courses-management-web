@@ -139,8 +139,8 @@
                     });
 
                     //save path image to database
-                    await axios.put("{{ route('users.updateImage') }}");
-                    alert('Image save successfully');
+                    const responseUpdate = await axios.put("{{ route('users.updateImage') }}");
+                    alert(responseUpdate.data.success);
                 } catch (error) {
                     alert('Error uploading image');
                 }

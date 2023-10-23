@@ -62,7 +62,7 @@ class ProfileController extends Controller
         $userId = auth()->id();
         $this->profileService->updateOrCreateProfile($userId, ['avatar' => "profile/{$userId}/avatar.jpg"]);
 
-        return response()->json(['success' => __('messages.profile.success.update')]);
+        return response()->json(['success' => __('messages.profile.success.update_image')]);
     }
 
     /**
