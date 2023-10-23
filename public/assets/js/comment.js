@@ -17,4 +17,25 @@ $(document).ready(function () {
         $(`.reply-wrap.${parentId}`).hide();
         $(`.show-reply.${parentId}`).show();
     })
+
+    $("a#commentId").bind("click", function () {
+        var commentId = $(this).attr("data-id");
+        $("#submitDelete").attr("data-id", `${commentId}`);
+    })
+
+    $("#submitDelete").on("click", function () {
+        var commentId = $(this).attr("data-id");
+        $(`#formDelete${commentId}`).trigger("submit");
+    })
+
+    setTimeout(() => {
+        $(".notification-toast").hide();
+    }, 2000);
+
+    $(".edit-comment").hide();
+    $(".btn-edit").bind("click", function () {
+        var editId = $(this).attr("data-comment-id");
+        $(`.edit-comment.${editId}`).toggle();
+        $(`.comment-content.${editId}`).toggle();
+    })
 });
