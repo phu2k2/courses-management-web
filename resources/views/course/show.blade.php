@@ -535,7 +535,7 @@
 
                     <div class="pt-5 pb-4 px-5 px-lg-3 px-xl-5">
                         <div class="d-flex align-items-center mb-2">
-                            <ins class="h2 mb-0">${{ $course->discounted_price }}</ins>
+                            <ins class="h2 mb-0">${{ number_format($course->discounted_price, 2) }}</ins>
                             <del class="ms-3">{{ $course->price }}</del>
                             <div class="badge badge-lg badge-purple text-white ms-auto fw-normal">{{ $course->discount }}%
                                 Off</div>

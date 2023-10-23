@@ -33,9 +33,11 @@ function handleDeleteButtonClick() {
         selectedIds.push(checkbox.getAttribute('data-id'));
     });
     var idsString = selectedIds;
+    var count = 0;
     selectedIds.forEach(function (id) {
-        modalBody.innerHTML += '<ul><li><strong>' + id + '</strong></li><ul>';
+        count++
     });
+    modalBody.innerHTML += '<div><strong>' + 'Do you want to ' + count + ' items ?' + '</strong></div>';
     document.getElementById('selectedItemsInput').value = idsString;
 }
 

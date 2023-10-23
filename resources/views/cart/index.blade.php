@@ -19,9 +19,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">{{ __('delete_label') }}</h5>
-                        </button>
                     </div>
                     <div class="modal-body delete_item">
+                        Do you want to delete items?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
@@ -53,7 +53,7 @@
         @include('layouts.message')
     </header>
     <!-- SHOP CART
-                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                                                ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             <div id="primary" class="content-area">
@@ -85,15 +85,12 @@
                                             @endphp
                                             @if (count($cart) > 0)
                                                 @foreach ($cart as $item)
-                                                    @php
-                                                        $discountAmount = $item->course->price * ($item->course->discount / 100);
-                                                        $discountedPrice = $item->course->price - $discountAmount;
-                                                    @endphp
                                                     <tr class="woocommerce-cart-form__cart-item cart_item">
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input flexCheckDefault"
-                                                                    type="checkbox" data-price="{{ $discountedPrice }}"
+                                                                    type="checkbox"
+                                                                    data-price="{{ number_format($item->course->discounted_price, 2) }}"
                                                                     data-id="{{ $item->id }}"
                                                                     onchange="calculateTotal()">
                                                             </div>
@@ -114,7 +111,7 @@
 
                                                         <td class="product-price" data-title="Price">
                                                             <span class="woocommerce-Price-amount amount"><span
-                                                                    class="woocommerce-Price-currencySymbol">$</span>{{ $discountedPrice }}</span>
+                                                                    class="woocommerce-Price-currencySymbol">$</span>{{ number_format($item->course->discounted_price, 2) }}</span>
                                                         </td>
 
                                                         <td class="product-quantity" data-title="Quantity">
