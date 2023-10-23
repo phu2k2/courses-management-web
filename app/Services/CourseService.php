@@ -35,7 +35,6 @@ class CourseService
      */
     public function getCourses(GetCoursesRequest $request): LengthAwarePaginator
     {
-        // dd($this->courseRepo->getCourses($request));
         return $this->courseRepo->getCourses($request);
     }
 
