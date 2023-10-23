@@ -41,4 +41,23 @@ class CommentService
         $result = $this->commentRepo->destroy($id);
         return $result;
     }
+
+    /**
+     * @param int $id
+     * @param int $userId
+     * @param array $request
+     *
+     * @return int|bool
+     */
+    public function update($id, $userId, $request)
+    {
+        $result = false;
+        if ($this->commentRepo->findComment($id, $userId)) {
+            $data = [];
+            $data['content'] = $request;
+            $result =  $this->commentRepo->update($id, $data);
+        }
+
+        return $result;
+    }
 }

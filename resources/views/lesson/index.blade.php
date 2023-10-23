@@ -5,6 +5,7 @@
 @endsection
 @section('script')
     <script type="module" src="{{ asset('assets/js/comment.js') }}"></script>
+    <script src="{{ asset('assets/js/submitForm.js') }}"></script>
     <script src="{{ asset('assets/js/toast.js') }}"></script>
 @endsection
 @section('modal')
@@ -70,6 +71,14 @@
                 </a>
 
                 <h3 class="text-white mb-6">Comment</h3>
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <i class="fa-solid fa-bell me-2"></i>
+                        <strong class="me-auto">Notification</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">Toast</div>
+                </div>
                 <ul class="list-unstyled pt-2">
                     @foreach ($comments as $comment)
                         @if (empty($comment->parent_id))
@@ -100,7 +109,8 @@
                                                     <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
                                                         aria-labelledby="navbarActionParent">
                                                         <li class="dropdown-item">
-                                                            <a class="dropdown-link" href="#">
+                                                            <a class="dropdown-link btn-edit"
+                                                                data-comment-id="{{ $comment->id }}">
                                                                 Edit
                                                             </a>
                                                         </li>
@@ -123,7 +133,26 @@
                                                 </div>
                                             @endif
                                         </div>
-                                        <p class="mb-2 line-height-md">{{ $comment->content }}</p>
+                                        <p class="mb-2 line-height-md comment-content {{ $comment->id }}">
+                                            {{ $comment->content }}</p>
+                                        @auth
+                                            <div class="edit-comment {{ $comment->id }}">
+                                                <div class="bg-portgore rounded p-1 p-md-4 mb-4">
+                                                    <form
+                                                        data-url="{{ route('comments.update', ['comment' => $comment->id]) }}"
+                                                        id="formEdit{{ $comment->id }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content{{ $comment->id }}" name="content"
+                                                            rows="3" placeholder="Add you comment">{{ $comment->content }}</textarea>
+                                                        <button type="button" class="btn btn-orange btn-block mw-md-200p"
+                                                            onclick="submitForm({{ $comment->id }})">SUBMIT</button>
+                                                        <a class="btn btn-gray-200 btn-block mw-md-200p btn-edit"
+                                                            data-comment-id="{{ $comment->id }}">CANCEL</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endauth
                                         <div class="mb-4">
                                             <button class="btn fa-solid fa-reply btn-reply"
                                                 data-parentId="{{ $comment->id }}"></button>Reply
@@ -183,7 +212,8 @@
                                                                     <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
                                                                         aria-labelledby="navbarAction">
                                                                         <li class="dropdown-item">
-                                                                            <a class="dropdown-link" href="#">
+                                                                            <a class="dropdown-link btn-edit"
+                                                                                data-comment-id="{{ $childComment->id }}">
                                                                                 Edit
                                                                             </a>
                                                                         </li>
@@ -208,7 +238,28 @@
                                                                 </div>
                                                             @endif
                                                         </div>
-                                                        <p class="mb-2 line-height-md">{{ $childComment->content }}</p>
+                                                        <p
+                                                            class="mb-2 line-height-md comment-content {{ $childComment->id }}">
+                                                            {{ $childComment->content }}</p>
+                                                        @auth
+                                                            <div class="edit-comment {{ $childComment->id }}">
+                                                                <div class="bg-portgore rounded p-1 p-md-4 mb-4">
+                                                                    <form
+                                                                        data-url="{{ route('comments.update', ['comment' => $childComment->id]) }}"
+                                                                        id="formEdit{{ $childComment->id }}" method="POST">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content{{ $childComment->id }}"
+                                                                            name="content" rows="3" placeholder="Add you comment">{{ $childComment->content }}</textarea>
+                                                                        <button type="button"
+                                                                            class="btn btn-orange btn-block mw-md-200p"
+                                                                            onclick="submitForm({{ $childComment->id }})">SUBMIT</button>
+                                                                        <a class="btn btn-gray-200 btn-block mw-md-200p btn-edit"
+                                                                            data-comment-id="{{ $childComment->id }}">CANCEL</a>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        @endauth
                                                         <div class="mb-4">
                                                             <button class="btn fa-regular fa-flag"></button>Report (To Do)
                                                         </div>
