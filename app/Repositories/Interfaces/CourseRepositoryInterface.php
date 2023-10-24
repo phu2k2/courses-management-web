@@ -11,7 +11,7 @@ interface CourseRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param GetCoursesRequest $request
-     * @return LengthAwarePaginator<Course>
+     * @return array
      */
-    public function getCourses($request): LengthAwarePaginator;
+    public function getCourses($request): array;
 }

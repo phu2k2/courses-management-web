@@ -27,6 +27,7 @@ class CourseController extends Controller
 
         return view('course.index', ['courses' => $data['courses'],
             'categoryInfo' => $data['categoryInfo'],
+            'totalCourses' => $data['totalCourses'],
         ]);
     }
 

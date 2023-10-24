@@ -35,18 +35,11 @@ class CourseService
      */
     public function getCourses(GetCoursesRequest $request): array
     {
-        $courses = $this->courseRepo->getCourses($request);
+        $data = $this->courseRepo->getCourses($request);
 
-        $categoryInfo = [];
-        foreach ($courses->groupBy('category.name') as $category => $group) {
-            $categoryInfo[] = (object) [
-                'name' => $category,
-                'count' => $group->count(),
-                'id' => $group->first()->category->id,
-            ];
-        }
-
-        return ['courses' => $courses, 'categoryInfo' => $categoryInfo];
+        return ['courses' => $data['courses'],
+        'categoryInfo' => $data['categoryInfo'],
+        'totalCourses' => $data['totalCourses']];
     }
 
     /**

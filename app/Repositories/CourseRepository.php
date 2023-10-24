@@ -22,9 +22,9 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      * Retrieve a paginated list of courses based on the provided filters.
      *
      * @param GetCoursesRequest $request
-     * @return LengthAwarePaginator<Course>
+     * @return array
      */
-    public function getCourses($request): LengthAwarePaginator
+    public function getCourses($request): array
     {
         $courses = Course::with('category')
         ->when($request->filled('search'), function ($query) use ($request) {
@@ -56,8 +56,28 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
         }
 
         $courses->orderBy($sortField, $sortType);
+        $categoryInfo = [];
 
-        return $courses->paginate(self::PAGESIZE);
+        foreach ($courses->get()->groupBy('category.name') as $category => $group) {
+            $firstCourse = $group->first();
+
+            if ($firstCourse && $firstCourse->category) {
+                $categoryInfo[] = (object) [
+                    'name' => $category,
+                    'count' => $group->count(),
+                    'id' => $firstCourse->category->id,
+                ];
+            }
+        }
+
+        return ['totalCourses' => $courses->count(),
+        'courses' => $courses->paginate(self::PAGESIZE),
+        'categoryInfo' => collect($categoryInfo)
+            ->sortByDesc('count')
+            ->take(10)
+            ->values()
+            ->all()
+        ];
     }
 
     /**
