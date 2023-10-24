@@ -436,14 +436,14 @@
                             @foreach ($reviews as $review)
                                 <li class="media d-flex">
                                     <div class="avatar avatar-xxl me-3 me-md-6 flex-shrink-0">
-                                        <img src="{{ $review->user->profile?->avatar }}" alt="..."
+                                        <img src="{{ $review->user->profile->avatar }}" alt="..."
                                             class="avatar-img rounded-circle">
                                     </div>
                                     <div class="media-body flex-grow-1">
                                         <div class="d-md-flex align-items-center mb-5">
                                             <div class="me-auto mb-4 mb-md-0">
                                                 <h5 class="mb-0">
-                                                    {{ $review->user->profile?->full_name }}
+                                                    {{ $review->user->profile->full_name }}
                                                     <span
                                                         class="font-size-sm text-blue">{{ '@' . $review->user->username }}</span>
                                                 </h5>
