@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\StoreTopicRequest;
 use App\Repositories\Interfaces\TopicRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,5 +25,10 @@ class TopicService
     public function getTopicsWithLessons($courseId)
     {
         return $this->topicRepo->getTopicsWithLessons($courseId);
+    }
+
+    public function create(StoreTopicRequest $request)
+    {
+        return $this->topicRepo->create($request->validated());
     }
 }
