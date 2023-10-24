@@ -24,7 +24,7 @@ class ProfileService
      * @param array $data
      * @return int|bool|Model
      */
-    public function updateOrCreateProfile($userId, $data)
+    public function updateOrCreateProfile($userId, $data = [])
     {
         $profile = $this->profileRepo->findUser($userId);
         if (!$profile) {

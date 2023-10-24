@@ -37,7 +37,7 @@ class RegisterController extends Controller
         $user = $this->userService->create($request->validated());
 
         if ($user instanceof User) {
-            $this->profileService->updateOrCreateProfile($user->id, ['avatar' => 'avatar/defaul.jpg']);
+            $this->profileService->updateOrCreateProfile($user->id);
         }
         session()->flash('message', __('messages.user.success.create'));
         return redirect()->route('login.show');
