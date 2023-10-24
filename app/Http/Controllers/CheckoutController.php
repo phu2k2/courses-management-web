@@ -27,6 +27,7 @@ class CheckoutController extends Controller
     public function index(): View
     {
         $carts = Session::get('cart');
+
         return view('checkout.index', compact('carts'));
     }
 
