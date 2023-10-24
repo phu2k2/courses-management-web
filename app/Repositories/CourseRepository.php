@@ -47,13 +47,14 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
         })
         ->when($request->filled('duration'), function ($query) use ($request) {
             $query->filterByDuration($request->input('duration'));
-        })
-        ->orderBy('id', 'ASC');
+        });
 
         if ($request->filled('sort')) {
             list($sortField, $sortType) = explode(':', $request->input('sort'));
             $courses->orderBy($sortField, $sortType);
         }
+
+        $courses->orderBy('id', 'ASC');
 
         return $courses->paginate(self::PAGESIZE);
     }
