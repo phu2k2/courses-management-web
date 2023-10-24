@@ -36,6 +36,7 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::put('profile', [ProfileController::class, 'update'])->name('update');
     Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
     Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
+    Route::get('my-courses', [CourseController::class, 'index'])->name('my-courses');
 });
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
 Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
@@ -45,3 +46,7 @@ Route::prefix('courses')->name('courses.')->group(function () {
 });
 
 Route::resource('comments', CommentController::class)->only(['destroy']);
+
+Route::prefix('instructor')->name('instructor')->group(function () {
+    Route::get('/', [HomeController::class, 'home']);
+});
