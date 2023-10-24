@@ -147,7 +147,7 @@
                             <form class="mb-4">
                                 <div class="input-group">
                                     <input class="form-control form-control-sm border-end-0 shadow-none" type="search"
-                                        placeholder="Search" aria-label="Search">
+                                        placeholder="Search(To do)" aria-label="Search">
                                     <div class="input-group-append">
                                         <button
                                             class="btn btn-sm btn-outline-white border-start-0 text-dark bg-transparent"
