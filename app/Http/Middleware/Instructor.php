@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Instructor
 {
-    const IS_INSTRUCTOR = 2;
+    protected const IS_INSTRUCTOR = 2;
     /**
      * Handle an incoming request.
      *
