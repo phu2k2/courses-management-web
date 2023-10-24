@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
 @endsection
 @section('script')
-    <script src="{{ asset('assets/js/toast.js') }}"></script>
     <script type="module" src="{{ asset('assets/js/comment.js') }}"></script>
     <script src="{{ asset('assets/js/submitForm.js') }}"></script>
     <script src="{{ asset('assets/js/toast.js') }}"></script>
