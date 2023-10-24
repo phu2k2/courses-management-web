@@ -9,7 +9,7 @@
             <div>
                 <div class="card">
                     <div class="card-body">
-                        <a href="#" class="card-title d-inline-block m-1">
+                        <a href="#" class="btn btn-primary d-inline-block m-2">
                             Add Course
                             <i class="bi bi-plus"></i>
                         </a>
