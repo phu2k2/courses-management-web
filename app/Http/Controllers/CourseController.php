@@ -52,6 +52,8 @@ class CourseController extends Controller
      */
     public function getMyCourses(): View
     {
-        return view('user.course.index');
+        $courses = $this->courseService->getMyCourses((int) auth()->id());
+
+        return view('user.course.index', compact('courses'));
     }
 }
