@@ -70,7 +70,7 @@ class CartService
     }
 
     /**
-     * @param int $id
+     * @param array $id
      * @return Collection
      */
     public function findSelectCart($id)

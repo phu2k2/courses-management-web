@@ -38,11 +38,7 @@ class CheckoutController extends Controller
     {
         try {
             $itemCarts = $request->input('select_items');
-            $carts = [];
-            foreach ($itemCarts as $item) {
-                $cart = $this->cartService->findSelectCart($item);
-                $carts[] = $cart;
-            }
+            $carts = $this->cartService->findSelectCart($itemCarts);
             Session::put('cart', $carts);
 
             return redirect()->route('checkouts.index');

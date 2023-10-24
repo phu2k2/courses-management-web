@@ -3,7 +3,7 @@
 @section('content')
     <div class="bg-white woocommerce-order-received">
         <!-- SHOP ORDER COMPLETED
-                                                                                                                                            ================================================== -->
+                                                                                                                                                ================================================== -->
         <div class="container py-8 py-lg-11">
             <div class="row">
                 <div class="col-xl-8 mx-xl-auto">
@@ -30,22 +30,20 @@
                                             @php
                                                 $total = 0;
                                             @endphp
-                                            @foreach ($carts as $items)
-                                                @foreach ($items as $item)
-                                                    <tr class="woocommerce-table__line-item order_item">
-                                                        <td class="woocommerce-table__product-name product-name">
-                                                            <a href="#">{{ $item->course->title }}</a>
-                                                        </td>
+                                            @foreach ($carts as $item)
+                                                <tr class="woocommerce-table__line-item order_item">
+                                                    <td class="woocommerce-table__product-name product-name">
+                                                        <a href="#">{{ $item->course->title }}</a>
+                                                    </td>
 
-                                                        <td class="woocommerce-table__product-total product-total">
-                                                            <span class="woocommerce-Price-amount amount"><span
-                                                                    class="woocommerce-Price-currencySymbol">$</span>{{ number_format($item->course->discounted_price, 2) }}</span>
-                                                        </td>
-                                                    </tr>
-                                                    @php
-                                                        $total += $item->course->discounted_price;
-                                                    @endphp
-                                                @endforeach
+                                                    <td class="woocommerce-table__product-total product-total">
+                                                        <span class="woocommerce-Price-amount amount"><span
+                                                                class="woocommerce-Price-currencySymbol">$</span>{{ number_format($item->course->discounted_price, 2) }}</span>
+                                                    </td>
+                                                </tr>
+                                                @php
+                                                    $total += $item->course->discounted_price;
+                                                @endphp
                                             @endforeach
 
                                         </tbody>
