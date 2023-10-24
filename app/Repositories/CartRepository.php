@@ -43,7 +43,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     }
 
     /**
-     * @param array $id
+     * @param array $ids
      * @return bool
      */
     public function deleteMultiple($ids)

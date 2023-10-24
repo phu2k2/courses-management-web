@@ -64,7 +64,7 @@ class CartController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param DeleteCartsRequest $request
      * @return RedirectResponse
      */
     public function deleteMutilCarts(DeleteCartsRequest $request)
