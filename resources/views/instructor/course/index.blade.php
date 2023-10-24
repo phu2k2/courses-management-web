@@ -3,14 +3,7 @@
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>List Course</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item">Management</li>
-                    <li class="breadcrumb-item active">Courses</li>
-                </ol>
-            </nav>
+            <h1>{{ __('courses_list') }}</h1>
         </div><!-- End Page Title -->
         <section class="section">
             <div>
@@ -22,7 +15,7 @@
                         </a>
                         <!-- Primary Color Bordered Table -->
                         <table class="table table-bordered border-primary">
-                            <thead>
+                            <thead class="table-primary">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Title</th>
@@ -46,10 +39,10 @@
                                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false"
                                                 style=" width: 100%; text-align : center">
-                                                Edit
+                                                Action
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Update</a></li>
+                                                <li><a class="dropdown-item" href="#">Edit</a></li>
                                                 <li><a class="dropdown-item" href="#">Delete</a></li>
                                             </ul>
                                         </div>
@@ -67,10 +60,10 @@
                                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false"
                                                 style=" width: 100%; text-align : center">
-                                                Edit
+                                                Action
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Update</a></li>
+                                                <li><a class="dropdown-item" href="#">Edit</a></li>
                                                 <li><a class="dropdown-item" href="#">Delete</a></li>
                                             </ul>
                                         </div>
@@ -90,10 +83,10 @@
                                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false"
                                                 style=" width: 100%; text-align : center">
-                                                Edit
+                                                Action
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Update</a></li>
+                                                <li><a class="dropdown-item" href="#">Edit</a></li>
                                                 <li><a class="dropdown-item" href="#">Delete</a></li>
                                             </ul>
                                         </div>
@@ -108,13 +101,14 @@
                                     <td>2012-06-11</td>
                                     <td>4.5</td>
                                     <td>
-                                        <div class="dropdown" >
+                                        <div class="dropdown">
                                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false" style=" width: 100%; text-align : center">
-                                                Edit
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                style=" width: 100%; text-align : center">
+                                                Action
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Update</a></li>
+                                                <li><a class="dropdown-item" href="#">Edit</a></li>
                                                 <li><a class="dropdown-item" href="#">Delete</a></li>
                                             </ul>
                                         </div>
@@ -128,13 +122,14 @@
                                     <td>2011-04-19</td>
                                     <td>4.5</td>
                                     <td>
-                                        <div class="dropdown" >
+                                        <div class="dropdown">
                                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false" style=" width: 100%; text-align : center">
-                                                Edit
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                style=" width: 100%; text-align : center">
+                                                Action
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Update</a></li>
+                                                <li><a class="dropdown-item" href="#">Edit</a></li>
                                                 <li><a class="dropdown-item" href="#">Delete</a></li>
                                             </ul>
                                         </div>
