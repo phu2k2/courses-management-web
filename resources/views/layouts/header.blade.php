@@ -118,15 +118,14 @@
                     </a>
                 </li>
 
+                @instructor
+                <li class="nav-item dropdown">
+                    <a class="nav-link" id="navbarInstructors" href="{{ route('instructor') }}">
+                        {{ __('instructor') }}
+                    </a>
+                </li>
+                @endinstructor
                 @auth
-                    @if (auth()->user()->role_id == 2)
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" id="navbarInstructors" href="{{ route('instructor') }}">
-                                {{ __('instructor') }}
-                            </a>
-                        </li>
-                    @endif
-
                     <li class="nav-item dropdown">
                         <a class="nav-link" id="navbarCourses" href="{{ route('users.my-courses') }}">
                             {{ __('courses') }}
@@ -205,7 +204,7 @@
                 </div>
             </li>
             <li class="nav-item border-0 px-0">
-                <a href="{{ auth()->user() ? route('carts.index') : route('login.show') }}" class="nav-link d-flex px-3 px-md-4 position-relative text-secondary icon-xs">
+                <a href="{{ route('carts.index') }}" class="nav-link d-flex px-3 px-md-4 position-relative text-secondary icon-xs">
                     <span class="badge badge-alizarin rounded-circle fw-bold badge-float mt-n1 ms-n2 px-0 w-16" id="badgeCart"
                     style="font-size: 8px;">{{ $countCart }}</span>
                     <!-- Icon -->
@@ -218,7 +217,7 @@
             </li>
 
             <li class="nav-item border-0 px-0">
-                @if (auth()->user())
+                @if (auth()->check())
                     <a class="nav-link d-flex px-3 px-md-4" data-bs-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
                         <!-- Avatar -->
                         <div class="avatar avatar-sm">
