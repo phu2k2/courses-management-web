@@ -37,16 +37,14 @@ class CheckoutController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        try {
-            $itemCarts = $request->input('select_items');
-            $carts = $this->cartService->findSelectCart($itemCarts);
-            Session::put('cart', $carts);
-
-            return redirect()->route('checkouts.index');
-        } catch (Exception $e) {
+        $itemCarts = $request->input('select_items');
+        if (empty($itemCarts)) {
             session()->flash('error', __('messages.checkout.error.save'));
-
             return redirect()->route('carts.index');
         }
+        $carts = $this->cartService->findSelectCart($itemCarts);
+        Session::put('cart', $carts);
+
+        return redirect()->route('checkouts.index');
     }
 }
