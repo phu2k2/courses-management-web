@@ -70,8 +70,9 @@ class CartController extends Controller
     public function deleteMutilCarts(DeleteCartsRequest $request)
     {
         $selectedItems = $request->input('selected_items');
+        $userId = (int) auth()->id();
         $ids = explode(',', data_get($selectedItems, []));
-        if ($this->cartService->deleteCarts($ids)) {
+        if ($this->cartService->deleteCarts($ids, $userId)) {
             session()->flash('message', __('messages.cart.success.delete'));
             return redirect()->back();
         }

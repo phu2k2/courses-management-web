@@ -49,12 +49,13 @@ class CartService
     }
 
     /**
-     * @param array $id
+     * @param array $ids
+     * @param int $userId
      * @return bool
      */
-    public function deleteCarts($id)
+    public function deleteCarts($ids, $userId)
     {
-        return $this->cartRepo->deleteMultiple($id);
+        return $this->cartRepo->deleteMultiple($ids, $userId);
     }
 
     /**

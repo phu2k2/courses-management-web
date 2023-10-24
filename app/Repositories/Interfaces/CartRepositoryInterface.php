@@ -17,8 +17,9 @@ interface CartRepositoryInterface extends RepositoryInterface
     public function hasCourseInCart(int $userId, int $courseId): bool;
 
     /**
-     * @param array $id
+     * @param array $ids
+     * @param int $userId
      * @return bool
      */
-    public function deleteMultiple($id);
+    public function deleteMultiple($ids, $userId);
 }
