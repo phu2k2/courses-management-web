@@ -63,7 +63,6 @@ class CartService
      * @param int $id .
      * @return bool True if the deletion was successful, false otherwise.
      */
-
     public function deleteCart($id)
     {
         return $this->cartRepo->delete($id);

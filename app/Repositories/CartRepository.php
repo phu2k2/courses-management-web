@@ -6,8 +6,6 @@ use App\Models\Cart;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\CartRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 
 class CartRepository extends BaseRepository implements CartRepositoryInterface
 {
@@ -48,8 +46,8 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      * @param array $id
      * @return bool
      */
-    public function deleteMultiple($id)
+    public function deleteMultiple($ids)
     {
-        return $this->model->whereIn('id', $id)->delete();
+        return $this->model->whereIn('id', $ids)->delete();
     }
 }

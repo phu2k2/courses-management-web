@@ -46,6 +46,6 @@
     "empty_cart": "Empty Course",
     "delete_label": "Do you want to delete ?",
     "shop_cart": "Shop Cart",
-    "unit": "$"
+    "monetary_unit": "$"
 
 }

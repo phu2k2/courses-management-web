@@ -2,12 +2,10 @@
 @section('title', 'cart')
 @section('script')
     <script src="{{ asset('assets/js/checkbox.js') }}"></script>
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
-@endsection
-@section('script')
-    <script src="{{ asset('assets/js/toast.js') }}"></script>
 @endsection
 @section('content')
     <form class="woocommerce-cart-form table-responsive" action="{{ route('carts.delete-cart') }}" method="post">
@@ -53,9 +51,18 @@
         @include('layouts.message')
     </header>
     <!-- SHOP CART
-                                                                                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                                                                                                                ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div id="primary" class="content-area">
                 <main id="main" class="site-main ">
                     <div class="page type-page status-publish hentry">
@@ -142,22 +149,14 @@
                                                 @endforeach
                                                 <tr>
                                                     <td colspan="5" class="actions">
-                                                        <div class="coupon">
-                                                            <label for="coupon_code">{{ __('coupon') }}:</label>
-                                                            <input type="text" name="coupon_code" class="input-text"
-                                                                id="coupon_code" value="" placeholder="Coupon code"
-                                                                autocomplete="off"> <input type="submit" class="button"
-                                                                name="apply_coupon" value="Apply coupon">
-                                                        </div>
                                                         <input class="button" data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal" value="Delete cart"
+                                                            data-bs-target="#exampleModal" value="Delete select cart"
                                                             onclick="handleDeleteButtonClick()">
                                                     </td>
                                                 </tr>
                                             @else
                                                 <tr>
                                                     <td colspan="5" class="text-center">{{ __('empty_cart') }}</td>
-
                                                 </tr>
                                             @endif
                                         </tbody>
@@ -179,7 +178,7 @@
                                 <tr class="order-total">
                                     <th>{{ __('total') }}</th>
                                     <td data-title="Total"><strong><span class="woocommerce-Price-amount amount"><span
-                                                    class="woocommerce-Price-currencySymbol">{{ __('unit') }}</span>
+                                                    class="woocommerce-Price-currencySymbol">{{ __('monetary_unit') }}</span>
                                                 {{ $total }}</span></strong>
                                     </td>
                                 </tr>

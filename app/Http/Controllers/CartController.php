@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeleteCartsRequest;
 use App\Services\CartService;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -44,7 +45,7 @@ class CartController extends Controller
         } catch (Exception $e) {
             session()->flash('error', __('messages.user.error.create_cart'));
         }
-        return redirect()->back();
+        return redirect()->back()->withErrors(__('messages.cart.error.delete'));
     }
 
     /**
@@ -63,16 +64,17 @@ class CartController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return RedirectResponse
      */
-    public function deleteMutilCarts(Request $request)
+    public function deleteMutilCarts(DeleteCartsRequest $request)
     {
-        $ids = explode(',', data_get($request, 'delected_items', []));
+        $selected_items = $request->input('selected_items');
+        $ids = explode(',', data_get($selected_items, []));
         if ($this->cartService->deleteCarts($ids)) {
             session()->flash('message', __('messages.cart.success.delete'));
             return redirect()->back();
         }
-        session()->flash('message', __('messages.cart.error.delete'));
 
         return redirect()->back();
     }
