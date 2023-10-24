@@ -37,7 +37,7 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::put('profile', [ProfileController::class, 'update'])->name('update');
     Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
     Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
-    Route::get('my-courses', [CourseController::class, 'index'])->name('my-courses');
+    Route::get('my-courses', [CourseController::class, 'getMyCourses'])->name('my-courses');
 });
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
 Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
