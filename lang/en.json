@@ -31,5 +31,21 @@
     "advanced_level": "Advanced",
 
     "english_lang": "English",
-    "vietnamese_lang": "Vietnamese"
+    "vietnamese_lang": "Vietnamese",
+
+    "process": "Proceed to checkout",
+    "total": "total",
+    "title_card": "Cart totals",
+    "select_all": "Select All",
+    "product": "Product",
+    "price": "Price",
+    "quantity": "Quantity",
+    "acion": "Action",
+    "delete": "Delete",
+    "coupon": "Coupon",
+    "empty_cart": "Empty Course",
+    "delete_label": "Do you want to delete ?",
+    "shop_cart": "Shop Cart",
+    "monetary_unit": "$"
+
 }
