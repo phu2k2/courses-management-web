@@ -43,7 +43,7 @@ Route::resource('carts', CartController::class)->only(['index', 'store', 'destro
 Route::resource('reviews', ReviewController::class)->only(['store']);
 
 Route::prefix('courses')->name('courses.')->group(function () {
-    Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show')->middleware(['verifyUserAccessCourse']);
+    Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show')->middleware('verifyUserAccessCourse');
 });
 
 Route::resource('comments', CommentController::class)->only(['destroy']);
