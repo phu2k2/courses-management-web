@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckCourseOwnership
+class VerifyUserAccessCourse
 {
     /**
      * Handle an incoming request.
