@@ -41,9 +41,9 @@ class CartController extends Controller
             $courseId = $request->input('course_id');
             $userId = (int) auth()->id();
             $this->cartService->addToCart($userId, $courseId);
-            session()->flash('message', __('messages.user.success.create_cart'));
+            session()->flash('message', __('messages.cart.success.create'));
         } catch (Exception $e) {
-            session()->flash('error', __('messages.user.error.create_cart'));
+            session()->flash('error', __('messages.cart.error.create'));
         }
         return redirect()->back()->withErrors(__('messages.cart.error.delete'));
     }
