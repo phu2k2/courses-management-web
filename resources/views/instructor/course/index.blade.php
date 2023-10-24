@@ -3,12 +3,12 @@
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>List User</h1>
+            <h1>List Course</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item">Management</li>
-                    <li class="breadcrumb-item active">Users</li>
+                    <li class="breadcrumb-item active">Courses</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -16,17 +16,10 @@
             <div>
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title d-inline-block m-1 dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Function
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Add</a></li>
-                                <li><a class="dropdown-item" href="#">Update</a></li>
-                                <li><a class="dropdown-item" href="#">Delete</a></li>
-                            </ul>
-                        </div>
+                        <a href="#" class="card-title d-inline-block m-1">
+                            Add Course
+                            <i class="bi bi-plus"></i>
+                        </a>
                         <!-- Primary Color Bordered Table -->
                         <table class="table table-bordered border-primary">
                             <thead>
@@ -37,6 +30,7 @@
                                     <th scope="col">Price</th>
                                     <th scope="col">Average Rating</th>
                                     <th scope="col">Total Students</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,6 +41,18 @@
                                     <td>28</td>
                                     <td>2016-05-25</td>
                                     <td>4.5</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                style=" width: 100%; text-align : center">
+                                                Edit
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Update</a></li>
+                                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -56,6 +62,20 @@
                                     <td>35</td>
                                     <td>2014-12-05</td>
                                     <td>4.5</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                style=" width: 100%; text-align : center">
+                                                Edit
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Update</a></li>
+                                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    </td>
                                     </td>
                                 </tr>
                                 <tr>
@@ -65,6 +85,19 @@
                                     <td>45</td>
                                     <td>2011-08-12</td>
                                     <td>4.5</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                style=" width: 100%; text-align : center">
+                                                Edit
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Update</a></li>
+                                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
                                     </td>
                                 </tr>
                                 <tr>
@@ -74,6 +107,17 @@
                                     <td>34</td>
                                     <td>2012-06-11</td>
                                     <td>4.5</td>
+                                    <td>
+                                        <div class="dropdown" >
+                                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false" style=" width: 100%; text-align : center">
+                                                Edit
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Update</a></li>
+                                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -83,17 +127,25 @@
                                     <td>47</td>
                                     <td>2011-04-19</td>
                                     <td>4.5</td>
+                                    <td>
+                                        <div class="dropdown" >
+                                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false" style=" width: 100%; text-align : center">
+                                                Edit
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Update</a></li>
+                                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <!-- End Primary Color Bordered Table -->
-
                     </div>
                 </div>
-
             </div>
         </section>
-
-    </main><!-- End #main -->
+    </main>
 @endsection
