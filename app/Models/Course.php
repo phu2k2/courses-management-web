@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
@@ -244,5 +245,13 @@ class Course extends Model
                 $query->orWhere('total_time', '>', self::VIDEO_DURATION_LONG);
             });
         });
+    }
+
+    /**
+     * @return HasOne<Topic>
+     */
+    public function topic(): HasOne
+    {
+        return $this->hasOne(Topic::class)->oldestOfMany();
     }
 }

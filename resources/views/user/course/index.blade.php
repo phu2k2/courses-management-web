@@ -96,7 +96,7 @@
                     <div class="card border shadow p-2 lift sk-fade">
                         <!-- Image -->
                         <div class="card-zoom position-relative">
-                            <a href="#" class="card-img sk-thumbnail d-block">
+                            <a href="{{ route('courses.lessons.show', ['courseId' => $course->course_id, 'lessonId' => $course->course->topic?->lesson?->id]) }}" class="card-img sk-thumbnail d-block">
                                 <img class="rounded shadow-light-lg" src="{{ $course->course->poster_url }}"
                                     alt="...">
                             </a>
