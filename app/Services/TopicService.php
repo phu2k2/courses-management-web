@@ -27,6 +27,10 @@ class TopicService
         return $this->topicRepo->getTopicsWithLessons($courseId);
     }
 
+    /**
+     * @param StoreTopicRequest $request
+     * @return Model
+     */
     public function create(StoreTopicRequest $request)
     {
         return $this->topicRepo->create($request->validated());
