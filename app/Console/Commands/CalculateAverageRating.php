@@ -29,14 +29,15 @@ class CalculateAverageRating extends Command
     {
         $chunkSize = 100;
 
-        Course::with('reviews')->whereHas('reviews', function ($query) {
+        $query = Course::with('reviews')->whereHas('reviews', function ($query) {
             $query->whereNotNull('rating');
-        })->chunk($chunkSize, function ($coursesToUpdate) {
+        });
+        $query->chunk($chunkSize, function ($coursesToUpdate) {
             foreach ($coursesToUpdate as $course) {
-                $newAverageRating = $course->reviews->avg('rating');
+                $newAvgRating = $course->reviews->avg('rating');
 
-                if ($newAverageRating !== $course->average_rating) {
-                    $course->update(['average_rating' => $newAverageRating]);
+                if ($newAvgRating !== $course->average_rating) {
+                    $course->update(['average_rating' => $newAvgRating]);
                 }
             }
         });
