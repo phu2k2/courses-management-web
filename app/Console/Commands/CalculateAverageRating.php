@@ -19,7 +19,7 @@ class CalculateAverageRating extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'This command recalculates the average rating for courses based on user reviews.';
 
     /**
      * Execute the console command.
@@ -27,12 +27,18 @@ class CalculateAverageRating extends Command
      */
     public function handle(): void
     {
-        $coursesToUpdate = Course::with('reviews')->whereHas('reviews', function ($query) {
-            $query->whereNotNull('rating');
-        })->get();
+        $chunkSize = 100;
 
-        foreach ($coursesToUpdate as $course) {
-            $course->update(['average_rating' => $course->reviews->avg('rating')]);
-        }
+        Course::with('reviews')->whereHas('reviews', function ($query) {
+            $query->whereNotNull('rating');
+        })->chunk($chunkSize, function ($coursesToUpdate) {
+            foreach ($coursesToUpdate as $course) {
+                $newAverageRating = $course->reviews->avg('rating');
+
+                if ($newAverageRating !== $course->average_rating) {
+                    $course->update(['average_rating' => $newAverageRating]);
+                }
+            }
+        });
     }
 }
