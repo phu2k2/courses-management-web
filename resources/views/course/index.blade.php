@@ -557,7 +557,7 @@
                 <!-- PAGINATION ================================================== -->
                 <nav class="mb-11" aria-label="Page navigationa">
                     <ul class="pagination justify-content-center">
-                        {!! $courses->links('pagination::bootstrap-4') !!}
+                        {!! $courses->appends(request()->query())->links('pagination::bootstrap-4') !!}
                     </ul>
                 </nav>
             </div>
