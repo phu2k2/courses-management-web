@@ -4,7 +4,6 @@ return [
     'user' => [
         'success' => [
             'create' => 'Register account was successful',
-            'create_cart' => 'Added to cart successfully!'
         ],
         'error' => [
             'create_cart' => 'Course is already in cart!',
@@ -30,11 +29,21 @@ return [
     ],
     'cart' => [
         'success' => [
+            'create' => 'Added to cart successfully!',
             'delete' => 'successfully removed the course from the shopping cart',
         ],
         'error' => [
+            'create' => 'Failed to add to cart!',
             'delete' => 'Removing course from cart failed'
         ]
+    ],
+    'review' => [
+        'success' => [
+            'create' => 'Add review successfull!',
+        ],
+        'error' => [
+            'create' => 'Failed to add review!'
+        ],
     ],
     'checkout' => [
         'error' => [
