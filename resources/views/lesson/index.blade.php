@@ -108,7 +108,7 @@
                                                     <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
                                                         aria-labelledby="navbarActionParent">
                                                         <li class="dropdown-item">
-                                                            <a class="dropdown-link btn-edit"
+                                                            <a class="dropdown-link btn-edit" href="javascript:void(0)"
                                                                 data-comment-id="{{ $comment->id }}">
                                                                 Edit
                                                             </a>
@@ -173,13 +173,13 @@
                                             </div>
                                         @endauth
                                         @if ($comments->where('parent_id', $comment->id)->count() != 0)
-                                            <div class="mb-4">
+                                            <a class="mb-4 btn" href="javascript:void(0)">
                                                 <span class="show-reply {{ $comment->id }}"
                                                     data-parentId="{{ $comment->id }}">
                                                     <i class="fa-solid fa-chevron-down"></i>
                                                     Show {{ $comments->where('parent_id', $comment->id)->count() }} replys
                                                 </span>
-                                            </div>
+                                            </a>
                                         @endif
                                     </div>
                                 </li>
@@ -214,7 +214,7 @@
                                                                     <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
                                                                         aria-labelledby="navbarAction">
                                                                         <li class="dropdown-item">
-                                                                            <a class="dropdown-link btn-edit"
+                                                                            <a class="dropdown-link btn-edit" href="javascript:void(0)"
                                                                                 data-comment-id="{{ $childComment->id }}">
                                                                                 Edit
                                                                             </a>
@@ -269,12 +269,12 @@
                                                 </li>
                                             @endif
                                         @endforeach
-                                        <div class="md-6">
+                                        <a class="mb-6 btn" href="javascript:void(0)">
                                             <span class="hide-reply {{ $comment->id }}"
                                                 data-parentId="{{ $comment->id }}">
                                                 <i class="fa-solid fa-chevron-up"></i> Hide comments
                                             </span>
-                                        </div>
+                                        </a>
                                     </div>
                                 @endif
                             </div>
@@ -404,7 +404,7 @@
                                                     class="badge btn-orange-soft text-white-70 me-5 font-size-sm fw-normal py-2">
                                                     {{ $lesson->lesson_duration }}
                                                 </div>
-                                                <a href="#" class="text-secondary d-flex">
+                                                <a href="{{ route('courses.lessons.show', ['courseId' => $course->id, 'lessonId' => $lesson->id])}}" class="text-secondary d-flex">
                                                     <!-- Icon -->
                                                     <svg width="14" height="16" viewBox="0 0 14 16"
                                                         xmlns="http://www.w3.org/2000/svg">

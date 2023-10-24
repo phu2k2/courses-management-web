@@ -433,84 +433,96 @@
 
                         <ul class="list-unstyled pt-2">
                             {{-- START COMMENT --}}
-                            <li class="media d-flex">
-                                <div class="avatar avatar-xxl me-3 me-md-6 flex-shrink-0">
-                                    <img src="{{ asset('assets/img/avatars/avatar-1.jpg') }}" alt="..."
-                                        class="avatar-img rounded-circle">
-                                </div>
-                                <div class="media-body flex-grow-1">
-                                    <div class="d-md-flex align-items-center mb-5">
-                                        <div class="me-auto mb-4 mb-md-0">
-                                            <h5 class="mb-0">Oscar Cafeo</h5>
-                                            <p class="font-size-sm font-italic">Beautiful courses</p>
-                                        </div>
-                                        <div class="star-rating">
-                                            <div class="rating" style="width:100%;"></div>
-                                        </div>
+                            @foreach ($reviews as $review)
+                                <li class="media d-flex">
+                                    <div class="avatar avatar-xxl me-3 me-md-6 flex-shrink-0">
+                                        <img src="{{ $review->user->profile?->avatar }}" alt="..."
+                                            class="avatar-img rounded-circle">
                                     </div>
-                                    <p class="mb-6 line-height-md">This course was well organized and covered a lot more
-                                        details than any other Figma courses. I really enjoy it. One suggestion is that it
-                                        can be much better if we could complete the prototype together. Since we created 24
-                                        frames, I really want to test it on Figma mirror to see all the connections. Could
-                                        you please let me take a look at the complete prototype?</p>
-                                </div>
-                            </li>
+                                    <div class="media-body flex-grow-1">
+                                        <div class="d-md-flex align-items-center mb-5">
+                                            <div class="me-auto mb-4 mb-md-0">
+                                                <h5 class="mb-0">
+                                                    {{ $review->user->profile?->full_name }}
+                                                    <span
+                                                        class="font-size-sm text-blue">{{ '@' . $review->user->username }}</span>
+                                                </h5>
+                                            </div>
+                                            <div class="star-rating">
+                                                <div class="rating"
+                                                    style="width:{{ convert_to_percent($review->rating) }}%;"></div>
+                                            </div>
+                                        </div>
+                                        <p class="mb-6 line-height-md">
+                                            {{ $review->review }}
+                                        </p>
+                                    </div>
+                                </li>
+                            @endforeach
                             {{-- END COMMENT --}}
                         </ul>
 
-                        <div class="border shadow rounded p-6 p-md-9">
-                            <h3 class="mb-2">Add Reviews & Rate</h3>
-                            <div class="">What is it like to Course?</div>
-                            <form>
-                                <div class="clearfix">
-                                    <fieldset class="slect-rating mb-3">
-                                        <input type="radio" id="star5" name="rating" value="5" />
-                                        <label class="full" for="star5" title="Awesome - 5 stars"></label>
+                        @auth
+                            @if ($reviews->where('user_id', auth()->id())->where('course_id', $course->id)->isEmpty())
+                                <div class="border shadow rounded p-6 p-md-9">
+                                    <h3 class="mb-2">Add Reviews & Rate</h3>
+                                    <div class="">What is it like to Course?</div>
+                                    <form action="{{ route('reviews.store') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                        <div class="clearfix">
+                                            <fieldset class="slect-rating mb-3">
+                                                <input type="radio" id="star5" name="rating" value="5" />
+                                                <label class="full" for="star5" title="Awesome - 5 stars"></label>
 
-                                        <input type="radio" id="star4half" name="rating" value="4 and a half" />
-                                        <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                                <input type="radio" id="star4half" name="rating" value="4.5" />
+                                                <label class="half" for="star4half"
+                                                    title="Pretty good - 4.5 stars"></label>
 
-                                        <input type="radio" id="star4" name="rating" value="4" />
-                                        <label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                                <input type="radio" id="star4" name="rating" value="4" />
+                                                <label class="full" for="star4" title="Pretty good - 4 stars"></label>
 
-                                        <input type="radio" id="star3half" name="rating" value="3 and a half" />
-                                        <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                                <input type="radio" id="star3half" name="rating" value="3.5" />
+                                                <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
 
-                                        <input type="radio" id="star3" name="rating" value="3" />
-                                        <label class="full" for="star3" title="Meh - 3 stars"></label>
+                                                <input type="radio" id="star3" name="rating" value="3" />
+                                                <label class="full" for="star3" title="Meh - 3 stars"></label>
 
-                                        <input type="radio" id="star2half" name="rating" value="2 and a half" />
-                                        <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                                <input type="radio" id="star2half" name="rating" value="2.5" />
+                                                <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
 
-                                        <input type="radio" id="star2" name="rating" value="2" />
-                                        <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                                <input type="radio" id="star2" name="rating" value="2" />
+                                                <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
 
-                                        <input type="radio" id="star1half" name="rating" value="1 and a half" />
-                                        <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                                <input type="radio" id="star1half" name="rating" value="1.5" />
+                                                <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
 
-                                        <input type="radio" id="star1" name="rating" value="1" />
-                                        <label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                                <input type="radio" id="star1" name="rating" value="1" />
+                                                <label class="full" for="star1" title="Sucks big time - 1 star"></label>
 
-                                        <input type="radio" id="starhalf" name="rating" value="half" />
-                                        <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                                    </fieldset>
-                                </div>
+                                                <input type="radio" id="starhalf" name="rating" value="half" />
+                                                <label class="half" for="starhalf"
+                                                    title="Sucks big time - 0.5 stars"></label>
+                                            </fieldset>
+                                        </div>
+                                        @error('rating')
+                                            <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                        @enderror
+                                        <div class="form-group mb-6">
+                                            <label for="exampleFormControlTextarea1">Review Content</label>
+                                            <textarea name="review" class="form-control placeholder-1" id="exampleFormControlTextarea1" rows="6"
+                                                placeholder="Content">{{ old('review') }}</textarea>
+                                            @error('review')
+                                                <span class="text-alizarin fst-italic">{{ $message }}</span>
+                                            @enderror
+                                        </div>
 
-                                <div class="form-group mb-6">
-                                    <label for="exampleInputTitle1">Review Title</label>
-                                    <input type="text" class="form-control placeholder-1" id="exampleInputTitle1"
-                                        placeholder="Courses">
-                                </div>
+                                        <button type="submit" class="btn btn-primary btn-block mw-md-300p">SUBMIT
+                                            REVIEW</button>
+                                    </form>
+                            @endif
+                        @endauth
 
-                                <div class="form-group mb-6">
-                                    <label for="exampleFormControlTextarea1">Review Content</label>
-                                    <textarea class="form-control placeholder-1" id="exampleFormControlTextarea1" rows="6" placeholder="Content"></textarea>
-                                </div>
-
-                                <button type="submit" class="btn btn-primary btn-block mw-md-300p">SUBMIT
-                                    REVIEW</button>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -535,7 +547,7 @@
 
                     <div class="pt-5 pb-4 px-5 px-lg-3 px-xl-5">
                         <div class="d-flex align-items-center mb-2">
-                            <ins class="h2 mb-0">${{ $course->discounted_price }}</ins>
+                            <ins class="h2 mb-0">${{ number_format($course->discounted_price, 2) }}</ins>
                             <del class="ms-3">{{ $course->price }}</del>
                             <div class="badge badge-lg badge-purple text-white ms-auto fw-normal">{{ $course->discount }}%
                                 Off</div>
@@ -771,8 +783,9 @@
 
             </div>
         </div>
+    </div>
 
-        {{-- RECOMMEND --}}
-        @include('common.recommend')
+    {{-- RECOMMEND --}}
+    @include('common.recommend')
     </div>
 @endsection
