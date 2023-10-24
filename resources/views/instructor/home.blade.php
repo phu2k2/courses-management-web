@@ -159,7 +159,7 @@
 
                                     <!-- Line Chart -->
                                     <div id="reportsChart"></div>
-
+                                    Todo
                                     {{-- <script type="module">
                                         document.addEventListener("DOMContentLoaded", () => {
                                             new ApexCharts(document.querySelector("#reportsChart"), {
@@ -257,42 +257,24 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row"><a href="#">#2457</a></th>
-                                                <td>Brandon Jacob</td>
-                                                <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                                                <td>$64</td>
-                                                <td><span class="badge bg-success">Approved</span></td>
+                                                <td>Todo</td>
+                                                <td><a href="#" class="text-primary">Todo</a></td>
+                                                <td>$Todo</td>
+                                                <td><span class="badge bg-success">Todo</span></td>
                                             </tr>
                                             <tr>
-                                                <th scope="row"><a href="#">#2147</a></th>
-                                                <td>Bridie Kessler</td>
-                                                <td><a href="#" class="text-primary">Blanditiis dolor omnis
-                                                        similique</a></td>
-                                                <td>$47</td>
-                                                <td><span class="badge bg-warning">Pending</span></td>
+                                                <th scope="row"><a href="#">#2457</a></th>
+                                                <td>Todo</td>
+                                                <td><a href="#" class="text-primary">Todo</a></td>
+                                                <td>$Todo</td>
+                                                <td><span class="badge bg-success">Todo</span></td>
                                             </tr>
                                             <tr>
-                                                <th scope="row"><a href="#">#2049</a></th>
-                                                <td>Ashleigh Langosh</td>
-                                                <td><a href="#" class="text-primary">At recusandae consectetur</a>
-                                                </td>
-                                                <td>$147</td>
-                                                <td><span class="badge bg-success">Approved</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">#2644</a></th>
-                                                <td>Angus Grady</td>
-                                                <td><a href="#" class="text-primar">Ut voluptatem id earum et</a>
-                                                </td>
-                                                <td>$67</td>
-                                                <td><span class="badge bg-danger">Rejected</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">#2644</a></th>
-                                                <td>Raheem Lehner</td>
-                                                <td><a href="#" class="text-primary">Sunt similique distinctio</a>
-                                                </td>
-                                                <td>$165</td>
-                                                <td><span class="badge bg-success">Approved</span></td>
+                                                <th scope="row"><a href="#">#2457</a></th>
+                                                <td>Todo</td>
+                                                <td><a href="#" class="text-primary">Todo</a></td>
+                                                <td>$Todo</td>
+                                                <td><span class="badge bg-success">Todo</span></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -335,49 +317,13 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row"><a href="#"><img src="assets/img/instructor/product-1.jpg"
+                                                <th scope="row"><a href="#"><img src=""
                                                             alt=""></a></th>
-                                                <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa
-                                                        voluptas nulla</a></td>
-                                                <td>$64</td>
-                                                <td class="fw-bold">124</td>
-                                                <td>$5,828</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#"><img src="assets/img/instructor/product-2.jpg"
-                                                            alt=""></a></th>
-                                                <td><a href="#" class="text-primary fw-bold">Exercitationem
-                                                        similique doloremque</a></td>
-                                                <td>$46</td>
-                                                <td class="fw-bold">98</td>
-                                                <td>$4,508</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#"><img src="assets/img/instructor/product-3.jpg"
-                                                            alt=""></a></th>
-                                                <td><a href="#" class="text-primary fw-bold">Doloribus nisi
-                                                        exercitationem</a></td>
-                                                <td>$59</td>
-                                                <td class="fw-bold">74</td>
-                                                <td>$4,366</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#"><img src="assets/img/instructor/product-4.jpg"
-                                                            alt=""></a></th>
-                                                <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint
-                                                        rerum error</a></td>
-                                                <td>$32</td>
-                                                <td class="fw-bold">63</td>
-                                                <td>$2,016</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#"><img src="assets/img/instructor/product-5.jpg"
-                                                            alt=""></a></th>
-                                                <td><a href="#" class="text-primary fw-bold">Sit unde debitis
-                                                        delectus repellendus</a></td>
-                                                <td>$79</td>
-                                                <td class="fw-bold">41</td>
-                                                <td>$3,239</td>
+                                                <td><a href="#" class="text-primary fw-bold">Todo
+                                                    </a></td>
+                                                <td>$Todo</td>
+                                                <td class="fw-bold">Todo</td>
+                                                <td>$Todo</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -418,8 +364,7 @@
                                     <div class="activite-label">32 min</div>
                                     <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
                                     <div class="activity-content">
-                                        Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a>
-                                        beatae
+                                        Todo
                                     </div>
                                 </div><!-- End activity item-->
 
@@ -427,7 +372,7 @@
                                     <div class="activite-label">56 min</div>
                                     <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
                                     <div class="activity-content">
-                                        Voluptatem blanditiis blanditiis eveniet
+                                        Todo
                                     </div>
                                 </div><!-- End activity item-->
 
@@ -435,7 +380,7 @@
                                     <div class="activite-label">2 hrs</div>
                                     <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
                                     <div class="activity-content">
-                                        Voluptates corrupti molestias voluptatem
+                                        Todo
                                     </div>
                                 </div><!-- End activity item-->
 
@@ -443,8 +388,7 @@
                                     <div class="activite-label">1 day</div>
                                     <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
                                     <div class="activity-content">
-                                        Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati
-                                            voluptatem</a> tempore
+                                        Todo
                                     </div>
                                 </div><!-- End activity item-->
 
@@ -452,7 +396,7 @@
                                     <div class="activite-label">2 days</div>
                                     <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
                                     <div class="activity-content">
-                                        Est sit eum reiciendis exercitationem
+                                        Todo
                                     </div>
                                 </div><!-- End activity item-->
 
@@ -460,7 +404,7 @@
                                     <div class="activite-label">4 weeks</div>
                                     <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
                                     <div class="activity-content">
-                                        Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
+                                        Todo
                                     </div>
                                 </div><!-- End activity item-->
 
@@ -473,7 +417,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Line Chart</h5>
-
+                            Todo
                             {{-- <!-- Line Chart -->
                             <canvas id="lineChart" style="max-height: 400px;"></canvas>
                             <script>
@@ -510,7 +454,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Doughnut Chart</h5>
-
+                            Todo
                             <!-- Doughnut Chart -->
                             {{-- <canvas id="doughnutChart" style="max-height: 400px;"></canvas>
                             <script>
