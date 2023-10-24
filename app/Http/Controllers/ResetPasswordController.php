@@ -32,13 +32,20 @@ class ResetPasswordController extends Controller
      */
     public function showResetPasswordForm($token): View
     {
-        $userData = $this->resetPasswordService->isExpiredToken($token, now());
-
-        if (!$userData) {
+        /**
+         * Check the creation token time is expired
+         */
+        $tokenData = $this->resetPasswordService->isExpiredToken($token, now()->toDateTimeString());
+        if (!$tokenData) {
             $this->resetPasswordService->deleteByToken($token);
             abort(404);
         }
-        $email = $userData['email'];
+
+        /**
+         * Get the email data of user
+         */
+        $email = $tokenData['email'];
+
         return view(('auth.reset-password'), compact('email', 'token'));
     }
 
@@ -48,20 +55,38 @@ class ResetPasswordController extends Controller
      */
     public function submitResetPasswordForm(ResetPasswordRequest $request)
     {
-        //Validate the token
+        /**
+         * Validate the token
+         */
         $updatePassword = $this->resetPasswordService->isValidToken($request->input('token'), $request->input('email'));
 
-        //Check the token
+        /**
+         * Check the token if the token is valid
+         */
         if (!$updatePassword) {
-            return redirect()->to(route('password.reset'))->with("error", "Error Token!");
+            return redirect()->to(route('password.reset'))->with("error", __('messages.password.error.reset_password'));
         }
 
-        //Hash and update the new password
+        /**
+         * Check expiration time after the user clicks the link and access the reset password page
+         */
+        $tokenData = $this->resetPasswordService->isExpiredToken($request->input('token'), now()->toDateTimeString());
+
+        if (!$tokenData) {
+            $this->resetPasswordService->deleteByToken($request->input('token'));
+            abort(404);
+        }
+
+        /**
+         * Hash and update the new password
+         */
         $this->userService->updatePassword($request->input('email'), $request->input('password'));
 
-        //Delete the token
+        /**
+         * Delete the token
+         */
         $this->resetPasswordService->deleteByEmail($request->input('email'));
 
-        return redirect()->route('login.show')->with('message', 'Reset Password Successfully!');
+        return redirect()->route('login.show')->with('message', __('messages.password.success.reset_password'));
     }
 }

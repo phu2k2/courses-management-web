@@ -29,8 +29,8 @@ class ResetPasswordRepository extends BaseRepository implements ResetPasswordRep
     /**
      * @param string $email
      * @param string $token
-     * @param mixed $createdTime
-     * @param mixed $expiredTime
+     * @param string $createdTime
+     * @param string $expiredTime
      * @return bool
      */
     public function addResetPassWord($email, $token, $createdTime, $expiredTime): bool
@@ -73,7 +73,7 @@ class ResetPasswordRepository extends BaseRepository implements ResetPasswordRep
 
     /**
      * @param string $token
-     * @param mixed $expiredTime
+     * @param string $expiredTime
      * @return mixed
      */
     public function isExpiredToken($token, $expiredTime)

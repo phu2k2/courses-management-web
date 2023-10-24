@@ -3,6 +3,7 @@
 namespace App\Repositories\Interfaces;
 
 use App\Repositories\RepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 interface ResetPasswordRepositoryInterface extends RepositoryInterface
 {
@@ -14,8 +15,8 @@ interface ResetPasswordRepositoryInterface extends RepositoryInterface
     /**
      * @param string $email
      * @param string $token
-     * @param mixed $createdTime
-     * @param mixed $expiredTime
+     * @param string $createdTime
+     * @param string $expiredTime
      * @return mixed
      */
     public function addResetPassWord($email, $token, $createdTime, $expiredTime);
@@ -37,7 +38,7 @@ interface ResetPasswordRepositoryInterface extends RepositoryInterface
     public function isValidToken($token, $email);
     /**
      * @param string $token
-     * @param mixed $expiredTime
+     * @param string $expiredTime
      * @return mixed
      */
     public function isExpiredToken($token, $expiredTime);

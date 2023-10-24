@@ -26,6 +26,7 @@ class ForgotPasswordController extends Controller
     {
         $this->userService = $userService;
         $this->resetPasswordService = $resetPasswordService;
+        $this->middleware('throttle:1,1')->only('submitForgetPasswordForm');
     }
 
     /**
@@ -43,15 +44,32 @@ class ForgotPasswordController extends Controller
     public function submitForgetPasswordForm(ForgotPasswordRequest $request)
     {
         /**
-         * Create a object for 'password_reset_token' table
-         */
-        $this->resetPasswordService->addResetPassWord($request->input('email'), Str::random(60), now(), now()->addMinutes(10));
-
-        /**
-         *Get the token just created above
+         * Check if token data exists for the provided email
          */
         $tokenData = $this->resetPasswordService->getByEmail($request->input('email'));
+        if ($tokenData) {
+            // return redirect()->back()->with("error", "Already sent the link to your email !");
+            return redirect()->back()->with("error", __('messages.password.error.forgot_password'));
+        }
 
+        /**
+         * Create a object for 'password_reset_token' table
+         */
+        $randomToken = Str::random(60);
+        $createdTime = now()->toDateTimeString();
+        $expiryTime = now()->addMinutes(10)->toDateTimeString();
+
+        $this->resetPasswordService->addResetPassWord(
+            $request->input('email'),
+            $randomToken,
+            $createdTime,
+            $expiryTime
+        );
+
+        /**
+         *Retrieve the token data again for the email address
+         */
+        $tokenData = $this->resetPasswordService->getByEmail($request->input('email'));
         /**
          * Send password reset link to email
          */
@@ -60,6 +78,6 @@ class ForgotPasswordController extends Controller
             $message->subject("Reset Password");
         });
 
-        return redirect()->back()->with('message', 'A reset link has been sent !');
+        return redirect()->back()->with('message', __('messages.password.success.forgot_password'));
     }
 }

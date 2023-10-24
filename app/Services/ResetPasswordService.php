@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Repositories\Interfaces\ResetPasswordRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class ResetPasswordService
 {
@@ -19,9 +18,9 @@ class ResetPasswordService
     }
 
     /**
-    * @param string $email
-    * @return mixed
-    */
+     * @param string $email
+     * @return mixed
+     */
     public function getByEmail($email)
     {
         return $this->resetPasswordRepo->getByEmail($email);
@@ -30,8 +29,8 @@ class ResetPasswordService
     /**
      * @param string $email
      * @param string $token
-     * @param mixed $createdTime
-     * @param mixed $expiredTime
+     * @param string $createdTime
+     * @param string $expiredTime
      * @return Model
      */
     public function addResetPassWord($email, $token, $createdTime, $expiredTime)
@@ -69,7 +68,7 @@ class ResetPasswordService
 
     /**
      * @param string $token
-     * @param mixed $expiredTime
+     * @param string $expiredTime
      * @return mixed
      */
     public function isExpiredToken($token, $expiredTime)

@@ -26,5 +26,15 @@ return [
         'error' => [
             'delete' => 'Removing course from cart failed'
         ]
+    ],
+    'password' => [
+        'success' => [
+            'forgot_password' => 'A reset link has been sent !',
+            'reset_password' => 'Reset Password Successfully!'
+        ],
+        'error' => [
+            'forgot_password' => 'Already sent the link to your email !',
+            'reset_password' => 'Error token !'
+        ]
     ]
 ];
