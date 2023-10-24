@@ -49,13 +49,12 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
             $query->filterByDuration($request->input('duration'));
         });
 
-        list($sortField, $sortType) = ['id', 'ASC'];
-
         if ($request->filled('sort')) {
             list($sortField, $sortType) = explode(':', $request->input('sort'));
+            $courses->orderBy($sortField, $sortType);
         }
 
-        $courses->orderBy($sortField, $sortType);
+        $courses->orderBy('id', 'ASC');
         $categoryInfo = [];
 
         foreach ($courses->get()->groupBy('category.name') as $category => $group) {

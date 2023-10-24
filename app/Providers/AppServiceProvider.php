@@ -2,20 +2,28 @@
 
 namespace App\Providers;
 
+use App\Helpers\AmazonS3;
 use App\Repositories\CourseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use App\Repositories\CartRepository;
+use App\Repositories\CommentRepository;
 use App\Repositories\Interfaces\CartRepositoryInterface;
+use App\Repositories\Interfaces\CommentRepositoryInterface;
 use App\Repositories\Interfaces\LessonRepositoryInterface;
 use App\Repositories\Interfaces\ProfileRepositoryInterface;
+use App\Repositories\Interfaces\ReviewRepositoryInterface;
 use App\Repositories\Interfaces\TopicRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\LessonRepository;
 use App\Repositories\ProfileRepository;
+use App\Repositories\ReviewRepository;
 use App\Repositories\TopicRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -37,6 +45,10 @@ class AppServiceProvider extends ServiceProvider
             CourseRepositoryInterface::class,
             CourseRepository::class
         );
+        $this->app->singleton(
+            ReviewRepositoryInterface::class,
+            ReviewRepository::class
+        );
 
         $this->app->singleton(
             TopicRepositoryInterface::class,
@@ -48,8 +60,16 @@ class AppServiceProvider extends ServiceProvider
         );
         $this->app->singleton(
             CartRepositoryInterface::class,
-            CartRepository::class
+            CartRepository::class,
         );
+
+        $this->app->singleton(
+            CommentRepositoryInterface::class,
+            CommentRepository::class
+        );
+        $this->app->singleton('AmazonS3', function () {
+            return new AmazonS3();
+        });
     }
 
     /**

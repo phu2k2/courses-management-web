@@ -47,4 +47,25 @@ class CartService
     {
         return $this->cartRepo->getCartByUser($id);
     }
+
+    /**
+     * Delete a record by course id.
+     *
+     * @param int $id .
+     * @return bool True if the deletion was successful, false otherwise.
+     */
+    public function deleteCart($id)
+    {
+        return $this->cartRepo->delete($id);
+    }
+
+    /**
+     * @param int $userId
+     *
+     * @return int
+     */
+    public function getCountCart($userId)
+    {
+        return count($this->cartRepo->getCartByUser($userId));
+    }
 }

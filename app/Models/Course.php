@@ -38,6 +38,11 @@ class Course extends Model
         'is_active',
     ];
 
+    private const VIDEO_DURATION_EXTRA_SHORT = 1;
+    private const VIDEO_DURATION_SHORT = 3;
+    private const VIDEO_DURATION_MEDIUM = 6;
+    private const VIDEO_DURATION_LONG = 17;
+
     /**
      * @return BelongsTo<Category, Course>
      */
@@ -209,31 +214,34 @@ class Course extends Model
      */
     public function scopeFilterByDuration(Builder $query, array $durations): Builder
     {
-        define('EXTRA_SHORT', [0, 1]);
-        define('SHORT', [1, 3]);
-        define('MEDIUM', [3, 6]);
-        define('LONG', [6, 17]);
-        define('EXTRA_LONG', [17]);
-
         return $query->where(function (Builder $query) use ($durations) {
-            $query->when(in_array(EXTRA_SHORT, $durations), function ($query) {
-                $query->orWhereBetween('total_time', EXTRA_SHORT);
+            $query->when(in_array('extraShort', $durations), function ($query) {
+                $query->orWhere('total_time', '<=', self::VIDEO_DURATION_EXTRA_SHORT);
             });
 
-            $query->when(in_array(SHORT, $durations), function ($query) {
-                $query->orWhereBetween('total_time', SHORT);
+            $query->when(in_array('short', $durations), function ($query) {
+                $query->orWhere(function (Builder $query) {
+                    $query->where('total_time', '>', self::VIDEO_DURATION_EXTRA_SHORT)
+                    ->where('total_time', '<=', self::VIDEO_DURATION_SHORT);
+                });
             });
 
-            $query->when(in_array(MEDIUM, $durations), function ($query) {
-                $query->orWhereBetween('total_time', MEDIUM);
+            $query->when(in_array('medium', $durations), function ($query) {
+                $query->orWhere(function (Builder $query) {
+                    $query->where('total_time', '>', self::VIDEO_DURATION_SHORT)
+                    ->where('total_time', '<=', self::VIDEO_DURATION_MEDIUM);
+                });
             });
 
-            $query->when(in_array(LONG, $durations), function ($query) {
-                $query->orWhereBetween('total_time', LONG);
+            $query->when(in_array('long', $durations), function ($query) {
+                $query->orWhere(function (Builder $query) {
+                    $query->where('total_time', '>', self::VIDEO_DURATION_MEDIUM)
+                    ->where('total_time', '<=', self::VIDEO_DURATION_LONG);
+                });
             });
 
-            $query->when(in_array(EXTRA_LONG, $durations), function ($query) {
-                $query->orWhere('total_time', '>', EXTRA_LONG[0]);
+            $query->when(in_array('extraLong', $durations), function ($query) {
+                $query->orWhere('total_time', '>', self::VIDEO_DURATION_LONG);
             });
         });
     }

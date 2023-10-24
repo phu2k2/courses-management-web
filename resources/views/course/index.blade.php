@@ -33,17 +33,20 @@
                         ================================================== -->
     <div class="container mb-6 mb-xl-8 z-index-2">
         <div class="d-lg-flex align-items-center mb-6 mb-xl-0">
-            <p class="mb-lg-0">We found <span class="text-dark">834 courses</span> available for you</p>
+            <p class="mb-lg-0">We found <span class="text-dark">{{$totalCourses}} courses</span> available for you</p>
             <div class="ms-lg-auto d-lg-flex flex-wrap">
                 <div class="mb-4 mb-lg-0 ms-lg-6">
                     <div class="border rounded d-flex align-items-center choices-label h-50p">
                         <span class="ps-5">Sort by:</span>
                         <select id="sort-select" onchange="handleSortChange()" class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end" data-choices>
                             <option value="default" {{ request('sort') == 'default' ? 'selected' : '' }}>{{__('course.sort.default')}}</option>
-                            <option value="created_at" {{ request('sort') == 'created_at' ? 'selected' : '' }}>{{__('course.sort.option_one')}}</option>
-                            <option value="num_reviews" {{ request('sort') == 'num_reviews' ? 'selected' : '' }}>{{__('course.sort.option_two')}}</option>
-                            <option value="average_rating" {{ request('sort') == 'average_rating' ? 'selected' : '' }}>{{__('course.sort.option_three')}}</option>
-                            <option value="total_students" {{ request('sort') == 'total_students' ? 'selected' : '' }}>{{__('course.sort.option_four')}}</option>
+                            <option value="created_at:desc" {{ request('sort') == 'created_at' ? 'selected' : '' }}>{{__('course.sort.option_one')}}</option>
+                            <option value="num_reviews:desc
+                            " {{ request('sort') == 'num_reviews' ? 'selected' : '' }}>{{__('course.sort.option_two')}}</option>
+                            <option value="average_rating:desc
+                            " {{ request('sort') == 'average_rating' ? 'selected' : '' }}>{{__('course.sort.option_three')}}</option>
+                            <option value="total_students:desc
+                            " {{ request('sort') == 'total_students' ? 'selected' : '' }}>{{__('course.sort.option_four')}}</option>
                         </select>
                     </div>
                 </div>
@@ -138,7 +141,7 @@
                             </h4>
                         </div>
 
-                        <div id="coursefiltercollapse2" class="collapse show mt-n2 px-6 pb-6"
+                        <div id="coursefiltercollapse2" class="collapse mt-n2 px-6 pb-6"
                             aria-labelledby="coursefilter2" data-parent="#courseSidebar">
                             <!-- Search -->
                             <form class="mb-4">
@@ -211,19 +214,19 @@
                                     <input type="radio" id="pricecustomradio1" name="price"
                                         class="custom-control-input" value ="all" @checked($selectedPrice == 'all')>
                                     <label class="custom-control-label font-size-base" for="pricecustomradio1">All
-                                        (18)</label>
+                                        </label>
                                 </li>
                                 <li class="custom-control custom-radio">
                                     <input type="radio" id="pricecustomradio2" name="price"
                                         class="custom-control-input" value = "free" @checked($selectedPrice == 'free')>
                                     <label class="custom-control-label font-size-base" for="pricecustomradio2">Free
-                                        (3)</label>
+                                        </label>
                                 </li>
                                 <li class="custom-control custom-radio">
                                     <input type="radio" id="pricecustomradio3" name="price"
                                         class="custom-control-input" value ="paid" @checked($selectedPrice == 'paid')>
                                     <label class="custom-control-label font-size-base" for="pricecustomradio3">Paid
-                                        (15)</label>
+                                        </label>
                                 </li>
                             </ul>
                         </div>
@@ -263,19 +266,19 @@
                                     <input type="checkbox" class="custom-control-input" id="levelcustomcheck1" name="level[]" 
                                     value="1" @checked(in_array('1', $selectedLevels))>
                                     <label class="custom-control-label font-size-base" for="levelcustomcheck1">{{ __('course.level.begin') }}
-                                        (03)</label>
+                                        </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="levelcustomcheck2" name="level[]" 
                                     value="2" @checked(in_array('2', $selectedLevels))>
                                     <label class="custom-control-label font-size-base"
-                                        for="levelcustomcheck2">{{ __('course.level.intermediate') }} (15)</label>
+                                        for="levelcustomcheck2">{{ __('course.level.intermediate') }} </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="levelcustomcheck3" name="level[]" 
                                     value="3" @checked(in_array('3', $selectedLevels))>
                                     <label class="custom-control-label font-size-base" for="levelcustomcheck3">{{ __('course.level.advanced') }}
-                                        (126)</label>
+                                        </label>
                                 </li>
                             </ul>
                         </div>
@@ -309,30 +312,31 @@
                                     <input type="checkbox" class="custom-control-input" id="durationcustomcheck1" name="duration[]" 
                                     value="extraShort" @checked(in_array('extraShort', $selectedDurations))>
                                     <label class="custom-control-label font-size-base" for="durationcustomcheck1">0-1 {{ __('course.duration_time') }}
-                                        (03)</label>
+                                        </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="durationcustomcheck2" name="duration[]" 
                                     value="short" @checked(in_array('short', $selectedDurations))>
-                                    <label class="custom-control-label font-size-base" for="durationcustomcheck2">1-3 {{ __('course.duration_time') }} (15)</label>
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck2">1-3 {{ __('course.duration_time') }}
+                                        </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="durationcustomcheck3" name="duration[]"
                                      value="medium" @checked(in_array('medium', $selectedDurations))>
                                     <label class="custom-control-label font-size-base" for="durationcustomcheck3">3-6 {{ __('course.duration_time') }}
-                                        (126)</label>
+                                        </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="ldurationcustomcheck4" name="duration[]"
                                      value="long" @checked(in_array('long', $selectedDurations))>
                                     <label class="custom-control-label font-size-base" for="ldurationcustomcheck4">6-17 {{ __('course.duration_time') }}
-                                        (126)</label>
+                                        </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="durationcustomcheck5" name="duration[]"
                                      value="extraLong" @checked(in_array('extraLong', $selectedDurations))>
                                     <label class="custom-control-label font-size-base" for="durationcustomcheck5">17+ {{ __('course.duration_time') }}
-                                        (126)</label>
+                                        </label>
                                 </li>
                             </ul>
                         </div>

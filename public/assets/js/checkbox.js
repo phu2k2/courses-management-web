@@ -24,7 +24,17 @@ function calculateTotal() {
     }
 }
 
-var headerCheckbox = document.querySelector('.form-check-input.header-checkbox');
-if (headerCheckbox) {
-    headerCheckbox.addEventListener('click', handleCheckboxClick);
+function handleDeleteButtonClick() {
+    var modalBody = document.querySelector('.modal-body.delete_item');
+    modalBody.innerHTML = '';
+    var checkboxes = document.querySelectorAll('.form-check-input.flexCheckDefault:checked');
+    var selectedIds = [];
+    checkboxes.forEach(function (checkbox) {
+        selectedIds.push(checkbox.getAttribute('data-id'));
+    });
+    var idsString = selectedIds.join(', ');
+    selectedIds.forEach(function (id) {
+        modalBody.innerHTML += '<ul><li><strong>' + id + '</strong></li><ul>';
+    });
+    document.getElementById('selectedItemsInput').value = idsString;
 }

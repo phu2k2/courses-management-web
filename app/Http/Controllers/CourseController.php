@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GetCoursesRequest;
 use App\Services\CourseService;
+use App\Services\ReviewService;
 use Illuminate\Contracts\View\View;
 
 class CourseController extends Controller
@@ -13,9 +14,15 @@ class CourseController extends Controller
      */
     protected $courseService;
 
-    public function __construct(CourseService $courseService)
+    /**
+     * @var ReviewService
+     */
+    protected $reviewService;
+
+    public function __construct(CourseService $courseService, ReviewService $reviewService)
     {
         $this->courseService = $courseService;
+        $this->reviewService = $reviewService;
     }
 
     /**
@@ -38,7 +45,8 @@ class CourseController extends Controller
     public function show(int $id): View
     {
         $course = $this->courseService->getCourse($id);
+        $reviews = $this->reviewService->getReviewsByCourse($id);
 
-        return view('course.show', compact('course'));
+        return view('course.show', compact('course', 'reviews'));
     }
 }
