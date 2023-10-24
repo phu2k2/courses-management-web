@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('comments', CommentController::class)->only(['destroy']);
     Route::resource('reviews', ReviewController::class)->only(['store']);
     Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
+    Route::delete('carts/delete-cart', [CartController::class, 'deleteMutilCarts'])->name('carts.delete-cart');
 
     //admin and instructor can access
     Route::middleware(['instructor'])->group(function () {
