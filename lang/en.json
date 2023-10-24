@@ -53,5 +53,21 @@
     "course.duration_time": "Hours",
     "course.rating_up": "up",
     "course.lessons": "lessons",
-    "course.reviews": "reviews"
+    "course.reviews": "reviews",
+
+    "process": "Proceed to checkout",
+    "total": "total",
+    "title_card": "Cart totals",
+    "select_all": "Select All",
+    "product": "Product",
+    "price": "Price",
+    "quantity": "Quantity",
+    "acion": "Action",
+    "delete": "Delete",
+    "coupon": "Coupon",
+    "empty_cart": "Empty Course",
+    "delete_label": "Do you want to delete ?",
+    "shop_cart": "Shop Cart",
+    "monetary_unit": "$"
+
 }

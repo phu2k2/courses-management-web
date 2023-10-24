@@ -544,7 +544,7 @@
 
                                         <div class="col-auto px-2 text-right">
                                             <del class="font-size-sm">${{ $course->price }}</del>
-                                            <ins class="h4 mb-0 d-block mb-lg-n1">${{ $course->price*(1-$course->discount/100) }}</ins>
+                                            <ins class="h4 mb-0 d-block mb-lg-n1">${{ number_format($course->discounted_price ,2)}}</ins>
                                         </div>
                                     </div>
                                 </div>

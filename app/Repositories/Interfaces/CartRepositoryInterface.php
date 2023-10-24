@@ -3,7 +3,6 @@
 namespace App\Repositories\Interfaces;
 
 use App\Repositories\RepositoryInterface;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 
 interface CartRepositoryInterface extends RepositoryInterface
@@ -16,4 +15,11 @@ interface CartRepositoryInterface extends RepositoryInterface
      * @return bool
      */
     public function hasCourseInCart(int $userId, int $courseId): bool;
+
+    /**
+     * @param array $ids
+     * @param int $userId
+     * @return bool
+     */
+    public function deleteMultiple($ids, $userId);
 }
