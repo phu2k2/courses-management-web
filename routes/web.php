@@ -22,28 +22,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware(['auth'])->group(function () {
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::get('profile', [ProfileController::class, 'show'])->name('profile');
+        Route::put('profile', [ProfileController::class, 'update'])->name('update');
+        Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
+        Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
+    });
+    Route::resource('comments', CommentController::class)->only(['destroy']);
+    Route::resource('reviews', ReviewController::class)->only(['store']);
+    Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
+
+    //admin and instructor can access
+    Route::middleware(['instructor'])->group(function () {
+        //route for instructor
+    });
+
+    //only admin can access
+    Route::middleware(['admin'])->group(function () {
+        //route for admin
+    });
+});
+
+Route::middleware(['guest'])->group(function () {
+    Route::prefix('login')->name('login.')->group(function () {
+        Route::get('show', [LoginController::class, 'show'])->name('show');
+        Route::post('auth', [LoginController::class, 'auth'])->name('auth');
+    });
+
+    Route::prefix('register')->name('register.')->group(function () {
+        Route::get('show', [RegisterController::class, 'show'])->name('show');
+        Route::post('store', [RegisterController::class, 'store'])->name('store');
+    });
+});
+
 Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::prefix('login')->name('login.')->group(function () {
-    Route::get('show', [LoginController::class, 'show'])->name('show');
-    Route::post('auth', [LoginController::class, 'auth'])->name('auth');
-});
-Route::prefix('register')->name('register.')->group(function () {
-    Route::get('show', [RegisterController::class, 'show'])->name('show');
-    Route::post('store', [RegisterController::class, 'store'])->name('store');
-});
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-Route::prefix('users')->name('users.')->group(function () {
-    Route::get('profile', [ProfileController::class, 'show'])->name('profile');
-    Route::put('profile', [ProfileController::class, 'update'])->name('update');
-    Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
-    Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
-});
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
-Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
-Route::resource('reviews', ReviewController::class)->only(['store']);
 
 Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show');
 });
-
-Route::resource('comments', CommentController::class)->only(['destroy']);
