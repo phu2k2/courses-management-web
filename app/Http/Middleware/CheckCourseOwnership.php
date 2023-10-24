@@ -17,12 +17,12 @@ class CheckCourseOwnership
     public function handle(Request $request, Closure $next): Response
     {
         $courseId = $request->route('courseId');
-        $enrollment = Enrollment::where('course_id',$courseId)
-            ->where('user_id',auth()->id())
+        $enrollment = Enrollment::where('course_id', $courseId)
+            ->where('user_id', auth()->id())
             ->first();
 
         if (!$enrollment) {
-            return redirect()->route('courses.show',['course' => $courseId]);
+            return redirect()->route('courses.show', ['course' => $courseId]);
         }
 
         return $next($request);
