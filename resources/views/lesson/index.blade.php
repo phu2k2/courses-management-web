@@ -1,12 +1,36 @@
 @extends('layouts.lesson')
 @section('title', 'Lesson: ' . $lesson->title)
-
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
+@endsection
 @section('script')
     <script type="module" src="{{ asset('assets/js/comment.js') }}"></script>
+    <script src="{{ asset('assets/js/submitForm.js') }}"></script>
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
+@endsection
+@section('modal')
+    <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentModalLabel">Delete</h5>
+                    </button>
+                </div>
+                <div class="modal-body delete_item">
+                    Do you really want to delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" id="submitDelete" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('content')
     <!-- COURSE ================================================== -->
-
+    @include('layouts.message')
     <div class="container container-wd">
         <div class="row pt-8 pb-10">
             <div class="col-lg-8">
@@ -47,212 +71,213 @@
                 </a>
 
                 <h3 class="text-white mb-6">Comment</h3>
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <i class="fa-solid fa-bell me-2"></i>
+                        <strong class="me-auto">Notification</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">Toast</div>
+                </div>
                 <ul class="list-unstyled pt-2">
-                    <div class="row-cols-md-12 mb-6">
-                        <li class="media d-flex">
-                            <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
-                                <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
-                                    class="avatar-img rounded-circle">
-                            </div>
-                            <div class="media-body flex-grow-1">
-                                <div class="d-md-flex align-items-center mb-1">
-                                    <div class="me-auto mb-4 mb-md-0">
-                                        <h5 class="text-white mb-1 fw-semi-bold">Lily <span
-                                                class="font-size-sm text-blue">@lily0707</span></h5>
-                                        <p class="font-size-sm font-italic">10 mins</p>
+                    @foreach ($comments as $comment)
+                        @if (empty($comment->parent_id))
+                            <div class="row-cols-md-12 mb-6">
+                                <li class="media d-flex">
+                                    <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
+                                        <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
+                                            class="avatar-img rounded-circle">
                                     </div>
-                                    <div class="me-0 sidenav-right">
-                                        <button class="btn" data-bs-toggle="dropdown" href="#" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
-                                            aria-labelledby="navbarActionParent">
-                                            <li class="dropdown-item">
-                                                <a class="dropdown-link" href="#">
-                                                    Edit
-                                                </a>
-                                            </li>
-                                            <li class="dropdown-item">
-                                                <a class="dropdown-link text-alizarin" href="#">
-                                                    Delete
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <p class="mb-2 line-height-md">This course was well organized and covered a lot more details
-                                    than any other Figma courses. I really enjoy it. One suggestion is that it can be much
-                                    better if we could complete the prototype together.</p>
-                                <div class="mb-4">
-                                    <button class="btn fa-solid fa-reply btn-reply" data-parentId="1"></button>Reply
-                                    <button class="btn fa-regular fa-flag"></button>Report
-                                </div>
-                                @auth
-                                    <div class="reply-comment 1">
-                                        <div class="bg-portgore rounded p-1 p-md-4 mb-4">
-                                            <form action="" method="POST">
-                                                <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content" name="content" rows="3"
-                                                    placeholder="Add you comment" data-parentId="1"></textarea>
-                                                <button type="submit"
-                                                    class="btn btn-orange btn-block mw-md-300p">SUBMIT</button>
-                                            </form>
+                                    <div class="media-body flex-grow-1">
+                                        <div class="d-md-flex align-items-center mb-1">
+                                            <div class="me-auto mb-4 mb-md-0">
+                                                <h5 class="text-white mb-1 fw-semi-bold">
+                                                    {{ $comment->user->profile?->full_name }}
+                                                    <span
+                                                        class="font-size-sm text-blue">{{ '@' . $comment->user->username }}</span>
+                                                </h5>
+                                                <p class="font-size-sm font-italic">
+                                                    {{ $comment->created_at->diffForHumans() }}
+                                                </p>
+                                            </div>
+                                            @if (auth()->id() == $comment->user->id)
+                                                <div class="me-0 sidenav-right">
+                                                    <button class="btn" data-bs-toggle="dropdown" href="#"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
+                                                        aria-labelledby="navbarActionParent">
+                                                        <li class="dropdown-item">
+                                                            <a class="dropdown-link btn-edit" href="javascript:void(0)"
+                                                                data-comment-id="{{ $comment->id }}">
+                                                                Edit
+                                                            </a>
+                                                        </li>
+                                                        <li class="dropdown-item">
+                                                            <form id="formDelete{{ $comment->id }}"
+                                                                action="{{ route('comments.destroy', ['comment' => $comment->id]) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $comment->id }}">
+                                                                <a class="dropdown-link text-alizarin" id="commentId"
+                                                                    data-id="{{ $comment->id }}" href="#"
+                                                                    data-bs-toggle="modal" data-bs-target="#commentModal">
+                                                                    Delete
+                                                                </a>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            @endif
                                         </div>
-                                    </div>
-                                @endauth
-                                <div class="mb-4">
-                                    <span class="show-reply 1" data-parentId="1"><i class="fa-solid fa-chevron-down"></i>
-                                        Show 2 replys</span>
-                                </div>
-                            </div>
-                        </li>
-                        <div class="offset-1 col-md-11 media reply-wrap 1">
-                            <li class="d-flex">
-                                <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
-                                    <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
-                                        class="avatar-img rounded-circle">
-                                </div>
-                                <div class="media-body flex-grow-1">
-                                    <div class="d-md-flex align-items-center mb-1">
-                                        <div class="me-auto mb-4 mb-md-0">
-                                            <h5 class="text-white mb-1 fw-semi-bold">Lily <span
-                                                    class="font-size-sm text-blue">@lily0707</span></h5>
-                                            <p class="font-size-sm font-italic">10 mins</p>
+                                        <p class="mb-2 line-height-md comment-content {{ $comment->id }}">
+                                            {{ $comment->content }}</p>
+                                        @auth
+                                            <div class="edit-comment {{ $comment->id }}">
+                                                <div class="bg-portgore rounded p-1 p-md-4 mb-4">
+                                                    <form
+                                                        data-url="{{ route('comments.update', ['comment' => $comment->id]) }}"
+                                                        id="formEdit{{ $comment->id }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content{{ $comment->id }}" name="content"
+                                                            rows="3" placeholder="Add you comment">{{ $comment->content }}</textarea>
+                                                        <button type="button" class="btn btn-orange btn-block mw-md-200p"
+                                                            onclick="submitForm({{ $comment->id }})">SUBMIT</button>
+                                                        <a class="btn btn-gray-200 btn-block mw-md-200p btn-edit"
+                                                            data-comment-id="{{ $comment->id }}">CANCEL</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endauth
+                                        <div class="mb-4">
+                                            <button class="btn fa-solid fa-reply btn-reply"
+                                                data-parentId="{{ $comment->id }}"></button>Reply
+                                            <button class="btn fa-regular fa-flag"></button>Report (To Do)
                                         </div>
-                                        <div class="me-0 sidenav-right">
-                                            <button class="btn" data-bs-toggle="dropdown" href="#"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa-solid fa-ellipsis-vertical"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
-                                                aria-labelledby="navbarAction">
-                                                <li class="dropdown-item">
-                                                    <a class="dropdown-link" href="#">
-                                                        Edit
-                                                    </a>
+                                        @auth
+                                            <div class="reply-comment {{ $comment->id }}">
+                                                <div class="bg-portgore rounded p-1 p-md-4 mb-4">
+                                                    <form action="" method="POST">
+                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content" name="content" rows="3"
+                                                            placeholder="Add you comment" data-parentId="{{ $comment->id }}"></textarea>
+                                                        <button type="submit"
+                                                            class="btn btn-orange btn-block mw-md-300p">SUBMIT</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endauth
+                                        @if ($comments->where('parent_id', $comment->id)->count() != 0)
+                                            <a class="mb-4 btn" href="javascript:void(0)">
+                                                <span class="show-reply {{ $comment->id }}"
+                                                    data-parentId="{{ $comment->id }}">
+                                                    <i class="fa-solid fa-chevron-down"></i>
+                                                    Show {{ $comments->where('parent_id', $comment->id)->count() }} replys
+                                                </span>
+                                            </a>
+                                        @endif
+                                    </div>
+                                </li>
+                                @if ($comments->where('parent_id', $comment->id)->count() != 0)
+                                    <div class="offset-1 col-md-11 media reply-wrap {{ $comment->id }}">
+                                        @foreach ($comments as $childComment)
+                                            @if ($childComment->parent_id == $comment->id)
+                                                <li class="d-flex">
+                                                    <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
+                                                        <img src="{{ asset('assets/img/products/product-2.jpg') }}"
+                                                            alt="..." class="avatar-img rounded-circle">
+                                                    </div>
+                                                    <div class="media-body flex-grow-1">
+                                                        <div class="d-md-flex align-items-center mb-1">
+                                                            <div class="me-auto mb-4 mb-md-0">
+                                                                <h5 class="text-white mb-1 fw-semi-bold">
+                                                                    {{ $childComment->user->profile?->full_name }}
+                                                                    <span
+                                                                        class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span>
+                                                                </h5>
+                                                                <p class="font-size-sm font-italic">
+                                                                    {{ $childComment->created_at->diffForHumans() }}
+                                                                </p>
+                                                            </div>
+                                                            @if (auth()->id() == $childComment->user->id)
+                                                                <div class="me-0 sidenav-right">
+                                                                    <button class="btn" data-bs-toggle="dropdown"
+                                                                        href="#" aria-haspopup="true"
+                                                                        aria-expanded="false">
+                                                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
+                                                                        aria-labelledby="navbarAction">
+                                                                        <li class="dropdown-item">
+                                                                            <a class="dropdown-link btn-edit" href="javascript:void(0)"
+                                                                                data-comment-id="{{ $childComment->id }}">
+                                                                                Edit
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="dropdown-item">
+                                                                            <form id="formDelete{{ $childComment->id }}"
+                                                                                action="{{ route('comments.destroy', ['comment' => $childComment->id]) }}"
+                                                                                method="post">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <input type="hidden" name="id"
+                                                                                    value="{{ $childComment->id }}">
+                                                                                <a class="dropdown-link text-alizarin"
+                                                                                    id="commentId"
+                                                                                    data-id="{{ $childComment->id }}"
+                                                                                    href="#" data-bs-toggle="modal"
+                                                                                    data-bs-target="#commentModal">
+                                                                                    Delete
+                                                                                </a>
+                                                                            </form>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                        <p
+                                                            class="mb-2 line-height-md comment-content {{ $childComment->id }}">
+                                                            {{ $childComment->content }}</p>
+                                                        @auth
+                                                            <div class="edit-comment {{ $childComment->id }}">
+                                                                <div class="bg-portgore rounded p-1 p-md-4 mb-4">
+                                                                    <form
+                                                                        data-url="{{ route('comments.update', ['comment' => $childComment->id]) }}"
+                                                                        id="formEdit{{ $childComment->id }}" method="POST">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content{{ $childComment->id }}"
+                                                                            name="content" rows="3" placeholder="Add you comment">{{ $childComment->content }}</textarea>
+                                                                        <button type="button"
+                                                                            class="btn btn-orange btn-block mw-md-200p"
+                                                                            onclick="submitForm({{ $childComment->id }})">SUBMIT</button>
+                                                                        <a class="btn btn-gray-200 btn-block mw-md-200p btn-edit"
+                                                                            data-comment-id="{{ $childComment->id }}">CANCEL</a>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        @endauth
+                                                        <div class="mb-4">
+                                                            <button class="btn fa-regular fa-flag"></button>Report (To Do)
+                                                        </div>
+                                                    </div>
                                                 </li>
-                                                <li class="dropdown-item">
-                                                    <a class="dropdown-link text-alizarin" href="#">
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                            @endif
+                                        @endforeach
+                                        <a class="mb-6 btn" href="javascript:void(0)">
+                                            <span class="hide-reply {{ $comment->id }}"
+                                                data-parentId="{{ $comment->id }}">
+                                                <i class="fa-solid fa-chevron-up"></i> Hide comments
+                                            </span>
+                                        </a>
                                     </div>
-                                    <p class="mb-2 line-height-md">This course was well organized and covered a lot more
-                                        details
-                                        than any other Figma courses. I really enjoy it. One suggestion is that it can be
-                                        much
-                                        better if we could complete the prototype together.</p>
-                                    <div class="mb-4">
-                                        <button class="btn fa-regular fa-flag"></button>Report
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="d-flex">
-                                <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
-                                    <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
-                                        class="avatar-img rounded-circle">
-                                </div>
-                                <div class="media-body flex-grow-1">
-                                    <div class="d-md-flex align-items-center mb-1">
-                                        <div class="me-auto mb-4 mb-md-0">
-                                            <h5 class="text-white mb-1 fw-semi-bold">Lily <span
-                                                    class="font-size-sm text-blue">@lily0707</span></h5>
-                                            <p class="font-size-sm font-italic">10 mins</p>
-                                        </div>
-                                        <div class="me-0 sidenav-right">
-                                            <button class="btn" data-bs-toggle="dropdown" href="#"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa-solid fa-ellipsis-vertical"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
-                                                aria-labelledby="navbarAction">
-                                                <li class="dropdown-item">
-                                                    <a class="dropdown-link" href="#">
-                                                        Edit
-                                                    </a>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <a class="dropdown-link text-alizarin" href="#">
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <p class="mb-2 line-height-md">This course was well organized and covered a lot more
-                                        details
-                                        than any other Figma courses. I really enjoy it. One suggestion is that it can be
-                                        much
-                                        better if we could complete the prototype together.</p>
-                                    <div class="mb-4">
-                                        <button class="btn fa-regular fa-flag"></button>Report
-                                    </div>
-                                </div>
-                            </li>
-                            <div class="md-6">
-                                <span class="hide-reply 1" data-parentId="1"><i class="fa-solid fa-chevron-up"></i> Hide
-                                    comments</span>
+                                @endif
                             </div>
-                        </div>
-                    </div>
-                    <div class="row-cols-md-12 mb-6">
-                        <li class="media d-flex">
-                            <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
-                                <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
-                                    class="avatar-img rounded-circle">
-                            </div>
-                            <div class="media-body flex-grow-1">
-                                <div class="d-md-flex align-items-center mb-1">
-                                    <div class="me-auto mb-4 mb-md-0">
-                                        <h5 class="text-white mb-1 fw-semi-bold">Lily <span
-                                                class="font-size-sm text-blue">@lily0707</span></h5>
-                                        <p class="font-size-sm font-italic">10 mins</p>
-                                    </div>
-                                    <div class="me-0 sidenav-right">
-                                        <button class="btn" data-bs-toggle="dropdown" href="#"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-wd-end border-xl"
-                                            aria-labelledby="navbarActionParent">
-                                            <li class="dropdown-item">
-                                                <a class="dropdown-link" href="#">
-                                                    Edit
-                                                </a>
-                                            </li>
-                                            <li class="dropdown-item">
-                                                <a class="dropdown-link text-alizarin" href="#">
-                                                    Delete
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <p class="mb-2 line-height-md">This course was well organized and covered a lot more
-                                    details
-                                    than any other Figma courses. I really enjoy it. One suggestion is that it can be much
-                                    better if we could complete the prototype together.</p>
-                                <div class="mb-4">
-                                    <button class="btn fa-solid fa-reply btn-reply" data-parentId="2"></button>Reply
-                                    <button class="btn fa-regular fa-flag"></button>Report
-                                </div>
-                                @auth
-                                    <div class="reply-comment 2">
-                                        <div class="bg-portgore rounded p-1 p-md-4 mb-4">
-                                            <form action="" method="POST">
-                                                <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content" name="content" rows="3"
-                                                    placeholder="Add you comment" data-parentId="2"></textarea>
-                                                <button type="submit"
-                                                    class="btn btn-orange btn-block mw-md-300p">SUBMIT</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                @endauth
-                            </div>
-                        </li>
-                    </div>
+                        @endif
+                    @endforeach
                 </ul>
 
                 <div class="bg-portgore rounded p-6 p-md-9 mb-8">
@@ -338,7 +363,8 @@
                                 </div>
                                 @foreach ($topic->lessons as $lesson)
                                     <div id="Curriculumcollapse{{ $key }}" class="collapse show"
-                                        aria-labelledby="curriculumheading{{ $key }}" data-parent="#accordionCurriculum">
+                                        aria-labelledby="curriculumheading{{ $key }}"
+                                        data-parent="#accordionCurriculum">
 
                                         <div
                                             class="border-top px-5 border-color-20 py-4 min-height-70 d-md-flex align-items-center">
@@ -374,7 +400,7 @@
                                                     class="badge btn-orange-soft text-white-70 me-5 font-size-sm fw-normal py-2">
                                                     {{ $lesson->lesson_duration }}
                                                 </div>
-                                                <a href="#" class="text-secondary d-flex">
+                                                <a href="{{ route('courses.lessons.show', ['courseId' => $course->id, 'lessonId' => $lesson->id])}}" class="text-secondary d-flex">
                                                     <!-- Icon -->
                                                     <svg width="14" height="16" viewBox="0 0 14 16"
                                                         xmlns="http://www.w3.org/2000/svg">

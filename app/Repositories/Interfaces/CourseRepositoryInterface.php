@@ -2,14 +2,16 @@
 
 namespace App\Repositories\Interfaces;
 
+use App\Http\Requests\GetCoursesRequest;
 use App\Repositories\RepositoryInterface;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Course;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface CourseRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @return LengthAwarePaginator<Model>
+     * @param GetCoursesRequest $request
+     * @return LengthAwarePaginator<Course>
      */
-    public function getCourses(): LengthAwarePaginator;
+    public function getCourses($request): LengthAwarePaginator;
 }
