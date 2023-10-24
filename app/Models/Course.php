@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -36,6 +37,11 @@ class Course extends Model
         'requirements_description',
         'is_active',
     ];
+
+    private const VIDEO_DURATION_EXTRA_SHORT = 1;
+    private const VIDEO_DURATION_SHORT = 3;
+    private const VIDEO_DURATION_MEDIUM = 6;
+    private const VIDEO_DURATION_LONG = 17;
 
     /**
      * @return BelongsTo<Category, Course>
@@ -96,7 +102,7 @@ class Course extends Model
 
     /**
      * @return HasMany<Review>
-     */
+    */
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class, 'course_id');
@@ -116,5 +122,127 @@ class Course extends Model
     public function enrollments(): HasMany
     {
         return $this->hasMany(Enrollment::class, 'course_id', 'id');
+    }
+
+    /**
+     * Scope the query to filter courses by category.
+     *
+     * @param  Builder  $query
+     * @param  array  $category
+     * @return Builder
+     */
+    public function scopeFilterByCategory(Builder $query, array $category): Builder
+    {
+        return $query->whereIn('category_id', $category);
+    }
+
+    /**
+     * Scope the query to filter courses by search term.
+     *
+     * @param  Builder  $query
+     * @param  string  $searchTerm
+     * @return Builder
+     */
+    public function scopeFilterBySearchTerm(Builder $query, string $searchTerm): Builder
+    {
+        return $query->where(function (Builder $query) use ($searchTerm) {
+            $query->where('title', 'like', "%$searchTerm%")
+                ->orWhere('description', 'like', "%$searchTerm%")
+                ->orWhere('learns_description', 'like', "%$searchTerm%");
+        });
+    }
+
+    /**
+     * Scope the query to filter courses by minimum rating.
+     *
+     * @param  Builder  $query
+     * @param  float  $rating
+     * @return Builder
+     */
+    public function scopeFilterByRating(Builder $query, float $rating): Builder
+    {
+        return $query->where('average_rating', '>=', $rating);
+    }
+
+    /**
+     * Scope the query to filter courses by languages.
+     *
+     * @param  Builder  $query
+     * @param  array  $languages
+     * @return Builder
+     */
+    public function scopeFilterByLanguage(Builder $query, array $languages): Builder
+    {
+        return $query->whereIn('languages', $languages);
+    }
+
+    /**
+     * Scope the query to filter courses by level.
+     *
+     * @param  Builder  $query
+     * @param  array  $levels
+     * @return Builder
+     */
+    public function scopeFilterByLevel(Builder $query, array $levels): Builder
+    {
+        return $query->whereIn('level', $levels);
+    }
+
+    /**
+     * Scope the query to filter courses by price.
+     *
+     * @param  Builder  $query
+     * @param  string  $price
+     * @return Builder
+     */
+    public function scopeFilterByPrice(Builder $query, string $price): Builder
+    {
+        if ($price === 'free') {
+            return $query->where('price', 0);
+        } elseif ($price === 'paid') {
+            return $query->where('price', '>', 0);
+        }
+        return $query;
+    }
+
+    /**
+     * Scope the query to filter courses by duration.
+     *
+     * @param  Builder  $query
+     * @param  array  $durations
+     * @return Builder
+     */
+    public function scopeFilterByDuration(Builder $query, array $durations): Builder
+    {
+        return $query->where(function (Builder $query) use ($durations) {
+            $query->when(in_array('extraShort', $durations), function ($query) {
+                $query->orWhere('total_time', '<=', self::VIDEO_DURATION_EXTRA_SHORT);
+            });
+
+            $query->when(in_array('short', $durations), function ($query) {
+                $query->orWhere(function (Builder $query) {
+                    $query->where('total_time', '>', self::VIDEO_DURATION_EXTRA_SHORT)
+                    ->where('total_time', '<=', self::VIDEO_DURATION_SHORT);
+                });
+            });
+
+            $query->when(in_array('medium', $durations), function ($query) {
+                $query->orWhere(function (Builder $query) {
+                    $query->where('total_time', '>', self::VIDEO_DURATION_SHORT)
+                    ->where('total_time', '<=', self::VIDEO_DURATION_MEDIUM);
+                });
+            });
+
+            $query->when(in_array('long', $durations), function ($query) {
+                $query->orWhere(function (Builder $query) {
+                    $query->where('total_time', '>', self::VIDEO_DURATION_MEDIUM)
+                    ->where('total_time', '<=', self::VIDEO_DURATION_LONG);
+                });
+            });
+
+            $query->when(in_array('extraLong', $durations), function ($query) {
+                $query->orWhere('total_time', '>', self::VIDEO_DURATION_LONG);
+            });
+        });
     }
 }
