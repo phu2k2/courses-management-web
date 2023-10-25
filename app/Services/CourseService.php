@@ -31,15 +31,11 @@ class CourseService
 
     /**
      * @param GetCoursesRequest $request
-     * @return array
+     * @return LengthAwarePaginator<Course>
      */
-    public function getCourses(GetCoursesRequest $request): array
+    public function getCourses(GetCoursesRequest $request): LengthAwarePaginator
     {
-        $data = $this->courseRepo->getCourses($request);
-
-        return ['courses' => $data['courses'],
-        'categoryInfo' => $data['categoryInfo'],
-        'totalCourses' => $data['totalCourses']];
+        return $this->courseRepo->getCourses($request);
     }
 
     /**
