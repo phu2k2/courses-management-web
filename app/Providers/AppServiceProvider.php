@@ -23,6 +23,7 @@ use App\Repositories\ProfileRepository;
 use App\Repositories\ReviewRepository;
 use App\Repositories\TopicRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -91,6 +92,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Blade::if('instructor', function () {
+            $roleInstructor = 2;
+            return auth()->check() && auth()->user()?->role_id == $roleInstructor;
+        });
     }
 }

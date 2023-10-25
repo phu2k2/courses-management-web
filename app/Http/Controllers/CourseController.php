@@ -46,4 +46,12 @@ class CourseController extends Controller
 
         return view('course.show', compact('course', 'reviews'));
     }
+
+    /**
+     * @return View
+     */
+    public function getMyCourses(): View
+    {
+        return view('user.course.index');
+    }
 }
