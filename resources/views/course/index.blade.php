@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', __('course.page_name'))
+@section('title', __('page_name_course'))
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/libs/aos/dist/aos.css') }}">
 @endsection
@@ -10,7 +10,7 @@
     <header class="py-8 py-lg-12 mb-8 overlay overlay-primary overlay-80"
         style="background-image: url({{ asset('assets/img/covers/cover-19.jpg')}} );">
         <div class="container text-center py-xl-5">
-            <h1 class="display-4 fw-semi-bold mb-0 text-white">{{__('course.page_name') }}</h1>
+            <h1 class="display-4 fw-semi-bold mb-0 text-white">{{__('page_name_course') }}</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-scroll justify-content-center">
                     <li class="breadcrumb-item">
@@ -19,7 +19,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item text-white active" aria-current="page">
-                        {{__('course.page_name') }}
+                        {{__('page_name_course') }}
                     </li>
                 </ol>
             </nav>
@@ -33,20 +33,17 @@
                         ================================================== -->
     <div class="container mb-6 mb-xl-8 z-index-2">
         <div class="d-lg-flex align-items-center mb-6 mb-xl-0">
-            <p class="mb-lg-0">We found <span class="text-dark">{{$totalCourses}} courses</span> available for you</p>
+            <p class="mb-lg-0">We found <span class="text-dark">{{ $courses->total() }} courses</span> available for you</p>
             <div class="ms-lg-auto d-lg-flex flex-wrap">
                 <div class="mb-4 mb-lg-0 ms-lg-6">
                     <div class="border rounded d-flex align-items-center choices-label h-50p">
-                        <span class="ps-5">Sort by:</span>
+                        <span class="ps-5">{{ __('sort_by') }}:</span>
                         <select id="sort-select" onchange="handleSortChange()" class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end" data-choices>
-                            <option value="default" {{ request('sort') == 'default' ? 'selected' : '' }}>{{__('course.sort.default')}}</option>
-                            <option value="created_at:desc" {{ request('sort') == 'created_at' ? 'selected' : '' }}>{{__('course.sort.option_one')}}</option>
-                            <option value="num_reviews:desc
-                            " {{ request('sort') == 'num_reviews' ? 'selected' : '' }}>{{__('course.sort.option_two')}}</option>
-                            <option value="average_rating:desc
-                            " {{ request('sort') == 'average_rating' ? 'selected' : '' }}>{{__('course.sort.option_three')}}</option>
-                            <option value="total_students:desc
-                            " {{ request('sort') == 'total_students' ? 'selected' : '' }}>{{__('course.sort.option_four')}}</option>
+                            <option value="default" @selected(request('sort') == 'default')>{{ __('sort.default') }}</option>
+                            <option value="created_at:desc" @selected(request('sort') == 'created_at:desc')>{{ __('sort.new_courses') }}</option>
+                            <option value="num_reviews:desc" @selected(request('sort') == 'num_reviews:desc')>{{ __('sort.most_reviewed') }}</option>
+                            <option value="average_rating:desc" @selected(request('sort') == 'average_rating:desc')>{{ __('sort.highest_rated') }}</option>
+                            <option value="total_students:desc" @selected(request('sort') == 'total_students:desc')>{{ __('sort.highest_student') }}</option>
                         </select>
                     </div>
                 </div>
@@ -76,7 +73,7 @@
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse1"
                                     aria-expanded="true" aria-controls="coursefiltercollapse1">
-                                    {{ __('course.filter.languages') }}
+                                    {{ __('languages') }}
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
                                         <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -169,13 +166,13 @@
                             </form>
                                 <ul class="list-unstyled list-group list-checkbox">
 
-                                    @foreach($categoryInfo as $category)
+                                    {{-- @foreach($categoryInfo as $category)
                                     <li class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="categorycustomcheck{{ $loop->index }}" 
                                         name="category[]" value="{{ $category->id }}"  @checked(in_array($category->id, $selectedCategories))>
                                         <label class="custom-control-label font-size-base" for="categorycustomcheck{{ $loop->index }}">{{ $category->name }} ({{ $category->count }})</label>
                                     </li>
-                                    @endforeach
+                                    @endforeach --}}
                                 </ul>
                             
                         </div>
@@ -189,7 +186,7 @@
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse3"
                                     aria-expanded="false" aria-controls="coursefiltercollapse3">
-                                    {{ __('course.filter.price') }}
+                                    {{ __('price') }}
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
                                         <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -240,7 +237,7 @@
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse4"
                                     aria-expanded="false" aria-controls="coursefiltercollapse4">
-                                    {{ __('course.filter.level') }}
+                                    {{ __('level') }}
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
                                         <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -265,19 +262,19 @@
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="levelcustomcheck1" name="level[]" 
                                     value="1" @checked(in_array('1', $selectedLevels))>
-                                    <label class="custom-control-label font-size-base" for="levelcustomcheck1">{{ __('course.level.begin') }}
+                                    <label class="custom-control-label font-size-base" for="levelcustomcheck1">{{ __('beginner') }}
                                         </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="levelcustomcheck2" name="level[]" 
                                     value="2" @checked(in_array('2', $selectedLevels))>
                                     <label class="custom-control-label font-size-base"
-                                        for="levelcustomcheck2">{{ __('course.level.intermediate') }} </label>
+                                        for="levelcustomcheck2">{{ __('intermediate') }} </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="levelcustomcheck3" name="level[]" 
                                     value="3" @checked(in_array('3', $selectedLevels))>
-                                    <label class="custom-control-label font-size-base" for="levelcustomcheck3">{{ __('course.level.advanced') }}
+                                    <label class="custom-control-label font-size-base" for="levelcustomcheck3">{{ __('advanced') }}
                                         </label>
                                 </li>
                             </ul>
@@ -289,7 +286,7 @@
                         <div id="coursefilter4">
                             <h4 class="mb-0">
                                 <button class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one" type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse4" aria-expanded="true" aria-controls="coursefiltercollapse4">
-                                    {{ __('course.filter.video_duration') }}
+                                    {{ __('video_duration') }}
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
                                         <svg width="15" height="2" viewBox="0 0 15 2" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -311,31 +308,31 @@
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="durationcustomcheck1" name="duration[]" 
                                     value="extraShort" @checked(in_array('extraShort', $selectedDurations))>
-                                    <label class="custom-control-label font-size-base" for="durationcustomcheck1">0-1 {{ __('course.duration_time') }}
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck1">0-1 {{ __('hours') }}
                                         </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="durationcustomcheck2" name="duration[]" 
                                     value="short" @checked(in_array('short', $selectedDurations))>
-                                    <label class="custom-control-label font-size-base" for="durationcustomcheck2">1-3 {{ __('course.duration_time') }}
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck2">1-3 {{ __('hours') }}
                                         </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="durationcustomcheck3" name="duration[]"
                                      value="medium" @checked(in_array('medium', $selectedDurations))>
-                                    <label class="custom-control-label font-size-base" for="durationcustomcheck3">3-6 {{ __('course.duration_time') }}
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck3">3-6 {{ __('hours') }}
                                         </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="ldurationcustomcheck4" name="duration[]"
                                      value="long" @checked(in_array('long', $selectedDurations))>
-                                    <label class="custom-control-label font-size-base" for="ldurationcustomcheck4">6-17 {{ __('course.duration_time') }}
+                                    <label class="custom-control-label font-size-base" for="ldurationcustomcheck4">6-17 {{ __('hours') }}
                                         </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="durationcustomcheck5" name="duration[]"
                                      value="extraLong" @checked(in_array('extraLong', $selectedDurations))>
-                                    <label class="custom-control-label font-size-base" for="durationcustomcheck5">17+ {{ __('course.duration_time') }}
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck5">17+ {{ __('hours') }}
                                         </label>
                                 </li>
                             </ul>
@@ -350,7 +347,7 @@
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse5"
                                     aria-expanded="true" aria-controls="coursefiltercollapse5">
-                                    {{ __('course.filter.rating') }}
+                                    {{ __('rating') }}
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
                                         <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -382,7 +379,7 @@
                                             </span>
 
                                             <span class="ms-3">
-                                                <span>& {{ __('course.rating_up') }}</span>
+                                                <span>& {{ __('rating_up') }}</span>
                                             </span>
                                         </span>
                                     </label>
@@ -397,7 +394,7 @@
                                             </span>
 
                                             <span class="ms-3">
-                                                <span>& {{ __('course.rating_up') }}</span>
+                                                <span>& {{ __('rating_up') }}</span>
                                             </span>
                                         </span>
                                     </label>
@@ -412,7 +409,7 @@
                                             </span>
 
                                             <span class="ms-3">
-                                                <span>& {{ __('course.rating_up') }}</span>
+                                                <span>& {{ __('rating_up') }}</span>
                                             </span>
                                         </span>
                                     </label>
@@ -427,7 +424,7 @@
                                             </span>
 
                                             <span class="ms-3">
-                                                <span>& {{ __('course.rating_up') }}</span>
+                                                <span>& {{ __('rating_up') }}</span>
                                             </span>
                                         </span>
                                     </label>
@@ -442,7 +439,7 @@
                                             </span>
 
                                             <span class="ms-3">
-                                                <span>& {{ __('course.rating_up') }}</span>
+                                                <span>& {{ __('rating_up') }}</span>
                                             </span>
                                         </span>
                                     </label>
@@ -452,7 +449,7 @@
                     </div>
 
                     {{-- <a href="#" type="" class="btn btn-primary btn-block mb-10">FILTER RESULTS</a> --}}
-                    <button type="submit" class="btn btn-primary btn-block mb-10">{{ __('course.filter.name_button_submit') }}</button>
+                    <button type="submit" class="btn btn-primary btn-block mb-10">{{ __('button_filter') }}</button>
                 </div>
             </form>
             </div>
@@ -499,7 +496,7 @@
                                         </div>
 
                                         <div class="font-size-sm">
-                                            <span>{{ $course->average_rating }} ({{ convert_to_short_form($course->num_reviews) }} {{ __('course.reviews') }})</span>
+                                            <span>{{ $course->average_rating }} ({{ convert_to_short_form($course->num_reviews) }} {{ __('reviews') }})</span>
                                         </div>
                                     </div>
 
@@ -518,7 +515,7 @@
                                                             </svg>
 
                                                         </div>
-                                                        <div class="font-size-sm">{{ $course->total_lessons }} {{ __('course.lessons') }}</div>
+                                                        <div class="font-size-sm">{{ $course->total_lessons }} {{ __('lessons') }}</div>
                                                     </div>
                                                 </li>
                                                 <li class="nav-item px-3">
@@ -557,7 +554,7 @@
                 <!-- PAGINATION ================================================== -->
                 <nav class="mb-11" aria-label="Page navigationa">
                     <ul class="pagination justify-content-center">
-                        {!! $courses->appends(request()->query())->links('pagination::bootstrap-4') !!}
+                        {!! $courses->links('pagination::bootstrap-4') !!}
                     </ul>
                 </nav>
             </div>
