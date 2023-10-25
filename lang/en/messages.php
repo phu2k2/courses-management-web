@@ -24,7 +24,7 @@ return [
             'delete' => 'Delete comment was successful',
         ],
         'error' => [
-            'create' => 'Create comment was successful',
+            'create' => 'Create comment was failed',
             'delete' => 'Delete comment was failed',
         ],
     ],
