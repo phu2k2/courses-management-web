@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('profile', [ProfileController::class, 'update'])->name('update');
         Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
         Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
+        Route::get('my-courses', [CourseController::class, 'getMyCourses'])->name('my-courses');
     });
     Route::resource('comments', CommentController::class)->only(['destroy']);
     Route::resource('reviews', ReviewController::class)->only(['store']);
@@ -37,7 +38,9 @@ Route::middleware(['auth'])->group(function () {
 
     //admin and instructor can access
     Route::middleware(['instructor'])->group(function () {
-        //route for instructor
+        Route::prefix('instructor')->name('instructor')->group(function () {
+            Route::get('/', [HomeController::class, 'home']);
+        });
     });
 
     //only admin can access
