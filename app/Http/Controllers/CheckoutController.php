@@ -33,6 +33,7 @@ class CheckoutController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @param Request $request
      * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
