@@ -7,6 +7,7 @@ use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class CourseRepository extends BaseRepository implements CourseRepositoryInterface
 {
@@ -23,6 +24,15 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     public function getCourses(): LengthAwarePaginator
     {
         return $this->model->with('category:id,name')->paginate(self::PAGESIZE);
+    }
+
+    /**
+     * @param int $id
+     * @return Collection
+     */
+    public function getInstructorCourses($id)
+    {
+        return $this->model->with('user:id')->where('instructor_id', $id)->get();
     }
 
     /**

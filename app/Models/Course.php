@@ -117,4 +117,12 @@ class Course extends Model
     {
         return $this->hasMany(Enrollment::class, 'course_id', 'id');
     }
+
+    /**
+     * @return BelongsTo<User, Course>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'instructor_id ', 'id');
+    }
 }
