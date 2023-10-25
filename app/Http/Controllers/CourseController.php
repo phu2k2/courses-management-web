@@ -43,8 +43,12 @@ class CourseController extends Controller
     {
         $course = $this->courseService->getCourse($id);
         $reviews = $this->reviewService->getReviewsByCourse($id);
+        $enrolled = false;
+        if (auth()->check()) {
+            $enrolled = $this->courseService->isEnrolled((int) auth()->id(), $id);
+        }
 
-        return view('course.show', compact('course', 'reviews'));
+        return view('course.show', compact('course', 'reviews', 'enrolled'));
     }
 
     /**

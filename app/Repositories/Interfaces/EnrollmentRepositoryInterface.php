@@ -14,4 +14,12 @@ interface EnrollmentRepositoryInterface extends RepositoryInterface
      * @return LengthAwarePaginator<Enrollment>
      */
     public function getMyCoures($userId): LengthAwarePaginator;
+
+    /**
+     * @param int $userId
+     * @param int $courseId
+     *
+     * @return int
+     */
+    public function isEnrolled($userId, $courseId);
 }
