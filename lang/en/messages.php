@@ -44,5 +44,10 @@ return [
         'error' => [
             'create' => 'Failed to add review!'
         ],
+    ],
+    'checkout' => [
+        'error' => [
+            'save' => 'Please choose at least one course'
+        ]
     ]
 ];

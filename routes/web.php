@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
@@ -58,3 +59,4 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
 
     Route::resource('courses', InstructorCourseController::class);
 });
+Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);

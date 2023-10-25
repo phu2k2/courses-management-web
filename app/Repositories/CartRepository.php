@@ -43,6 +43,15 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     }
 
     /**
+     * @param array $id
+     * @return Collection
+     */
+    public function getCourseToCart($id)
+    {
+        return $this->model->with('course:id,title,price,discount')->whereIn('id', $id)->get();
+    }
+
+    /**
      * @param array $ids
      * @param int $userId
      * @return bool

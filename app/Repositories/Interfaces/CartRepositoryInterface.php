@@ -17,6 +17,12 @@ interface CartRepositoryInterface extends RepositoryInterface
     public function hasCourseInCart(int $userId, int $courseId): bool;
 
     /**
+     * @param array $id
+     * @return Collection
+     */
+    public function getCourseToCart($id);
+
+    /**
      * @param array $ids
      * @param int $userId
      * @return bool
