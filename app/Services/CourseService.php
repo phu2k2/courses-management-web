@@ -72,6 +72,6 @@ class CourseService
      */
     public function isEnrolled($userId, $courseId)
     {
-        return $this->enrollmentRepo->isEnrolled($userId, $courseId);
+        return (bool) $this->enrollmentRepo->isEnrolled($userId, $courseId);
     }
 }

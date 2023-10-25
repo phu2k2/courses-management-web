@@ -31,7 +31,7 @@ class EnrollmentRepository extends BaseRepository implements EnrollmentRepositor
      * @param int $userId
      * @param int $courseId
      *
-     * @return bool
+     * @return int
      */
     public function isEnrolled($userId, $courseId)
     {
