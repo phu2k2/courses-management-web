@@ -8,6 +8,7 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,9 +37,12 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::put('profile', [ProfileController::class, 'update'])->name('update');
     Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
     Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
+    Route::get('my-courses', [CourseController::class, 'getMyCourses'])->name('my-courses');
 });
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
+Route::delete('carts/delete-cart', [CartController::class, 'deleteMutilCarts'])->name('carts.delete-cart');
 Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
+Route::resource('reviews', ReviewController::class)->only(['store']);
 
 Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show');
@@ -46,8 +50,8 @@ Route::prefix('courses')->name('courses.')->group(function () {
 
 Route::resource('comments', CommentController::class)->only(['destroy']);
 
-Route::prefix('instructor')->group(function () {
+Route::prefix('instructor')->name('instructor.')->group(function () {
     Route::get('/', function () {
         return view('instructor.home');
-    })->name('instructor.home');
+    })->name('home');
 });

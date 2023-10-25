@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GetCoursesRequest;
 use App\Services\CourseService;
 use App\Services\ReviewService;
 use Illuminate\Contracts\View\View;
@@ -27,9 +28,9 @@ class CourseController extends Controller
     /**
      * @return View
      */
-    public function index(): View
+    public function index(GetCoursesRequest $request): View
     {
-        $courses = $this->courseService->getCourses();
+        $courses = $this->courseService->getCourses($request);
 
         return view('course.index', compact('courses'));
     }
@@ -44,5 +45,13 @@ class CourseController extends Controller
         $reviews = $this->reviewService->getReviewsByCourse($id);
 
         return view('course.show', compact('course', 'reviews'));
+    }
+
+    /**
+     * @return View
+     */
+    public function getMyCourses(): View
+    {
+        return view('user.course.index');
     }
 }

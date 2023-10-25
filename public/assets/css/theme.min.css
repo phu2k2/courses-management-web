@@ -39791,3 +39791,10 @@ body.compensate-for-scrollbar {
 .slect-rating>label:hover~input:checked~label {
     color: #ffbb72
 }
+
+.text-show-line {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}

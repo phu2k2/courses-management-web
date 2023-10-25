@@ -400,7 +400,7 @@
                                                     class="badge btn-orange-soft text-white-70 me-5 font-size-sm fw-normal py-2">
                                                     {{ $lesson->lesson_duration }}
                                                 </div>
-                                                <a href="#" class="text-secondary d-flex">
+                                                <a href="{{ route('courses.lessons.show', ['courseId' => $course->id, 'lessonId' => $lesson->id])}}" class="text-secondary d-flex">
                                                     <!-- Icon -->
                                                     <svg width="14" height="16" viewBox="0 0 14 16"
                                                         xmlns="http://www.w3.org/2000/svg">
