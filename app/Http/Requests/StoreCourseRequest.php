@@ -27,10 +27,10 @@ class StoreCourseRequest extends FormRequest
             'price' => ['bail', 'required', 'decimal:0,2'],
             'discount' => ['bail', 'required', 'integer'],
             'category_id' => ['bail', 'required', 'integer', 'exists:categories,id'],
-            'trailer_url' => ['bail', 'required', 'string', 'file'],
+            'trailer_url' => ['bail', 'required', 'string'],
             'languages' => ['bail', 'required', 'integer', 'digits_between:1,2'],
             'level' => ['bail', 'required', 'integer', 'digits_between:1,3'],
-            'poster_url' => ['bail', 'required', 'string', 'image'],
+            'poster_url' => ['bail', 'required', 'string'],
             'description' => ['bail', 'required', 'string'],
             'learns_description' => ['bail', 'required', 'string'],
             'requirements_description' => ['bail', 'required', 'string']
