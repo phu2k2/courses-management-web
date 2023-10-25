@@ -17,7 +17,7 @@
                         <table class="table table-bordered border-primary" style="text-align : center">
                             <thead class="table-primary">
                                 <tr>
-                                    <th scope="col">Id</th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Category</th>
                                     <th scope="col">Price</th>
@@ -55,6 +55,11 @@
                         <!-- End Primary Color Bordered Table -->
                     </div>
                 </div>
+                <nav class="mb-11" aria-label="Page navigationa">
+                    <ul class="pagination justify-content-center">
+                        {!! $courses->links('pagination::bootstrap-4') !!}
+                    </ul>
+                </nav>
             </div>
         </section>
     </main>
