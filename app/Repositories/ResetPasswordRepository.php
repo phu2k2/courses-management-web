@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\ResetPassword;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\ResetPasswordRepositoryInterface;
-use Illuminate\Database\Eloquent\Model;
 
 class ResetPasswordRepository extends BaseRepository implements ResetPasswordRepositoryInterface
 {

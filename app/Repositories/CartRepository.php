@@ -6,7 +6,6 @@ use App\Models\Cart;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\CartRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 class CartRepository extends BaseRepository implements CartRepositoryInterface
 {

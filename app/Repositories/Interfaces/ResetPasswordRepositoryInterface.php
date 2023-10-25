@@ -3,7 +3,6 @@
 namespace App\Repositories\Interfaces;
 
 use App\Repositories\RepositoryInterface;
-use Illuminate\Database\Eloquent\Model;
 
 interface ResetPasswordRepositoryInterface extends RepositoryInterface
 {
