@@ -22,7 +22,7 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      * Retrieve a paginated list of courses based on the provided filters.
      *
      * @param GetCoursesRequest $request
-     * @return LengthAwarePaginator
+     * @return LengthAwarePaginator<Course>
      */
     public function getCourses($request): LengthAwarePaginator
     {
