@@ -42,7 +42,7 @@ class OrderService
     {
         try {
             $paymentMethod = 1;
-            $status = 1;
+            $status = 2;
             $cartId = [];
             $dataOrder = [];
             $dataEnroll = [];
