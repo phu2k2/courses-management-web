@@ -165,7 +165,6 @@
                                 </div>
                             </form>
                                 <ul class="list-unstyled list-group list-checkbox">
-
                                     @foreach($categories as $category)
                                     <li class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="categorycustomcheck{{ $loop->index }}" 
@@ -174,7 +173,6 @@
                                     </li>
                                     @endforeach
                                 </ul>
-                            
                         </div>
                     </div>
 
