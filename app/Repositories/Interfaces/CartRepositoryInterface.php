@@ -22,4 +22,11 @@ interface CartRepositoryInterface extends RepositoryInterface
      * @return Collection
      */
     public function getCourseToCart($id);
+
+    /**
+     * @param array $ids
+     * @param int $userId
+     * @return bool
+     */
+    public function deleteMultiple($ids, $userId): bool;
 }
