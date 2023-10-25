@@ -12,11 +12,11 @@ class OrderController extends Controller
     /**
      * @var OrderService
      */
-    protected $orderServie;
+    protected $orderService;
 
-    public function __construct(OrderService $orderServie)
+    public function __construct(OrderService $orderService)
     {
-        $this->orderServie = $orderServie;
+        $this->orderService = $orderService;
     }
     /**
      * Display a listing of the resource.
@@ -36,7 +36,7 @@ class OrderController extends Controller
         try {
             $userId = (int) auth()->id();
             $cart = session()->get('cart');
-            $this->orderServie->BuyCourses($userId, $cart);
+            $this->orderService->BuyCourses($userId, $cart);
         } catch (Exception $e) {
             session()->flash('error', __('messages.order.error.create_order'));
             return redirect()->route('carts.index');
