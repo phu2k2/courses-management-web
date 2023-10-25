@@ -14,8 +14,8 @@
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
-        @vite(['resources/scss/app.scss', 'resources/js/app.js'])
-        <link href="{{ asset('assets/css/style.css') }} " rel="stylesheet">
+        @vite(['resources/scss/instructor.scss', 'resources/js/app.js'])
+        <link href="{{ asset('assets/css/instructor/style.css') }} " rel="stylesheet">
 
         @yield('style')
         <title> @yield('title') </title>
@@ -35,7 +35,7 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Template Main JS File -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/instructor/main.js') }}"></script>
     @yield('script')
 </body>
 

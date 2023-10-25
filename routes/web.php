@@ -59,3 +59,4 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
 
     Route::resource('courses', InstructorCourseController::class);
 });
+Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
