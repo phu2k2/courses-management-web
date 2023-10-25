@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,5 +34,17 @@ class Comment extends Model
     public function lesson()
     {
         return $this->belongsTo(Lesson::class, 'lesson_id', 'id');
+    }
+
+    /**
+     * Scope the query to filter courses by languages.
+     *
+     * @param  Builder  $query
+     * @param  array  $userId
+     * @return Builder
+     */
+    public function scopeOwner($query, $userId)
+    {
+        return $query->where('user_id', $userId);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\GetCoursesRequest;
 use App\Models\Course;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
@@ -18,11 +19,44 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     }
 
     /**
-     * @return LengthAwarePaginator<Model>
+     * Retrieve a paginated list of courses based on the provided filters.
+     *
+     * @param GetCoursesRequest $request
+     * @return LengthAwarePaginator<Course>
      */
-    public function getCourses(): LengthAwarePaginator
+    public function getCourses($request): LengthAwarePaginator
     {
-        return $this->model->with('category:id,name')->paginate(self::PAGESIZE);
+        $courses = Course::with('category')
+        ->when($request->filled('search'), function ($query) use ($request) {
+            $query->filterBySearchTerm($request->input('search'));
+        })
+        ->when($request->filled('category'), function ($query) use ($request) {
+            $query->filterByCategory($request->input('category'));
+        })
+        ->when($request->filled('rating'), function ($query) use ($request) {
+            $query->filterByRating($request->input('rating'));
+        })
+        ->when($request->filled('language'), function ($query) use ($request) {
+            $query->filterByLanguage($request->input('language'));
+        })
+        ->when($request->filled('level'), function ($query) use ($request) {
+            $query->filterByLevel($request->input('level'));
+        })
+        ->when($request->filled('price'), function ($query) use ($request) {
+            $query->filterByPrice($request->input('price'));
+        })
+        ->when($request->filled('duration'), function ($query) use ($request) {
+            $query->filterByDuration($request->input('duration'));
+        });
+
+        if ($request->filled('sort')) {
+            list($sortField, $sortType) = explode(':', $request->input('sort'));
+            $courses->orderBy($sortField, $sortType);
+        }
+
+        $courses->orderBy('id', 'ASC');
+
+        return $courses->paginate(self::PAGESIZE);
     }
 
     /**

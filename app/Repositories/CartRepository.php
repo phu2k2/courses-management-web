@@ -41,4 +41,14 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
             ->where('user_id', $id)
             ->get();
     }
+
+    /**
+     * @param array $ids
+     * @param int $userId
+     * @return bool
+     */
+    public function deleteMultiple($ids, $userId)
+    {
+        return $this->model->where('user_id', $userId)->whereIn('id', $ids)->delete();
+    }
 }

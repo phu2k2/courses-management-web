@@ -6,7 +6,9 @@ use App\Helpers\AmazonS3;
 use App\Repositories\CourseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use App\Repositories\CartRepository;
+use App\Repositories\CommentRepository;
 use App\Repositories\Interfaces\CartRepositoryInterface;
+use App\Repositories\Interfaces\CommentRepositoryInterface;
 use App\Repositories\Interfaces\LessonRepositoryInterface;
 use App\Repositories\Interfaces\ProfileRepositoryInterface;
 use App\Repositories\Interfaces\ResetPasswordRepositoryInterface;
@@ -19,6 +21,7 @@ use App\Repositories\ResetPasswordRepository;
 use App\Repositories\ReviewRepository;
 use App\Repositories\TopicRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -67,6 +70,10 @@ class AppServiceProvider extends ServiceProvider
             ResetPasswordRepository::class,
         );
 
+        $this->app->singleton(
+            CommentRepositoryInterface::class,
+            CommentRepository::class
+        );
         $this->app->singleton('AmazonS3', function () {
             return new AmazonS3();
         });
@@ -77,6 +84,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Blade::if('instructor', function () {
+            $roleInstructor = 2;
+            return auth()->check() && auth()->user()?->role_id == $roleInstructor;
+        });
     }
 }

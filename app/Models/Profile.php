@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use AmazonS3;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,5 +27,23 @@ class Profile extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    /**
+     * avatar get from s3
+     * @param string $value
+     * @return string
+     */
+    public function getAvatarAttribute($value)
+    {
+        return AmazonS3::getObjectUrl($value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return implode(" ", [$this->last_name, $this->first_name]);
     }
 }

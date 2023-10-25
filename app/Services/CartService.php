@@ -49,6 +49,16 @@ class CartService
     }
 
     /**
+     * @param array $ids
+     * @param int $userId
+     * @return bool
+     */
+    public function deleteCarts($ids, $userId)
+    {
+        return $this->cartRepo->deleteMultiple($ids, $userId);
+    }
+
+    /**
      * Delete a record by course id.
      *
      * @param int $id .
@@ -57,5 +67,15 @@ class CartService
     public function deleteCart($id)
     {
         return $this->cartRepo->delete($id);
+    }
+
+    /**
+     * @param int $userId
+     *
+     * @return int
+     */
+    public function getCountCart($userId)
+    {
+        return count($this->cartRepo->getCartByUser($userId));
     }
 }

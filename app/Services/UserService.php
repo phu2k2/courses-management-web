@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
+use AmazonS3;
 
 class UserService
 {

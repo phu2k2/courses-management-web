@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CommentService;
 use App\Services\CourseService;
 use App\Services\LessonService;
 use App\Services\TopicService;
@@ -24,11 +25,21 @@ class LessonController extends Controller
      */
     protected $topicService;
 
-    public function __construct(LessonService $lessonService, CourseService $courseService, TopicService $topicService)
-    {
+    /**
+     * @var CommentService
+     */
+    protected $commentService;
+
+    public function __construct(
+        LessonService $lessonService,
+        CourseService $courseService,
+        TopicService $topicService,
+        CommentService $commentService
+    ) {
         $this->lessonService = $lessonService;
         $this->courseService = $courseService;
         $this->topicService = $topicService;
+        $this->commentService = $commentService;
     }
 
     /**
@@ -41,7 +52,8 @@ class LessonController extends Controller
         $course = $this->courseService->findCourse($courseId);
         $lesson = $this->lessonService->findLesson($lessonId);
         $topics = $this->topicService->getTopicsWithLessons($courseId);
+        $comments = $this->commentService->getByLesson($lessonId);
 
-        return view('lesson.index', compact('course', 'lesson', 'topics'));
+        return view('lesson.index', compact('course', 'lesson', 'topics', 'comments'));
     }
 }
