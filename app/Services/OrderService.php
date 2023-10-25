@@ -6,6 +6,7 @@ use App\Repositories\Interfaces\CartRepositoryInterface;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use Exception;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderService
@@ -40,6 +41,7 @@ class OrderService
      */
     public function buyCourses($userId, $carts)
     {
+        $currentTime  = Carbon::now();
         try {
             $paymentMethod = 1;
             $status = 2;
@@ -55,8 +57,8 @@ class OrderService
                     'price' => $item->course?->discounted_price,
                     'payment_method' => $paymentMethod,
                     'status' => $status,
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => $currentTime,
+                    'updated_at' => $currentTime,
                 ];
 
                 $dataEnroll = [
@@ -64,8 +66,8 @@ class OrderService
                     'course_id' => $courseId,
                     'title' => $item->course?->title,
                     'brief' => $item->course?->introduction,
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => $currentTime,
+                    'updated_at' => $currentTime,
                 ];
             }
             $this->orderRepo->createMany($dataOrder);
