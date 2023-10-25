@@ -33,21 +33,23 @@ class OrderService
     }
 
     /**
-     * Add courses into cart
      * @param int $userId
      * @param array $carts
      * @throws Exception
-    //  * @return bool
+     * @return bool
      */
     public function buyCourses($userId, $carts)
     {
         try {
             $paymentMethod = 1;
             $status = 1;
+            $cartId = [];
+            $dataOrder = [];
+            $dataEnroll = [];
             foreach ($carts as $item) {
                 $cartId[] = $item->id;
                 $courseId = $item->course->id;
-                $dataOrder[] = [
+                $dataOrder = [
                     'user_id' => $userId,
                     'course_id' => $courseId,
                     'price' => $item->course?->discounted_price,
@@ -55,7 +57,7 @@ class OrderService
                     'status' => $status,
                 ];
 
-                $dataEnroll[] = [
+                $dataEnroll = [
                     'user_id' => $userId,
                     'course_id' => $courseId,
                     'title' => $item->course?->title,
@@ -71,7 +73,7 @@ class OrderService
     }
 
     /**
-     * @param array $ids
+     * @param array $carts
      * @param int $userId
      * @return bool
      */
