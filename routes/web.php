@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
@@ -50,6 +51,7 @@ Route::prefix('courses')->name('courses.')->group(function () {
 
 Route::resource('comments', CommentController::class)->only(['destroy']);
 
+Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
 Route::prefix('instructor')->name('instructor')->group(function () {
     Route::get('/', [HomeController::class, 'home']);
 });
