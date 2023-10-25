@@ -41,6 +41,7 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
 });
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
+Route::delete('carts/delete-cart', [CartController::class, 'deleteMutilCarts'])->name('carts.delete-cart');
 Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
 Route::resource('reviews', ReviewController::class)->only(['store']);
 

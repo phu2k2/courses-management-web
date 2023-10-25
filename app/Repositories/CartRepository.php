@@ -6,7 +6,6 @@ use App\Models\Cart;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\CartRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 class CartRepository extends BaseRepository implements CartRepositoryInterface
 {
@@ -58,6 +57,16 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      * @return bool
      */
     public function deleteMultiple($ids, $userId): bool
+    {
+        return $this->model->where('user_id', $userId)->whereIn('id', $ids)->delete();
+    }
+
+    /**
+     * @param array $ids
+     * @param int $userId
+     * @return bool
+     */
+    public function deleteMultiple($ids, $userId)
     {
         return $this->model->where('user_id', $userId)->whereIn('id', $ids)->delete();
     }
