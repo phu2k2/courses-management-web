@@ -55,6 +55,8 @@ class OrderService
                     'price' => $item->course?->discounted_price,
                     'payment_method' => $paymentMethod,
                     'status' => $status,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ];
 
                 $dataEnroll = [
@@ -62,6 +64,8 @@ class OrderService
                     'course_id' => $courseId,
                     'title' => $item->course?->title,
                     'brief' => $item->course?->introduction,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ];
             }
             $this->orderRepo->createMany($dataOrder);
