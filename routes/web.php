@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
@@ -55,3 +56,4 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
         return view('instructor.home');
     })->name('home');
 });
+Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
