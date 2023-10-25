@@ -21,5 +21,5 @@ interface EnrollmentRepositoryInterface extends RepositoryInterface
      *
      * @return bool
      */
-    public function getEnrolled($userId, $courseId);
+    public function isEnrolled($userId, $courseId);
 }

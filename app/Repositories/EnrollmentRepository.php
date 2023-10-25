@@ -33,7 +33,7 @@ class EnrollmentRepository extends BaseRepository implements EnrollmentRepositor
      *
      * @return bool
      */
-    public function getEnrolled($userId, $courseId)
+    public function isEnrolled($userId, $courseId)
     {
         /** @phpstan-ignore-next-line */
         return $this->model->owner($userId)->where('course_id', $courseId)->get()->count();
