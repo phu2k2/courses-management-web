@@ -166,13 +166,13 @@
                             </form>
                                 <ul class="list-unstyled list-group list-checkbox">
 
-                                    {{-- @foreach($categoryInfo as $category)
+                                    @foreach($categories as $category)
                                     <li class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="categorycustomcheck{{ $loop->index }}" 
                                         name="category[]" value="{{ $category->id }}"  @checked(in_array($category->id, $selectedCategories))>
-                                        <label class="custom-control-label font-size-base" for="categorycustomcheck{{ $loop->index }}">{{ $category->name }} ({{ $category->count }})</label>
+                                        <label class="custom-control-label font-size-base" for="categorycustomcheck{{ $loop->index }}">{{ $category->name }}</label>
                                     </li>
-                                    @endforeach --}}
+                                    @endforeach
                                 </ul>
                             
                         </div>
