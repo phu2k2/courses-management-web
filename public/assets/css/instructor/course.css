@@ -1,0 +1,28 @@
+.ck-editor__editable_inline {
+    min-height: 150px;
+}
+
+.img-change {
+    height: 200px;
+    width: auto;
+}
+
+.icon-upload {
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.label-img {
+    display: flex;
+    align-items: center;
+}
+
+.text-alizarin {
+    color: rgb(235, 28, 36);
+}
+
+.fst-italic {
+    font-style: italic !important
+}
+
