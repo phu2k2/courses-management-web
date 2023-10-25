@@ -15,9 +15,24 @@
                  <i class="bi bi-journal-text"></i><span>Management</span><i class="bi bi-chevron-down ms-auto"></i>
              </a>
              <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="forms-layouts.html">
+                        <i class="bi bi-book"></i><span>Courses</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="forms-layouts.html">
+                        <i class="bi bi-bookmark"></i><span>Topics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="forms-layouts.html">
+                        <i class="bi bi-file-earmark-text"></i><span>Lessons</span>
+                    </a>
+                </li>
                  <li>
                      <a href="">
-                         <i class="bi bi-person"></i><span>Users</span>
+                         <i class="bi bi-person"></i><span>Students</span>
                      </a>
                  </li>
                  <li>
@@ -32,62 +47,13 @@
                  </li>
                  <li>
                      <a href="forms-layouts.html">
-                         <i class="bi bi-basket"></i><span>Orders</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="forms-layouts.html">
-                         <i class="bi bi-cart"></i><span>Carts</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="forms-layouts.html">
-                         <i class="bi bi-journal"></i><span>Enrrollments</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="forms-layouts.html">
-                         <i class="bi bi-heart"></i><span>Favorites</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="forms-layouts.html">
                          <i class="bi bi-star"></i><span>Reviews</span>
                      </a>
                  </li>
-                 <li>
-                     <a href="forms-elements.html">
-                         <i class="bi bi-folder"></i><span>Categories</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="forms-layouts.html">
-                         <i class="bi bi-book"></i><span>Courses</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="forms-layouts.html">
-                         <i class="bi bi-bookmark"></i><span>Topics</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="forms-layouts.html">
-                         <i class="bi bi-file-earmark-text"></i><span>Lessons</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="forms-layouts.html">
-                         <i class="bi bi-gear"></i><span>Processing</span>
-                     </a>
-                 </li>
+  
                  <li>
                      <a href="forms-layouts.html">
                          <i class="bi bi-chat-left"></i><span>Comments</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="forms-layouts.html">
-                         <i class="bi bi-chat-right"></i><span>Child comments</span>
                      </a>
                  </li>
 

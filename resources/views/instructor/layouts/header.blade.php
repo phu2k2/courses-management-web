@@ -24,9 +24,11 @@
                     <i class="bi bi-search"></i>
                 </a>
             </li><!-- End Search Icon-->
-
+            <li class="nav-item">
+                <a class="d-md-block mx-4 fw-bold" href="{{ route('home') }}">Student</a>
+            </li>
             <li class="nav-item dropdown">
-
+                
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="bi bi-bell"></i>
                     <span class="badge bg-primary badge-number">4</span>
