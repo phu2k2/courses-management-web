@@ -246,12 +246,4 @@ class Course extends Model
             });
         });
     }
-
-    /**
-     * @return HasOne<Topic>
-     */
-    public function topic(): HasOne
-    {
-        return $this->hasOne(Topic::class)->oldestOfMany();
-    }
 }

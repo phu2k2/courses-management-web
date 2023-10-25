@@ -63,4 +63,15 @@ class CourseService
     {
         return $this->enrollmentRepo->getMyCoures($userId);
     }
+
+    /**
+     * @param int $userId
+     * @param int $courseId
+     *
+     * @return bool
+     */
+    public function isEnrolled($userId, $courseId)
+    {
+        return $this->enrollmentRepo->getEnrolled($userId, $courseId);
+    }
 }

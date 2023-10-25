@@ -23,7 +23,19 @@ class EnrollmentRepository extends BaseRepository implements EnrollmentRepositor
     public function getMyCoures($userId): LengthAwarePaginator
     {
         /** @phpstan-ignore-next-line */
-        return $this->model->with('course.category:id,name', 'course.topic.lesson')
+        return $this->model->with('course.category:id,name')
             ->owner($userId)->paginate(self::PAGINATE_DEFAULT);
+    }
+
+    /**
+     * @param int $userId
+     * @param int $courseId
+     *
+     * @return bool
+     */
+    public function getEnrolled($userId, $courseId)
+    {
+        /** @phpstan-ignore-next-line */
+        return $this->model->owner($userId)->where('course_id', $courseId)->get()->count();
     }
 }

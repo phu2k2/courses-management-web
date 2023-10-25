@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('title', 'My Courses')
+@section('script')
+    <script type="module" src="{{ asset('assets/js/remove.duplicate.js') }}"></script>
+@endsection
 @section('content')
     <!-- PAGE TITLE
         ================================================== -->
@@ -34,9 +37,12 @@
                         </div>
                         <div class="ms-xl-auto d-xl-flex flex-wrap">
                             <div class="mb-4 mb-xl-0 ms-xl-6">
-                                <select class="form-select form-select-sm text-dark shadow-none dropdown-menu-end"
+                                <select id="optionCategories" class="form-select form-select-sm text-dark shadow-none dropdown-menu-end"
                                     data-choices>
                                     <option>{{ __('course.filter.all_categories') }}</option>
+                                    @foreach ($courses as $option)
+                                        <option value="{{ $option->course->category->id }}">{{ ucfirst($option->course->category->name) }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -96,7 +102,7 @@
                     <div class="card border shadow p-2 lift sk-fade">
                         <!-- Image -->
                         <div class="card-zoom position-relative">
-                            <a href="{{ route('courses.lessons.show', ['courseId' => $course->course_id, 'lessonId' => $course->course->topic?->lesson?->id]) }}" class="card-img sk-thumbnail d-block">
+                            <a href="{{ route('courses.show', ['course' => $course->course_id]) }}" class="card-img sk-thumbnail d-block">
                                 <img class="rounded shadow-light-lg" src="{{ $course->course->poster_url }}"
                                     alt="...">
                             </a>
@@ -115,7 +121,7 @@
                             <!-- Preheading -->
                             <ul class="nav mx-n3 mb-3 d-xl-flex align-items-center">
                                 <li class="nav-item px-3 badge badge-lg badge-purple badge-pill ms-2 px-5">
-                                    <a href="#"><span class="mb-1 d-inline-block text-white font-size-sm">{{ $course->course->category->name }}</span></a>
+                                    <a href="#"><span class="mb-1 d-inline-block text-white font-size-sm">{{ ucfirst($course->course->category->name) }}</span></a>
                                 </li>
                             </ul>
 

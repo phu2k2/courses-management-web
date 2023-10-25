@@ -33,12 +33,4 @@ class Topic extends Model
     {
         return $this->hasMany(Lesson::class);
     }
-
-    /**
-     * @return HasOne<Lesson>
-     */
-    public function lesson(): HasOne
-    {
-        return $this->hasOne(Lesson::class)->oldestOfMany();
-    }
 }
