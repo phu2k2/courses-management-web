@@ -2,9 +2,9 @@
     min-height: 150px;
 }
 
-.img-change {
-    height: 200px;
-    width: auto;
+.img-change, .change-video {
+    width: 100%;
+    height: auto;
 }
 
 .icon-upload {

@@ -30,22 +30,22 @@
                     <h5 class="card-title">Add new course</h5>
 
                     <!-- General Form Elements -->
-                    <form action="{{ route('instructor.courses.store') }}" method="POST">
+                    <form method="POST">
                         @csrf
                         <div class="row mb-3">
-                            <label for="inputText" class="col-sm-2 col-form-label">Title</label>
+                            <label for="inputText" class="col-sm-2 col-form-label fw-bold">Title</label>
                             <div class="col-sm-10">
                                 <input type="text" name="title" class="form-control">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="textIntroduction" class="col-sm-2 col-form-label">Introduction</label>
+                            <label for="textIntroduction" class="col-sm-2 col-form-label fw-bold">Introduction</label>
                             <div class="col-sm-10">
                                 <textarea cols="4" id="introduction" name="introduction" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="selectCategory" class="col-sm-2 col-form-label">Category</label>
+                            <label for="selectCategory" class="col-sm-2 col-form-label fw-bold">Category</label>
                             <div class="col-sm-10">
                                 <select class="form-select" name="category_id" aria-label="Default select example">
                                     <option selected>Select Category</option>
@@ -56,46 +56,60 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputNumber" class="col-sm-2 col-form-label">Poster Upload</label>
+                            <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Poster Upload</label>
                             <div class="col-sm-10 row change-img">
-                                <div>
-                                    <img class="mb-3 col-sm-5 img-change" style="display: none" alt="">
+                                <div class="col-sm-6">
+                                    <img class="mb-3 img-change" src="{{ asset('assets/img/icons/show-change-image.jpg') }}" alt="">
                                 </div>
-                                <div>
-                                    <input type="file" name="poster_url" id="image" class="form-control" style="display: none" onchange="readURL(this);" accept="image/*">
-                                    <label for="image" class="label-img">
-                                        <img class="icon-upload" src="{{ asset('assets/img/icons/image-upload.png') }}" alt="">
-                                        <div class="mx-4 text-alizarin fst-italic">< Only upload file format: .jpg, .png, .jpeg ></div>
-                                    </label>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        Upload your course image here. It must meet our course image quality standards to be accepted.
+                                        <p class="text-alizarin fst-italic">
+                                            Important guidelines: .jpg, .jpeg,. gif, or .png. no text on the image.
+                                        </span>
+                                    </div>
+                                    <input type="file" name="poster_url" id="image" class="form-control" onchange="readURL(this);" accept="image/*">
                                 </div>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputNumber" class="col-sm-2 col-form-label">Trailer Upload</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="file" name="trailer_url" id="formFile">
+                            <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Trailer Upload</label>
+                            <div class="col-sm-10 row change-img">
+                                <div class="col-sm-6 video-change">
+                                    <img class="mb-3 change-video" src="{{ asset('assets/img/icons/show-change-image.jpg') }}" alt="">
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        Your promo video is a quick and compelling way for students to preview what they’ll learn in your course.
+                                        Students considering your course are more likely to enroll if your promo video is well-made.
+                                        <p class="text-alizarin fst-italic">
+                                            Learn how to make your promo video awesome!
+                                        </span>
+                                    </div>
+                                    <input type="file" name="trailer_url" id="trailer" class="form-control" onchange="readURL(this);" accept="video/*">
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="textIntroduction" class="col-sm-2 col-form-label">Description</label>
+                            <label for="textIntroduction" class="col-sm-2 col-form-label fw-bold">Description</label>
                             <div class="col-sm-10">
                                 <textarea cols="4" id="description" name="description" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="textIntroduction" class="col-sm-2 col-form-label">Learns Description</label>
+                            <label for="textIntroduction" class="col-sm-2 col-form-label fw-bold">Learns Description</label>
                             <div class="col-sm-10">
                                 <textarea cols="4" id="learns" name="learns_description" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="textIntroduction" class="col-sm-2 col-form-label">Requirements</label>
+                            <label for="textIntroduction" class="col-sm-2 col-form-label fw-bold">Requirements</label>
                             <div class="col-sm-10">
                                 <textarea cols="4" id="requirements" name="requirements_description" class="form-control"></textarea>
                             </div>
                         </div>
                         <fieldset class="row mb-3">
-                            <legend class="col-form-label col-sm-2 pt-0">Language</legend>
+                            <legend class="col-form-label col-sm-2 pt-0 fw-bold">Language</legend>
                             <div class="col-sm-10 row">
                                 <div class="col-sm-2 form-check">
                                     <input class="form-check-input" type="radio" name="languages" id="english_lang"
@@ -114,7 +128,7 @@
                             </div>
                         </fieldset>
                         <fieldset class="row mb-3">
-                            <legend class="col-form-label col-sm-2 pt-0">Level</legend>
+                            <legend class="col-form-label col-sm-2 pt-0 fw-bold">Level</legend>
                             <div class="col-sm-10 row">
                                 <div class="col-sm-2 form-check">
                                     <input class="form-check-input" type="radio" name="level" id="english_lang"
@@ -140,11 +154,11 @@
                             </div>
                         </fieldset>
                         <div class="row mb-3">
-                            <label for="inputNumber" class="col-sm-2 col-form-label">Price</label>
+                            <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Price</label>
                             <div class="col-sm-4">
                                 <input type="number" step="0.01" name="price" class="form-control">
                             </div>
-                            <label for="inputNumber" class="col-sm-2 col-form-label">Discount</label>
+                            <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Discount</label>
                             <div class="col-sm-4">
                                 <input type="number" min="0" max="100" step="1" name="discount" class="form-control">
                             </div>
