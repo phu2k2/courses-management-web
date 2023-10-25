@@ -20,43 +20,6 @@
                         <i class="bi bi-book"></i><span>Courses</span>
                     </a>
                 </li>
-                <li>
-                    <a href="forms-layouts.html">
-                        <i class="bi bi-bookmark"></i><span>Topics</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="forms-layouts.html">
-                        <i class="bi bi-file-earmark-text"></i><span>Lessons</span>
-                    </a>
-                </li>
-                 <li>
-                     <a href="">
-                         <i class="bi bi-person"></i><span>Students</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="forms-elements.html">
-                         <i class="bi bi-person-circle"></i><span>Profiles</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="forms-elements.html">
-                         <i class="bi bi-facebook"></i><span>Socials</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="forms-layouts.html">
-                         <i class="bi bi-star"></i><span>Reviews</span>
-                     </a>
-                 </li>
-  
-                 <li>
-                     <a href="forms-layouts.html">
-                         <i class="bi bi-chat-left"></i><span>Comments</span>
-                     </a>
-                 </li>
-
              </ul>
          </li><!-- End Forms Nav -->
 
@@ -68,13 +31,6 @@
                  <span>Profile</span>
              </a>
          </li><!-- End Profile Page Nav -->
-
-         <li class="nav-item">
-             <a class="nav-link collapsed" href="">
-                 <i class="bi bi-person"></i>
-                 <span>Contract</span>
-             </a>
-         </li>
 
      </ul>
 
