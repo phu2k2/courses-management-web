@@ -38,6 +38,7 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::put('profile', [ProfileController::class, 'update'])->name('update');
     Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
     Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
+    Route::get('my-courses', [CourseController::class, 'getMyCourses'])->name('my-courses');
 });
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
 Route::delete('carts/delete-cart', [CartController::class, 'deleteMutilCarts'])->name('carts.delete-cart');
@@ -51,3 +52,6 @@ Route::prefix('courses')->name('courses.')->group(function () {
 Route::resource('comments', CommentController::class)->only(['destroy']);
 
 Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
+Route::prefix('instructor')->name('instructor')->group(function () {
+    Route::get('/', [HomeController::class, 'home']);
+});
