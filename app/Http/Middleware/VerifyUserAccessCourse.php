@@ -20,7 +20,7 @@ class VerifyUserAccessCourse
         $courseId = $request->route('courseId');
 
         // Validate courseId is number and > 0
-        if(!is_numeric($courseId) || $courseId <= 0) {
+        if (!is_numeric($courseId) || $courseId <= 0) {
             return redirect()->route('courses.index');
         }
 
@@ -32,7 +32,7 @@ class VerifyUserAccessCourse
         }
 
         // Verify whether the user has participated in the course or not
-        $enrollment = Enrollment::where('course_id', $courseId) 
+        $enrollment = Enrollment::where('course_id', $courseId)
             ->where('user_id', auth()->id())
             ->first();
 
