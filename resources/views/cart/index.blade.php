@@ -52,7 +52,7 @@
         @include('layouts.message')
     </header>
     <!-- SHOP CART
-                                                                                                                                                                                                                                                                                                                                        ================================================== -->
+                                                                                                                                                                                                                                                                                                                                            ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             @if ($errors->any())
@@ -100,7 +100,8 @@
                                                                     type="checkbox"
                                                                     data-price="{{ number_format($item->course->discounted_price, 2) }}"
                                                                     data-id="{{ $item->id }}"
-                                                                    onchange="calculateTotal()">
+                                                                    onchange="calculateTotal()" name="select_items"
+                                                                    value="{{ $item->id }}">
                                                             </div>
                                                         </td>
                                                         <td class="product-name" data-title="Product">
