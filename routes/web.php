@@ -5,6 +5,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
@@ -55,5 +56,8 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
     Route::get('/', function () {
         return view('instructor.home');
     })->name('home');
+
+    Route::resource('courses', InstructorCourseController::class);
+    Route::get('courses/create/upload-file', [InstructorCourseController::class, 'upload'])->name('courses.upload');
 });
 Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
