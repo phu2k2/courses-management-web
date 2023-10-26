@@ -67,7 +67,7 @@ class CourseController extends Controller
         $userId = auth()->id();
         $pathImage = "instructor/{$userId}/course_{$courseId}/poster.jpg";
         $pathVideo = "instructor/{$userId}/course_{$courseId}/trailer.mp4";
-        // dd(AmazonS3::getPreSignedUploadUrl($pathImage));
+
         return response()->json([
             'urlImage' => AmazonS3::getPreSignedUploadUrl($pathImage),
             'urlVideo' => AmazonS3::getPreSignedUploadUrl($pathVideo)]);

@@ -103,7 +103,7 @@
                         <!-- Image -->
                         <div class="card-zoom position-relative">
                             <a href="{{ route('courses.show', ['course' => $course->course_id]) }}" class="card-img sk-thumbnail d-block">
-                                <img class="rounded shadow-light-lg" src="{{ $course->course->poster_url }}"
+                                <img class="rounded shadow-light-lg" src="{{ $course->course->poster }}"
                                     alt="...">
                             </a>
                         </div>

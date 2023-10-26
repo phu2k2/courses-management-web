@@ -259,7 +259,7 @@ class Course extends Model
     }
 
     /**
-     * avatar get from s3
+     * poster get from s3
      * @return string
      */
     public function getPosterAttribute()
@@ -268,7 +268,7 @@ class Course extends Model
     }
 
     /**
-     * avatar get from s3
+     * trailer get from s3
      * @return string
      */
     public function getTrailerAttribute()
