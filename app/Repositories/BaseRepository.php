@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Repositories\RepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 abstract class BaseRepository implements RepositoryInterface
 {
@@ -36,9 +37,13 @@ abstract class BaseRepository implements RepositoryInterface
         );
     }
 
-    public function getAll()
+    /**
+     * @param array $columns
+     * @return Collection
+     */
+    public function getAll($columns = ['*'])
     {
-        return $this->model->all();
+        return $this->model->select($columns)->get();
     }
 
     /**
@@ -72,6 +77,17 @@ abstract class BaseRepository implements RepositoryInterface
     public function create($attributes = [])
     {
         return $this->model->create($attributes);
+    }
+
+    /**
+     * Create a new record in the database with the given attributes.
+     *
+     * @param array $attributes The attributes to populate the new record.
+     * @return \Illuminate\Database\Eloquent\Model|bool The created model instance.
+     */
+    public function insertMultiple($attributes = [])
+    {
+        return $this->model->insert($attributes);
     }
 
     /**
