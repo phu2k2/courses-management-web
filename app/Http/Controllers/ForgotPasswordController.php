@@ -43,12 +43,12 @@ class ForgotPasswordController extends Controller
      */
     public function submitForgetPasswordForm(ForgotPasswordRequest $request)
     {
+        $email = $request->input('email');
         /**
          * Check if token data exists for the provided email
          */
-        $tokenData = $this->resetPasswordService->getByEmail($request->input('email'));
+        $tokenData = $this->resetPasswordService->getByEmail($email);
         if ($tokenData) {
-            // return redirect()->back()->with("error", "Already sent the link to your email !");
             return redirect()->back()->with("error", __('messages.password.error.forgot_password'));
         }
 
@@ -60,7 +60,7 @@ class ForgotPasswordController extends Controller
         $expiryTime = now()->addMinutes(10)->toDateTimeString();
 
         $this->resetPasswordService->addResetPassWord(
-            $request->input('email'),
+            $email,
             $randomToken,
             $createdTime,
             $expiryTime
@@ -69,12 +69,12 @@ class ForgotPasswordController extends Controller
         /**
          *Retrieve the token data again for the email address
          */
-        $tokenData = $this->resetPasswordService->getByEmail($request->input('email'));
+        $tokenData = $this->resetPasswordService->getByEmail($email);
         /**
          * Send password reset link to email
          */
-        Mail::send("email.index", ['token' => $tokenData['token']], function ($message) use ($request) {
-            $message->to($request->input('email'));
+        Mail::send("email.index", ['token' => $tokenData['token']], function ($message) use ($email) {
+            $message->to($email);
             $message->subject("Reset Password");
         });
 

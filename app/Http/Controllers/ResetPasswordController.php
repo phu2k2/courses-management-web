@@ -20,6 +20,16 @@ class ResetPasswordController extends Controller
      */
     protected $resetPasswordService;
 
+    /**
+     * @var string
+     */
+    protected $tokenField = 'token';
+
+    /**
+     * @var string
+     */
+    protected $emailField = 'email';
+
     public function __construct(UserService $userService, ResetPasswordService $resetPasswordService)
     {
         $this->userService = $userService;
@@ -37,7 +47,7 @@ class ResetPasswordController extends Controller
          */
         $tokenData = $this->resetPasswordService->isExpiredToken($token, now()->toDateTimeString());
         if (!$tokenData) {
-            $this->resetPasswordService->deleteByToken($token);
+            $this->resetPasswordService->deleteByField($this->tokenField, $token);
             abort(404);
         }
 
@@ -55,37 +65,41 @@ class ResetPasswordController extends Controller
      */
     public function submitResetPasswordForm(ResetPasswordRequest $request)
     {
+        $token = $request->input('token');
+        $email = $request->input('email');
+        $updatePassword = $request->input('password');
+
         /**
          * Validate the token
          */
-        $updatePassword = $this->resetPasswordService->isValidToken($request->input('token'), $request->input('email'));
+        $updateData = $this->resetPasswordService->isValidToken($token, $email);
 
         /**
          * Check the token if the token is valid
          */
-        if (!$updatePassword) {
+        if (!$updateData) {
             return redirect()->to(route('password.reset'))->with("error", __('messages.password.error.reset_password'));
         }
 
         /**
          * Check expiration time after the user clicks the link and access the reset password page
          */
-        $tokenData = $this->resetPasswordService->isExpiredToken($request->input('token'), now()->toDateTimeString());
+        $tokenData = $this->resetPasswordService->isExpiredToken($token, now()->toDateTimeString());
 
         if (!$tokenData) {
-            $this->resetPasswordService->deleteByToken($request->input('token'));
+            $this->resetPasswordService->deleteByField($this->tokenField, $token);
             abort(404);
         }
 
         /**
          * Hash and update the new password
          */
-        $this->userService->updatePassword($request->input('email'), $request->input('password'));
+        $this->userService->updatePassword($email, $updatePassword);
 
         /**
          * Delete the token
          */
-        $this->resetPasswordService->deleteByEmail($request->input('email'));
+        $this->resetPasswordService->deleteByField($this->emailField, $email);
 
         return redirect()->route('login.show')->with('message', __('messages.password.success.reset_password'));
     }

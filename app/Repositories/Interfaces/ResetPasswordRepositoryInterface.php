@@ -20,15 +20,11 @@ interface ResetPasswordRepositoryInterface extends RepositoryInterface
      */
     public function addResetPassWord($email, $token, $createdTime, $expiredTime);
     /**
-     * @param string $email
+     * @param string $field
+     * @param string $value
      * @return int|bool True if the deletion was successful, false otherwise.
      */
-    public function deleteByEmail($email);
-    /**
-     * @param string $token
-     * @return int|bool True if the deletion was successful, false otherwise.
-     */
-    public function deleteByToken($token);
+    public function deleteByField($field, $value);
     /**
      * @param string $email
      * @param string $token

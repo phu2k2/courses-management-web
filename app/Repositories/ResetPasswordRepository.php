@@ -43,21 +43,14 @@ class ResetPasswordRepository extends BaseRepository implements ResetPasswordRep
     }
 
     /**
-     * @param string $email
+     * @param string $field
+     * @param string $value
      * @return int|bool True if the deletion was successful, false otherwise.
      */
-    public function deleteByEmail($email)
+    public function deleteByField($field, $value)
     {
-        return $this->model->where('email', $email)->delete();
-    }
 
-    /**
-     * @param string $token
-     * @return int|bool True if the deletion was successful, false otherwise.
-     */
-    public function deleteByToken($token)
-    {
-        return $this->model->where('token', $token)->delete();
+        return $this->model->where($field, $value)->delete();
     }
 
     /**
