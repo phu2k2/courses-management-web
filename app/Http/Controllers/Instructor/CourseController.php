@@ -14,4 +14,9 @@ class CourseController extends Controller
     {
         return view('instructor.course.create');
     }
+
+    public function upload(): View
+    {
+        return view('instructor.course.upload');
+    }
 }

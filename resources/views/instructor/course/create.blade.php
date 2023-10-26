@@ -131,58 +131,11 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label"></label>
                                 <div class="offset-sm-9 col-sm-1">
-                                    <a href="javascript:void(0)" id="nextStep1" class="btn btn-primary">NEXT</a>
+                                    <button type="submit" id="nextStep1" class="btn btn-primary">NEXT</button>
                                 </div>
                             </div>
                         </div>
                     </form><!-- End General Form Elements -->
-                    <form action="" method="POST" id="stepTwo" style="display: none">
-                        @csrf
-                        <div>
-                            <h5 class="card-title">Step 2: Upload Poster and Trailer</h5>
-                            <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Poster Upload</label>
-                                <div class="col-sm-10 row change-img">
-                                    <div class="col-sm-6">
-                                        <img class="mb-3 img-change" src="{{ asset('assets/img/icons/show-change-image.jpg') }}" alt="">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            Upload your course image here. It must meet our course image quality standards to be accepted.
-                                            <p class="text-alizarin fst-italic">
-                                                Important guidelines: .jpg, .jpeg,. gif, or .png. no text on the image.
-                                            </span>
-                                        </div>
-                                        <input type="file" name="poster_url" id="image" class="form-control" onchange="readURL(this);" accept="image/*">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Trailer Upload</label>
-                                <div class="col-sm-10 row change-img">
-                                    <div class="col-sm-6 video-change">
-                                        <img class="mb-3 change-video" src="{{ asset('assets/img/icons/show-change-image.jpg') }}" alt="">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            Your promo video is a quick and compelling way for students to preview what they’ll learn in your course.
-                                            Students considering your course are more likely to enroll if your promo video is well-made.
-                                            <p class="text-alizarin fst-italic">
-                                                Learn how to make your promo video awesome!
-                                            </span>
-                                        </div>
-                                        <input type="file" name="trailer_url" id="trailer" class="form-control" onchange="readURL(this);" accept="video/*">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="offset-sm-10 col-sm-2">
-                                    <a id="uploadS3" class="btn btn-success">UPLOAD</a>
-                                    <button id="btnFinish" type="submit" class="btn btn-primary" disabled>FINISH</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
 
