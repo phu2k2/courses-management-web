@@ -65,4 +65,3 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
     Route::resource('courses', InstructorCourseController::class);
     Route::get('courses/create/upload-file', [InstructorCourseController::class, 'upload'])->name('courses.upload');
 });
-
