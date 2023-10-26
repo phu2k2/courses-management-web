@@ -5,10 +5,11 @@ namespace App\Repositories;
 interface RepositoryInterface
 {
     /**
+     * @param array $columns
      * Get all
      * @return mixed
      */
-    public function getAll();
+    public function getAll($columns = ['*']);
 
     /**
      * Find a record by its primary key.

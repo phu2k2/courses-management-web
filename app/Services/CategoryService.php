@@ -10,18 +10,19 @@ class CategoryService
     /**
      * @var CategoryRepositoryInterface
      */
-    protected $courseRepo;
+    protected $categoryRepo;
 
     public function __construct(CategoryRepositoryInterface $categoryRepo)
     {
-        $this->courseRepo = $categoryRepo;
+        $this->categoryRepo = $categoryRepo;
     }
 
     /**
+     * @param array $columns
      * @return Collection
      */
-    public function getCategories(): Collection
+    public function getAll($columns = ['*'])
     {
-        return $this->courseRepo->getCategories();
+        return $this->categoryRepo->getAll($columns);
     }
 }
