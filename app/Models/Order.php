@@ -35,4 +35,17 @@ class Order extends Model
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');
     }
+
+    /**
+     * @return string
+     */
+    public function getStatusOrderAttribute()
+    {
+        return  match ((int) $this->status) {
+            1 => __('Pending'),
+            2 => __('Success'),
+            3 => __('Failed'),
+            default => '',
+        };
+    }
 }

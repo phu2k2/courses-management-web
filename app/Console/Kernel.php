@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('app:check-update-lesson')->daily();
+        $schedule->command('app:calculate-average-rating')->everyThirtyMinutes();
     }
 
     /**
