@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('password_reset_tokens', function (Blueprint $table) {
             $table->timestamp('expired_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('password_reset_tokens', function (Blueprint $table) {
-            Schema::dropColumns('password_reset_tokens','expired_at');
+            Schema::dropColumns('password_reset_tokens','expired_at','updated_at');
         });
     }
 };

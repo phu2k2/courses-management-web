@@ -44,25 +44,16 @@ class ForgotPasswordController extends Controller
     public function submitForgetPasswordForm(ForgotPasswordRequest $request)
     {
         $email = $request->input('email');
-        /**
-         * Check if token data exists for the provided email
-         */
-        $tokenData = $this->resetPasswordService->getByEmail($email);
-        if ($tokenData) {
-            return redirect()->back()->with("error", __('messages.password.error.forgot_password'));
-        }
 
         /**
          * Create a object for 'password_reset_token' table
          */
         $randomToken = Str::random(60);
-        $createdTime = now()->toDateTimeString();
         $expiryTime = now()->addMinutes(10)->toDateTimeString();
 
         $this->resetPasswordService->addResetPassWord(
             $email,
             $randomToken,
-            $createdTime,
             $expiryTime
         );
 

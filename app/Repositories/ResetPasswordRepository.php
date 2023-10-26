@@ -28,18 +28,20 @@ class ResetPasswordRepository extends BaseRepository implements ResetPasswordRep
     /**
      * @param string $email
      * @param string $token
-     * @param string $createdTime
      * @param string $expiredTime
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Model|static
      */
-    public function addResetPassWord($email, $token, $createdTime, $expiredTime): bool
+    public function addResetPassWord($email, $token, $expiredTime)
     {
-        return $this->model->insert([
-            'email' => $email,
-            'token' => $token,
-            'created_at' => $createdTime,
-            'expired_at' => $expiredTime
-        ]);
+        return $this->model->updateOrCreate(
+            [
+                'email' => $email,
+            ],
+            [
+                'token' => $token,
+                'expired_at' => $expiredTime
+            ]
+        );
     }
 
     /**

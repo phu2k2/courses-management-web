@@ -14,11 +14,10 @@ interface ResetPasswordRepositoryInterface extends RepositoryInterface
     /**
      * @param string $email
      * @param string $token
-     * @param string $createdTime
      * @param string $expiredTime
      * @return mixed
      */
-    public function addResetPassWord($email, $token, $createdTime, $expiredTime);
+    public function addResetPassWord($email, $token, $expiredTime);
     /**
      * @param string $field
      * @param string $value

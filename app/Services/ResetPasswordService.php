@@ -29,13 +29,12 @@ class ResetPasswordService
     /**
      * @param string $email
      * @param string $token
-     * @param string $createdTime
      * @param string $expiredTime
-     * @return Model
+     * @return \Illuminate\Database\Eloquent\Model|static
      */
-    public function addResetPassWord($email, $token, $createdTime, $expiredTime)
+    public function addResetPassWord($email, $token, $expiredTime)
     {
-        return $this->resetPasswordRepo->addResetPassWord($email, $token, $createdTime, $expiredTime);
+        return $this->resetPasswordRepo->addResetPassWord($email, $token, $expiredTime);
     }
 
     /**
