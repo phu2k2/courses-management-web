@@ -28,7 +28,7 @@
             <div class="card">
                 <div class="card-body">
                     <!-- General Form Elements -->
-                    <form autocomplete="off" action="{{ route('instructor.courses.store') }}" id="stepOne" method="POST">
+                    <form action="{{ route('instructor.courses.store') }}" id="stepOne" method="POST">
                         @csrf
                         <div>
                             <h5 class="card-title">Step 1: Add Information Course</h5>
