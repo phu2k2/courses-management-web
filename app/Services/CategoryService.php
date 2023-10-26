@@ -18,10 +18,11 @@ class CategoryService
     }
 
     /**
+     * @param array $columns
      * @return Collection
      */
-    public function getAll(): Collection
+    public function getAll($columns = ['*'])
     {
-        return $this->categoryRepo->getAll();
+        return $this->categoryRepo->getAll($columns);
     }
 }
