@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\StoreCommentRequest;
 use App\Repositories\Interfaces\CommentRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class CommentService
 {
