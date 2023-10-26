@@ -23,7 +23,9 @@
                                     <th scope="col">Price</th>
                                     <th scope="col">Average Rating</th>
                                     <th scope="col">Total Students</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Curriculum</th>
+                                    <th scope="col">Is Public</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,7 +33,7 @@
                                     <tr>
                                         <th scope="row">{{ $course->id }}</th>
                                         <td style = "text-align: start ">{{ $course->title }}</td>
-                                        <td>{{ $course->category->name }}</td>
+                                        <td>{{ data_get($course, 'category.name') }}</td>
                                         <td>{{ $course->price }} $</td>
                                         <td>{{ $course->average_rating }}</td>
                                         <td>{{ $course->total_students }}</td>
@@ -47,6 +49,16 @@
                                                     <li><a class="dropdown-item" href="#">Delete</a></li>
                                                 </ul>
                                             </div>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
+                                                style=" width: 100%; text-align : center">
+                                                Access
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <input class="form-check-input header-checkbox" type="checkbox"
+                                                {{ $course->is_active ? 'checked' : '' }}>
                                         </td>
                                     </tr>
                                 @endforeach

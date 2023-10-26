@@ -47,9 +47,10 @@ Route::prefix('courses')->name('courses.')->group(function () {
 
 Route::resource('comments', CommentController::class)->only(['destroy']);
 
-Route::resource('instructors/courses', InstructorCourseController::class)->only(['index', 'show']);
+
 Route::prefix('instructors')->group(function () {
     Route::get('/', function () {
         return view('instructor.home');
     })->name('instructor.home');
+    Route::get('/courses', [InstructorCourseController::class, 'index'])->name('course.index');
 });
