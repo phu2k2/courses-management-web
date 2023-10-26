@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class CourseService
 {
@@ -33,6 +34,15 @@ class CourseService
     public function getCourses(): LengthAwarePaginator
     {
         return $this->courseRepo->getCourses();
+    }
+
+    /**
+     * @param int $id
+     * @return LengthAwarePaginator<Model>
+     */
+    public function getInstructorCourses($id): LengthAwarePaginator
+    {
+        return $this->courseRepo->getInstructorCourses($id);
     }
 
     /**

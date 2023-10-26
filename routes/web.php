@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
@@ -46,8 +47,10 @@ Route::prefix('courses')->name('courses.')->group(function () {
 
 Route::resource('comments', CommentController::class)->only(['destroy']);
 
-Route::prefix('instructor')->group(function () {
+
+Route::prefix('instructors')->group(function () {
     Route::get('/', function () {
         return view('instructor.home');
     })->name('instructor.home');
+    Route::get('/courses', [InstructorCourseController::class, 'index'])->name('course.index');
 });
