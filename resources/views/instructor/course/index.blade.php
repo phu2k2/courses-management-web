@@ -23,7 +23,10 @@
                                     <th scope="col">Price</th>
                                     <th scope="col">Average Rating</th>
                                     <th scope="col">Total Students</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Curriculum</th>
+                                    <th scope="col">Status</th>
+                                    <th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,6 +50,17 @@
                                             </ul>
                                         </div>
                                     </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
+                                            style=" width: 100%; text-align : center">
+                                            Access
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input header-checkbox" type="checkbox">
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">2</th>
@@ -68,7 +82,16 @@
                                             </ul>
                                         </div>
                                     </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
+                                            style=" width: 100%; text-align : center">
+                                            Access
+                                        </button>
                                     </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input header-checkbox" type="checkbox">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -91,6 +114,16 @@
                                             </ul>
                                         </div>
                                     </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
+                                            style=" width: 100%; text-align : center">
+                                            Access
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input header-checkbox" type="checkbox">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -113,6 +146,17 @@
                                             </ul>
                                         </div>
                                     </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
+                                            style=" width: 100%; text-align : center">
+                                            Access
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input header-checkbox" type="checkbox">
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">5</th>
@@ -132,6 +176,17 @@
                                                 <li><a class="dropdown-item" href="#">Edit</a></li>
                                                 <li><a class="dropdown-item" href="#">Delete</a></li>
                                             </ul>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
+                                            style=" width: 100%; text-align : center">
+                                            Access
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input header-checkbox" type="checkbox">
                                         </div>
                                     </td>
                                 </tr>
