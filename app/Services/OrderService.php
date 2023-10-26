@@ -40,7 +40,7 @@ class OrderService
      * @param int $userId
      * @param array $carts
      * @throws Exception
-     * @return bool
+     * @return void
      */
     public function buyCourses($userId, $carts)
     {
@@ -52,6 +52,7 @@ class OrderService
         $cartId = [];
         $dataOrder = [];
         $dataEnroll = [];
+
         try {
             foreach ($carts as $item) {
                 $cartId[] = $item->id;
@@ -75,15 +76,16 @@ class OrderService
                     'updated_at' => $currentTime,
                 ];
             }
+
             $this->orderRepo->insertMultiple($dataOrder);
+            $this->deleteCarts($cartId, $userId);
             $this->enrollmentRepo->insertMultiple($dataEnroll);
+
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
             throw new Exception();
         }
-
-        return $this->deleteCarts($cartId, $userId);
     }
 
     /**
