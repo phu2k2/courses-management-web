@@ -20,7 +20,7 @@ class OrderController extends Controller
     }
     /**
      * Display a listing of the resource.
-     * @return View
+     * @return RedirectResponse|View
      */
     public function index()
     {
