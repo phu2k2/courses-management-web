@@ -5,6 +5,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
@@ -51,7 +52,12 @@ Route::prefix('courses')->name('courses.')->group(function () {
 
 Route::resource('comments', CommentController::class)->only(['destroy']);
 
-Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
-Route::prefix('instructor')->name('instructor')->group(function () {
-    Route::get('/', [HomeController::class, 'home']);
+Route::prefix('instructor')->name('instructor.')->group(function () {
+    Route::get('/', function () {
+        return view('instructor.home');
+    })->name('home');
+
+    Route::resource('courses', InstructorCourseController::class);
+    Route::get('courses/create/upload-file', [InstructorCourseController::class, 'upload'])->name('courses.upload');
 });
+Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);

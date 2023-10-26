@@ -120,7 +120,7 @@
 
                 @instructor
                 <li class="nav-item dropdown">
-                    <a class="nav-link" id="navbarInstructors" href="{{ route('instructor') }}">
+                    <a class="nav-link" id="navbarInstructors" href="{{ route('instructor.home') }}">
                         {{ __('instructor') }}
                     </a>
                 </li>

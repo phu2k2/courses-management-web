@@ -19,6 +19,8 @@ import * as bootstrap from 'bootstrap';
 // import '@fancyapps/fancybox/dist/jquery.fancybox.min.js';
 import AOS from "aos";
 window.AOS = AOS;
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+window.ClassicEditor = ClassicEditor;
 // import 'choices.js/public/assets/scripts/choices.min.js';
 // import 'countup.js/dist/countUp.min.js';
 // import 'dropzone/dist/dropzone-min.js';
