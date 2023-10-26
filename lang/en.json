@@ -53,6 +53,7 @@
     "rating_up": "up",
     "lessons": "lessons",
     "reviews": "reviews",
+    "courses_available": "We found :total courses available for you",
 
     "process": "Proceed to checkout",
     "total": "total",

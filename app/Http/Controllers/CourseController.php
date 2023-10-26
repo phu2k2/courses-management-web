@@ -43,7 +43,7 @@ class CourseController extends Controller
 
         $categories = $this->categoryService->getCategories();
 
-        return view('course.index')->with(['courses' => $courses, 'categories' => $categories]);
+        return view('course.index', compact('courses', 'categories'));
     }
 
     /**

@@ -33,7 +33,7 @@
                         ================================================== -->
     <div class="container mb-6 mb-xl-8 z-index-2">
         <div class="d-lg-flex align-items-center mb-6 mb-xl-0">
-            <p class="mb-lg-0">We found <span class="text-dark">{{ $courses->total() }} courses</span> available for you</p>
+            <p class="mb-lg-0">{{ __('courses_available', ['total' => $courses->total()]) }}</p>
             <div class="ms-lg-auto d-lg-flex flex-wrap">
                 <div class="mb-4 mb-lg-0 ms-lg-6">
                     <div class="border rounded d-flex align-items-center choices-label h-50p">
