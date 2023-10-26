@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Admin
 {
-    protected const IS_ADMIN = 3;
+    protected const ADMIN = 3;
     /**
      * Handle an incoming request.
      *
@@ -18,7 +18,7 @@ class Admin
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-        if ($user && $user->role_id == self::IS_ADMIN) {
+        if ($user && $user->role_id == self::ADMIN) {
             return $next($request);
         }
 

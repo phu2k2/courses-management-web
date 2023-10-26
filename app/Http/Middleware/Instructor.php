@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Instructor
 {
-    protected const IS_INSTRUCTOR = 2;
+    protected const INSTRUCTOR = 2;
     /**
      * Handle an incoming request.
      *
@@ -18,7 +18,7 @@ class Instructor
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-        if ($user && $user->role_id >= self::IS_INSTRUCTOR) {
+        if ($user && $user->role_id >= self::INSTRUCTOR) {
             return $next($request);
         }
 
