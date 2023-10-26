@@ -46,4 +46,11 @@ class CourseController extends Controller
     {
         return redirect()->route('instructor.courses.upload');
     }
+
+    public function showCurriculum(int $id) : View
+    {
+        $course = $this->courseService->getCourse($id);
+
+        return view('instructor.course.curriculum', compact('course'));
+    }
 }

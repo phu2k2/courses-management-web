@@ -61,6 +61,7 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
     Route::get('/', function () {
         return view('instructor.home');
     })->name('home');
+    Route::get('/curriculum/show/courses/{courseId}', [InstructorCourseController::class, 'showCurriculum'])->name('curriculum.show');
     Route::resource('courses', InstructorCourseController::class);
     Route::get('courses/create/upload-file', [InstructorCourseController::class, 'upload'])->name('courses.upload');
 });
