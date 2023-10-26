@@ -48,6 +48,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @return HasMany<User>
+     */
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class, 'instructor_id');
+    }
+
+    /**
      * @return HasMany<Order>
      */
     public function orders(): HasMany

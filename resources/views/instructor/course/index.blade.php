@@ -14,10 +14,10 @@
                             <i class="bi bi-plus"></i>
                         </a>
                         <!-- Primary Color Bordered Table -->
-                        <table class="table table-bordered border-primary">
+                        <table class="table table-bordered border-primary" style="text-align : center">
                             <thead class="table-primary">
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Category</th>
                                     <th scope="col">Price</th>
@@ -25,176 +25,53 @@
                                     <th scope="col">Total Students</th>
                                     <th scope="col">Action</th>
                                     <th scope="col">Curriculum</th>
-                                    <th scope="col">Status</th>
-                                    <th>
+                                    <th scope="col">Is Public</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Brandon Jacob</td>
-                                    <td>Designer</td>
-                                    <td>28</td>
-                                    <td>2016-05-25</td>
-                                    <td>4.5</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                @foreach ($courses as $course)
+                                    <tr>
+                                        <th scope="row">{{ $course->id }}</th>
+                                        <td style = "text-align: start ">{{ $course->title }}</td>
+                                        <td>{{ data_get($course, 'category.name') }}</td>
+                                        <td>{{ $course->price }} $</td>
+                                        <td>{{ $course->average_rating }}</td>
+                                        <td>{{ $course->total_students }}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false"
+                                                    style=" width: 100%; text-align : center">
+                                                    Action
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                                    <li><a class="dropdown-item" href="#">Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
                                                 style=" width: 100%; text-align : center">
-                                                Action
+                                                Access
                                             </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item" href="#">Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
-                                            style=" width: 100%; text-align : center">
-                                            Access
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input header-checkbox" type="checkbox">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Bridie Kessler</td>
-                                    <td>Developer</td>
-                                    <td>35</td>
-                                    <td>2014-12-05</td>
-                                    <td>4.5</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false"
-                                                style=" width: 100%; text-align : center">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item" href="#">Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
-                                            style=" width: 100%; text-align : center">
-                                            Access
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input header-checkbox" type="checkbox">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Ashleigh Langosh</td>
-                                    <td>Finance</td>
-                                    <td>45</td>
-                                    <td>2011-08-12</td>
-                                    <td>4.5</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false"
-                                                style=" width: 100%; text-align : center">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item" href="#">Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
-                                            style=" width: 100%; text-align : center">
-                                            Access
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input header-checkbox" type="checkbox">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Angus Grady</td>
-                                    <td>HR</td>
-                                    <td>34</td>
-                                    <td>2012-06-11</td>
-                                    <td>4.5</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false"
-                                                style=" width: 100%; text-align : center">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item" href="#">Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
-                                            style=" width: 100%; text-align : center">
-                                            Access
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input header-checkbox" type="checkbox">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Raheem Lehner</td>
-                                    <td>Dynamic Division Officer</td>
-                                    <td>47</td>
-                                    <td>2011-04-19</td>
-                                    <td>4.5</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false"
-                                                style=" width: 100%; text-align : center">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item" href="#">Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
-                                            style=" width: 100%; text-align : center">
-                                            Access
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input header-checkbox" type="checkbox">
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            <input class="form-check-input header-checkbox" type="checkbox"
+                                                {{ $course->is_active ? 'checked' : '' }}>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         <!-- End Primary Color Bordered Table -->
                     </div>
                 </div>
+                <nav class="mb-11" aria-label="Page navigationa">
+                    <ul class="pagination justify-content-center">
+                        {!! $courses->links('pagination::bootstrap-4') !!}
+                    </ul>
+                </nav>
             </div>
         </section>
     </main>
