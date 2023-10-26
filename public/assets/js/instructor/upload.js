@@ -34,6 +34,9 @@ uploadBtn.addEventListener("click", async () => {
     const selectVideo = videoInput.files[0];
 
     if (selectVideo && selectImage) {
+        $(".btn-close").hide();
+        $("#closeModal").hide();
+        $("#modalNotification").modal("show");
         try {
             const responseUrlUpload = await axios.get(path);
             const urlImage = responseUrlUpload.data.urlImage;
@@ -50,16 +53,20 @@ uploadBtn.addEventListener("click", async () => {
                 }
             });
 
-            await axios.put(baseUrl);
+            await axios.put(baseUrl)
 
-            alert('Upload files were successfull!');
+            $(".modal-body").text("Upload files was successful!");
+            $(".btn-close").show();
+            $("#closeModal").show();
             $('#uploadS3').css('pointer-events', 'none');
             $('#uploadS3').css('opacity', '0.3');
             $('#btnFinish').css('pointer-events', 'auto');
         } catch (error) {
-            alert('Upload files were failed!');
+            $(".modal-body").text("Upload files was failed!");
+            $("#modalNotification").modal("show");
         }
     } else {
-        alert("Please chosen file!");
+        $(".modal-body").text("Please chosen the files!");
+        $("#modalNotification").modal("show");
     }
 });
