@@ -71,7 +71,7 @@
         </ul>
 
         <!-- Search -->
-        <form class="d-none d-wd-flex ms-5 w-xl-450p">
+        <form class="d-none d-wd-flex ms-5 w-xl-450p" action="{{ route('courses.index') }}" method="GET" >
             <div class="input-group border rounded">
                 <div class="input-group-prepend">
                     <button class="btn btn-sm my-2 my-sm-0 text-secondary icon-xs d-flex align-items-center"
@@ -89,7 +89,7 @@
                     </button>
                 </div>
                 <input class="form-control form-control-sm border-0 ps-0" type="search"
-                    placeholder="{{ __('placeholder_search') }}" aria-label="Search">
+                    placeholder="{{ __('placeholder_search') }}" aria-label="Search" name="search">
             </div>
         </form>
 

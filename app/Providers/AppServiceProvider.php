@@ -6,9 +6,11 @@ use App\Helpers\AmazonS3;
 use App\Repositories\CourseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use App\Repositories\CartRepository;
+use App\Repositories\CategoryRepository;
 use App\Repositories\CommentRepository;
 use App\Repositories\EnrollmentRepository;
 use App\Repositories\Interfaces\CartRepositoryInterface;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CommentRepositoryInterface;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
 use App\Repositories\Interfaces\LessonRepositoryInterface;
@@ -70,6 +72,12 @@ class AppServiceProvider extends ServiceProvider
             CommentRepositoryInterface::class,
             CommentRepository::class
         );
+
+        $this->app->singleton(
+            CategoryRepositoryInterface::class,
+            CategoryRepository::class
+        );
+
         $this->app->singleton('AmazonS3', function () {
             return new AmazonS3();
         });
