@@ -6,7 +6,6 @@ return [
             'create' => 'Register account was successful',
         ],
         'error' => [
-            'create_cart' => 'Course is already in cart!',
             'login' => 'Login error, please check your email or password'
         ]
     ],
@@ -21,9 +20,11 @@ return [
     ],
     'comment' => [
         'success' => [
+            'create' => 'Create comment was successful',
             'delete' => 'Delete comment was successful',
         ],
         'error' => [
+            'create' => 'Create comment was failed',
             'delete' => 'Delete comment was failed',
         ],
     ],
