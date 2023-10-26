@@ -55,5 +55,10 @@ return [
         'error' => [
             'create_order' => 'The course has been purchased'
         ]
+    ],
+    'file' => [
+        'success' => [
+            'upload' => 'Upload files were successful',
+        ]
     ]
 ];
