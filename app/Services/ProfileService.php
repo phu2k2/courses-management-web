@@ -33,4 +33,16 @@ class ProfileService
 
         return $this->profileRepo->updateProfile($userId, $data);
     }
+
+    /**
+     * Update or create profile by user id
+     *
+     * @param mixed $userId
+     * @param array $data
+     * @return int|bool|Model
+     */
+    public function create($userId, $data = [])
+    {
+        return $this->profileRepo->create(array_merge(['user_id' => $userId], $data));
+    }
 }
