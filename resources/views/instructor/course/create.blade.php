@@ -30,7 +30,7 @@
                     <!-- General Form Elements -->
                     <form autocomplete="off" action="{{ route('instructor.courses.store') }}" method="POST">
                         @csrf
-                        <div id="stepOne">
+                        <div>
                             <h5 class="card-title">Step 1: Add Information Course</h5>
                             <div class="row mb-3">
                                 <label for="inputText" class="col-sm-2 col-form-label fw-bold">Title</label>
@@ -165,8 +165,10 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div id="stepTwo" style="display: none">
+                    </form><!-- End General Form Elements -->
+                    <form action="" method="POST" id="stepTwo" style="display: none">
+                        @csrf
+                        <div>
                             <h5 class="card-title">Step 2: Upload Poster and Trailer</h5>
                             <div class="row mb-3">
                                 <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Poster Upload</label>
@@ -204,18 +206,13 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-sm-2">
-                                    <a href="javascript:void(0)" id="cancelStep1" class="btn btn-secondary">CANCEL</a>
-                                </div>
-                                <div class="offset-sm-8 col-sm-2">
+                                <div class="offset-sm-10 col-sm-2">
                                     <a id="uploadS3" class="btn btn-success">UPLOAD</a>
                                     <button id="btnFinish" type="submit" class="btn btn-primary" disabled>FINISH</button>
                                 </div>
                             </div>
                         </div>
-
-                    </form><!-- End General Form Elements -->
-
+                    </form>
                 </div>
             </div>
 

@@ -36,7 +36,6 @@ $(document).ready(function () {
     })
 
     $('#uploadS3').bind('click', function () {
-        console.log('test');
         $('#uploadS3').attr('aria-disabled', 'true');
         $('#uploadS3').css('pointer-events', 'none');
         $('#btnFinish').removeAttr('disabled');
