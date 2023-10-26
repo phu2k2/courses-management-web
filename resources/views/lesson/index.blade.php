@@ -21,7 +21,7 @@
                     Do you really want to delete?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" id="cancelDelete" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" id="submitDelete" class="btn btn-primary">Delete</button>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                 <ul class="list-unstyled pt-2">
                     @foreach ($comments as $comment)
                         @if (empty($comment->parent_id))
-                            <div class="row-cols-md-12 mb-6">
+                            <div class="row-cols-md-12 mb-6" id="comment{{ $comment->id}}">
                                 <li class="media d-flex">
                                     <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
                                         <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
@@ -115,14 +115,13 @@
                                                         </li>
                                                         <li class="dropdown-item">
                                                             <form id="formDelete{{ $comment->id }}"
-                                                                action="{{ route('comments.destroy', ['comment' => $comment->id]) }}"
+                                                                data-url="{{ route('comments.destroy', ['comment' => $comment->id]) }}"
                                                                 method="post">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <input type="hidden" name="id"
-                                                                    value="{{ $comment->id }}">
+                                                                <input type="hidden" name="id" value="{{ $comment->id }}">
                                                                 <a class="dropdown-link text-alizarin" id="commentId"
-                                                                    data-id="{{ $comment->id }}" href="#"
+                                                                    data-id="{{ $comment->id }}" href="javascript:void(0)" onclick="deleteComment({{ $comment->id }})"
                                                                     data-bs-toggle="modal" data-bs-target="#commentModal">
                                                                     Delete
                                                                 </a>
@@ -187,7 +186,7 @@
                                     <div class="offset-1 col-md-11 media reply-wrap {{ $comment->id }}">
                                         @foreach ($comments as $childComment)
                                             @if ($childComment->parent_id == $comment->id)
-                                                <li class="d-flex">
+                                                <li class="d-flex" id="comment{{ $childComment->id}}">
                                                     <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
                                                         <img src="{{ asset('assets/img/products/product-2.jpg') }}"
                                                             alt="..." class="avatar-img rounded-circle">
@@ -221,7 +220,7 @@
                                                                         </li>
                                                                         <li class="dropdown-item">
                                                                             <form id="formDelete{{ $childComment->id }}"
-                                                                                action="{{ route('comments.destroy', ['comment' => $childComment->id]) }}"
+                                                                                data-url="{{ route('comments.destroy', ['comment' => $childComment->id]) }}"
                                                                                 method="post">
                                                                                 @csrf
                                                                                 @method('DELETE')
@@ -230,7 +229,8 @@
                                                                                 <a class="dropdown-link text-alizarin"
                                                                                     id="commentId"
                                                                                     data-id="{{ $childComment->id }}"
-                                                                                    href="#" data-bs-toggle="modal"
+                                                                                    href="javascript:void(0)" onclick="deleteComment({{ $childComment->id }})"
+                                                                                    data-bs-toggle="modal"
                                                                                     data-bs-target="#commentModal">
                                                                                     Delete
                                                                                 </a>

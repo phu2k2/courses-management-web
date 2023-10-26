@@ -51,7 +51,7 @@ Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show')->middleware('verifyUserAccessCourse');
 });
 
-Route::resource('comments', CommentController::class)->only(['store', 'destroy']);
+Route::resource('comments', CommentController::class)->only(['store']);
 
 Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
 
