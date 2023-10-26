@@ -38,6 +38,17 @@ class Course extends Model
         'is_active',
     ];
 
+    protected $attributes = [
+        'trailer_url' => 'null',
+        'poster_url' => 'null',
+        'average_rating' => 0,
+        'num_reviews' => 0,
+        'total_students' => 0,
+        'total_lessons' => 0,
+        'total_time' => 0,
+        'is_active' => 'false'
+    ];
+
     private const VIDEO_DURATION_EXTRA_SHORT = 1;
     private const VIDEO_DURATION_SHORT = 3;
     private const VIDEO_DURATION_MEDIUM = 6;

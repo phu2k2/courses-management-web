@@ -54,10 +54,9 @@
                                 <label for="selectCategory" class="col-sm-2 col-form-label fw-bold">Category <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="category_id" aria-label="Default select example">
-                                        <option selected>Select Category</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ ucfirst($category->name) }}</option>
+                                        @endforeach
                                     </select>
                                     @error('category_id')
                                         <div class="text-alizarin fst-italic">{{ $message }}</div>

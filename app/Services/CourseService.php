@@ -46,4 +46,14 @@ class CourseService
     {
         return $this->courseRepo->findOrFail($id);
     }
+
+    /**
+     * @param array $data
+     *
+     * @return Model
+     */
+    public function create($data)
+    {
+        return $this->courseRepo->create($data);
+    }
 }
