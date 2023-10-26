@@ -32,7 +32,6 @@ class StoreCourseRequest extends FormRequest
             'description' => ['bail', 'required', 'string'],
             'learns_description' => ['bail', 'required', 'string'],
             'requirements_description' => ['bail', 'required', 'string']
-
         ];
     }
 }
