@@ -7,7 +7,7 @@ use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use Exception;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class OrderService
 {
@@ -26,8 +26,11 @@ class OrderService
      */
     protected $enrollmentRepo;
 
-    public function __construct(OrderRepositoryInterface $orderRepo, CartRepositoryInterface $cartRepo, EnrollmentRepositoryInterface $enrollmentRepo)
-    {
+    public function __construct(
+        OrderRepositoryInterface $orderRepo,
+        CartRepositoryInterface $cartRepo,
+        EnrollmentRepositoryInterface $enrollmentRepo
+    ) {
         $this->orderRepo = $orderRepo;
         $this->cartRepo = $cartRepo;
         $this->enrollmentRepo = $enrollmentRepo;
@@ -42,12 +45,14 @@ class OrderService
     public function buyCourses($userId, $carts)
     {
         $currentTime  = Carbon::now();
+        DB::beginTransaction();
+
+        $paymentMethod = 1;
+        $status = 2;
+        $cartId = [];
+        $dataOrder = [];
+        $dataEnroll = [];
         try {
-            $paymentMethod = 1;
-            $status = 2;
-            $cartId = [];
-            $dataOrder = [];
-            $dataEnroll = [];
             foreach ($carts as $item) {
                 $cartId[] = $item->id;
                 $courseId = $item->course->id;
@@ -70,12 +75,15 @@ class OrderService
                     'updated_at' => $currentTime,
                 ];
             }
-            $this->orderRepo->createMany($dataOrder);
-            $this->enrollmentRepo->createMany($dataEnroll);
-            return $this->deleteCarts($cartId, $userId);
+            $this->orderRepo->insertMultiple($dataOrder);
+            $this->enrollmentRepo->insertMultiple($dataEnroll);
+            DB::commit();
         } catch (Exception $e) {
+            DB::rollBack();
             throw new Exception();
         }
+
+        return $this->deleteCarts($cartId, $userId);
     }
 
     /**

@@ -38,7 +38,7 @@ interface RepositoryInterface
      * @param array $attributes
      * @return mixed
      */
-    public function createMany($attributes = []);
+    public function insertMultiple($attributes = []);
 
     /**
      * Update a record by its primary key.
