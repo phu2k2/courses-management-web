@@ -58,5 +58,6 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
     })->name('home');
 
     Route::resource('courses', InstructorCourseController::class);
+    Route::get('courses/create/upload-file', [InstructorCourseController::class, 'upload'])->name('courses.upload');
 });
 Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
