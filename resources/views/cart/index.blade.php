@@ -52,7 +52,7 @@
         @include('layouts.message')
     </header>
     <!-- SHOP CART
-                                                                                                                                                                                                                                                                                                                                            ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
     <div class="container pb-6 pb-xl-10">
         <div class="row">
             @if ($errors->any())
