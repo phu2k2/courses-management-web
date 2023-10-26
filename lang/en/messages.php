@@ -50,5 +50,10 @@ return [
         'error' => [
             'save' => 'Please choose at least one course'
         ]
+    ],
+    'order' => [
+        'error' => [
+            'create_order' => 'The course has been purchased'
+        ]
     ]
 ];

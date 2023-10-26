@@ -14,11 +14,13 @@ use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CommentRepositoryInterface;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
 use App\Repositories\Interfaces\LessonRepositoryInterface;
+use App\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Repositories\Interfaces\ProfileRepositoryInterface;
 use App\Repositories\Interfaces\ReviewRepositoryInterface;
 use App\Repositories\Interfaces\TopicRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\LessonRepository;
+use App\Repositories\OrderRepository;
 use App\Repositories\ProfileRepository;
 use App\Repositories\ReviewRepository;
 use App\Repositories\TopicRepository;
@@ -81,6 +83,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('AmazonS3', function () {
             return new AmazonS3();
         });
+
+        $this->app->singleton(
+            OrderRepositoryInterface::class,
+            OrderRepository::class
+        );
 
         $this->app->singleton(
             EnrollmentRepositoryInterface::class,

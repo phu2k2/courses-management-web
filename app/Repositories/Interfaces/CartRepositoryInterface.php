@@ -27,5 +27,5 @@ interface CartRepositoryInterface extends RepositoryInterface
      * @param int $userId
      * @return bool
      */
-    public function deleteMultiple($ids, $userId);
+    public function deleteMultiple($ids, $userId): bool;
 }

@@ -48,7 +48,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      */
     public function getCourseToCart($id)
     {
-        return $this->model->with('course:id,title,price,discount')->whereIn('id', $id)->get();
+        return $this->model->with('course:id,title,price,discount,introduction')->whereIn('id', $id)->get();
     }
 
     /**
@@ -56,7 +56,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      * @param int $userId
      * @return bool
      */
-    public function deleteMultiple($ids, $userId)
+    public function deleteMultiple($ids, $userId): bool
     {
         return $this->model->where('user_id', $userId)->whereIn('id', $ids)->delete();
     }
