@@ -6,9 +6,10 @@ interface RepositoryInterface
 {
     /**
      * Get all
+     * @param array $columns
      * @return mixed
      */
-    public function getAll();
+    public function getAll($columns = ['*']);
 
     /**
      * Find a record by its primary key.
