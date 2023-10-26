@@ -1,22 +1,25 @@
 @extends('layouts.app')
-@section('title', 'course')
+@section('title', __('page_name_course'))
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/libs/aos/dist/aos.css') }}">
+@endsection
+@section('script')
+    <script src="{{ asset('assets/js/courses.js') }}"></script>
 @endsection
 @section('content')
     <header class="py-8 py-lg-12 mb-8 overlay overlay-primary overlay-80"
         style="background-image: url({{ asset('assets/img/covers/cover-19.jpg')}} );">
         <div class="container text-center py-xl-5">
-            <h1 class="display-4 fw-semi-bold mb-0 text-white">Courses</h1>
+            <h1 class="display-4 fw-semi-bold mb-0 text-white">{{__('page_name_course') }}</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-scroll justify-content-center">
                     <li class="breadcrumb-item">
                         <a class="text-white" href="#">
-                            Home
+                            {{__('home') }}
                         </a>
                     </li>
                     <li class="breadcrumb-item text-white active" aria-current="page">
-                        Courses
+                        {{__('page_name_course') }}
                     </li>
                 </ol>
             </nav>
@@ -30,30 +33,36 @@
                         ================================================== -->
     <div class="container mb-6 mb-xl-8 z-index-2">
         <div class="d-lg-flex align-items-center mb-6 mb-xl-0">
-            <p class="mb-lg-0">We found <span class="text-dark">834 courses</span> available for you</p>
+            <p class="mb-lg-0">{{ __('courses_available', ['total' => $courses->total()]) }}</p>
             <div class="ms-lg-auto d-lg-flex flex-wrap">
                 <div class="mb-4 mb-lg-0 ms-lg-6">
                     <div class="border rounded d-flex align-items-center choices-label h-50p">
-                        <span class="ps-5">Sort by:</span>
-                        <select
-                            class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end"
-                            data-choices>
-                            <option>Default</option>
-                            <option>New Courses</option>
-                            <option>Price Low to High</option>
-                            <option>Price High to Low</option>
-                            <option>Highest Rated</option>
+                        <span class="ps-5">{{ __('sort_by') }}:</span>
+                        <select id="sort-select" onchange="handleSortChange()" class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end" data-choices>
+                            <option value="default" @selected(request('sort') == 'default')>{{ __('sort.default') }}</option>
+                            <option value="created_at:desc" @selected(request('sort') == 'created_at:desc')>{{ __('sort.new_courses') }}</option>
+                            <option value="num_reviews:desc" @selected(request('sort') == 'num_reviews:desc')>{{ __('sort.most_reviewed') }}</option>
+                            <option value="average_rating:desc" @selected(request('sort') == 'average_rating:desc')>{{ __('sort.highest_rated') }}</option>
+                            <option value="total_students:desc" @selected(request('sort') == 'total_students:desc')>{{ __('sort.highest_student') }}</option>
                         </select>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    @php
+        $selectedPrice = request('price', null);
+        $selectedDurations = request('duration', []);
+        $selectedRating = request('rating', null);
+        $selectedLevels = request('level',[]);
+        $selectedLanguages = request('language', []);
+        $selectedCategories = request('category', []);
+    @endphp
     <!-- COURSE LIST V2 ================================================== -->
     <div class="container">
         <div class="row">
             <div class="col-xl-4 mb-5 mb-xl-0">
+                <form action="{{ route('courses.index') }}" method="GET" id="filter-form">
                 <!-- SIDEBAR FILTER================================================== -->
                 <div class=" vertical-scroll" id="courseSidebar">
                     <div class="border rounded mb-6 @@widgetBG">
@@ -64,7 +73,7 @@
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse1"
                                     aria-expanded="true" aria-controls="coursefiltercollapse1">
-                                    Category
+                                    {{ __('languages') }}
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
                                         <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -85,36 +94,18 @@
 
                         <div id="coursefiltercollapse1" class="collapse show mt-n2 px-6 pb-6"
                             aria-labelledby="coursefilter1" data-parent="#courseSidebar">
-                            <ul class="list-unstyled list-group list-checkbox">
+                            <ul class="list-unstyled list-group list-checkbox list-checkbox-limit">
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheckone">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheckone">Art
-                                        (8)</label>
+                                    <input type="checkbox" class="custom-control-input" id="languagescustomcheck1" name="language[]" 
+                                    value="1" @checked(in_array('1', $selectedLanguages))>
+                                    <label class="custom-control-label font-size-base" 
+                                        for="languagescustomcheck1">English</label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck2">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck2">Exercise
-                                        (8)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck3">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck3">Material
-                                        Design (7)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck4">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck4">Software
-                                        Development (6)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck5">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck5">Music
-                                        (6)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck6">
+                                    <input type="checkbox" class="custom-control-input" id="languagescustomcheck2" name="language[]" 
+                                    value="2" @checked(in_array('2', $selectedLanguages))>
                                     <label class="custom-control-label font-size-base"
-                                        for="categorycustomcheck6">Photography (6)</label>
+                                        for="languagescustomcheck2">Vietnamese</label>
                                 </li>
                             </ul>
                         </div>
@@ -128,7 +119,7 @@
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse2"
                                     aria-expanded="true" aria-controls="coursefiltercollapse2">
-                                    Instructors
+                                    Category
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
                                         <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -147,13 +138,13 @@
                             </h4>
                         </div>
 
-                        <div id="coursefiltercollapse2" class="collapse show mt-n2 px-6 pb-6"
+                        <div id="coursefiltercollapse2" class="collapse mt-n2 px-6 pb-6"
                             aria-labelledby="coursefilter2" data-parent="#courseSidebar">
                             <!-- Search -->
                             <form class="mb-4">
                                 <div class="input-group">
                                     <input class="form-control form-control-sm border-end-0 shadow-none" type="search"
-                                        placeholder="Search" aria-label="Search">
+                                        placeholder="Search(To do)" aria-label="Search">
                                     <div class="input-group-append">
                                         <button
                                             class="btn btn-sm btn-outline-white border-start-0 text-dark bg-transparent"
@@ -163,7 +154,7 @@
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M8.80758 0C3.95121 0 0 3.95121 0 8.80758C0 13.6642 3.95121 17.6152 8.80758 17.6152C13.6642 17.6152 17.6152 13.6642 17.6152 8.80758C17.6152 3.95121 13.6642 0 8.80758 0ZM8.80758 15.9892C4.8477 15.9892 1.62602 12.7675 1.62602 8.80762C1.62602 4.84773 4.8477 1.62602 8.80758 1.62602C12.7675 1.62602 15.9891 4.8477 15.9891 8.80758C15.9891 12.7675 12.7675 15.9892 8.80758 15.9892Z"
-                                                    fill="currentColor" />
+                                                    fill="currentColor" />short
                                                 <path
                                                     d="M19.762 18.6121L15.1007 13.9509C14.7831 13.6332 14.2687 13.6332 13.9511 13.9509C13.6335 14.2682 13.6335 14.7831 13.9511 15.1005L18.6124 19.7617C18.7712 19.9205 18.9791 19.9999 19.1872 19.9999C19.395 19.9999 19.6032 19.9205 19.762 19.7617C20.0796 19.4444 20.0796 18.9295 19.762 18.6121Z"
                                                     fill="currentColor" />
@@ -173,39 +164,15 @@
                                     </div>
                                 </div>
                             </form>
-
-                            <ul class="list-unstyled list-group list-checkbox list-checkbox-limit">
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="instructorscustomcheck1">
-                                    <label class="custom-control-label font-size-base" for="instructorscustomcheck1">Chris
-                                        Convrse (03)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="instructorscustomcheck2">
-                                    <label class="custom-control-label font-size-base"
-                                        for="instructorscustomcheck2">Morten Rand (15)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="instructorscustomcheck3">
-                                    <label class="custom-control-label font-size-base" for="instructorscustomcheck3">Rayi
-                                        Villalobos (125)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="instructorscustomcheck4">
-                                    <label class="custom-control-label font-size-base" for="instructorscustomcheck4">James
-                                        William (1.584)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="instructorscustomcheck5">
-                                    <label class="custom-control-label font-size-base"
-                                        for="instructorscustomcheck5">Villalobos (584)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="instructorscustomcheck6">
-                                    <label class="custom-control-label font-size-base" for="instructorscustomcheck6">Rand
-                                        joe (44)</label>
-                                </li>
-                            </ul>
+                                <ul class="list-unstyled list-group list-checkbox">
+                                    @foreach($categories as $category)
+                                    <li class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="categorycustomcheck{{ $loop->index }}" 
+                                        name="category[]" value="{{ $category->id }}"  @checked(in_array($category->id, $selectedCategories))>
+                                        <label class="custom-control-label font-size-base" for="categorycustomcheck{{ $loop->index }}">{{ $category->name }}</label>
+                                    </li>
+                                    @endforeach
+                                </ul>
                         </div>
                     </div>
 
@@ -216,8 +183,8 @@
                                 <button
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse3"
-                                    aria-expanded="true" aria-controls="coursefiltercollapse3">
-                                    Price
+                                    aria-expanded="false" aria-controls="coursefiltercollapse3">
+                                    {{ __('price') }}
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
                                         <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -235,27 +202,26 @@
                                 </button>
                             </h4>
                         </div>
-
-                        <div id="coursefiltercollapse3" class="collapse show mt-n2 px-6 pb-6"
+                        <div id="coursefiltercollapse3" class="collapse  mt-n2 px-6 pb-6"
                             aria-labelledby="coursefilter3" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" id="pricecustomradio1" name="customRadio"
-                                        class="custom-control-input">
+                                    <input type="radio" id="pricecustomradio1" name="price"
+                                        class="custom-control-input" value ="all" @checked($selectedPrice == 'all')>
                                     <label class="custom-control-label font-size-base" for="pricecustomradio1">All
-                                        (18)</label>
+                                        </label>
                                 </li>
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" id="pricecustomradio2" name="customRadio"
-                                        class="custom-control-input">
+                                    <input type="radio" id="pricecustomradio2" name="price"
+                                        class="custom-control-input" value = "free" @checked($selectedPrice == 'free')>
                                     <label class="custom-control-label font-size-base" for="pricecustomradio2">Free
-                                        (3)</label>
+                                        </label>
                                 </li>
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" id="pricecustomradio3" name="customRadio"
-                                        class="custom-control-input">
+                                    <input type="radio" id="pricecustomradio3" name="price"
+                                        class="custom-control-input" value ="paid" @checked($selectedPrice == 'paid')>
                                     <label class="custom-control-label font-size-base" for="pricecustomradio3">Paid
-                                        (15)</label>
+                                        </label>
                                 </li>
                             </ul>
                         </div>
@@ -268,8 +234,8 @@
                                 <button
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse4"
-                                    aria-expanded="true" aria-controls="coursefiltercollapse4">
-                                    Level
+                                    aria-expanded="false" aria-controls="coursefiltercollapse4">
+                                    {{ __('level') }}
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
                                         <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -288,23 +254,84 @@
                             </h4>
                         </div>
 
-                        <div id="coursefiltercollapse4" class="collapse show mt-n2 px-6 pb-6"
+                        <div id="coursefiltercollapse4" class="collapse mt-n2 px-6 pb-6"
                             aria-labelledby="coursefilter4" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck1">
-                                    <label class="custom-control-label font-size-base" for="levelcustomcheck1">Beginner
-                                        (03)</label>
+                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck1" name="level[]" 
+                                    value="1" @checked(in_array('1', $selectedLevels))>
+                                    <label class="custom-control-label font-size-base" for="levelcustomcheck1">{{ __('beginner') }}
+                                        </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck2">
+                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck2" name="level[]" 
+                                    value="2" @checked(in_array('2', $selectedLevels))>
                                     <label class="custom-control-label font-size-base"
-                                        for="levelcustomcheck2">Intermediate (15)</label>
+                                        for="levelcustomcheck2">{{ __('intermediate') }} </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck3">
-                                    <label class="custom-control-label font-size-base" for="levelcustomcheck3">Advanced
-                                        (126)</label>
+                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck3" name="level[]" 
+                                    value="3" @checked(in_array('3', $selectedLevels))>
+                                    <label class="custom-control-label font-size-base" for="levelcustomcheck3">{{ __('advanced') }}
+                                        </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="border rounded mb-6 @widgetBG">
+                        <!-- Heading -->
+                        <div id="coursefilter4">
+                            <h4 class="mb-0">
+                                <button class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one" type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse4" aria-expanded="true" aria-controls="coursefiltercollapse4">
+                                    {{ __('video_duration') }}
+                                    <span class="ms-auto text-dark d-flex">
+                                        <!-- Icon -->
+                                        <svg width="15" height="2" viewBox="0 0 15 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="15" height="2" fill="currentColor"></rect>
+                                        </svg>
+
+                                        <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0 7H15V9H0V7Z" fill="currentColor"></path>
+                                            <path d="M6 16L6 8.74228e-08L8 0L8 16H6Z" fill="currentColor"></path>
+                                        </svg>
+
+                                    </span>
+                                </button>
+                            </h4>
+                        </div>
+
+                        <div id="coursefiltercollapse4" class="collapse show mt-n2 px-6 pb-6" aria-labelledby="coursefilter4" data-parent="#courseSidebar">
+                            <ul class="list-unstyled list-group list-checkbox">
+                                <li class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck1" name="duration[]" 
+                                    value="extraShort" @checked(in_array('extraShort', $selectedDurations))>
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck1">0-1 {{ __('hours') }}
+                                        </label>
+                                </li>
+                                <li class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck2" name="duration[]" 
+                                    value="short" @checked(in_array('short', $selectedDurations))>
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck2">1-3 {{ __('hours') }}
+                                        </label>
+                                </li>
+                                <li class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck3" name="duration[]"
+                                     value="medium" @checked(in_array('medium', $selectedDurations))>
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck3">3-6 {{ __('hours') }}
+                                        </label>
+                                </li>
+                                <li class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="ldurationcustomcheck4" name="duration[]"
+                                     value="long" @checked(in_array('long', $selectedDurations))>
+                                    <label class="custom-control-label font-size-base" for="ldurationcustomcheck4">6-17 {{ __('hours') }}
+                                        </label>
+                                </li>
+                                <li class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck5" name="duration[]"
+                                     value="extraLong" @checked(in_array('extraLong', $selectedDurations))>
+                                    <label class="custom-control-label font-size-base" for="durationcustomcheck5">17+ {{ __('hours') }}
+                                        </label>
                                 </li>
                             </ul>
                         </div>
@@ -318,7 +345,7 @@
                                     class="p-6 text-dark fw-medium d-flex align-items-center collapse-accordion-toggle line-height-one"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#coursefiltercollapse5"
                                     aria-expanded="true" aria-controls="coursefiltercollapse5">
-                                    Rating
+                                    {{ __('rating') }}
                                     <span class="ms-auto text-dark d-flex">
                                         <!-- Icon -->
                                         <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -340,72 +367,77 @@
                         <div id="coursefiltercollapse5" class="collapse show mt-n2 px-6 pb-6"
                             aria-labelledby="coursefilter5" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="ratingcustomcheck1">
-                                    <label class="custom-control-label font-size-base" for="ratingcustomcheck1">
+                                <li class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion1" name ="rating" 
+                                    value="4.5" @checked($selectedRating == '4.5')>
+                                    <label class="custom-control-label font-size-base" for="ratingcustomradion1">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
-                                                <span class="rating" style="width:90%;"></span>
+                                                <span class="rating" style="width:92%;"></span>
                                             </span>
 
                                             <span class="ms-3">
-                                                <span>& up</span>
+                                                <span>& {{ __('rating_up') }}</span>
                                             </span>
                                         </span>
                                     </label>
                                 </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="ratingcustomcheck2">
-                                    <label class="custom-control-label font-size-base" for="ratingcustomcheck2">
+                                <li class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion2" name ="rating" 
+                                    value="4" @checked($selectedRating == '4')>
+                                    <label class="custom-control-label font-size-base" for="ratingcustomradion2">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
-                                                <span class="rating" style="width:70%;"></span>
+                                                <span class="rating" style="width:80%;"></span>
                                             </span>
 
                                             <span class="ms-3">
-                                                <span>& up</span>
+                                                <span>& {{ __('rating_up') }}</span>
                                             </span>
                                         </span>
                                     </label>
                                 </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="ratingcustomcheck3">
-                                    <label class="custom-control-label font-size-base" for="ratingcustomcheck3">
+                                <li class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion3" name ="rating" 
+                                    value="3.5" @checked($selectedRating == '3.5')>
+                                    <label class="custom-control-label font-size-base" for="ratingcustomradion3">
+                                        <span class="d-flex align-items-end">
+                                            <span class="star-rating">
+                                                <span class="rating" style="width:72%;"></span>
+                                            </span>
+
+                                            <span class="ms-3">
+                                                <span>& {{ __('rating_up') }}</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </li>
+                                <li class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion4" name ="rating" 
+                                    value="3" @checked($selectedRating == '3')>
+                                    <label class="custom-control-label font-size-base" for="ratingcustomradion4">
+                                        <span class="d-flex align-items-end">
+                                            <span class="star-rating">
+                                                <span class="rating" style="width:60%;"></span>
+                                            </span>
+
+                                            <span class="ms-3">
+                                                <span>& {{ __('rating_up') }}</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </li>
+                                <li class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion5" name ="rating" 
+                                    value="2.5" @checked($selectedRating == '2.5')>
+                                    <label class="custom-control-label font-size-base" for="ratingcustomradion5">
                                         <span class="d-flex align-items-end">
                                             <span class="star-rating">
                                                 <span class="rating" style="width:50%;"></span>
                                             </span>
 
                                             <span class="ms-3">
-                                                <span>& up</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="ratingcustomcheck4">
-                                    <label class="custom-control-label font-size-base" for="ratingcustomcheck4">
-                                        <span class="d-flex align-items-end">
-                                            <span class="star-rating">
-                                                <span class="rating" style="width:35%;"></span>
-                                            </span>
-
-                                            <span class="ms-3">
-                                                <span>& up</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="ratingcustomcheck5">
-                                    <label class="custom-control-label font-size-base" for="ratingcustomcheck5">
-                                        <span class="d-flex align-items-end">
-                                            <span class="star-rating">
-                                                <span class="rating" style="width:10%;"></span>
-                                            </span>
-
-                                            <span class="ms-3">
-                                                <span>& up</span>
+                                                <span>& {{ __('rating_up') }}</span>
                                             </span>
                                         </span>
                                     </label>
@@ -414,10 +446,13 @@
                         </div>
                     </div>
 
-                    <a href="#" class="btn btn-primary btn-block mb-10">FILTER RESULTS</a>
+                    {{-- <a href="#" type="" class="btn btn-primary btn-block mb-10">FILTER RESULTS</a> --}}
+                    <button type="submit" class="btn btn-primary btn-block mb-10">{{ __('button_filter') }}</button>
                 </div>
+            </form>
             </div>
-
+            
+            
             <div class="col-xl-8">
                 <div class="row row-cols-md-2 mb-3 ">
                 {{-- START COURSE --}}
@@ -455,11 +490,11 @@
 
                                     <div class="d-lg-flex align-items-end flex-wrap mb-n1">
                                         <div class="star-rating mb-2 mb-lg-0 me-lg-3">
-                                            <div class="rating" style="width:50%;"></div>
+                                            <div class="rating" style="width:{{ ($course->average_rating - 1) / 3.6 * 100 }}%;"></div>
                                         </div>
 
                                         <div class="font-size-sm">
-                                            <span>{{ $course->average_rating }} ({{ convert_to_short_form($course->num_reviews) }} reviews)</span>
+                                            <span>{{ $course->average_rating }} ({{ convert_to_short_form($course->num_reviews) }} {{ __('reviews') }})</span>
                                         </div>
                                     </div>
 
@@ -478,7 +513,7 @@
                                                             </svg>
 
                                                         </div>
-                                                        <div class="font-size-sm">{{ $course->total_lessons }} lessons</div>
+                                                        <div class="font-size-sm">{{ $course->total_lessons }} {{ __('lessons') }}</div>
                                                     </div>
                                                 </li>
                                                 <li class="nav-item px-3">
@@ -504,7 +539,7 @@
 
                                         <div class="col-auto px-2 text-right">
                                             <del class="font-size-sm">${{ $course->price }}</del>
-                                            <ins class="h4 mb-0 d-block mb-lg-n1">${{ $course->price*(1-$course->discount/100) }}</ins>
+                                            <ins class="h4 mb-0 d-block mb-lg-n1">${{ number_format($course->discounted_price ,2)}}</ins>
                                         </div>
                                     </div>
                                 </div>

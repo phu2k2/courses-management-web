@@ -1,13 +1,17 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,18 +40,28 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::put('profile', [ProfileController::class, 'update'])->name('update');
     Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
     Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
+    Route::get('my-courses', [CourseController::class, 'getMyCourses'])->name('my-courses');
 });
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
+Route::delete('carts/delete-cart', [CartController::class, 'deleteMutilCarts'])->name('carts.delete-cart');
 Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
+Route::resource('reviews', ReviewController::class)->only(['store']);
 
 Route::prefix('courses')->name('courses.')->group(function () {
-    Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show');
+    Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show')->middleware('verifyUserAccessCourse');
 });
 
-Route::resource('comments', CommentController::class)->only(['destroy']);
+Route::resource('comments', CommentController::class)->only(['store', 'destroy']);
 
-Route::prefix('instructor')->group(function () {
+Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
+
+Route::resource('orders', OrderController::class)->only(['index', 'store']);
+
+Route::prefix('instructor')->name('instructor.')->group(function () {
     Route::get('/', function () {
         return view('instructor.home');
-    })->name('instructor.home');
+    })->name('home');
+
+    Route::resource('courses', InstructorCourseController::class);
+    Route::get('courses/create/upload-file', [InstructorCourseController::class, 'upload'])->name('courses.upload');
 });

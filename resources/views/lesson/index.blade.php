@@ -69,7 +69,6 @@
                         </span>
                     </span>
                 </a>
-
                 <h3 class="text-white mb-6">Comment</h3>
                 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
@@ -161,10 +160,13 @@
                                         @auth
                                             <div class="reply-comment {{ $comment->id }}">
                                                 <div class="bg-portgore rounded p-1 p-md-4 mb-4">
-                                                    <form action="" method="POST">
-                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content" name="content" rows="3"
+                                                    <form action="{{ route('comments.store') }}" method="POST">
+                                                        @csrf
+                                                        <input name="lesson_id" type="hidden" value="{{ $lesson->id }}">
+                                                        <input name="parent_id" type="hidden" value="{{ $comment->id }}">
+                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" name="content" rows="3"
                                                             placeholder="Add you comment" data-parentId="{{ $comment->id }}"></textarea>
-                                                        <button type="submit"
+                                                        <button type="submit" id="submit-child"
                                                             class="btn btn-orange btn-block mw-md-300p">SUBMIT</button>
                                                     </form>
                                                 </div>
@@ -283,10 +285,12 @@
                 <div class="bg-portgore rounded p-6 p-md-9 mb-8">
                     <h3 class="text-white mb-2">Add Comment</h3>
                     <div class="">What is it like to Lesson?</div>
-                    <form>
+                    <form action="{{ route('comments.store') }}" method="POST">
+                        @csrf
+                        <input name="lesson_id" type="hidden" value="{{ $lesson->id }}">
                         <div class="form-group mb-6">
-                            <label class="text-white" for="content">Content</label>
-                            <textarea class="form-control placeholder-1 bg-dark border-0" id="content" name="content" rows="5"
+                            <label id="label_content" class="text-white" for="content">Content</label>
+                            <textarea class="form-control placeholder-1 bg-dark border-0" id="content-text" name="content" rows="5"
                                 placeholder="Content"></textarea>
                         </div>
 
@@ -400,7 +404,7 @@
                                                     class="badge btn-orange-soft text-white-70 me-5 font-size-sm fw-normal py-2">
                                                     {{ $lesson->lesson_duration }}
                                                 </div>
-                                                <a href="#" class="text-secondary d-flex">
+                                                <a href="{{ route('courses.lessons.show', ['courseId' => $course->id, 'lessonId' => $lesson->id])}}" class="text-secondary d-flex">
                                                     <!-- Icon -->
                                                     <svg width="14" height="16" viewBox="0 0 14 16"
                                                         xmlns="http://www.w3.org/2000/svg">
