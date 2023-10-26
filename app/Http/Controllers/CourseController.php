@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GetCoursesRequest;
+use App\Services\CategoryService;
 use App\Services\CourseService;
 use App\Services\ReviewService;
 use Illuminate\Contracts\View\View;
@@ -19,10 +20,16 @@ class CourseController extends Controller
      */
     protected $reviewService;
 
-    public function __construct(CourseService $courseService, ReviewService $reviewService)
+    /**
+     * @var CategoryService
+     */
+    protected $categoryService;
+
+    public function __construct(CourseService $courseService, ReviewService $reviewService, CategoryService $categoryService)
     {
         $this->courseService = $courseService;
         $this->reviewService = $reviewService;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -32,7 +39,11 @@ class CourseController extends Controller
     {
         $courses = $this->courseService->getCourses($request);
 
-        return view('course.index', compact('courses'));
+        $courses->appends($request->validated());
+
+        $categories = $this->categoryService->getAll(['id', 'name']);
+
+        return view('course.index', compact('courses', 'categories'));
     }
 
     /**
@@ -43,8 +54,12 @@ class CourseController extends Controller
     {
         $course = $this->courseService->getCourse($id);
         $reviews = $this->reviewService->getReviewsByCourse($id);
+        $enrolled = false;
+        if (auth()->check()) {
+            $enrolled = $this->courseService->isEnrolled((int) auth()->id(), $id);
+        }
 
-        return view('course.show', compact('course', 'reviews'));
+        return view('course.show', compact('course', 'reviews', 'enrolled'));
     }
 
     /**
@@ -52,6 +67,8 @@ class CourseController extends Controller
      */
     public function getMyCourses(): View
     {
-        return view('user.course.index');
+        $courses = $this->courseService->getMyCourses((int) auth()->id());
+
+        return view('user.course.index', compact('courses'));
     }
 }

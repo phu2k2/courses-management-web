@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Repositories\RepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 abstract class BaseRepository implements RepositoryInterface
 {
@@ -36,9 +37,13 @@ abstract class BaseRepository implements RepositoryInterface
         );
     }
 
-    public function getAll()
+    /**
+     * @param array $columns
+     * @return Collection
+     */
+    public function getAll($columns = ['*'])
     {
-        return $this->model->all();
+        return $this->model->select($columns)->get();
     }
 
     /**
