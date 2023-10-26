@@ -33,19 +33,19 @@
                         <div>
                             <h5 class="card-title">Step 1: Add Information Course</h5>
                             <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label fw-bold">Title</label>
+                                <label for="inputText" class="col-sm-2 col-form-label fw-bold">Title <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" name="title" class="form-control">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="textIntroduction" class="col-sm-2 col-form-label fw-bold">Introduction</label>
+                                <label for="textIntroduction" class="col-sm-2 col-form-label fw-bold">Introduction <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-10">
                                     <textarea cols="4" id="introduction" name="introduction" class="form-control"></textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="selectCategory" class="col-sm-2 col-form-label fw-bold">Category</label>
+                                <label for="selectCategory" class="col-sm-2 col-form-label fw-bold">Category <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="category_id" aria-label="Default select example">
                                         <option selected>Select Category</option>
@@ -56,25 +56,25 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="textIntroduction" class="col-sm-2 col-form-label fw-bold">Description</label>
+                                <label for="textIntroduction" class="col-sm-2 col-form-label fw-bold">Description <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-10">
                                     <textarea cols="4" id="description" name="description" class="form-control"></textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="textIntroduction" class="col-sm-2 col-form-label fw-bold">Learns Description</label>
+                                <label for="textIntroduction" class="col-sm-2 col-form-label fw-bold">Learns Description <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-10">
                                     <textarea cols="4" id="learns" name="learns_description" class="form-control"></textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="textIntroduction" class="col-sm-2 col-form-label fw-bold">Requirements</label>
+                                <label for="textIntroduction" class="col-sm-2 col-form-label fw-bold">Requirements <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-10">
                                     <textarea cols="4" id="requirements" name="requirements_description" class="form-control"></textarea>
                                 </div>
                             </div>
                             <fieldset class="row mb-3">
-                                <legend class="col-form-label col-sm-2 pt-0 fw-bold">Language</legend>
+                                <legend class="col-form-label col-sm-2 pt-0 fw-bold">Language <span class="text-alizarin fst-italic">*</span></legend>
                                 <div class="col-sm-10 row">
                                     <div class="col-sm-2 form-check">
                                         <input class="form-check-input" type="radio" name="languages" id="english_lang"
@@ -93,7 +93,7 @@
                                 </div>
                             </fieldset>
                             <fieldset class="row mb-3">
-                                <legend class="col-form-label col-sm-2 pt-0 fw-bold">Level</legend>
+                                <legend class="col-form-label col-sm-2 pt-0 fw-bold">Level <span class="text-alizarin fst-italic">*</span></legend>
                                 <div class="col-sm-10 row">
                                     <div class="col-sm-2 form-check">
                                         <input class="form-check-input" type="radio" name="level" id="english_lang"
@@ -119,11 +119,11 @@
                                 </div>
                             </fieldset>
                             <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Price</label>
+                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Price <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-4">
                                     <input type="number" step="0.01" name="price" class="form-control">
                                 </div>
-                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Discount</label>
+                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Discount <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-4">
                                     <input type="number" min="0" max="100" step="1" name="discount" class="form-control">
                                 </div>

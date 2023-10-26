@@ -33,7 +33,7 @@
                         <div>
                             <h5 class="card-title">Step 2: Upload Poster and Trailer</h5>
                             <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Poster Upload</label>
+                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Poster Upload <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-10 row change-img">
                                     <div class="col-sm-6">
                                         <img class="mb-3 img-change" src="{{ asset('assets/img/icons/show-change-image.jpg') }}" alt="">
@@ -41,7 +41,7 @@
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             Upload your course image here. It must meet our course image quality standards to be accepted.
-                                            <p class="text-alizarin fst-italic">
+                                            <p class="fw-bold text-primary-support">
                                                 Important guidelines: .jpg, .jpeg,. gif, or .png. no text on the image.
                                             </span>
                                         </div>
@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Trailer Upload</label>
+                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Trailer Upload <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-10 row change-img">
                                     <div class="col-sm-6 video-change">
                                         <img class="mb-3 change-video" src="{{ asset('assets/img/icons/show-change-image.jpg') }}" alt="">
@@ -59,7 +59,7 @@
                                         <div class="mb-3">
                                             Your promo video is a quick and compelling way for students to preview what they’ll learn in your course.
                                             Students considering your course are more likely to enroll if your promo video is well-made.
-                                            <p class="text-alizarin fst-italic">
+                                            <p class="fw-bold text-primary-support">
                                                 Learn how to make your promo video awesome!
                                             </span>
                                         </div>
