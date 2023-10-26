@@ -5,8 +5,8 @@ namespace App\Repositories;
 interface RepositoryInterface
 {
     /**
-     * @param array $columns
      * Get all
+     * @param array $columns
      * @return mixed
      */
     public function getAll($columns = ['*']);
