@@ -87,6 +87,6 @@ class CourseController extends Controller
         $data['trailer_url'] = "instructor/{$userId}/course_{$courseId}/trailer.mp4";
         $this->courseService->update($courseId, $data);
 
-        return response()->json(['success' => __('message.file.success.upload')]);
+        return response()->json(['message' => __('messages.file.success.upload')]);
     }
 }

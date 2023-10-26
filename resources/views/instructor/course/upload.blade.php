@@ -30,7 +30,12 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            Please wait for the files to upload
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">Please wait for the files to upload</div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" id="closeModal" data-bs-dismiss="modal">Close</button>

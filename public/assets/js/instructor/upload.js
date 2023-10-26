@@ -53,11 +53,13 @@ uploadBtn.addEventListener("click", async () => {
                 }
             });
 
-            await axios.put(baseUrl)
+            axios.put(baseUrl)
+            .then(function (response) {
+                $(".modal-body").text(response.data.message);
+                $(".btn-close").show();
+                $("#closeModal").show();
+            })
 
-            $(".modal-body").text("Upload files was successful!");
-            $(".btn-close").show();
-            $("#closeModal").show();
             $('#uploadS3').css('pointer-events', 'none');
             $('#uploadS3').css('opacity', '0.3');
             $('#btnFinish').css('pointer-events', 'auto');
