@@ -42,7 +42,7 @@ class CourseController extends Controller
         $courses->appends($request->validated());
 
         $categories = $this->categoryService->getAll(['id', 'name']);
-        
+
         return view('course.index', compact('courses', 'categories'));
     }
 
