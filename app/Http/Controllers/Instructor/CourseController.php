@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Instructor;
 
+use AmazonS3;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCourseRequest;
 use App\Services\CategoryService;
@@ -35,17 +36,57 @@ class CourseController extends Controller
         return view('instructor.course.create', compact('categories'));
     }
 
-    public function upload(): View
+    /**
+     * @param int $courseId
+     *
+     * @return View
+     */
+    public function upload($courseId): View
     {
-        return view('instructor.course.upload');
+        return view('instructor.course.upload', ['courseId' => $courseId]);
     }
 
     public function store(StoreCourseRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $data['instructor_id'] = auth()->id();
-        $this->courseService->create($data);
+        $course = $this->courseService->create($data);
+        $courseId = $course->id;
 
-        return redirect()->route('instructor.courses.upload');
+        return redirect()->route('instructor.courses.upload', ['courseId' => $courseId]);
+    }
+
+    /**
+     * Generate and return a pre-signed upload URL for a user's profile image.
+     * @param int $courseId
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getUploadUrl($courseId)
+    {
+        $userId = auth()->id();
+        $pathImage = "instructor/{$userId}/course_{$courseId}/poster.jpg";
+        $pathVideo = "instructor/{$userId}/course_{$courseId}/trailer.mp4";
+        // dd(AmazonS3::getPreSignedUploadUrl($pathImage));
+        return response()->json([
+            'urlImage' => AmazonS3::getPreSignedUploadUrl($pathImage),
+            'urlVideo' => AmazonS3::getPreSignedUploadUrl($pathVideo)]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * @param int $courseId
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateUrl($courseId)
+    {
+        $userId = auth()->id();
+        $data = [];
+        $data['poster_url'] = "instructor/{$userId}/course_{$courseId}/poster.jpg";
+        $data['trailer_url'] = "instructor/{$userId}/course_{$courseId}/trailer.mp4";
+        $this->courseService->update($courseId, $data);
+
+        return response()->json(['success' => 'Upload files were successful']);
     }
 }

@@ -84,4 +84,15 @@ class CourseService
     {
         return (bool) $this->enrollmentRepo->isEnrolled($userId, $courseId);
     }
+
+    /**
+     * @param int $courseId
+     * @param array $data
+     *
+     * @return bool
+     */
+    public function update($courseId, $data)
+    {
+        return $this->courseRepo->update($courseId, $data);
+    }
 }

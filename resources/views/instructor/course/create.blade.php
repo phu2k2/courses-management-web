@@ -5,7 +5,6 @@
 @endsection
 @section('script')
     <script type="module" src="{{ asset('assets/js/instructor/create.course.js') }}"></script>
-    <script src="{{ asset('assets/js/instructor/change.image.js') }}"></script>
 @endsection
 @section('content')
 <main id="main" class="main">

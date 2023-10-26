@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use AmazonS3;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -255,5 +256,23 @@ class Course extends Model
                 $query->orWhere('total_time', '>', self::VIDEO_DURATION_LONG);
             });
         });
+    }
+
+    /**
+     * avatar get from s3
+     * @return string
+     */
+    public function getPosterAttribute()
+    {
+        return AmazonS3::getObjectUrl($this->poster_url);
+    }
+
+    /**
+     * avatar get from s3
+     * @return string
+     */
+    public function getTrailerAttribute()
+    {
+        return AmazonS3::getObjectUrl($this->trailer_url);
     }
 }
