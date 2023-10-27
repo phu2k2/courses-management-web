@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Course;
-use App\Models\Enrollment;
 use App\Models\Lesson;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
@@ -30,33 +29,27 @@ class CheckUpdateLesson extends Command
      */
     public function handle()
     {
-        //Get lessons have create today and array id lesson
-        $lessons = Lesson::whereDate('created_at', now()->toDateString())->get();
-        $lessonIds = $lessons->pluck('id')->toArray();
+        // Lấy tất cả bài học mới được tạo (created_at = now) và danh sách người học
+        Lesson::whereDate('created_at', Carbon::now())
+            ->with(['topic.course.enrollments.user'])
+            ->chunk(100, function ($newLessonsAndEnrollments) {
+                foreach ($newLessonsAndEnrollments as $lesson) {
+                    // Lấy ra những user đăng kí khóa học
+                    $enrollments = $lesson->topic->course->enrollments ?? [];
+                    foreach ($enrollments as $enrollment) {
+                        // Lấy thông tin người học
+                        $user = $enrollment->user;
 
-        //Get course have lesson and array id course
-        $coursesWithNewLessons = Course::select('id', 'title')
-            ->with('topics.lessons')->whereHas('topics.lessons', function ($query) use ($lessonIds) {
-                $query->whereIn('id', $lessonIds);
-            })->get();
-        $coursesId = $coursesWithNewLessons->pluck('id')->toArray();
-
-        //get user and enrollment have course_id
-        $usersEnrollment = Enrollment::with('user:id,username,email')->whereIn('course_id', $coursesId)
-            ->orderBy('course_id')->get();
-
-        //send email for user have enrollment course
-        foreach ($usersEnrollment as $enrollment) {
-            $user = $enrollment->user;
-            $course = $coursesWithNewLessons->where('id', $enrollment->course_id)->first();
-            $topicIds = $course?->topics->pluck('id')->toArray();
-
-            $lesson = $lessons->whereIn('topic_id', $topicIds ?? [])->first();
-
-            Mail::send('mails.courses.create_lesson', ['user' => $user, 'course' => $course, 'lesson' => $lesson], function ($message) use ($user) {
-                $message->to($user?->email)
-                    ->subject('Course Update Notification');
+                        Mail::send(
+                            'mails.courses.create_lesson',
+                            ['user' => $user, 'course' => $lesson->topic?->course, 'lesson' => $lesson],
+                            function ($message) use ($user) {
+                                $message->to($user?->email)
+                                    ->subject('Course Update Notification');
+                            }
+                        );
+                    }
+                }
             });
-        }
     }
 }

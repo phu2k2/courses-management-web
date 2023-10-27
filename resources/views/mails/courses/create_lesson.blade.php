@@ -202,11 +202,11 @@
                                   <p>We are delighted to inform you that the course "{{ $course->title }}" you've enrolled in has been updated with a new lecture.</p>
                               
                                   <p>New Lecture Name: {{ $lesson->title }}</p>
-                                  <p>Lecture Duration: {{ $lesson->lesson_duration }}</p>
+                                  <p>Lecture Duration: {{ $lesson->lesson_duration }}h</p>
                               
                                   <p>Thank you for being a part of our course. Keep learning and growing!</p>
                               
-                                  <p>Best regards,</p>
+                                  <p>Best regards, SupremeMethod</p>
                                 </div>
                               </td>
                             </tr>
