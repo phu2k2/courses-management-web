@@ -20,11 +20,3 @@ ClassicEditor
     .catch(error => {
         console.error(error);
     });
-
-$(document).ready(function () {
-    $('#uploadS3').bind('click', function () {
-        $('#uploadS3').attr('aria-disabled', 'true');
-        $('#uploadS3').css('pointer-events', 'none');
-        $('#btnFinish').removeAttr('disabled');
-    })
-})
