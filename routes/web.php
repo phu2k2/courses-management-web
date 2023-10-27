@@ -48,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', function () {
                 return view('instructor.home');
             })->name('home');
-        
+
             Route::resource('courses', InstructorCourseController::class);
             Route::get('courses/create/upload-file/{courseId}', [InstructorCourseController::class, 'upload'])->name('courses.upload');
             Route::get('courses/create/getUploadUrl/{courseId}', [InstructorCourseController::class, 'getUploadUrl'])->name('courses.getUrl');
