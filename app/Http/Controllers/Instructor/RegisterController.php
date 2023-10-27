@@ -43,6 +43,7 @@ class RegisterController extends Controller
         $user = auth()->user();
         $userId = $user->id;
         $email = $user->email;
+        $userName = $user->username;
 
         $expireTime = 30;
         $lastEmailSentTime = $request->session()->get('last_email_sent_time');
@@ -56,7 +57,7 @@ class RegisterController extends Controller
             ['id' => $userId]
         );
 
-        Mail::send("email.register", ['confirmationUrl' => $confirmationUrl], function ($message) use ($email) {
+        Mail::send("email.register", ['confirmationUrl' => $confirmationUrl, 'username' => $userName], function ($message) use ($email) {
             $message->to($email);
             $message->subject('Instructor Registration');
         });
