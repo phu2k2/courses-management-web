@@ -38,6 +38,16 @@ return [
             'delete' => 'Removing course from cart failed'
         ]
     ],
+    'password' => [
+        'success' => [
+            'forgot_password' => 'A reset link has been sent !',
+            'reset_password' => 'Reset Password Successfully!'
+        ],
+        'error' => [
+            'forgot_password' => 'Already sent the link to your email !',
+            'reset_password' => 'Error token !'
+        ]
+    ],
     'review' => [
         'success' => [
             'create' => 'Add review successfull!',
@@ -46,10 +56,15 @@ return [
             'create' => 'Failed to add review!'
         ],
     ],
+    'instructor' => [
+        'error' => [
+            'request' => 'Wait for 1 minutes to send again!'
+        ],
+    ],
     'checkout' => [
         'error' => [
             'save' => 'Please choose at least one course'
-        ]
+        ],
     ],
     'order' => [
         'error' => [
