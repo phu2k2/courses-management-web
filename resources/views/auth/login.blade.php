@@ -72,7 +72,8 @@
                                                 </div>
 
                                                 <div class="ms-auto">
-                                                    <a class="text-gray-800" href="">{{ __('forgot') }}</a>
+                                                    <a class="text-gray-800"
+                                                        href="{{ route('password.request') }}">{{ __('forgot') }}</a>
                                                 </div>
                                             </div>
 

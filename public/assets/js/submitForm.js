@@ -71,7 +71,7 @@ function deleteComment(id, parentId)
         })
         .catch(function (error) {
             $(".messageNotice").html(error.message);
-                $(".toast-error").show();
+            $(".toast-error").show();
             setTimeout(() => {
                 $(".notification-toast").hide();
             }, 3000);

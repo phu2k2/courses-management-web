@@ -12,3 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
         $(".notification-toast").hide();
     }, 3000);
 });
+setTimeout(() => {
+    $(".notification-toast").hide();
+}, 2000);
