@@ -38,6 +38,16 @@ return [
             'delete' => 'Removing course from cart failed'
         ]
     ],
+    'password' => [
+        'success' => [
+            'forgot_password' => 'A reset link has been sent !',
+            'reset_password' => 'Reset Password Successfully!'
+        ],
+        'error' => [
+            'forgot_password' => 'Already sent the link to your email !',
+            'reset_password' => 'Error token !'
+        ]
+    ],
     'review' => [
         'success' => [
             'create' => 'Add review successfull!',
@@ -59,11 +69,11 @@ return [
     'checkout' => [
         'error' => [
             'save' => 'Please choose at least one course'
-        ]
+        ],
     ],
     'order' => [
         'error' => [
             'create_order' => 'The course has been purchased'
-        ]
+        ],
     ]
 ];
