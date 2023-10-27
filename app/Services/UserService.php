@@ -51,4 +51,14 @@ class UserService
     {
         return $this->userRepository->update($userId, $data);
     }
+
+    /**
+     * @param string $email
+     * @param string $password
+     * @return int|bool
+     */
+    public function updatePassword($email, $password)
+    {
+        return $this->userRepository->updatePassword($email, Hash::make($password));
+    }
 }
