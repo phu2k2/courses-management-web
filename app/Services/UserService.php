@@ -83,10 +83,10 @@ class UserService
         return false;
     }
 
-    /*
+    /**
      * @param string $email
      * @param string $password
-     * @return int|bool
+     * @return bool|int
      */
     public function updatePassword($email, $password)
     {
