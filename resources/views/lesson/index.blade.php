@@ -22,10 +22,27 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="cancelDelete" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" id="submitDelete" class="btn btn-primary">Delete</button>
+                    <button type="submit" id="submitDelete" class="btn btn-alizarin">Delete</button>
                 </div>
             </div>
         </div>
+    </div>
+    <!-- Notification-->
+    <div class="notification-toast toast-success" style="display: none">
+        <div>
+            <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
+            <span class="alert-text"><strong class="me-2">{{ __('success') }}</strong><br></span>
+        </div>
+        <div><span class="messageNotice"></span></div>
+        <button type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+    <div class="notification-toast toast-error" style="display: none">
+        <div>
+            <span class="alert-icon"><i class="fa-solid fa-circle-exclamation"></i></i></span>
+            <span class="alert-text"><strong class="me-2">{{ __('error') }}</strong><br></span>
+        </div>
+        <div><span class="messageNotice"></span></div>
+        <button type="button" class="btn-close" aria-label="Close"></button>
     </div>
 @endsection
 @section('content')
@@ -70,14 +87,6 @@
                     </span>
                 </a>
                 <h3 class="text-white mb-6">Comment</h3>
-                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <i class="fa-solid fa-bell me-2"></i>
-                        <strong class="me-auto">Notification</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">Toast</div>
-                </div>
                 <ul class="list-unstyled pt-2">
                     @foreach ($comments as $comment)
                         @if (empty($comment->parent_id))
@@ -121,7 +130,7 @@
                                                                 @method('DELETE')
                                                                 <input type="hidden" name="id" value="{{ $comment->id }}">
                                                                 <a class="dropdown-link text-alizarin" id="commentId"
-                                                                    data-id="{{ $comment->id }}" href="javascript:void(0)" onclick="deleteComment({{ $comment->id }})"
+                                                                    data-id="{{ $comment->id }}" href="javascript:void(0)" onclick="deleteComment({{ $comment->id }}, null)"
                                                                     data-bs-toggle="modal" data-bs-target="#commentModal">
                                                                     Delete
                                                                 </a>
@@ -176,7 +185,7 @@
                                                 <span class="show-reply {{ $comment->id }}"
                                                     data-parentId="{{ $comment->id }}">
                                                     <i class="fa-solid fa-chevron-down"></i>
-                                                    Show {{ $comments->where('parent_id', $comment->id)->count() }} replys
+                                                    Show <span id="count{{ $comment->id }}">{{ $comments->where('parent_id', $comment->id)->count() }}</span> replys
                                                 </span>
                                             </a>
                                         @endif
@@ -229,7 +238,7 @@
                                                                                 <a class="dropdown-link text-alizarin"
                                                                                     id="commentId"
                                                                                     data-id="{{ $childComment->id }}"
-                                                                                    href="javascript:void(0)" onclick="deleteComment({{ $childComment->id }})"
+                                                                                    href="javascript:void(0)" onclick="deleteComment({{ $childComment->id }}, {{ $comment->id }})"
                                                                                     data-bs-toggle="modal"
                                                                                     data-bs-target="#commentModal">
                                                                                     Delete

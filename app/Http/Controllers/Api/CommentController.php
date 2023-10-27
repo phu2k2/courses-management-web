@@ -29,10 +29,10 @@ class CommentController extends Controller
     public function update(UpdateCommentRequest $request, int $commentId)
     {
         if ($this->commentService->update($commentId, (int) auth()->id(), $request->content)) {
-            return response()->json(['message' =>  __('messages.comment.success.update')], 200);
+            return response()->json(['message' =>  __('messages.comment.success.update'), 'code' => 200], 200);
         }
 
-        return response()->json(['message' =>  __('messages.comment.error.update')], 400);
+        return response()->json(['message' =>  __('messages.comment.error.update'), 'code' => 400], 400);
     }
 
     /**
@@ -45,9 +45,9 @@ class CommentController extends Controller
     public function destroy(DeleteCommentRequest $request, int $id)
     {
         if ($this->commentService->delete($id, (int) auth()->id())) {
-            return response()->json(['message' =>  __('messages.comment.success.delete')], 200);
+            return response()->json(['message' =>  __('messages.comment.success.delete'), 'code' => 200], 200);
         }
 
-        return response()->json(['message' =>  __('messages.comment.error.delete')], 400);
+        return response()->json(['message' =>  __('messages.comment.error.delete'), 'code' => 400], 400);
     }
 }
