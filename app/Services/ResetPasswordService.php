@@ -40,23 +40,12 @@ class ResetPasswordService
     /**
      * Delete a record based on email or token.
      *
-     * @param string $field The field to search ('email' or 'token').
-     * @param string $value The value to search for.
+     * @param string $email
      * @return int|bool True if the deletion was successful, false otherwise.
      */
-    public function deleteByField($field, $value)
+    public function deleteByEmail($email)
     {
-        return $this->resetPasswordRepo->deleteByField($field, $value);
-    }
-
-    /**
-     * @param string $email
-     * @param string $token
-     * @return mixed
-     */
-    public function isValidToken($token, $email)
-    {
-        return $this->resetPasswordRepo->isValidToken($token, $email);
+        return $this->resetPasswordRepo->deleteByEmail($email);
     }
 
     /**
