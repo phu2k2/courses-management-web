@@ -48,9 +48,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', function () {
                 return view('instructor.home');
             })->name('home');
-
+        
             Route::resource('courses', InstructorCourseController::class);
-            Route::get('courses/create/upload-file', [InstructorCourseController::class, 'upload'])->name('courses.upload');
+            Route::get('courses/create/upload-file/{courseId}', [InstructorCourseController::class, 'upload'])->name('courses.upload');
+            Route::get('courses/create/getUploadUrl/{courseId}', [InstructorCourseController::class, 'getUploadUrl'])->name('courses.getUrl');
+            Route::put('courses/create/updateUrl/{courseId}', [InstructorCourseController::class, 'updateUrl'])->name('courses.updateUrl');
         });
     });
 
@@ -83,17 +85,6 @@ Route::resource('courses', CourseController::class)->only(['index', 'show']);
 Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
 
 Route::resource('orders', OrderController::class)->only(['index', 'store']);
-
-Route::prefix('instructor')->name('instructor.')->group(function () {
-    Route::get('/', function () {
-        return view('instructor.home');
-    })->name('home');
-
-    Route::resource('courses', InstructorCourseController::class);
-    Route::get('courses/create/upload-file/{courseId}', [InstructorCourseController::class, 'upload'])->name('courses.upload');
-    Route::get('courses/create/getUploadUrl/{courseId}', [InstructorCourseController::class, 'getUploadUrl'])->name('courses.getUrl');
-    Route::put('courses/create/updateUrl/{courseId}', [InstructorCourseController::class, 'updateUrl'])->name('courses.updateUrl');
-});
 
 Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show')->middleware('verifyUserAccessCourse');
