@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserRoleEnum;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Instructor
 {
-    protected const INSTRUCTOR = 2;
     /**
      * Handle an incoming request.
      *
@@ -18,7 +18,7 @@ class Instructor
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-        if ($user && $user->role_id >= self::INSTRUCTOR) {
+        if ($user && $user->role_id >= UserRoleEnum::Instructor) {
             return $next($request);
         }
 

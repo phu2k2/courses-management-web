@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserRoleEnum;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Admin
 {
-    protected const ADMIN = 3;
     /**
      * Handle an incoming request.
      *
@@ -18,7 +18,7 @@ class Admin
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-        if ($user && $user->role_id == self::ADMIN) {
+        if ($user && $user->role_id == UserRoleEnum::Admin) {
             return $next($request);
         }
 
