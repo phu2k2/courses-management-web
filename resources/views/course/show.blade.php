@@ -436,14 +436,14 @@
                             @foreach ($reviews as $review)
                                 <li class="media d-flex">
                                     <div class="avatar avatar-xxl me-3 me-md-6 flex-shrink-0">
-                                        <img src="{{ $review->user->profile?->avatar }}" alt="..."
+                                        <img src="{{ $review->user->profile->avatar }}" alt="..."
                                             class="avatar-img rounded-circle">
                                     </div>
                                     <div class="media-body flex-grow-1">
                                         <div class="d-md-flex align-items-center mb-5">
                                             <div class="me-auto mb-4 mb-md-0">
                                                 <h5 class="mb-0">
-                                                    {{ $review->user->profile?->full_name }}
+                                                    {{ $review->user->profile->full_name }}
                                                     <span
                                                         class="font-size-sm text-blue">{{ '@' . $review->user->username }}</span>
                                                 </h5>
@@ -520,6 +520,7 @@
                                         <button type="submit" class="btn btn-primary btn-block mw-md-300p">SUBMIT
                                             REVIEW</button>
                                     </form>
+                                </div>
                             @endif
                         @endauth
 
@@ -579,12 +580,14 @@
                             <span class="ms-2">2 days left at this price!</span>
                         </div>
 
+                        @if ($enrolled == false)
                         <button class="btn btn-primary btn-block mb-3" type="button" name="button">BUY NOW</button>
                         <form action="{{ route('carts.store') }}" method="POST">
                             @csrf
                             <input type = "hidden" name="course_id" value = "{{ $course->id }}">
                             <button class="btn btn-orange btn-block mb-6" type="submit" name="button">ADD TO CART</button>
                         </form>
+                        @endif
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex align-items-center py-3">
                                 <div class="text-secondary d-flex icon-uxs">
@@ -717,75 +720,10 @@
                         </ul>
                     </div>
                 </div>
-
-                <div class="d-none">
-                    <div class="border rounded px-6 px-lg-5 px-xl-6 pt-5 shadow">
-                        <h3 class="mb-5">Latest Courses</h3>
-                        <ul class="list-unstyled mb-0">
-                            <li class="media mb-6 d-flex">
-                                <a href="course-single-v5.html" class="w-100p d-block me-5">
-                                    <img src="{{ asset('assets/img/photos/photo-1.jpg') }}" alt="..."
-                                        class="avatar-img rounded-lg h-90p w-100p">
-                                </a>
-                                <div class="media-body flex-grow-1">
-                                    <a href="course-single-v5.html" class="d-block">
-                                        <h6 class="line-clamp-2 mb-3">Web Developtment and Design</h6>
-                                    </a>
-                                    <del class="font-size-sm me-2">$959</del>
-                                    <ins class="h6 mb-0 ">$415.99</ins>
-                                </div>
-                            </li>
-
-                            <li class="media mb-6 d-flex">
-                                <a href="course-single-v5.html" class="w-100p d-block me-5">
-                                    <img src="{{ asset('assets/img/photos/photo-2.jpg') }}" alt="..."
-                                        class="avatar-img rounded-lg h-90p w-100p">
-                                </a>
-                                <div class="media-body flex-grow-1">
-                                    <a href="course-single-v5.html" class="d-block">
-                                        <h6 class="line-clamp-2 mb-3">The Complete Cyber Security Course : Hackers </h6>
-                                    </a>
-                                    <del class="font-size-sm me-2">$959</del>
-                                    <ins class="h6 mb-0 ">$415.99</ins>
-                                </div>
-                            </li>
-
-                            <li class="media mb-6 d-flex">
-                                <a href="course-single-v5.html" class="w-100p d-block me-5">
-                                    <img src="{{ asset('assets/img/photos/photo-14.jpg') }} " alt="..."
-                                        class="avatar-img rounded-lg h-90p w-100p">
-                                </a>
-                                <div class="media-body flex-grow-1">
-                                    <a href="course-single-v5.html" class="d-block">
-                                        <h6 class="line-clamp-2 mb-3">Fashion Photography From Professional</h6>
-                                    </a>
-                                    <del class="font-size-sm me-2">$959</del>
-                                    <ins class="h6 mb-0 ">$415.99</ins>
-                                </div>
-                            </li>
-
-                            <li class="media mb-6 d-flex">
-                                <a href="course-single-v5.html" class="w-100p d-block me-5">
-                                    <img src="{{ asset('assets/img/photos/photo-16.jpg') }}" alt="..."
-                                        class="avatar-img rounded-lg h-90p w-100p">
-                                </a>
-                                <div class="media-body flex-grow-1">
-                                    <a href="course-single-v5.html" class="d-block">
-                                        <h6 class="line-clamp-2 mb-3">The Complete Financial Analyst Course 2020</h6>
-                                    </a>
-                                    <del class="font-size-sm me-2">$959</del>
-                                    <ins class="h6 mb-0 ">$415.99</ins>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
 
     {{-- RECOMMEND --}}
     @include('common.recommend')
-    </div>
 @endsection

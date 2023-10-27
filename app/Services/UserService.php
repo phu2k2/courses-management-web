@@ -24,14 +24,14 @@ class UserService
     /**
      * @param array $request
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function create(array $request)
     {
         $attribute = Arr::except($request, ['password', 'username']);
         $attribute['username'] = strtolower($request['username']);
         $attribute['password'] = Hash::make($request['password']);
-        $this->userRepository->create($attribute);
+        return $this->userRepository->create($attribute);
     }
 
     /**

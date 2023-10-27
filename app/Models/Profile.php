@@ -21,6 +21,10 @@ class Profile extends Model
         'description'
     ];
 
+    protected $attributes = [
+        'avatar' => 'avatar/default.jpg',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\User, \App\Models\Profile>
      */
