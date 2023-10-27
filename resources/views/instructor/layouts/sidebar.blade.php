@@ -17,7 +17,7 @@
              <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="forms-layouts.html">
-                        <i class="bi bi-book"></i><span>Courses</span>
+                        <i class="bi bi-book"></i><span>Courses(To do)</span>
                     </a>
                 </li>
              </ul>
@@ -28,7 +28,7 @@
          <li class="nav-item">
              <a class="nav-link collapsed" href="">
                  <i class="bi bi-person"></i>
-                 <span>Profile</span>
+                 <span>Profile(To do)</span>
              </a>
          </li><!-- End Profile Page Nav -->
 

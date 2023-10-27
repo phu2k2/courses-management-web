@@ -10,13 +10,13 @@
             </a>
             <a class="list-group-item list-group-item-action px-3" data-toggle="list" href="#"
                 role="tab">
-                Password
+                Password(To do)
             </a>
             <a class="list-group-item list-group-item-action px-3" data-toggle="list" href="#" role="tab">
-                Privacy and safety
+                Privacy and safety(To do)
             </a>
             <a class="list-group-item list-group-item-action px-3" data-toggle="list" href="#" role="tab">
-                Delete account
+                Delete account(To do)
             </a>
         </div>
     </div>
