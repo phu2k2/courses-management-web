@@ -40,8 +40,8 @@ class Course extends Model
     ];
 
     protected $attributes = [
-        'trailer_url' => 'null',
-        'poster_url' => 'null',
+        'trailer_url' => '',
+        'poster_url' => '',
         'average_rating' => 0,
         'num_reviews' => 0,
         'total_students' => 0,
@@ -260,19 +260,23 @@ class Course extends Model
 
     /**
      * poster get from s3
+     * @param string $value
+     *
      * @return string
      */
-    public function getPosterAttribute()
+    public function getPosterUrlAttribute($value)
     {
-        return AmazonS3::getObjectUrl($this->poster_url);
+        return AmazonS3::getObjectUrl($value);
     }
 
     /**
      * trailer get from s3
+     * @param string $value
+     *
      * @return string
      */
-    public function getTrailerAttribute()
+    public function getTrailerUrlAttribute($value)
     {
-        return AmazonS3::getObjectUrl($this->trailer_url);
+        return AmazonS3::getObjectUrl($value);
     }
 }

@@ -109,7 +109,7 @@
                         </a>
 
                         <div class="rounded mb-8">
-                            <iframe width="750" height="470" src="{{ $course->trailer }}"
+                            <iframe width="750" height="470" src="{{ $course->trailer_url }}"
                                 title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen></iframe>
@@ -543,7 +543,7 @@
                             </svg>
 
                         </div>
-                        <img class="rounded shadow-light-lg" src="{{ $course->poster }}" alt="...">
+                        <img class="rounded shadow-light-lg" src="{{ $course->poster_url }}" alt="...">
                     </a>
 
                     <div class="pt-5 pb-4 px-5 px-lg-3 px-xl-5">

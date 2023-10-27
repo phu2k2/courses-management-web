@@ -46,6 +46,11 @@ class CourseController extends Controller
         return view('instructor.course.upload', ['courseId' => $courseId]);
     }
 
+    /**
+     * @param StoreCourseRequest $request
+     *
+     * @return RedirectResponse
+     */
     public function store(StoreCourseRequest $request): RedirectResponse
     {
         $data = $request->validated();
