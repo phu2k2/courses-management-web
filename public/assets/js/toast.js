@@ -7,8 +7,4 @@ document.addEventListener('DOMContentLoaded', function() {
             notification.style.display = 'none';
         });
     });
-
-    setTimeout(() => {
-        $(".notification-toast").hide();
-    }, 3000);
 });
