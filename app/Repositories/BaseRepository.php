@@ -80,6 +80,17 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
+     * Create a new record in the database with the given attributes.
+     *
+     * @param array $attributes The attributes to populate the new record.
+     * @return \Illuminate\Database\Eloquent\Model|bool The created model instance.
+     */
+    public function insertMultiple($attributes = [])
+    {
+        return $this->model->insert($attributes);
+    }
+
+    /**
      * Update a record by its primary key.
      *
      * @param int $id The primary key value.

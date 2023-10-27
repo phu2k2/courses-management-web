@@ -23,8 +23,14 @@ interface CourseRepositoryInterface extends RepositoryInterface
      * @param string $dateFormat
      * @param int $instructorId
      * @param int $courseId
-     * 
+     *
      * @return Collection
      */
     public function getCourseRevenueStatistics($startDate, $endDate, $dateFormat, $instructorId, $courseId): Collection;
+
+    /**
+     * @param array $courseIds
+     * @return int
+     */
+    public function addStudentInCourse($courseIds);
 }

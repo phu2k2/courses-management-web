@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class CourseRepository extends BaseRepository implements CourseRepositoryInterface
 {
@@ -29,27 +30,27 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     public function getCourses($request): LengthAwarePaginator
     {
         $courses = Course::with('category')
-        ->when($request->filled('search'), function ($query) use ($request) {
-            $query->filterBySearchTerm($request->input('search'));
-        })
-        ->when($request->filled('category'), function ($query) use ($request) {
-            $query->filterByCategory($request->input('category'));
-        })
-        ->when($request->filled('rating'), function ($query) use ($request) {
-            $query->filterByRating($request->input('rating'));
-        })
-        ->when($request->filled('language'), function ($query) use ($request) {
-            $query->filterByLanguage($request->input('language'));
-        })
-        ->when($request->filled('level'), function ($query) use ($request) {
-            $query->filterByLevel($request->input('level'));
-        })
-        ->when($request->filled('price'), function ($query) use ($request) {
-            $query->filterByPrice($request->input('price'));
-        })
-        ->when($request->filled('duration'), function ($query) use ($request) {
-            $query->filterByDuration($request->input('duration'));
-        });
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->filterBySearchTerm($request->input('search'));
+            })
+            ->when($request->filled('category'), function ($query) use ($request) {
+                $query->filterByCategory($request->input('category'));
+            })
+            ->when($request->filled('rating'), function ($query) use ($request) {
+                $query->filterByRating($request->input('rating'));
+            })
+            ->when($request->filled('language'), function ($query) use ($request) {
+                $query->filterByLanguage($request->input('language'));
+            })
+            ->when($request->filled('level'), function ($query) use ($request) {
+                $query->filterByLevel($request->input('level'));
+            })
+            ->when($request->filled('price'), function ($query) use ($request) {
+                $query->filterByPrice($request->input('price'));
+            })
+            ->when($request->filled('duration'), function ($query) use ($request) {
+                $query->filterByDuration($request->input('duration'));
+            });
 
         if ($request->filled('sort')) {
             list($sortField, $sortType) = explode(':', $request->input('sort'));
@@ -78,7 +79,7 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      * @param string $dateFormat
      * @param int $instructorId
      * @param int $courseId
-     * 
+     *
      * @return Collection
      */
     public function getCourseRevenueStatistics($startDate, $endDate, $dateFormat, $instructorId, $courseId): Collection
@@ -98,5 +99,14 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
             ->groupBy('date_order')
             ->addBinding($dateFormat, 'select')
             ->get();
+    }
+
+    /**
+     * @param array $courseIds
+     * @return int
+     */
+    public function addStudentInCourse($courseIds)
+    {
+        return $this->model->whereIn('id', $courseIds)->increment('total_students');
     }
 }

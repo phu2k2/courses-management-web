@@ -69,7 +69,6 @@
                         </span>
                     </span>
                 </a>
-
                 <h3 class="text-white mb-6">Comment</h3>
                 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
@@ -85,14 +84,14 @@
                             <div class="row-cols-md-12 mb-6">
                                 <li class="media d-flex">
                                     <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
-                                        <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
+                                        <img src="{{ $comment->user->profile->avatar }}" alt="..."
                                             class="avatar-img rounded-circle">
                                     </div>
                                     <div class="media-body flex-grow-1">
                                         <div class="d-md-flex align-items-center mb-1">
                                             <div class="me-auto mb-4 mb-md-0">
                                                 <h5 class="text-white mb-1 fw-semi-bold">
-                                                    {{ $comment->user->profile?->full_name }}
+                                                    {{ $comment->user->profile->full_name }}
                                                     <span
                                                         class="font-size-sm text-blue">{{ '@' . $comment->user->username }}</span>
                                                 </h5>
@@ -161,10 +160,13 @@
                                         @auth
                                             <div class="reply-comment {{ $comment->id }}">
                                                 <div class="bg-portgore rounded p-1 p-md-4 mb-4">
-                                                    <form action="" method="POST">
-                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" id="content" name="content" rows="3"
+                                                    <form action="{{ route('comments.store') }}" method="POST">
+                                                        @csrf
+                                                        <input name="lesson_id" type="hidden" value="{{ $lesson->id }}">
+                                                        <input name="parent_id" type="hidden" value="{{ $comment->id }}">
+                                                        <textarea class="form-control placeholder-1 bg-dark border-0 mb-4" name="content" rows="3"
                                                             placeholder="Add you comment" data-parentId="{{ $comment->id }}"></textarea>
-                                                        <button type="submit"
+                                                        <button type="submit" id="submit-child"
                                                             class="btn btn-orange btn-block mw-md-300p">SUBMIT</button>
                                                     </form>
                                                 </div>
@@ -187,14 +189,14 @@
                                             @if ($childComment->parent_id == $comment->id)
                                                 <li class="d-flex">
                                                     <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
-                                                        <img src="{{ asset('assets/img/products/product-2.jpg') }}"
+                                                        <img src="{{ $childComment->user->profile->avatar }}"
                                                             alt="..." class="avatar-img rounded-circle">
                                                     </div>
                                                     <div class="media-body flex-grow-1">
                                                         <div class="d-md-flex align-items-center mb-1">
                                                             <div class="me-auto mb-4 mb-md-0">
                                                                 <h5 class="text-white mb-1 fw-semi-bold">
-                                                                    {{ $childComment->user->profile?->full_name }}
+                                                                    {{ $childComment->user->profile->full_name }}
                                                                     <span
                                                                         class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span>
                                                                 </h5>
@@ -283,10 +285,12 @@
                 <div class="bg-portgore rounded p-6 p-md-9 mb-8">
                     <h3 class="text-white mb-2">Add Comment</h3>
                     <div class="">What is it like to Lesson?</div>
-                    <form>
+                    <form action="{{ route('comments.store') }}" method="POST">
+                        @csrf
+                        <input name="lesson_id" type="hidden" value="{{ $lesson->id }}">
                         <div class="form-group mb-6">
-                            <label class="text-white" for="content">Content</label>
-                            <textarea class="form-control placeholder-1 bg-dark border-0" id="content" name="content" rows="5"
+                            <label id="label_content" class="text-white" for="content">Content</label>
+                            <textarea class="form-control placeholder-1 bg-dark border-0" id="content-text" name="content" rows="5"
                                 placeholder="Content"></textarea>
                         </div>
 
