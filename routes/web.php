@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
         Route::get('my-courses', [CourseController::class, 'getMyCourses'])->name('my-courses');
     });
-    Route::resource('comments', CommentController::class)->only(['store', 'destroy']);
+    Route::resource('comments', CommentController::class)->only(['store']);
     Route::resource('reviews', ReviewController::class)->only(['store']);
     Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
     Route::delete('carts/delete-cart', [CartController::class, 'deleteMutilCarts'])->name('carts.delete-cart');

@@ -23,7 +23,7 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lesson_id' => ['required', 'int', Rule::exists('lessons', 'lesson_id')],
+            'lesson_id' => ['required', 'int', Rule::exists('lessons', 'id')],
             'parent_id' => ['nullable', 'int', Rule::exists('comments', 'id')],
             'content' => ['bail', 'required', 'string', 'max:500'],
         ];
