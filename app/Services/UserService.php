@@ -82,7 +82,7 @@ class UserService
 
         return false;
     }
-    
+
     /*
      * @param string $email
      * @param string $password
