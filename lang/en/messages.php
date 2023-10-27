@@ -54,5 +54,10 @@ return [
         'error' => [
             'create' => 'Failed to add review!'
         ],
+    ],
+    'instructor' => [
+        'error' => [
+            'request' => 'Wait for 1 minutes to send again!'
+        ],
     ]
 ];

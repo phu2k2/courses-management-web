@@ -26,7 +26,6 @@ class ForgotPasswordController extends Controller
     {
         $this->userService = $userService;
         $this->resetPasswordService = $resetPasswordService;
-        $this->middleware('throttle:1,1')->only('submitForgetPasswordForm');
     }
 
     /**
@@ -43,6 +42,13 @@ class ForgotPasswordController extends Controller
      */
     public function submitForgetPasswordForm(ForgotPasswordRequest $request)
     {
+        $expireTime = 60;
+        $lastEmailSentTime = $request->session()->get('last_email_sent_time');
+
+        if ($lastEmailSentTime && now()->diffInSeconds($lastEmailSentTime) < $expireTime) {
+            return redirect()->back()->with("error", __('messages.instructor.error.request'));
+        }
+
         $email = $request->input('email');
 
         /**
@@ -68,6 +74,8 @@ class ForgotPasswordController extends Controller
             $message->to($email);
             $message->subject("Reset Password");
         });
+
+        $request->session()->put('last_email_sent_time', now());
 
         return redirect()->back()->with('message', __('messages.password.success.forgot_password'));
     }
