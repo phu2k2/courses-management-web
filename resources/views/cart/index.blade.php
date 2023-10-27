@@ -25,7 +25,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
                             data-bs-dismiss="modal">{{ __('cancel') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('delete') }}</button>
+                        <button type="submit" class="btn btn-alizarin">{{ __('delete') }}</button>
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@
                                                             <td class="product-remove">
                                                                 <a data-bs-toggle="modal"
                                                                     data-bs-target="#confirmDeleteModal{{ $item->id }}"
-                                                                    class="btn btn-danger"
+                                                                    class="btn btn-alizarin"
                                                                     style="padding: 0.7rem 1.5rem">Delete</a>
                                                             </td>
 
@@ -148,8 +148,8 @@
                                                     @endforeach
                                                     <tr>
                                                         <td colspan="5" class="actions">
-                                                            <input class="button" data-bs-toggle="modal"
-                                                                data-bs-target="#exampleModal" value="Delete cart"
+                                                            <input class="button" id="deleteSelected" data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModal" value="Delete selected"
                                                                 onclick="handleDeleteButtonClick()">
                                                         </td>
                                                     </tr>
@@ -205,7 +205,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger"
+                        <button type="button" class="btn btn-alizarin"
                             onclick="deleteItem({{ $item->id }}, '{{ csrf_token() }}')">Delete</button>
                     </div>
                 </div>

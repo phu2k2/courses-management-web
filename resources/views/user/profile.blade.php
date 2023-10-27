@@ -3,8 +3,30 @@
 @section('title', 'Edit frofile')
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/css/account.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
+@endsection
+@section('script')
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
 @endsection
 @section('content')
+    <!-- Notification-->
+    <div class="notification-toast toast-success" style="display: none">
+        <div>
+            <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
+            <span class="alert-text"><strong class="me-2">{{ __('success') }}</strong><br></span>
+        </div>
+        <div><span class="messageNotice"></span></div>
+        <button type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+    <div class="notification-toast toast-error" style="display: none">
+        <div>
+            <span class="alert-icon"><i class="fa-solid fa-circle-exclamation"></i></i></span>
+            <span class="alert-text"><strong class="me-2">{{ __('error') }}</strong><br></span>
+        </div>
+        <div><span class="messageNotice"></span></div>
+        <button type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+
     <div class="container py-4 bg-white-ice">
         <div class="row">
             @include('user.sidebar')
@@ -140,12 +162,24 @@
 
                     //save path image to database
                     const responseUpdate = await axios.put("{{ route('users.updateImage') }}");
-                    alert(responseUpdate.data.success);
+                    $(".messageNotice").html("Update image successful");
+                    $(".toast-success").show();
+                    setTimeout(() => {
+                        $(".notification-toast").hide();
+                    }, 3000);
                 } catch (error) {
-                    alert('Error uploading image');
+                    $(".messageNotice").html("Error uploading image");
+                    $(".toast-error").show();
+                    setTimeout(() => {
+                        $(".notification-toast").hide();
+                    }, 3000);
                 }
             } else {
-                alert('You have not selected a file')
+                $(".messageNotice").html("You have not selected a file");
+                $(".toast-error").show();
+                setTimeout(() => {
+                    $(".notification-toast").hide();
+                }, 3000);
             }
         });
     </script>
