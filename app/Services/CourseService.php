@@ -58,6 +58,16 @@ class CourseService
     }
 
     /**
+     * @param array $data
+     *
+     * @return Model
+     */
+    public function create($data)
+    {
+        return $this->courseRepo->create($data);
+    }
+
+    /**
      * @param int $userId
      * @return LengthAwarePaginator<Enrollment>
      */
@@ -111,5 +121,16 @@ class CourseService
         $type = $request->input('type');
 
         return $this->courseRepo->totalStudentsByTime($instructorId, $courseId, $startDate, $endDate, $this->getSelectExpression($type));
+    }
+
+    /**
+     * @param int $courseId
+     * @param array $data
+     *
+     * @return bool
+     */
+    public function update($courseId, $data)
+    {
+        return $this->courseRepo->update($courseId, $data);
     }
 }

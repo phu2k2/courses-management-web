@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Interfaces\CartRepositoryInterface;
+use App\Repositories\Interfaces\CourseRepositoryInterface;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use Exception;
@@ -26,14 +27,21 @@ class OrderService
      */
     protected $enrollmentRepo;
 
+    /**
+     * @var CourseRepositoryInterface
+     */
+    protected $courseRepo;
+
     public function __construct(
         OrderRepositoryInterface $orderRepo,
         CartRepositoryInterface $cartRepo,
-        EnrollmentRepositoryInterface $enrollmentRepo
+        EnrollmentRepositoryInterface $enrollmentRepo,
+        CourseRepositoryInterface $courseRepo
     ) {
         $this->orderRepo = $orderRepo;
         $this->cartRepo = $cartRepo;
         $this->enrollmentRepo = $enrollmentRepo;
+        $this->courseRepo = $courseRepo;
     }
 
     /**
@@ -52,11 +60,14 @@ class OrderService
         $cartId = [];
         $dataOrder = [];
         $dataEnroll = [];
+        $courseIds = [];
 
         try {
             foreach ($carts as $item) {
                 $cartId[] = $item->id;
                 $courseId = $item->course->id;
+                $courseIds = $item->course->id;
+
                 $dataOrder = [
                     'user_id' => $userId,
                     'course_id' => $courseId,
@@ -77,9 +88,10 @@ class OrderService
                 ];
             }
 
+            $this->courseRepo->addStudentInCourse($courseIds);
             $this->orderRepo->insertMultiple($dataOrder);
-            $this->deleteCarts($cartId, $userId);
             $this->enrollmentRepo->insertMultiple($dataEnroll);
+            $this->deleteCarts($cartId, $userId);
 
             DB::commit();
         } catch (Exception $e) {

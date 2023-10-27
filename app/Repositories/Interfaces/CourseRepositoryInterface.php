@@ -27,4 +27,10 @@ interface CourseRepositoryInterface extends RepositoryInterface
      * @return Collection
      */
     public function totalStudentsByTime($instructorId, $courseId, $startDate, $endDate, $type): Collection;
+
+    /**
+     * @param array $courseIds
+     * @return int
+     */
+    public function addStudentInCourse($courseIds);
 }

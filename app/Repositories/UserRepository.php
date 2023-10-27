@@ -25,4 +25,14 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return $this->model->with('profile')->find($userId);
     }
+
+    /**
+     * @param string $email
+     * @param string $password
+     * @return int|bool
+     */
+    public function updatePassword($email, $password)
+    {
+        return $this->model->where("email", $email)->update(["password" => $password]);
+    }
 }

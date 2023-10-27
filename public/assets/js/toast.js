@@ -8,3 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+setTimeout(() => {
+    $(".notification-toast").hide();
+}, 3000);

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Models\User;
+use App\Services\ProfileService;
 use App\Services\UserService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -14,9 +16,15 @@ class RegisterController extends Controller
      */
     protected $userService;
 
-    public function __construct(UserService $userService)
+    /**
+     * @var ProfileService
+     */
+    protected $profileService;
+
+    public function __construct(UserService $userService, ProfileService $profileService)
     {
         $this->userService = $userService;
+        $this->profileService = $profileService;
     }
 
     public function show(): View
@@ -26,7 +34,11 @@ class RegisterController extends Controller
 
     public function store(RegisterRequest $request): RedirectResponse
     {
-        $this->userService->create($request->validated());
+        $user = $this->userService->create($request->validated());
+
+        if ($user instanceof User) {
+            $this->profileService->create($user->id);
+        }
         session()->flash('message', __('messages.user.success.create'));
         return redirect()->route('login.show');
     }

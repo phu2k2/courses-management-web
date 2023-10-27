@@ -3,15 +3,18 @@
     "error": "Error!",
     "login_title": "Log In to Your Skola Account!",
     "register_title": "Sign Up and Start Learning!",
+    "forgot_title": "Forgot Password",
+    "reset_title" : "Reset Password",
     "username": "Username",
     "email": "Email",
     "password": "Password",
     "remember": "Remember me",
-    "forgot": "Forgot password",
     "login": "Log In",
     "register": "Sign Up",
     "login_label": "Don't have an account?",
     "register_label": "Already have an account?",
+    "send_link_reset": "Send Password Reset Link",
+
     "logout_label": "Do you really want to log out?",
     "cancel": "Cancel",
     "submit": "Submit",
@@ -25,14 +28,13 @@
     "profile": "Profile",
     "logout": "Log Out",
     "placeholder_search": "What do you want to learn?",
-
     "beginner_level": "Beginner",
     "intermediate_level": "Intermediate",
     "advanced_level": "Advanced",
 
     "english_lang": "English",
     "vietnamese_lang": "Vietnamese",
-    
+
     "page_name_course": "Courses",
     "sort_by": "Sort By",
     "sort.default": "Default",
@@ -74,13 +76,7 @@
     "all_courses": "All Courses",
     "my_list": "My List",
     "tools": "Tools",
-    "sort_by": "Sort by",
     "filter_by": "Filter by",
     "search": "Search",
-
-    "course.sort.option_one": "New Courses",
-    "course.sort.option_two": "Most Reviewed",
-    "course.sort.option_three": "Highest Rated",
-    "course.sort.option_four": "Highest Student",
-    "course.filter.all_categories": "All Categories"
+    "all_categories": "All Categories"
 }

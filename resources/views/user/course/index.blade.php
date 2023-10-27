@@ -16,30 +16,31 @@
                 <div class="d-xl-flex flex-wrap">
                     <div>
                         <div class="ms-xl-auto d-xl-flex flex-wrap">
-                            <div class="mb-4 mb-xl-0">{{ __('sort_by') }}:</div>
+                            <div class="mb-4 mb-xl-0">{{ __('sort_by') }}:(To do)</div>
                         </div>
                         <div class="mb-4 mb-xl-0">
                             <div class="border rounded d-flex align-items-center choices-label h-50p">
                                 <select
                                     class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end"
                                     data-choices>
-                                    <option>{{ __('course.sort.option_one') }}</option>
-                                    <option>{{ __('course.sort.option_two') }}</option>
-                                    <option>{{ __('course.sort.option_three') }}</option>
-                                    <option>{{ __('course.sort.option_four') }}</option>
+                                    <option>{{ __('sort.default') }}</option>
+                                    <option>{{ __('sort.new_courses') }}</option>
+                                    <option>{{ __('sort.most_reviewed') }}</option>
+                                    <option>{{ __('sort.highest_rated') }}</option>
+                                    <option>{{ __('sort.highest_student') }}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div>
                         <div class="ms-xl-auto d-xl-flex flex-wrap">
-                            <div class="mb-4 mb-xl-0 ms-xl-6">{{ __('filter_by') }}:</div>
+                            <div class="mb-4 mb-xl-0 ms-xl-6">{{ __('filter_by') }}:(To do)</div>
                         </div>
                         <div class="ms-xl-auto d-xl-flex flex-wrap">
                             <div class="mb-4 mb-xl-0 ms-xl-6">
                                 <select id="optionCategories" class="form-select form-select-sm text-dark shadow-none dropdown-menu-end"
                                     data-choices>
-                                    <option>{{ __('course.filter.all_categories') }}</option>
+                                    <option>{{ __('all_categories') }}</option>
                                     @foreach ($courses as $option)
                                         <option value="{{ $option->course->category->id }}">{{ ucfirst($option->course->category->name) }}</option>
                                     @endforeach
@@ -61,7 +62,7 @@
                 <div class="ms-xl-auto">
                     <div class="float-wd-end">
                         <div class="mb-4 mb-xl-0 ms-xl-6">
-                            {{ __('search') }}:
+                            {{ __('search') }}:(To do)
                         </div>
                         <div class="mb-4 mb-xl-0 ms-xl-6">
                             <!-- Search -->

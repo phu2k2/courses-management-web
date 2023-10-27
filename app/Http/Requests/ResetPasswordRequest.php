@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreCommentRequest extends FormRequest
+class ResetPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +22,16 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lesson_id' => ['required', 'int', Rule::exists('lessons', 'id')],
-            'parent_id' => ['nullable', 'int', Rule::exists('comments', 'id')],
-            'content' => ['bail', 'required', 'string', 'max:500'],
+            'email' => 'required|email|exists:users',
+            'token' => 'required',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+                'confirmed'
+            ],
+            'password_confirmation' => 'required'
         ];
     }
 }

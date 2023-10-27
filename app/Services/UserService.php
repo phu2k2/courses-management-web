@@ -22,14 +22,14 @@ class UserService
     /**
      * @param array $request
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function create(array $request)
     {
         $attribute = Arr::except($request, ['password', 'username']);
         $attribute['username'] = strtolower($request['username']);
         $attribute['password'] = Hash::make($request['password']);
-        $this->userRepository->create($attribute);
+        return $this->userRepository->create($attribute);
     }
 
     /**
@@ -50,5 +50,15 @@ class UserService
     public function updateUser($userId, $data)
     {
         return $this->userRepository->update($userId, $data);
+    }
+
+    /**
+     * @param string $email
+     * @param string $password
+     * @return int|bool
+     */
+    public function updatePassword($email, $password)
+    {
+        return $this->userRepository->updatePassword($email, Hash::make($password));
     }
 }

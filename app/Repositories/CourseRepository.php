@@ -92,4 +92,13 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
             ->groupBy('enrollment_date')
             ->orderBy('enrollment_date')->get();
     }
+
+    /**
+     * @param array $courseIds
+     * @return int
+     */
+    public function addStudentInCourse($courseIds)
+    {
+        return $this->model->whereIn('id', $courseIds)->increment('total_students');
+    }
 }
