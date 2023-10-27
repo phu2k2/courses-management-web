@@ -6,7 +6,6 @@ return [
             'create' => 'Register account was successful',
         ],
         'error' => [
-            'create_cart' => 'Course is already in cart!',
             'login' => 'Login error, please check your email or password'
         ]
     ],
@@ -21,9 +20,11 @@ return [
     ],
     'comment' => [
         'success' => [
+            'create' => 'Create comment was successful',
             'delete' => 'Delete comment was successful',
         ],
         'error' => [
+            'create' => 'Create comment was failed',
             'delete' => 'Delete comment was failed',
         ],
     ],
@@ -58,6 +59,16 @@ return [
     'instructor' => [
         'error' => [
             'request' => 'Wait for 1 minutes to send again!'
+        ],
+    ],
+    'checkout' => [
+        'error' => [
+            'save' => 'Please choose at least one course'
+        ],
+    ],
+    'order' => [
+        'error' => [
+            'create_order' => 'The course has been purchased'
         ],
     ]
 ];
