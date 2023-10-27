@@ -65,6 +65,16 @@ class CourseService
     }
 
     /**
+     * @param array $data
+     *
+     * @return Model
+     */
+    public function create($data)
+    {
+        return $this->courseRepo->create($data);
+    }
+
+    /**
      * @param int $userId
      * @return LengthAwarePaginator<Enrollment>
      */
@@ -82,5 +92,16 @@ class CourseService
     public function isEnrolled($userId, $courseId)
     {
         return (bool) $this->enrollmentRepo->isEnrolled($userId, $courseId);
+    }
+
+    /**
+     * @param int $courseId
+     * @param array $data
+     *
+     * @return bool
+     */
+    public function update($courseId, $data)
+    {
+        return $this->courseRepo->update($courseId, $data);
     }
 }

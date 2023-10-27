@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\UserRoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -29,6 +31,10 @@ class User extends Authenticatable
     protected $attributes = [
         'is_active' => 1,
         'role_id' => 1
+    ];
+
+    protected $casts = [
+        'role_id' => UserRoleEnum::class
     ];
 
     /**
