@@ -5,6 +5,7 @@ namespace App\Repositories\Interfaces;
 use App\Http\Requests\GetCoursesRequest;
 use App\Repositories\RepositoryInterface;
 use App\Models\Course;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -17,15 +18,13 @@ interface CourseRepositoryInterface extends RepositoryInterface
     public function getCourses($request): LengthAwarePaginator;
 
     /**
-     * Find a record by its primary key.
-     *
-     * @param Date $start_date.
-     * @param Date $end_date
+     * @param Carbon|false $startDate.
+     * @param Carbon|false $endDate
      * @param string $dateFormat
-     * @param int $instructor_id
-     * @param int $course_id
+     * @param int $instructorId
+     * @param int $courseId
      * 
      * @return Collection
      */
-    public function getCourseRevenueStatistics($start_date, $end_date, $dateFormat, $instructor_id, $course_id): Collection;
+    public function getCourseRevenueStatistics($startDate, $endDate, $dateFormat, $instructorId, $courseId): Collection;
 }

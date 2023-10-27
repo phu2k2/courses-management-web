@@ -11,6 +11,7 @@ use App\Models\Course;
 use App\Models\Enrollment;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class CourseService
 {
@@ -77,28 +78,33 @@ class CourseService
         return (bool) $this->enrollmentRepo->isEnrolled($userId, $courseId);
     }
 
-    public function getCourseRevenueStatistics(RevenueReportRequest $request)
+    /**
+     * @param RevenueReportRequest $request
+     *
+     * @return Collection
+     */
+    public function getCourseRevenueStatistics(RevenueReportRequest $request): Collection
     {
-        $start_date = Carbon::createFromFormat('Y/m/d', $request->input('start_date'));
-        $end_date = Carbon::createFromFormat('Y/m/d', $request->input('end_date'));
-        $statis_by = $request->input('statis_by');
+        $startDate = Carbon::createFromFormat('Y/m/d', $request->input('startDate'));
+        $endDate = Carbon::createFromFormat('Y/m/d', $request->input('endDate'));
+        $statisBy = $request->input('statisBy');
 
         $dateFormat = "%Y-%m-%d";
 
-        if ($statis_by == 'year') {
+        if ($statisBy == 'year') {
             $dateFormat = "%Y";
-        } elseif ($statis_by == 'month') {
+        } elseif ($statisBy == 'month') {
             $dateFormat = "%Y-%m";
-        } elseif ($statis_by == 'week') {
+        } elseif ($statisBy == 'week') {
             $dateFormat = "%Y-%u";
         }
 
         return $this->courseRepo->getCourseRevenueStatistics(
-            $start_date,
-            $end_date,
+            $startDate,
+            $endDate,
             $dateFormat,
-            $request->input('instructor_id'),
-            $request->input('course_id')
+            $request->input('instructorId'),
+            $request->input('courseId')
         );
     }
 }

@@ -23,11 +23,11 @@ class RevenueReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'statis_by' => 'required|in:month,year,week,date',
-            'instructor_id' => 'nullable|integer',
-            'course_id' => 'nullable|integer'
+            'startDate' => 'required|date',
+            'endDate' => 'required|date|after_or_equal:start_date',
+            'statisBy' => 'required|in:month,year,week,date',
+            'instructorId' => 'nullable|integer',
+            'courseId' => 'nullable|integer'
         ];
     }
 }
