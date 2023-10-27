@@ -96,13 +96,13 @@
                             aria-labelledby="coursefilter1" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox list-checkbox-limit">
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="languagescustomcheck1" name="language[]" 
+                                    <input type="checkbox" class="custom-control-input" id="languagescustomcheck1" name="language[]"
                                     value="1" @checked(in_array('1', $selectedLanguages))>
-                                    <label class="custom-control-label font-size-base" 
+                                    <label class="custom-control-label font-size-base"
                                         for="languagescustomcheck1">English</label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="languagescustomcheck2" name="language[]" 
+                                    <input type="checkbox" class="custom-control-input" id="languagescustomcheck2" name="language[]"
                                     value="2" @checked(in_array('2', $selectedLanguages))>
                                     <label class="custom-control-label font-size-base"
                                         for="languagescustomcheck2">Vietnamese</label>
@@ -167,7 +167,7 @@
                                 <ul class="list-unstyled list-group list-checkbox">
                                     @foreach($categories as $category)
                                     <li class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="categorycustomcheck{{ $loop->index }}" 
+                                        <input type="checkbox" class="custom-control-input" id="categorycustomcheck{{ $loop->index }}"
                                         name="category[]" value="{{ $category->id }}"  @checked(in_array($category->id, $selectedCategories))>
                                         <label class="custom-control-label font-size-base" for="categorycustomcheck{{ $loop->index }}">{{ $category->name }}</label>
                                     </li>
@@ -258,19 +258,19 @@
                             aria-labelledby="coursefilter4" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck1" name="level[]" 
+                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck1" name="level[]"
                                     value="1" @checked(in_array('1', $selectedLevels))>
                                     <label class="custom-control-label font-size-base" for="levelcustomcheck1">{{ __('beginner') }}
                                         </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck2" name="level[]" 
+                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck2" name="level[]"
                                     value="2" @checked(in_array('2', $selectedLevels))>
                                     <label class="custom-control-label font-size-base"
                                         for="levelcustomcheck2">{{ __('intermediate') }} </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck3" name="level[]" 
+                                    <input type="checkbox" class="custom-control-input" id="levelcustomcheck3" name="level[]"
                                     value="3" @checked(in_array('3', $selectedLevels))>
                                     <label class="custom-control-label font-size-base" for="levelcustomcheck3">{{ __('advanced') }}
                                         </label>
@@ -304,13 +304,13 @@
                         <div id="coursefiltercollapse4" class="collapse show mt-n2 px-6 pb-6" aria-labelledby="coursefilter4" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck1" name="duration[]" 
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck1" name="duration[]"
                                     value="extraShort" @checked(in_array('extraShort', $selectedDurations))>
                                     <label class="custom-control-label font-size-base" for="durationcustomcheck1">0-1 {{ __('hours') }}
                                         </label>
                                 </li>
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck2" name="duration[]" 
+                                    <input type="checkbox" class="custom-control-input" id="durationcustomcheck2" name="duration[]"
                                     value="short" @checked(in_array('short', $selectedDurations))>
                                     <label class="custom-control-label font-size-base" for="durationcustomcheck2">1-3 {{ __('hours') }}
                                         </label>
@@ -368,7 +368,7 @@
                             aria-labelledby="coursefilter5" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="ratingcustomradion1" name ="rating" 
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion1" name ="rating"
                                     value="4.5" @checked($selectedRating == '4.5')>
                                     <label class="custom-control-label font-size-base" for="ratingcustomradion1">
                                         <span class="d-flex align-items-end">
@@ -383,7 +383,7 @@
                                     </label>
                                 </li>
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="ratingcustomradion2" name ="rating" 
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion2" name ="rating"
                                     value="4" @checked($selectedRating == '4')>
                                     <label class="custom-control-label font-size-base" for="ratingcustomradion2">
                                         <span class="d-flex align-items-end">
@@ -398,7 +398,7 @@
                                     </label>
                                 </li>
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="ratingcustomradion3" name ="rating" 
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion3" name ="rating"
                                     value="3.5" @checked($selectedRating == '3.5')>
                                     <label class="custom-control-label font-size-base" for="ratingcustomradion3">
                                         <span class="d-flex align-items-end">
@@ -413,7 +413,7 @@
                                     </label>
                                 </li>
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="ratingcustomradion4" name ="rating" 
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion4" name ="rating"
                                     value="3" @checked($selectedRating == '3')>
                                     <label class="custom-control-label font-size-base" for="ratingcustomradion4">
                                         <span class="d-flex align-items-end">
@@ -428,7 +428,7 @@
                                     </label>
                                 </li>
                                 <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="ratingcustomradion5" name ="rating" 
+                                    <input type="radio" class="custom-control-input" id="ratingcustomradion5" name ="rating"
                                     value="2.5" @checked($selectedRating == '2.5')>
                                     <label class="custom-control-label font-size-base" for="ratingcustomradion5">
                                         <span class="d-flex align-items-end">
@@ -451,8 +451,8 @@
                 </div>
             </form>
             </div>
-            
-            
+
+
             <div class="col-xl-8">
                 <div class="row row-cols-md-2 mb-3 ">
                 {{-- START COURSE --}}

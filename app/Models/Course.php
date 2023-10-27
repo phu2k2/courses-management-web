@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use AmazonS3;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -36,6 +37,17 @@ class Course extends Model
         'learns_description',
         'requirements_description',
         'is_active',
+    ];
+
+    protected $attributes = [
+        'trailer_url' => '',
+        'poster_url' => '',
+        'average_rating' => 0,
+        'num_reviews' => 0,
+        'total_students' => 0,
+        'total_lessons' => 0,
+        'total_time' => 0,
+        'is_active' => 'false'
     ];
 
     private const VIDEO_DURATION_EXTRA_SHORT = 1;
@@ -252,5 +264,27 @@ class Course extends Model
                 $query->orWhere('total_time', '>', self::VIDEO_DURATION_LONG);
             });
         });
+    }
+
+    /**
+     * poster get from s3
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getPosterUrlAttribute($value)
+    {
+        return AmazonS3::getObjectUrl($value);
+    }
+
+    /**
+     * trailer get from s3
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getTrailerUrlAttribute($value)
+    {
+        return AmazonS3::getObjectUrl($value);
     }
 }

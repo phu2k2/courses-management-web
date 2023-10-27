@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('comments', CommentController::class)->only(['update']);
+Route::apiResource('comments', CommentController::class)->only(['update', 'destroy']);

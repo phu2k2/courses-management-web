@@ -1,4 +1,5 @@
 function deleteItem(itemId, token) {
+
     $.ajax({
         type: 'POST',
         url: `carts/${itemId}`,
@@ -9,6 +10,12 @@ function deleteItem(itemId, token) {
         },
         success: function () {
             location.reload(true);
+            $(".messageNotice").text("Delete item was successful");
+            $(".toast-success").show();
+
+            setTimeout(() => {
+                $(".notification-toast").hide();
+            }, 10000);
         }
     });
 }
