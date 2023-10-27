@@ -61,7 +61,12 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
     Route::get('/', function () {
         return view('instructor.home');
     })->name('home');
+    Route::get('/', function () {
+        return view('instructor.home');
+    })->name('home');
     Route::get('/curriculum/show/courses/{courseId}', [InstructorCourseController::class, 'showCurriculum'])->name('curriculum.show');
+    Route::get('/curriculum/show/courses/{courseId}/topics/create', [InstructorCourseController::class, 'createTopic'])->name('topics.create');
+    Route::post('/curriculum/show/courses/topics/store', [InstructorCourseController::class, 'storeTopic'])->name('topics.store');
     Route::resource('courses', InstructorCourseController::class);
     Route::get('courses/create/upload-file', [InstructorCourseController::class, 'upload'])->name('courses.upload');
 });

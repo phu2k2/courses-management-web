@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Instructor;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTopicRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Services\CourseService;
+use App\Services\TopicService;
 
 class CourseController extends Controller
 {
@@ -14,9 +16,15 @@ class CourseController extends Controller
      */
     protected $courseService;
 
-    public function __construct(CourseService $courseService)
+    /**
+     * @var TopicService
+     */
+    protected $topicService;
+
+    public function __construct(CourseService $courseService, TopicService $topicService)
     {
         $this->courseService = $courseService;
+        $this->topicService = $topicService;
     }
 
     /**
@@ -47,10 +55,34 @@ class CourseController extends Controller
         return redirect()->route('instructor.courses.upload');
     }
 
-    public function showCurriculum(int $id) : View
+    public function showCurriculum(int $id): View
     {
         $course = $this->courseService->getCourse($id);
 
         return view('instructor.course.curriculum', compact('course'));
+    }
+
+    public function createTopic(int $id): View
+    {
+        return view('instructor.topic.create', compact('id'));
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param StoreTopicRequest $request
+     * @return RedirectResponse
+     */
+    public function storeTopic(StoreTopicRequest $request)
+    {
+        $courseId = $request->input('course_id');
+
+        if ($this->topicService->create($request)) {
+            session()->flash('message', __('messages.topic.success.create'));
+            return redirect()->route('instructor.curriculum.show', compact('courseId'));
+        }
+        session()->flash('error', __('messages.topic.error.create'));
+
+        return redirect()->back();
     }
 }

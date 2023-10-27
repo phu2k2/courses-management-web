@@ -3,11 +3,13 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/css/instructor/course.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/theme.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
 @endsection.
 @section('script')
     <script type="module" src="{{ asset('assets/js/instructor/create.course.js') }}"></script>
     <script src="{{ asset('assets/js/instructor/change.image.js') }}"></script>
-    <script src="{{ asset('assets/js/theme.min.css') }}"></script>
+    <script src="{{ asset('assets/js/theme.min.js') }}"></script>
+    <script src="{{ asset('assets/js/toast.css') }}"></script>
 @endsection
 @section('content')
     <main id="main" class="main">
@@ -15,6 +17,8 @@
             <div class = "container">
                 <div class = "row mb-8">
                     <div class = "offset-lg-1 col-lg-10 mb-6 mb-lg-0 position-relative">
+                        <!-- Img -->
+                        @include('layouts.message')
                         <div id="Curriculum" class="mb-9">
                             <div id="accordionCurriculum">
                                 @foreach ($course->topics as $key => $topic)
@@ -124,8 +128,9 @@
                                 @endforeach
                             </div>
                         </div>
-                        <button class="btn btn-primary" style="position: fixed; bottom: 160px; right: 150px; z-index: 1000"
-                            type="button" name="button">Add topic</button>
+                        <a class="btn btn-primary" style="position: fixed; bottom: 160px; right: 150px; z-index: 1000"
+                            href="{{ route('instructor.topics.create', ['courseId' => $course->id]) }}">Add
+                            topic</a>
                     </div>
                 </div>
             </div>
