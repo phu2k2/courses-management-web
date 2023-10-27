@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\UserRoleEnum;
 use App\Helpers\AmazonS3;
 use App\Repositories\CourseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
@@ -14,12 +15,16 @@ use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CommentRepositoryInterface;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
 use App\Repositories\Interfaces\LessonRepositoryInterface;
+use App\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Repositories\Interfaces\ProfileRepositoryInterface;
+use App\Repositories\Interfaces\ResetPasswordRepositoryInterface;
 use App\Repositories\Interfaces\ReviewRepositoryInterface;
 use App\Repositories\Interfaces\TopicRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\LessonRepository;
+use App\Repositories\OrderRepository;
 use App\Repositories\ProfileRepository;
+use App\Repositories\ResetPasswordRepository;
 use App\Repositories\ReviewRepository;
 use App\Repositories\TopicRepository;
 use App\Repositories\UserRepository;
@@ -67,6 +72,10 @@ class AppServiceProvider extends ServiceProvider
             CartRepositoryInterface::class,
             CartRepository::class,
         );
+        $this->app->singleton(
+            ResetPasswordRepositoryInterface::class,
+            ResetPasswordRepository::class,
+        );
 
         $this->app->singleton(
             CommentRepositoryInterface::class,
@@ -83,6 +92,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(
+            OrderRepositoryInterface::class,
+            OrderRepository::class
+        );
+
+        $this->app->singleton(
             EnrollmentRepositoryInterface::class,
             EnrollmentRepository::class
         );
@@ -94,8 +108,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::if('instructor', function () {
-            $roleInstructor = 2;
-            return auth()->check() && auth()->user()?->role_id == $roleInstructor;
+            return auth()->check() && auth()->user()?->role_id == UserRoleEnum::Instructor;
         });
     }
 }
