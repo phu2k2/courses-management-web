@@ -36,6 +36,7 @@
     "vietnamese_lang": "Vietnamese",
 
     "page_name_course": "Courses",
+    "sort_by": "Sort By",
     "sort.default": "Default",
     "sort.new_courses": "New Courses",
     "sort.most_reviewed": "Most Reviewed",
@@ -75,7 +76,6 @@
     "all_courses": "All Courses",
     "my_list": "My List",
     "tools": "Tools",
-    "sort_by": "Sort by",
     "filter_by": "Filter by",
     "search": "Search",
 
