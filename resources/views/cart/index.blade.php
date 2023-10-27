@@ -9,6 +9,24 @@
     <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
 @endsection
 @section('content')
+    @include('layouts.message')
+    <!-- Notification-->
+    <div class="notification-toast toast-success" style="display: none">
+        <div>
+            <span class="alert-icon"><i class="fa-solid fa-thumbs-up"></i></span>
+            <span class="alert-text"><strong class="me-2">{{ __('success') }}</strong><br></span>
+        </div>
+        <div><span class="messageNotice"></span></div>
+        <button type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+    <div class="notification-toast toast-error" style="display: none">
+        <div>
+            <span class="alert-icon"><i class="fa-solid fa-circle-exclamation"></i></i></span>
+            <span class="alert-text"><strong class="me-2">{{ __('error') }}</strong><br></span>
+        </div>
+        <div><span class="messageNotice"></span></div>
+        <button type="button" class="btn-close" aria-label="Close"></button>
+    </div>
     <form class="woocommerce-cart-form table-responsive" action="{{ route('carts.delete-cart') }}" method="post">
         @csrf
         @method('DELETE')
@@ -49,7 +67,6 @@
             </nav>
         </div>
         <!-- Img -->
-        @include('layouts.message')
     </header>
     <!-- SHOP CART
                                                                                                                                                                                                                                                                                                                                                     ================================================== -->
@@ -177,7 +194,7 @@
                                     <tr class="order-total">
                                         <th>Total</th>
                                         <td data-title="Total"><strong><span class="woocommerce-Price-amount amount"><span
-                                                        class="woocommerce-Price-currencySymbol">£</span>
+                                                        class="woocommerce-Price-currencySymbol">$</span>
                                                     {{ $total }}</span></strong>
                                         </td>
                                     </tr>
@@ -200,6 +217,9 @@
             id="confirmDeleteModal{{ $item->id }}">
             <div class="modal-dialog">
                 <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{ __('delete_label') }}</h5>
+                    </div>
                     <div class="modal-body">
                         Are you sure you want to delete this item?
                     </div>
