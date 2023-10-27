@@ -17,12 +17,14 @@ use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
 use App\Repositories\Interfaces\LessonRepositoryInterface;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Repositories\Interfaces\ProfileRepositoryInterface;
+use App\Repositories\Interfaces\ResetPasswordRepositoryInterface;
 use App\Repositories\Interfaces\ReviewRepositoryInterface;
 use App\Repositories\Interfaces\TopicRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\LessonRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\ProfileRepository;
+use App\Repositories\ResetPasswordRepository;
 use App\Repositories\ReviewRepository;
 use App\Repositories\TopicRepository;
 use App\Repositories\UserRepository;
@@ -69,6 +71,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             CartRepositoryInterface::class,
             CartRepository::class,
+        );
+        $this->app->singleton(
+            ResetPasswordRepositoryInterface::class,
+            ResetPasswordRepository::class,
         );
 
         $this->app->singleton(

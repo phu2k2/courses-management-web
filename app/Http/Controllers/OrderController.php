@@ -18,14 +18,18 @@ class OrderController extends Controller
     {
         $this->orderService = $orderService;
     }
-
     /**
      * Display a listing of the resource.
-     * @return View
+     * @return RedirectResponse|View
      */
     public function index()
     {
-        return view('order.index');
+        $orders = session()->get('cart');
+        if ($orders) {
+            session()->forget('cart');
+            return view('order.index', compact('orders'));
+        }
+        return redirect()->route('carts.index');
     }
 
     /**
