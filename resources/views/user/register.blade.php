@@ -25,7 +25,7 @@
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email address</label>
                                     <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
-                                        name="email" value="{{ $user->email }}">
+                                        name="email" value="{{ $user->email }}" disabled>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             @endif

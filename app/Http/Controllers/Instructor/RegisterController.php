@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Instructor;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRegisterRequest;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\View\View;
@@ -33,13 +34,15 @@ class RegisterController extends Controller
     }
 
     /**
-     * @param StoreRegisterRequest $request
+     * @param Request $request
      * @return RedirectResponse
      */
-    public function submitRegisterForm(StoreRegisterRequest $request): RedirectResponse
+    public function submitRegisterForm(Request $request): RedirectResponse
     {
-        $userId = (int) auth()->id();
-        $email = $request->input('email');
+        /** @var User */
+        $user = auth()->user();
+        $userId = $user->id;
+        $email = $user->email;
 
         $expireTime = 30;
         $lastEmailSentTime = $request->session()->get('last_email_sent_time');
