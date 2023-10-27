@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/instructor/course.css') }}">
 @endsection
 @section('script')
-    <script type="module" src="{{ asset('assets/js/instructor/create.course.js') }}"></script>
+    <script type="module" src="{{ asset('assets/js/instructor/upload.js') }}"></script>
     <script src="{{ asset('assets/js/instructor/change.image.js') }}"></script>
 @endsection
 @section('content')
@@ -21,14 +21,35 @@
             </ol>
         </nav>
     </div><!-- End Page Title -->
-
+    <!-- Modal -->
+    <div class="modal fade" id="modalNotification" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title fw-bold" id="staticBackdropLabel">Notification</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">Please wait for the files to upload</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="closeModal" data-bs-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+    </div>
     <section class="section">
         <div class="">
 
             <div class="card">
                 <div class="card-body">
                     <!-- General Form Elements -->
-                    <form action="" method="POST" id="stepTwo">
+                    <form data-url="{{ route('instructor.courses.updateUrl', ['courseId' => $courseId]) }}" method="POST" id="stepTwo">
                         @csrf
                         <div>
                             <h5 class="card-title">Step 2: Upload Poster and Trailer</h5>
@@ -49,6 +70,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="course_id" value="{{ $courseId }}" id="courseId">
                             <div class="row mb-3">
                                 <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Trailer Upload <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-10 row change-img">
@@ -70,7 +92,7 @@
                             <div class="row mb-3">
                                 <div class="offset-sm-10 col-sm-2">
                                     <a id="uploadS3" class="btn btn-success">UPLOAD</a>
-                                    <button id="btnFinish" type="submit" class="btn btn-primary" disabled>FINISH</button>
+                                    <a id="btnFinish" href="{{ route('instructor.courses.index') }}" class="btn btn-primary" aria-disabled="true">FINISH</a>
                                 </div>
                             </div>
                         </div>

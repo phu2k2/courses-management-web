@@ -33,9 +33,9 @@ function submitForm(id) {
 
 function deleteComment(id, parentId)
 {
-    console.log(parentId);
     var formDelete = document.getElementById("formDelete" + id);
     var baseUrl = formDelete.dataset.url;
+
     $('#submitDelete').on("click", function () {
         $('#cancelDelete').trigger('click');
         axios.delete(baseUrl, {
