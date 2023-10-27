@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\UserRoleEnum;
 use App\Helpers\AmazonS3;
 use App\Repositories\CourseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
@@ -101,8 +102,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::if('instructor', function () {
-            $roleInstructor = 2;
-            return auth()->check() && auth()->user()?->role_id == $roleInstructor;
+            return auth()->check() && auth()->user()?->role_id == UserRoleEnum::Instructor;
         });
     }
 }

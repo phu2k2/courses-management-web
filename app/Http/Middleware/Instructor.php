@@ -18,8 +18,10 @@ class Instructor
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-        if ($user && $user->role_id >= UserRoleEnum::Instructor) {
-            return $next($request);
+        if ($user) {
+            if ($user->role_id == UserRoleEnum::Instructor || $user->role_id == UserRoleEnum::Admin) {
+                return $next($request);
+            }
         }
 
         abort(403);
