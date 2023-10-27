@@ -44,5 +44,15 @@ return [
         'error' => [
             'create' => 'Failed to add review!'
         ],
+    ],
+    'instructor' => [
+        'success' => [
+            'send' => 'Send mail successfully',
+            'register' => 'Register instructor successfully',
+        ],
+        'error' => [
+            'request' => 'Please waiting 1 minutes to send email again',
+            'register' => 'You have register instructor',
+        ]
     ]
 ];

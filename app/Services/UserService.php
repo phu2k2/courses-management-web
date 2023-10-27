@@ -6,6 +6,8 @@ use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use AmazonS3;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 
 class UserService
 {
@@ -50,5 +52,34 @@ class UserService
     public function updateUser($userId, $data)
     {
         return $this->userRepository->update($userId, $data);
+    }
+
+    /**
+     * @param int $userId
+     * @return bool
+     */
+    public function updateRole($userId)
+    {
+        $roleId = 2;
+
+        return $this->userRepository->findOrFail($userId)->update([
+            'role_id' => $roleId,
+        ]);
+    }
+
+    /**
+     * @param int $userId
+     * @return bool
+     */
+    public function findRole($userId)
+    {
+        $roleId = 2;
+        /** @var User */
+        $user = $this->userRepository->findOrFail($userId);
+        if ($user->role_id === $roleId) {
+            return true;
+        }
+
+        return false;
     }
 }

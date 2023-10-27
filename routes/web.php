@@ -4,12 +4,14 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Instructor\RegisterController as InstructorRegisterController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,9 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
     Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
     Route::get('my-courses', [CourseController::class, 'getMyCourses'])->name('my-courses');
+    Route::get('register', [InstructorRegisterController::class, 'index'])->name('register');
+    Route::post('send-mail', [InstructorRegisterController::class, 'submitRegisterForm'])->name('sendMail');
+    Route::get('update/{id}', [InstructorRegisterController::class, 'updateRole'])->name('edit')->middleware('signed');
 });
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
 Route::delete('carts/delete-cart', [CartController::class, 'deleteMutilCarts'])->name('carts.delete-cart');
