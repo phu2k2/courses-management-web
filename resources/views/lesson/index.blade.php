@@ -93,14 +93,14 @@
                             <div class="row-cols-md-12 mb-6" id="comment{{ $comment->id}}">
                                 <li class="media d-flex">
                                     <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
-                                        <img src="{{ asset('assets/img/products/product-2.jpg') }}" alt="..."
+                                        <img src="{{ $comment->user->profile->avatar }}" alt="..."
                                             class="avatar-img rounded-circle">
                                     </div>
                                     <div class="media-body flex-grow-1">
                                         <div class="d-md-flex align-items-center mb-1">
                                             <div class="me-auto mb-4 mb-md-0">
                                                 <h5 class="text-white mb-1 fw-semi-bold">
-                                                    {{ $comment->user->profile?->full_name }}
+                                                    {{ $comment->user->profile->full_name }}
                                                     <span
                                                         class="font-size-sm text-blue">{{ '@' . $comment->user->username }}</span>
                                                 </h5>
@@ -197,14 +197,14 @@
                                             @if ($childComment->parent_id == $comment->id)
                                                 <li class="d-flex" id="comment{{ $childComment->id}}">
                                                     <div class="avatar avatar-xl me-3 me-md-6 flex-shrink-0">
-                                                        <img src="{{ asset('assets/img/products/product-2.jpg') }}"
+                                                        <img src="{{ $childComment->user->profile->avatar }}"
                                                             alt="..." class="avatar-img rounded-circle">
                                                     </div>
                                                     <div class="media-body flex-grow-1">
                                                         <div class="d-md-flex align-items-center mb-1">
                                                             <div class="me-auto mb-4 mb-md-0">
                                                                 <h5 class="text-white mb-1 fw-semi-bold">
-                                                                    {{ $childComment->user->profile?->full_name }}
+                                                                    {{ $childComment->user->profile->full_name }}
                                                                     <span
                                                                         class="font-size-sm text-blue">{{ '@' . $childComment->user->username }}</span>
                                                                 </h5>
