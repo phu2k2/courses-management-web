@@ -22,10 +22,12 @@ return [
         'success' => [
             'create' => 'Create comment was successful',
             'delete' => 'Delete comment was successful',
+            'update' => 'Update comment was successful',
         ],
         'error' => [
             'create' => 'Create comment was failed',
             'delete' => 'Delete comment was failed',
+            'update' => 'Update comment was failed',
         ],
     ],
     'cart' => [
@@ -74,6 +76,11 @@ return [
     'order' => [
         'error' => [
             'create_order' => 'The course has been purchased'
-        ],
+        ]
+    ],
+    'file' => [
+        'success' => [
+            'upload' => 'Upload files were successful',
+        ]
     ]
 ];
