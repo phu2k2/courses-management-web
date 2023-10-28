@@ -18,7 +18,7 @@
                     <div class="tab-pane fade show active" id="account" role="tabpanel">
                         <form method="POST" action="{{ route('users.sendMail') }}">
                             @csrf
-                            @if ($user->role_id === 2)
+                            @instructor
                                 <h2 style="text-align: center;">YOU HAS REGISTERED INSTRUCTOR</h2>
                             @else
                                 <h2 style="text-align: center;">FORM REGISTER INTRUCTOR</h2>
@@ -28,7 +28,7 @@
                                         name="email" value="{{ $user->email }}" disabled>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                            @endif
+                            @endinstructor
                         </form>
                     </div>
                 </div>

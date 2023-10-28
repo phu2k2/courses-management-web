@@ -45,10 +45,12 @@ class RegisterController extends Controller
         $email = $user->email;
         $userName = $user->username;
 
-        $expireTime = 30;
+        $expireTime = 60;
         $lastEmailSentTime = $request->session()->get('last_email_sent_time');
         if ($lastEmailSentTime && now()->diffInSeconds($lastEmailSentTime) < $expireTime) {
-            return redirect()->back()->with("error", __('messages.instructor.error.request'));
+            session()->flash('error', __('messages.instructor.error.request'));
+
+            return redirect()->back();
         }
 
         $confirmationUrl = URL::temporarySignedRoute(
@@ -63,8 +65,9 @@ class RegisterController extends Controller
         });
 
         $request->session()->put('last_email_sent_time', now());
+        session()->flash('message', __('messages.instructor.success.send'));
 
-        return redirect()->back()->with('message', __('messages.instructor.success.send'));
+        return redirect()->back();
     }
 
     /**
@@ -74,11 +77,13 @@ class RegisterController extends Controller
     public function updateRole($id): RedirectResponse
     {
         if ($this->userService->findRole($id)) {
-            return redirect()->back()->with('error', __('messages.instructor.error.register'));
+            session()->flash('error', __('messages.instructor.error.register'));
+
+            return redirect()->back();
         }
-
         $this->userService->updateRole($id);
+        session()->flash('message', __('messages.instructor.success.register'));
 
-        return redirect()->back()->with('message', __('messages.instructor.success.register'));
+        return redirect()->back();
     }
 }

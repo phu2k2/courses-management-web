@@ -6,6 +6,7 @@ use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use AmazonS3;
+use App\Enums\UserRoleEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -60,7 +61,7 @@ class UserService
      */
     public function updateRole($userId)
     {
-        $roleId = 2;
+        $roleId = UserRoleEnum::Instructor;
 
         return $this->userRepository->findOrFail($userId)->update([
             'role_id' => $roleId,
@@ -73,7 +74,7 @@ class UserService
      */
     public function findRole($userId)
     {
-        $roleId = 2;
+        $roleId = UserRoleEnum::Instructor;
         /** @var User */
         $user = $this->userRepository->findOrFail($userId);
         if ($user->role_id === $roleId) {
