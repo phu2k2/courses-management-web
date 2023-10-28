@@ -15,7 +15,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="commentModalLabel">Delete</h5>
-                    </button>
                 </div>
                 <div class="modal-body delete_item">
                     Do you really want to delete?

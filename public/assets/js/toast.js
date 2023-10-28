@@ -10,4 +10,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 setTimeout(() => {
     $(".notification-toast").hide();
-}, 2000);
+}, 3000);

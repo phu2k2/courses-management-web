@@ -31,13 +31,13 @@
 
         <li class="nav-item">
             <a href="#" class="nav-link" data-bs-toggle="pill" data-filter=".business" data-target="#gallery">
-                {{ __('my_list') }}
+                {{ __('my_list') }}(To do)
             </a>
         </li>
 
         <li class="nav-item">
             <a href="#" class="nav-link" data-bs-toggle="pill" data-filter=".design" data-target="#gallery">
-                {{ __('tools') }}
+                {{ __('tools') }}(To do)
             </a>
         </li>
     </ul>

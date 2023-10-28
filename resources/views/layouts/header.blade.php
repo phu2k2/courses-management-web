@@ -134,14 +134,14 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link" id="navbarFavorites" href="#">
-                            {{ __('favorites') }}
+                            {{ __('favorites') }}(To do)
                         </a>
                     </li>
                 @endauth
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="navbarAboutUs" href="#">
-                        {{ __('about') }}
+                        {{ __('about') }}(To do)
                     </a>
                 </li>
             </ul>
