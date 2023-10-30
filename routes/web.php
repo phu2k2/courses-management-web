@@ -54,7 +54,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('courses/create/getUploadUrl/{courseId}', [InstructorCourseController::class, 'getUploadUrl'])->name('courses.getUrl');
             Route::put('courses/create/updateUrl/{courseId}', [InstructorCourseController::class, 'updateUrl'])->name('courses.updateUrl');
             Route::get('/curriculum/show/courses/{courseId}', [InstructorCourseController::class, 'showCurriculum'])->name('curriculum.show');
-            Route::get('/curriculum/show/courses/{courseId}/topics/create', [InstructorCourseController::class, 'createTopic'])->name('topics.create');
+            Route::get('/curriculum/show/courses/{courseId}/topics/create', [InstructorCourseController::class, 'createTopic'])
+                ->name('topics.create');
             Route::post('/curriculum/show/courses/topics/store', [InstructorCourseController::class, 'storeTopic'])->name('topics.store');
             Route::get('courses/create/upload-file', [InstructorCourseController::class, 'upload'])->name('courses.upload');
         });
