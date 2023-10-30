@@ -44,6 +44,7 @@ class Course extends Model
         'poster_url' => '',
         'average_rating' => 0,
         'num_reviews' => 0,
+        'discount' => 0,
         'total_students' => 0,
         'total_lessons' => 0,
         'total_time' => 0,

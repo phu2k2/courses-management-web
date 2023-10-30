@@ -25,7 +25,7 @@ class StoreCourseRequest extends FormRequest
             'title' => ['bail', 'required', 'unique:courses,title', 'string', 'max:255'],
             'introduction' => ['bail', 'required', 'string', 'max:255'],
             'price' => ['bail', 'required', 'decimal:0,2'],
-            'discount' => ['bail', 'required', 'integer'],
+            'discount' => ['bail', 'nullable', 'integer', 'between:0,100'],
             'category_id' => ['bail', 'required', 'integer', 'exists:categories,id'],
             'languages' => ['bail', 'required', 'integer', 'digits_between:1,2'],
             'level' => ['bail', 'required', 'integer', 'digits_between:1,3'],
