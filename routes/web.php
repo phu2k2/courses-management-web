@@ -38,8 +38,9 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::resource('comments', CommentController::class)->only(['store']);
     Route::resource('reviews', ReviewController::class)->only(['store']);
-    Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('carts', CartController::class)->only(['index', 'store']);
     Route::delete('carts/delete-cart', [CartController::class, 'deleteMutilCarts'])->name('carts.delete-cart');
+    Route::delete('carts/{id}', [CartController::class, 'destroy'])->name('carts.destroy');
     Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
     Route::resource('orders', OrderController::class)->only(['index', 'store']);
     //admin and instructor can access
