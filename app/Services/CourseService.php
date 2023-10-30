@@ -104,7 +104,7 @@ class CourseService
             'week' => "%Y-%u",
         ];
         $dateFormat = $dateFormats[$statisBy] ?? "%Y-%m-%d";
-        
+
         return $this->courseRepo->getCourseRevenueStatistics(
             $startDate,
             $endDate,
