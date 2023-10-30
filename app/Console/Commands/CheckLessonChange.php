@@ -41,7 +41,7 @@ class CheckUpdateLesson extends Command
                         $user = $enrollment->user;
 
                         Mail::send(
-                            'mails.courses.create_lesson',
+                            'email.courses.create_lesson',
                             ['user' => $user, 'course' => $lesson->topic?->course, 'lesson' => $lesson],
                             function ($message) use ($user) {
                                 $message->to($user?->email)
