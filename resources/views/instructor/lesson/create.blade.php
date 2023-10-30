@@ -1,12 +1,10 @@
 @extends('instructor.layouts.app')
 @section('title', 'Create New Topic')
 @section('style')
-    <link rel="stylesheet" href="{{ asset('assets/css/theme.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/instructor/course.css') }}">
 @endsection.
 @section('script')
-    <script src="{{ asset('assets/js/theme.min.js') }}"></script>
     <script src="{{ asset('assets/js/toast.js') }}"></script>
     <script src="{{ asset('assets/js/instructor/change.image.js') }}"></script>
 @endsection
