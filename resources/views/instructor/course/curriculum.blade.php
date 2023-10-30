@@ -52,8 +52,9 @@
                                                 </h5>
                                             </div>
                                             <div class="col-lg-2 mx-6">
-                                                <button class="btn btn-primary btn-sm btn-block mx-3" style={width:50px}
-                                                    type="button" name="button">Add Lesson</button>
+                                                <button class="btn btn-primary btn-sm btn-block mx-3"
+                                                    style="background-color:#8685d1" type="button" name="button">Add
+                                                    Lesson</button>
                                             </div>
                                         </div>
 
@@ -128,8 +129,9 @@
                                 @endforeach
                             </div>
                         </div>
-                        <a class="btn btn-primary" style="position: fixed; bottom: 160px; right: 150px; z-index: 1000"
-                            href="{{ route('instructor.topics.create', ['courseId' => $course->id]) }}">Add
+                        <a class="btn btn-primary shadow"
+                            style="position: fixed; bottom: 160px; right: 150px; z-index: 1000;"
+                            href="{{ route('instructor.topics.create', ['courseId' => $course->id]) }}" style="">Add
                             topic</a>
                     </div>
                 </div>
