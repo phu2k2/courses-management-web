@@ -34,7 +34,7 @@
 
     "english_lang": "English",
     "vietnamese_lang": "Vietnamese",
-    
+
     "page_name_course": "Courses",
     "sort_by": "Sort By",
     "sort.default": "Default",
@@ -76,13 +76,7 @@
     "all_courses": "All Courses",
     "my_list": "My List",
     "tools": "Tools",
-    "sort_by": "Sort by",
     "filter_by": "Filter by",
     "search": "Search",
-
-    "course.sort.option_one": "New Courses",
-    "course.sort.option_two": "Most Reviewed",
-    "course.sort.option_three": "Highest Rated",
-    "course.sort.option_four": "Highest Student",
-    "course.filter.all_categories": "All Categories"
+    "all_categories": "All Categories"
 }

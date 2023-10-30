@@ -22,7 +22,7 @@
                     <h1 class="me-xl-14 text-white">
                         {{ $course->title }}
                     </h1>
-                    <p class="me-xl-13 mb-5 text-white">{{ $course->introduction }}</p>
+                    <p class="me-xl-13 mb-5 text-white">{!! $course->introduction !!}</p>
 
                     <a href="#"
                         class="badge badge-lg badge-rounded-circle badge-secondary font-size-base badge-float badge-float-inside top-0 text-white">
@@ -76,7 +76,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="pills-instructor-tab" data-bs-toggle="pill" href="#pills-instructor"
-                            role="tab" aria-controls="pills-instructor" aria-selected="false">Instructor</a>
+                            role="tab" aria-controls="pills-instructor" aria-selected="false">Instructor(To do)</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="pills-reviews-tab" data-bs-toggle="pill" href="#pills-reviews"
@@ -93,7 +93,7 @@
                             href="#readcollapseExample" role="button" aria-expanded="false"
                             aria-controls="readcollapseExample">
                             <span class="d-inline-flex align-items-center more">
-                                Read More
+                                Read More(To do)
                                 <span
                                     class="d-flex align-items-center justify-content-center bg-teal rounded-circle ms-2 p-2 w-26p">
                                     <i class="fas fa-plus font-size-10 text-white"></i>
@@ -215,7 +215,7 @@
                                                         question</div>
                                                     <div class="badge btn-blue-soft me-5 font-size-sm fw-normal py-2">
                                                         {{ $lesson->lesson_duration }} min</div>
-                                                    <a href="#" class="text-secondary d-flex">
+                                                    <a href="{{ $enrolled == true ? route('courses.lessons.show', ['courseId' => $course->id, 'lessonId' => $lesson->id]) : '#' }}" class="text-secondary d-flex">
                                                         <!-- Icon -->
                                                         @if ($key % 2 == 0)
                                                             <svg width="14" height="16" viewBox="0 0 14 16"
@@ -345,7 +345,7 @@
                                     class="border rounded shadow d-flex align-items-center justify-content-center px-9 py-8">
                                     <div class="m-2 text-center">
                                         <h1 class="display-2 mb-0 fw-medium mb-n1">4.93</h1>
-                                        <h5 class="mb-0">Course rating</h5>
+                                        <h5 class="mb-0">Course rating(To do)</h5>
                                         <div class="star-rating">
                                             <div class="rating" style="width:100%;"></div>
                                         </div>
@@ -365,7 +365,7 @@
                                         <div class="star-rating star-rating-lg secondary me-4">
                                             <div class="rating" style="width:90%;"></div>
                                         </div>
-                                        <span>4132</span>
+                                        <span>4132(To do)</span>
                                     </div>
                                 </div>
 
@@ -581,7 +581,7 @@
                         </div>
 
                         @if ($enrolled == false)
-                        <button class="btn btn-primary btn-block mb-3" type="button" name="button">BUY NOW</button>
+                        <button class="btn btn-primary btn-block mb-3" type="button" name="button">BUY NOW(To do)</button>
                         <form action="{{ route('carts.store') }}" method="POST">
                             @csrf
                             <input type = "hidden" name="course_id" value = "{{ $course->id }}">
@@ -692,7 +692,7 @@
                                 <span>Yes</span>
                             </li>
                             <li class="list-group-item d-flex align-items-center py-4">
-                                <a href="course-single-v5.html"
+                                <a href=""
                                     class="mx-auto text-teal fw-medium d-flex align-items-center mt-2">
                                     <!-- Icon -->
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -714,7 +714,7 @@
                                             fill="currentColor" />
                                     </svg>
 
-                                    <span class="ms-3">Share this course</span>
+                                    <span class="ms-3">Share this course(To do)</span>
                                 </a>
                             </li>
                         </ul>

@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class CourseRepository extends BaseRepository implements CourseRepositoryInterface
 {
@@ -79,14 +78,16 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      * @param string $dateFormat
      * @param int $instructorId
      * @param int $courseId
-     *
+     *gi
      * @return Collection
      */
     public function getCourseRevenueStatistics($startDate, $endDate, $dateFormat, $instructorId, $courseId): Collection
     {
-        return $this->model::selectRaw('DATE_FORMAT(orders.created_at, ?) as date_order, SUM(orders.price) as total_price')
+        $orderStatusSuccess = 2;
+
+        return $this->model::selectRaw('DATE_FORMAT(orders.created_at, ?) AS date_order, SUM(orders.price) AS total_price')
             ->join('orders', 'orders.course_id', '=', 'courses.id')
-            ->where('orders.status', 2)
+            ->where('orders.status', $orderStatusSuccess)
             ->when($instructorId, function ($query) use ($instructorId) {
                 return $query->where('courses.instructor_id', $instructorId);
             })

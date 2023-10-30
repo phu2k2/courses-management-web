@@ -59,6 +59,16 @@ class CourseService
     }
 
     /**
+     * @param array $data
+     *
+     * @return Model
+     */
+    public function create($data)
+    {
+        return $this->courseRepo->create($data);
+    }
+
+    /**
      * @param int $userId
      * @return LengthAwarePaginator<Enrollment>
      */
@@ -88,17 +98,13 @@ class CourseService
         $startDate = Carbon::createFromFormat('Y/m/d', $request->input('startDate'));
         $endDate = Carbon::createFromFormat('Y/m/d', $request->input('endDate'));
         $statisBy = $request->input('statisBy');
-
-        $dateFormat = "%Y-%m-%d";
-
-        if ($statisBy == 'year') {
-            $dateFormat = "%Y";
-        } elseif ($statisBy == 'month') {
-            $dateFormat = "%Y-%m";
-        } elseif ($statisBy == 'week') {
-            $dateFormat = "%Y-%u";
-        }
-
+        $dateFormats = [
+            'year' => "%Y",
+            'month' => "%Y-%m",
+            'week' => "%Y-%u",
+        ];
+        $dateFormat = $dateFormats[$statisBy] ?? "%Y-%m-%d";
+        
         return $this->courseRepo->getCourseRevenueStatistics(
             $startDate,
             $endDate,
@@ -106,5 +112,16 @@ class CourseService
             $request->input('instructorId'),
             $request->input('courseId')
         );
+    }
+
+    /**
+     * @param int $courseId
+     * @param array $data
+     *
+     * @return bool
+     */
+    public function update($courseId, $data)
+    {
+        return $this->courseRepo->update($courseId, $data);
     }
 }

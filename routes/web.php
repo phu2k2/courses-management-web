@@ -36,10 +36,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
         Route::get('my-courses', [CourseController::class, 'getMyCourses'])->name('my-courses');
     });
-    Route::resource('comments', CommentController::class)->only(['store', 'destroy']);
+    Route::resource('comments', CommentController::class)->only(['store']);
     Route::resource('reviews', ReviewController::class)->only(['store']);
-    Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('carts', CartController::class)->only(['index', 'store']);
     Route::delete('carts/delete-cart', [CartController::class, 'deleteMutilCarts'])->name('carts.delete-cart');
+    Route::delete('carts/{id}', [CartController::class, 'destroy'])->name('carts.destroy');
     Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
     Route::resource('orders', OrderController::class)->only(['index', 'store']);
     //admin and instructor can access
@@ -50,7 +51,9 @@ Route::middleware(['auth'])->group(function () {
             })->name('home');
 
             Route::resource('courses', InstructorCourseController::class);
-            Route::get('courses/create/upload-file', [InstructorCourseController::class, 'upload'])->name('courses.upload');
+            Route::get('courses/create/upload-file/{courseId}', [InstructorCourseController::class, 'upload'])->name('courses.upload');
+            Route::get('courses/create/getUploadUrl/{courseId}', [InstructorCourseController::class, 'getUploadUrl'])->name('courses.getUrl');
+            Route::put('courses/create/updateUrl/{courseId}', [InstructorCourseController::class, 'updateUrl'])->name('courses.updateUrl');
         });
     });
 
@@ -79,6 +82,10 @@ Route::middleware(['guest'])->group(function () {
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
+
+Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
+
+Route::resource('orders', OrderController::class)->only(['index', 'store']);
 
 Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show')->middleware('verifyUserAccessCourse');

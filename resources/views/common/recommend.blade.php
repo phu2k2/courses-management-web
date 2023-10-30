@@ -3,7 +3,7 @@
 <section class="pt-5 pb-9 py-md-11 bg-white mb-8 border-bottom">
     <div class="container">
         <div class="text-center mb-4 mb-md-7 text-capitalize" data-aos="fade-up">
-            <h1 class="mb-1">Recommended for you</h1>
+            <h1 class="mb-1">Recommended for you(To do)</h1>
             <p class="font-size-lg mb-0">Discover your perfect program in our courses.</p>
         </div>
 
