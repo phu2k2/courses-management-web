@@ -141,7 +141,7 @@
                                 </div>
                             </fieldset>
                             <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Price (USD) <span class="text-alizarin fst-italic">*</span></label>
+                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Price ($) <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-4">
                                     <input type="number" step="0.01" name="price" class="form-control" value="{{ old('price') }}">
                                     @error('price')
