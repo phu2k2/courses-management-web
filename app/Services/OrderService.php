@@ -66,9 +66,9 @@ class OrderService
             foreach ($carts as $item) {
                 $cartId[] = $item->id;
                 $courseId = $item->course->id;
-                $courseIds = $item->course->id;
+                $courseIds[] = $item->course->id;
 
-                $dataOrder = [
+                $dataOrder[] = [
                     'user_id' => $userId,
                     'course_id' => $courseId,
                     'price' => $item->course?->discounted_price,
@@ -78,7 +78,7 @@ class OrderService
                     'updated_at' => $currentTime,
                 ];
 
-                $dataEnroll = [
+                $dataEnroll[] = [
                     'user_id' => $userId,
                     'course_id' => $courseId,
                     'title' => $item->course?->title,
