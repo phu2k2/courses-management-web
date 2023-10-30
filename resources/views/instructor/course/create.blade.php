@@ -141,16 +141,22 @@
                                 </div>
                             </fieldset>
                             <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Price ($) <span class="text-alizarin fst-italic">*</span></label>
+                                <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Price (USD) <span class="text-alizarin fst-italic">*</span></label>
                                 <div class="col-sm-4">
-                                    <input type="number" step="0.01" name="price" class="form-control" value="{{ old('price') }}">
-                                    @error('price')
-                                        <div class="text-alizarin fst-italic">{{ $message }}</div>
-                                    @enderror
+                                    <div class="inputWithIcon">
+                                        <input type="number" step="0.01" min="0" name="price" class="form-control" value="{{ old('price') }}">
+                                        <i class="bi bi-currency-dollar me-2"></i>
+                                        @error('price')
+                                            <div class="text-alizarin fst-italic">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <label for="inputNumber" class="col-sm-2 col-form-label fw-bold">Discount (%)</label>
                                 <div class="col-sm-4">
-                                    <input type="number" min="0" max="100" step="1" name="discount" class="form-control" value="{{ old('discount') }}">
+                                    <div class="inputWithIcon">
+                                        <input type="number" min="0" max="100" step="1" name="discount" class="form-control" value="{{ old('discount') }}">
+                                        <i class="bi bi-percent me-2"></i>
+                                    </div>
                                     @error('discount')
                                         <div class="text-alizarin fst-italic">{{ $message }}</div>
                                     @enderror
