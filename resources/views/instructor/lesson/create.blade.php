@@ -3,10 +3,12 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/css/theme.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/instructor/course.css') }}">
 @endsection.
 @section('script')
     <script src="{{ asset('assets/js/theme.min.js') }}"></script>
     <script src="{{ asset('assets/js/toast.js') }}"></script>
+    <script src="{{ asset('assets/js/instructor/change.image.js') }}"></script>
 @endsection
 @section('content')
     <main id="main" class="main">
@@ -52,8 +54,7 @@
                                     <div class="col-sm-10 row change-img">
                                         <div class="col-sm-6 video-change">
                                             <img class="mb-3 change-video"
-                                                src="{{ asset('assets/img/icons/show-change-image.jpg') }}" alt=""
-                                                style="width:200px; height:200px;">
+                                                src="{{ asset('assets/img/icons/show-change-image.jpg') }}" alt="">
                                         </div>
                                         <div class="col-sm-6">
                                             <input type="file" name="trailer_url" id="trailer" class="form-control"
@@ -72,9 +73,7 @@
                         </form><!-- End General Form Elements -->
                     </div>
                 </div>
-
             </div>
         </section>
-
     </main><!-- End #main -->
 @endsection
