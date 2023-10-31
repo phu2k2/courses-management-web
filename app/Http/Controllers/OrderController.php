@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Services\OrderService;
+use App\Services\PaypalService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class OrderController extends Controller
@@ -36,8 +38,16 @@ class OrderController extends Controller
      * Store a newly created resource in storage.
      * @return RedirectResponse
      */
-    public function store()
+    public function store(Request $request)
     {
+        $paymentMethod = $request->input('payment_method');
+
+        if ($paymentMethod === 'paypal') {
+            return redirect()->route('paypal.payment');
+        } elseif ($paymentMethod === 'momo') {
+            //implement
+        }
+
         try {
             $userId = (int) auth()->id();
             $cart = session()->get('cart');

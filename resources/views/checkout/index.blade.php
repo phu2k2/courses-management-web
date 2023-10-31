@@ -1,6 +1,13 @@
 @extends('layouts.app')
 @section('title', 'checkout')
+@section('script')
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
+@endsection
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
+@endsection
 @section('content')
+@include('layouts.message')
     <div class="bg-white woocommerce-order-received">
         <!-- SHOP ORDER COMPLETED
                                                                                                                                                                                         ================================================== -->
@@ -52,12 +59,20 @@
 
                                             <tfoot>
                                                 <tr>
-                                                    <th scope="row">Payment method:</th>
-                                                    <td>Paypal payments</td>
+                                                    <th scope="row">Select Payment method:</th>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <select class="form-control" id="paymentMethod" name="payment_method">
+                                                                <option value="paypal">Paypal</option>
+                                                                <option value="momo">Momo</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Total:</th>
-                                                    <td><span class="woocommerce-Price-amount amount"><span
+                                                    <td>
+                                                        <span class="woocommerce-Price-amount amount"><span
                                                                 class="woocommerce-Price-currencySymbol">$</span>{{ number_format($total, 2) }}</span>
                                                     </td>
                                                 </tr>
