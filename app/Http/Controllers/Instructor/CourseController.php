@@ -75,8 +75,7 @@ class CourseController extends Controller
 
         return response()->json([
             'urlImage' => AmazonS3::getPreSignedUploadUrl($pathImage),
-            'urlVideo' => AmazonS3::getPreSignedUploadUrl($pathVideo)
-        ]);
+            'urlVideo' => AmazonS3::getPreSignedUploadUrl($pathVideo)]);
     }
 
     /**
