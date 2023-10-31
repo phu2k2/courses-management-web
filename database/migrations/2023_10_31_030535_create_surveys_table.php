@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('surveys', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedTinyInteger('category_id');
-            $table->tinyInteger('languages');
-            $table->tinyInteger('level');
+            $table->unsignedTinyInteger('category_id')->nullable();
+            $table->tinyInteger('languages')->nullable();
+            $table->tinyInteger('level')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
