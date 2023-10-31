@@ -2,8 +2,12 @@
 
 return [
     'user' => [
+        'verify_email' => [
+            'success' => 'Email authentication successful',
+            'error' => 'Email authentication failed'
+        ],
         'success' => [
-            'create' => 'Register account was successful',
+            'create' => 'Register account was successful. Please check your email to verify your account.',
         ],
         'error' => [
             'login' => 'Login error, please check your email or password'
