@@ -77,5 +77,11 @@ return [
         'success' => [
             'upload' => 'Upload files were successful',
         ]
+        ],
+    'payment' => [
+        'paypal' => [
+            'error' => 'Something went wrong.',
+            'cancel' => 'You have canceled the transaction.'
+        ]
     ]
 ];

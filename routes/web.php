@@ -10,6 +10,7 @@ use App\Http\Controllers\Instructor\CourseController as InstructorCourseControll
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
@@ -43,6 +44,14 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('carts/{id}', [CartController::class, 'destroy'])->name('carts.destroy');
     Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
     Route::resource('orders', OrderController::class)->only(['index', 'store']);
+
+    Route::controller(PaypalController::class)
+        ->prefix('paypal')->name('paypal.')
+        ->group(function () {
+            Route::get('handle', 'handlePayment')->name('payment');
+            Route::get('success', 'paymentSuccess')->name('success');
+        });
+
     //admin and instructor can access
     Route::middleware(['instructor'])->group(function () {
         Route::prefix('instructor')->name('instructor.')->group(function () {
