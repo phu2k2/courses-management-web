@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\SurveyRepositoryInterface;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SurveyService
@@ -32,6 +33,8 @@ class SurveyService
      */
     public function addSurvey(Request $request)
     {
+        $currentTime  = Carbon::now();
+
         $data = [];
         $level = $request->input("level");
         $language = $request->input("languages");
@@ -41,7 +44,9 @@ class SurveyService
                 'user_id' => auth()->id(),
                 'category_id' => $category,
                 'languages' => $language,
-                'level' => $level
+                'level' => $level,
+                'created_at' => $currentTime,
+                'updated_at' => $currentTime,
             ];
         }
         $this->surveyRepo->insertMultiple($data);
