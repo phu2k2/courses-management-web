@@ -17,3 +17,11 @@ function readURL(input) {
     const html = `<video controls="controls" src=" ${url} " type="video/mp4" class="mb-3 img-change video"></video>`
     $('.video-change').append(html);
   };
+
+  document.getElementById('lessonUrl').onchange = e => {
+    const file = e.target.files[0];
+    const url = URL.createObjectURL(file);
+    $('.change-video').hide();
+    const html = `<video controls="controls" src=" ${url} " type="video/mp4" class="mb-3 img-change video"></video>`
+    $('.video-change').append(html);
+};

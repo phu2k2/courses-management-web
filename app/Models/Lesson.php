@@ -22,6 +22,10 @@ class Lesson extends Model
         'lesson_url',
     ];
 
+    protected $attributes = [
+        'lesson_url' => '',
+    ];
+
     /**
      * @return HasMany<Comment>
      */

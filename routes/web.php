@@ -7,6 +7,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
+use App\Http\Controllers\Instructor\LessonController as InstructorLessonController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
@@ -53,6 +54,14 @@ Route::middleware(['auth'])->group(function () {
             Route::get('courses/create/upload-file/{courseId}', [InstructorCourseController::class, 'upload'])->name('courses.upload');
             Route::get('courses/create/getUploadUrl/{courseId}', [InstructorCourseController::class, 'getUploadUrl'])->name('courses.getUrl');
             Route::put('courses/create/updateUrl/{courseId}', [InstructorCourseController::class, 'updateUrl'])->name('courses.updateUrl');
+            Route::get('/curriculum/show/courses/{courseId}', [InstructorCourseController::class, 'showCurriculum'])->name('curriculum.show');
+            Route::get('/curriculum/show/courses/{courseId}/topics/create', [InstructorCourseController::class, 'createTopic'])
+                ->name('topics.create');
+            Route::post('/curriculum/show/courses/topics/store', [InstructorCourseController::class, 'storeTopic'])->name('topics.store');
+            Route::get('/courses/{courseId}/topics/{topicId}/lessons/create', [InstructorLessonController::class, 'create'])->name('lessons.create');
+            Route::post('/lessons/store', [InstructorLessonController::class, 'store'])->name('lessons.store');
+            Route::get('/lessons/getUploadUrl/{lessonId}', [InstructorLessonController::class, 'getUploadUrl'])->name('lessons.getUrl');
+            Route::put('/lessons/updateUrl/{lessonId}', [InstructorLessonController::class, 'updateUrl'])->name('lessons.updateUrl');
         });
     });
 
@@ -77,6 +86,7 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/forgot-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('password.email');
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
     Route::post('/reset-password', [ResetPasswordController::class, 'submitResetPasswordForm'])->name('password.update');
+    Route::get('courses/create/upload-file', [InstructorCourseController::class, 'upload'])->name('courses.upload');
 });
 
 Route::get('/', [HomeController::class, 'home'])->name('home');

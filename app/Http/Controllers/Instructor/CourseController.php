@@ -75,7 +75,8 @@ class CourseController extends Controller
 
         return response()->json([
             'urlImage' => AmazonS3::getPreSignedUploadUrl($pathImage),
-            'urlVideo' => AmazonS3::getPreSignedUploadUrl($pathVideo)]);
+            'urlVideo' => AmazonS3::getPreSignedUploadUrl($pathVideo)
+        ]);
     }
 
     /**
@@ -93,5 +94,12 @@ class CourseController extends Controller
         $this->courseService->update($courseId, $data);
 
         return response()->json(['message' => __('messages.file.success.upload')]);
+    }
+
+    public function showCurriculum(int $id): View
+    {
+        $course = $this->courseService->getCourse($id);
+
+        return view('instructor.course.curriculum', compact('course'));
     }
 }
