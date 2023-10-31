@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\LessonService;
 use Illuminate\Http\Request;
 use AmazonS3;
+use App\Http\Requests\StoreLessonRequest;
 use Illuminate\Contracts\View\View;
 
 class LessonController extends Controller
@@ -38,7 +39,7 @@ class LessonController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(StoreLessonRequest $request)
     {
         $lesson = $this->lessonService->create($request->all());
         $lessonId = $lesson->id;
