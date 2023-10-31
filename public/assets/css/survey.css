@@ -22,22 +22,3 @@
     height: 5px;
     width: 33.3%;
 }
-
-.footer {
-    height: 64px;
-    overflow: hidden;
-    padding: 15px 50px;
-    background-color: #ccc;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
-
-.survey-container {
-    margin: auto;
-    width: 600px;
-    height: 400px;
-    background-color: #fff;
-    position: relative;
-}
