@@ -90,4 +90,15 @@ class UserService
     {
         return $this->userRepository->updatePassword($email, Hash::make($password));
     }
+
+    /**
+     * @param string $token
+     * @param string $timeSubmit
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function isExpiredToken($token, $timeSubmit)
+    {
+        return $this->userRepository->isExpiredToken($token, $timeSubmit);
+    }
 }

@@ -46,4 +46,15 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return $this->model->where('id', $userId)->where('role_id', UserRoleEnum::Instructor)->first();
     }
+
+    /**
+     * @param string $token
+     * @param string $timeSubmit
+     *
+     * @return Model|null
+     */
+    public function isExpiredToken($token, $timeSubmit)
+    {
+        return $this->model->where('token', $token)->where('expired_at', '>', $timeSubmit)->first();
+    }
 }

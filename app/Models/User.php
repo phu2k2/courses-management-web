@@ -27,11 +27,13 @@ class User extends Authenticatable
         'password',
         'is_active',
         'role_id',
+        'token',
     ];
 
     protected $attributes = [
         'is_active' => 0,
-        'role_id' => 1
+        'role_id' => 1,
+        'token' => ''
     ];
 
     protected $casts = [

@@ -25,4 +25,12 @@ interface UserRepositoryInterface extends RepositoryInterface
      * @return Model|null
      */
     public function findRoleInstructor($userId);
+
+    /**
+     * @param string $token
+     * @param string $timeSubmit
+     *
+     * @return Model|null
+     */
+    public function isExpiredToken($token, $timeSubmit);
 }

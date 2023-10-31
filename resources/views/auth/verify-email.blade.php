@@ -152,7 +152,7 @@
                                                         <tr>
                                                             <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                                                 <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:20px;font-weight:400;line-height:30px;text-align:center;color:#8189A9;">
-                                                                <h2 style="margin: 0; font-weight: bold; font-size: 20px; line-height: 24px;">Welcome to SupremeMethod, {{ $user->username }}!</h2>
+                                                                <h2 style="margin: 0; font-weight: bold; font-size: 20px; line-height: 24px;">Welcome to SupremeMethod, {{ $username }}!</h2>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -187,7 +187,7 @@
                                                         <tr>
                                                             <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                                             <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;line-height:20px;text-align:left;color:#8189A9;">
-                                                                <p>Hi {{ $user->username }},</p>
+                                                                <p>Hi <b>{{ $username }}</b>,</p>
                                                                 <p>We're happy you signed up for SupremeMethod.</p>
                                                                 <p>You’re the newest member in this community of over 100 million people who use SupremeMethod to learn, study and instruction courses online!</p>
 
@@ -204,7 +204,7 @@
                                                             <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
                                                                 <tbody><tr>
                                                                 <td align="center" bgcolor="#0078be" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#0078be;" valign="middle">
-                                                                    <a href="" style="display: inline-block; background: #0078be; color: #ffffff; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 500; line-height: 24px; margin: 0; text-decoration: none; text-transform: none; padding: 10px 25px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Verify Now </a>
+                                                                    <a href="{{ route('verify-email', ['token' => $token]) }}" style="display: inline-block; background: #0078be; color: #ffffff; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 500; line-height: 24px; margin: 0; text-decoration: none; text-transform: none; padding: 10px 25px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Verify Now </a>
                                                                 </td>
                                                                 </tr>
                                                             </tbody></table>

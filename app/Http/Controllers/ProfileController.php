@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use AmazonS3;
+use App\Enums\ActiveUserEnum;
 
 class ProfileController extends Controller
 {
@@ -76,5 +77,24 @@ class ProfileController extends Controller
         $path = "profile/{$userId}/avatar.jpg";
 
         return response()->json(['url' => AmazonS3::getPreSignedUploadUrl($path)]);
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return RedirectResponse
+     */
+    public function updateActive($token)
+    {
+        $user = $this->userService->isExpiredToken($token, now());
+        if ($this->userService->isExpiredToken($token, now())) {
+            $data = [];
+            $data['is_active'] = ActiveUserEnum::active;
+            $this->userService->updateUser($user?->id, $data);
+            session()->flash('message', __('messages.user.verify_email.success'));
+
+            return redirect()->route('login.show');
+        }
+        abort(419);
     }
 }
