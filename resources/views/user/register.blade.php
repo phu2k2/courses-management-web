@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit frofile')
+@section('title', 'Register Instructor')
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/css/account.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
@@ -19,9 +19,9 @@
                         <form method="POST" action="{{ route('users.sendMail') }}">
                             @csrf
                             @instructor
-                                <h2 style="text-align: center;">YOU HAS REGISTERED INSTRUCTOR</h2>
+                                <h2 style="text-align: center;">YOU HAVE REGISTERED AS AN INSTRUCTOR</h2>
                             @else
-                                <h2 style="text-align: center;">FORM REGISTER INTRUCTOR</h2>
+                                <h2 style="text-align: center;">FORM REGISTER INSTRUCTOR</h2>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email address</label>
                                     <input type="email" class="form-control" id="inputEmail4" placeholder="Email"

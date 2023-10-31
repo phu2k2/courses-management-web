@@ -72,12 +72,9 @@ class UserService
      * @param int $userId
      * @return bool
      */
-    public function findRole($userId)
+    public function findRoleInstructor($userId)
     {
-        $roleId = UserRoleEnum::Instructor;
-        /** @var User */
-        $user = $this->userRepository->findOrFail($userId);
-        if ($user->role_id === $roleId) {
+        if ($this->userRepository->findRoleInstructor($userId)) {
             return true;
         }
 

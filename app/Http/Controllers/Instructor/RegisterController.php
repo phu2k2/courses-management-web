@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Instructor;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\UserService;
+use App\Services\EmailService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\URL;
 use Illuminate\View\View;
 
 class RegisterController extends Controller
@@ -18,9 +17,15 @@ class RegisterController extends Controller
      */
     protected $userService;
 
-    public function __construct(UserService $userService)
+    /**
+     * @var emailService
+     */
+    protected $emailService;
+
+    public function __construct(UserService $userService, EmailService $emailService)
     {
         $this->userService = $userService;
+        $this->emailService = $emailService;
     }
 
     /**
@@ -28,7 +33,7 @@ class RegisterController extends Controller
      */
     public function index(): View
     {
-        $user = $this->userService->getInfor((int) auth()->id());
+        $user = $this->userService->getInfor(auth()->id());
 
         return view('user.register', compact('user'));
     }
@@ -53,18 +58,12 @@ class RegisterController extends Controller
             return redirect()->back();
         }
 
-        $confirmationUrl = URL::temporarySignedRoute(
-            'users.edit',
-            now()->addMinutes(10),
-            ['id' => $userId]
-        );
+        $confirmationUrl = $this->emailService->expiredLink($userId);
 
-        Mail::send("email.register", ['confirmationUrl' => $confirmationUrl, 'username' => $userName], function ($message) use ($email) {
-            $message->to($email);
-            $message->subject('Instructor Registration');
-        });
+        $this->emailService->sendEmail($email, $userName, $confirmationUrl);
 
         $request->session()->put('last_email_sent_time', now());
+
         session()->flash('message', __('messages.instructor.success.send'));
 
         return redirect()->back();
@@ -76,11 +75,12 @@ class RegisterController extends Controller
      */
     public function updateRole($id): RedirectResponse
     {
-        if ($this->userService->findRole($id)) {
-            session()->flash('error', __('messages.instructor.error.register'));
+        if ($this->userService->findRoleInstructor($id)) {
+            session()->flash('message', __('messages.instructor.error.register'));
 
             return redirect()->back();
         }
+
         $this->userService->updateRole($id);
         session()->flash('message', __('messages.instructor.success.register'));
 
