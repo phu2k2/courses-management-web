@@ -6,7 +6,6 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
@@ -14,6 +13,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\Instructor\RegisterController as InstructorRegisterController;
+use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,9 @@ Route::middleware(['auth'])->group(function () {
         Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
         Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
         Route::get('my-courses', [CourseController::class, 'getMyCourses'])->name('my-courses');
+        Route::get('register', [InstructorRegisterController::class, 'index'])->name('register');
+        Route::post('send-mail', [InstructorRegisterController::class, 'submitRegisterForm'])->name('sendMail');
+        Route::get('comfirm-instructor/{id}', [InstructorRegisterController::class, 'updateRole'])->name('comfirm')->middleware('signed');
     });
     Route::resource('comments', CommentController::class)->only(['store']);
     Route::resource('reviews', ReviewController::class)->only(['store']);
