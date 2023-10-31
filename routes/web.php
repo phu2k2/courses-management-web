@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('carts/{id}', [CartController::class, 'destroy'])->name('carts.destroy');
     Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
     Route::resource('orders', OrderController::class)->only(['index', 'store']);
+    Route::resource('surveys', SurveyController::class)->only(['index', 'store']);
     //admin and instructor can access
     Route::middleware(['instructor'])->group(function () {
         Route::prefix('instructor')->name('instructor.')->group(function () {
