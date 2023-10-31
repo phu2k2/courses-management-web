@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
         Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
         Route::get('my-courses', [CourseController::class, 'getMyCourses'])->name('my-courses');
+        Route::get('survey-form', [LoginController::class, 'survey'])->name('survey-form');
     });
     Route::resource('comments', CommentController::class)->only(['store']);
     Route::resource('reviews', ReviewController::class)->only(['store']);
