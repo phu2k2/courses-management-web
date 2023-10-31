@@ -48,6 +48,15 @@ class CourseService
 
     /**
      * @param int $id
+     * @return LengthAwarePaginator<Model>
+     */
+    public function getInstructorCourses($id): LengthAwarePaginator
+    {
+        return $this->courseRepo->getInstructorCourses($id);
+    }
+
+    /**
+     * @param int $id
      * @return Model
      */
     public function getCourse(int $id): Model
