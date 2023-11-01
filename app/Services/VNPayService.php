@@ -78,7 +78,7 @@ class VNPayService
             if ($i == 1) {
                 $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
             }
-            if($i==0){
+            if ($i == 0) {
                 $hashdata .= urlencode($key) . "=" . urlencode($value);
                 $i = 1;
             }
@@ -109,7 +109,7 @@ class VNPayService
             return false;
         }
 
-        if(!$this->checkPrice($inputData['vnp_Amount'])){
+        if (!$this->checkPrice($inputData['vnp_Amount'])) {
             return false;
         }
 
@@ -140,7 +140,7 @@ class VNPayService
             if ($i == 1) {
                 $hashData = $hashData . '&' . urlencode($key) . "=" . urlencode($value);
             }
-            if($i == 0){
+            if ($i == 0) {
                 $hashData = $hashData . urlencode($key) . "=" . urlencode($value);
             }
             $i = 1;
