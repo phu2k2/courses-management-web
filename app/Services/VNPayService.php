@@ -116,6 +116,13 @@ class VNPayService
         return true;
     }
 
+    /**
+     * Verifies the integrity and authenticity of input data
+     * by comparing a computed hash with a provided secure hash.
+     *
+     * @param array $inputData
+     * @return boolean
+     */
     public function checkSecureHash($inputData)
     {
         $vnpHashSecret = env('VNP_HASH_SECRET');
@@ -145,6 +152,12 @@ class VNPayService
         return $secureHash == $vnpSecureHash;
     }
 
+    /**
+     * Get payment success or fail.
+     *
+     * @param int $vnpAmount
+     * @return boolean
+     */
     public function checkPrice($vnpAmount)
     {
         $courseIds = [];
