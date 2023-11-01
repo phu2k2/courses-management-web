@@ -87,4 +87,15 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     {
         return $this->model->whereIn('id', $courseIds)->increment('total_students');
     }
+
+    /**
+     * @param array $categoryIds
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function recommendCourse($categoryIds)
+    {
+        $numberItem = 6;
+
+        return $this->model->whereIn('category_id', $categoryIds)->inRandomOrder()->take($numberItem)->get();
+    }
 }
