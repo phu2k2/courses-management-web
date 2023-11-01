@@ -47,7 +47,7 @@ class VNPayService
         $vnpTmnCode = env('VNP_TMN_CODE');
         $vnpHashSecret = env('VNP_HASH_SECRET');
         $vnpTxnRef = $userID . time();
-        $vnpOrderInfo = 'Noi dung thanh toan';
+        $vnpOrderInfo = 'Payment with VN Pay';
         $vnpOrderType = 'billpayment';
         $vnpAmount = $priceVND * self::VNPAY_AMOUNT_MULTIPLIER;
         $vnpLocale = 'vn';
