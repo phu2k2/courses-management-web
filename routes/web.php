@@ -15,6 +15,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\Instructor\RegisterController as InstructorRegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,11 +37,15 @@ Route::middleware(['auth'])->group(function () {
         Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
         Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
         Route::get('my-courses', [CourseController::class, 'getMyCourses'])->name('my-courses');
+        Route::get('register', [InstructorRegisterController::class, 'index'])->name('register');
+        Route::post('send-mail', [InstructorRegisterController::class, 'submitRegisterForm'])->name('sendMail');
+        Route::get('comfirm-instructor/{id}', [InstructorRegisterController::class, 'updateRole'])->name('comfirm')->middleware('signed');
     });
     Route::resource('comments', CommentController::class)->only(['store']);
     Route::resource('reviews', ReviewController::class)->only(['store']);
-    Route::resource('carts', CartController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('carts', CartController::class)->only(['index', 'store']);
     Route::delete('carts/delete-cart', [CartController::class, 'deleteMutilCarts'])->name('carts.delete-cart');
+    Route::delete('carts/{id}', [CartController::class, 'destroy'])->name('carts.destroy');
     Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
     Route::resource('orders', OrderController::class)->only(['index', 'store']);
     //admin and instructor can access

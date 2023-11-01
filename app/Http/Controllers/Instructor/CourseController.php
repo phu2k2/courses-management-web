@@ -18,7 +18,7 @@ class CourseController extends Controller
     protected $categoryService;
 
     /**
-     * @var CourseService;
+     * @var CourseService
      */
     protected $courseService;
 
