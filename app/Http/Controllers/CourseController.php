@@ -51,7 +51,6 @@ class CourseController extends Controller
     public function index(GetCoursesRequest $request): View
     {
         $userId = (int) auth()->id();
-        $categoryIds = [];
 
         $courses = $this->courseService->getCourses($request);
 
