@@ -199,7 +199,7 @@
                                 <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;line-height:20px;text-align:left;color:#8189A9;">
                                   <p>Dear {{ $user->username }},</p>
 ​
-                                  <p>We are delighted to inform you that the course "{{ $course->title }}" you've enrolled in has been updated with a new lecture.</p>
+                                  <p>We are delighted to inform you that the course "{{ $lesson->topic->course->title }}" you've enrolled in has been updated with a new lecture.</p>
                               
                                   <p>New Lecture Name: {{ $lesson->title }}</p>
                                   <p>Lecture Duration: {{ $lesson->lesson_duration }}h</p>
@@ -215,7 +215,7 @@
                                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
                                   <tbody><tr>
                                     <td align="center" bgcolor="#0078be" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#0078be;" valign="middle">
-                                      <a href="{{ route('courses.lessons.show', ['courseId' => $course->id, 'lessonId' => $lesson->id]) }}" style="display: inline-block; background: #0078be; color: #ffffff; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 500; line-height: 24px; margin: 0; text-decoration: none; text-transform: none; padding: 10px 25px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Start Learning Now </a>
+                                      <a href="{{ route('courses.lessons.show', ['courseId' => $lesson->topic->course_id, 'lessonId' => $lesson->id]) }}" style="display: inline-block; background: #0078be; color: #ffffff; font-family: Montserrat, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 500; line-height: 24px; margin: 0; text-decoration: none; text-transform: none; padding: 10px 25px; mso-padding-alt: 0px; border-radius: 3px;" target="_blank"> Start Learning Now </a>
                                     </td>
                                   </tr> 
                                 </tbody></table>

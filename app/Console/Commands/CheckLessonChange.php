@@ -29,8 +29,9 @@ class CheckUpdateLesson extends Command
      */
     public function handle()
     {
-        // Lấy tất cả bài học mới được tạo (created_at = now) và danh sách người học
-        Lesson::whereDate('created_at', Carbon::now())
+        $startTime = Carbon::now()->subDay();
+        $endTime = Carbon::now();
+        Lesson::whereBetween('created_at', [$startTime, $endTime])
             ->with(['topic.course.enrollments.user'])
             ->chunk(100, function ($newLessonsAndEnrollments) {
                 foreach ($newLessonsAndEnrollments as $lesson) {
@@ -42,7 +43,7 @@ class CheckUpdateLesson extends Command
 
                         Mail::send(
                             'email.courses.create_lesson',
-                            ['user' => $user, 'course' => $lesson->topic?->course, 'lesson' => $lesson],
+                            ['user' => $user, 'lesson' => $lesson],
                             function ($message) use ($user) {
                                 $message->to($user?->email)
                                     ->subject('Course Update Notification');
