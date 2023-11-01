@@ -19,21 +19,19 @@ class TopicController extends Controller
     {
         $this->topicService = $topicService;
     }
-    public function createTopic(int $id): View
+    public function create(int $courseId): View
     {
-        return view('instructor.topic.create', compact('id'));
+        return view('instructor.topic.create', compact('courseId'));
     }
 
     /**
-     * Undocumented function
-     *
+     * Function add one topic for one course
+     * @param int $courseId
      * @param StoreTopicRequest $request
      * @return RedirectResponse
      */
-    public function storeTopic(StoreTopicRequest $request)
+    public function store(StoreTopicRequest $request, $courseId)
     {
-        $courseId = $request->input('course_id');
-
         if ($this->topicService->create($request)) {
             session()->flash('message', __('messages.topic.success.create'));
             return redirect()->route('instructor.curriculum.show', compact('courseId'));

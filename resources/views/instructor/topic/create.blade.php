@@ -19,13 +19,14 @@
                             <div class="card-body" style="margin: 10px;padding: -10px;">
                                 <h5 class="card-title">Add Topic</h5>
                                 <!-- Vertical Form -->
-                                <form class="row g-3" method="POST" action="{{route('instructor.topics.store')}}">
+                                <form class="row g-3" method="POST"
+                                    action="{{ route('instructor.topics.store', ['courseId' => $courseId]) }}">
                                     @csrf
                                     <div class="col-12" style="margin-top: 20px;">
                                         <label for="name" class="form-label">Topic Name</label>
                                         <input type="text" class="form-control" id="name" name="name">
                                         <input type="hidden" class="form-control" name="course_id"
-                                            value="{{ $id }}">
+                                            value="{{ $courseId }}">
                                     </div>
                                     <div class="text-center" style="margin-top: 40px;">
                                         <button type="submit" class="btn btn-primary">Submit</button>
