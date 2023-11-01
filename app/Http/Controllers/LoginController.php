@@ -2,13 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ActiveUserEnum;
 use App\Http\Requests\LoginRequest;
+use App\Services\EmailService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    /**
+     * @var EmailService
+     */
+    protected $emailService;
+
+    public function __construct(EmailService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
+
     public function show(): View
     {
         return view('auth.login');
@@ -24,12 +36,18 @@ class LoginController extends Controller
         $credentials = $request->validated();
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+            if (auth()->user()?->is_active == ActiveUserEnum::active) {
+                $request->session()->regenerate();
 
-            return redirect()->route('home');
+                return redirect()->route('home');
+            }
+            $this->emailService->verifyMail((int) auth()->id(), (string) auth()->user()?->email, (string) auth()->user()?->username);
+            auth()->logout();
+
+            return redirect()->back()->with('error', __('messages.user.error.active'))->withInput();
         }
 
-        return redirect()->back()->with('error', __('messages.user.error.login'));
+        return redirect()->back()->with('error', __('messages.user.error.login'))->withInput();
     }
 
     /**

@@ -10,7 +10,8 @@ return [
             'create' => 'Register account was successful. Please check your email to verify your account.',
         ],
         'error' => [
-            'login' => 'Login error, please check your email or password'
+            'login' => 'Login error, please check your email or password',
+            'active' => 'Your account has not been activated, please check your email for authentication.'
         ]
     ],
     'profile' => [
