@@ -20,4 +20,10 @@ interface CourseRepositoryInterface extends RepositoryInterface
      * @return int
      */
     public function addStudentInCourse($courseIds);
+
+    /**
+     * @param array $courseIds
+     * @return float
+     */
+    public function getTotalPriceOfCourses($courseIds);
 }

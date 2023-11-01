@@ -79,4 +79,21 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     {
         return $this->model->whereIn('id', $courseIds)->increment('total_students');
     }
+
+    /**
+     * @param array $courseIds
+     * @return float
+     */
+    public function getTotalPriceOfCourses($courseIds)
+    {
+        $result = $this->model->whereIn('id', $courseIds)
+            ->selectRaw('SUM(price * (100 - discount) / 100) as total_price')
+            ->first();
+
+        if (!$result) {
+            return 0;
+        }
+
+        return $result->total_price;
+    }
 }
