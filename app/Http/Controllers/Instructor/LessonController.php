@@ -43,6 +43,7 @@ class LessonController extends Controller
     {
         $lesson = $this->lessonService->create($request->all());
         $lessonId = $lesson->id;
+
         return response()->json(['message' => __('message.file.success.upload'), 'lessonId' => $lessonId]);
     }
 
