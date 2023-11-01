@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\SurveyRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,17 +13,9 @@ class SurveyService
      */
     protected $surveyRepo;
 
-    /**
-     * @var CategoryRepositoryInterface
-     */
-    protected $categoryRepo;
-
-    public function __construct(
-        SurveyRepositoryInterface $surveyRepo,
-        CategoryRepositoryInterface $categoryRepo
-    ) {
+    public function __construct(SurveyRepositoryInterface $surveyRepo)
+    {
         $this->surveyRepo = $surveyRepo;
-        $this->categoryRepo = $categoryRepo;
     }
 
     /**
