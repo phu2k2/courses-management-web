@@ -52,8 +52,15 @@
 
                                             <tfoot>
                                                 <tr>
-                                                    <th scope="row">Payment method:</th>
-                                                    <td>Paypal payments</td>
+                                                    <th scope="row">Select Payment method:</th>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <select class="form-control" id="paymentMethod" name="payment_method">
+                                                                <option value="paypal">Paypal</option>
+                                                                <option value="vnpay">VN Pay</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Total:</th>

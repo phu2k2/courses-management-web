@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\VNPayController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -90,3 +91,6 @@ Route::resource('orders', OrderController::class)->only(['index', 'store']);
 Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show')->middleware('verifyUserAccessCourse');
 });
+
+Route::get('/payments/vn-pay', [VNPayController::class,'index'])->name('vnPay.payment');
+Route::get('/payments/vn-pay/process', [VNPayController::class,'processPaymentAndOrder'])->name('vnPay.processPaymentAndOrder');
