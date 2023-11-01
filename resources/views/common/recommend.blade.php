@@ -9,7 +9,7 @@
 
         <section class="bg-light pt-5 pb-5 shadow-sm" data-aos="fade-up">
             <div class="container">
-                <div class="row">
+                <div class="row d-flex flex-row flex-nowrap overflow-auto">
                     @foreach ($recommend as $course)
                         <!--ADD CLASSES HERE d-flex align-items-stretch-->
                         <div class="col-lg-4 mb-3 d-flex align-items-stretch">

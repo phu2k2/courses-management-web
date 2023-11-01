@@ -30,7 +30,9 @@ interface CourseRepositoryInterface extends RepositoryInterface
 
     /**
      * @param array $categoryIds
+     * @param string $language
+     * @param string $level
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function recommendCourse($categoryIds);
+    public function recommnedCourse($categoryIds, $language, $level);
 }

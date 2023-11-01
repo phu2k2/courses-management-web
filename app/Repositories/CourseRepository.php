@@ -90,12 +90,12 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
 
     /**
      * @param array $categoryIds
+     * @param string $language
+     * @param string $level
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function recommendCourse($categoryIds)
+    public function recommnedCourse($categoryIds, $language, $level)
     {
-        $numberItem = 6;
-
-        return $this->model->whereIn('category_id', $categoryIds)->inRandomOrder()->take($numberItem)->get();
+        return $this->model->whereIn('category_id', $categoryIds)->whereOr($language)->whereOr($level)->get();
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Survey;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\SurveyRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class SurveyRepository extends BaseRepository implements SurveyRepositoryInterface
 {
@@ -25,6 +26,30 @@ class SurveyRepository extends BaseRepository implements SurveyRepositoryInterfa
      */
     public function getCategories($userId)
     {
-        return $this->model->where('user_id', $userId)->select('category_id')->get();
+        /** @var Survey */
+        $survey = $this->model;
+        return $survey->owner($userId)->select('category_id')->get();
+    }
+
+    /**
+     * @param int $userId
+     * @return Model
+     */
+    public function getLanguage($userId)
+    {
+        /** @var Survey */
+        $survey = $this->model;
+        return $survey->owner($userId)->value('languages');
+    }
+
+    /**
+     * @param int $userId
+     * @return Model
+     */
+    public function getLevel($userId)
+    {
+        /** @var Survey */
+        $survey = $this->model;
+        return $survey->owner($userId)->value('level');
     }
 }
