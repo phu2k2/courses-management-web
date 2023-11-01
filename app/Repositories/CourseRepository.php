@@ -62,6 +62,15 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     }
 
     /**
+     * @param int $id
+     * @return LengthAwarePaginator<Model>
+     */
+    public function getInstructorCourses($id): LengthAwarePaginator
+    {
+        return $this->model->with('user:id')->where('instructor_id', $id)->paginate(self::PAGESIZE);
+    }
+
+    /**
      * Find a record by its primary key.
      *
      * @param int $id The primary key value.
