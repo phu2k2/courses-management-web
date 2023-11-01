@@ -1,5 +1,20 @@
 @extends('layouts.app')
 @section('title', 'Course: ' . $course->title)
+@section('meta-tags')
+<!-- Facebook OG tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ $course->title }}" />
+    <meta property="og:description" content="{{ $course->introduction }}" />
+    <meta property="og:video" content="{{ $course->trailer_url }}" />
+    <meta property="og:url" content="{{ route('courses.show', ['course' => $course->id]) }}">
+
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ $course->title }}" />
+    <meta name="twitter:description" content="{{ $course->introduction }}" />
+    <meta name="twitter:video" content="{{ $course->trailer_url }}" />
+    <meta property="twitter:url" content="{{ route('courses.show', ['course' => $course->id]) }}">
+@endsection
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
 @endsection
