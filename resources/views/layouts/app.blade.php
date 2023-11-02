@@ -25,6 +25,7 @@
 </head>
 
 <body class="bg-white">
+    @yield('modal')
     @include('layouts.header')
 
     @yield('content')
