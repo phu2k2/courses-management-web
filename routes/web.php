@@ -6,6 +6,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
+use App\Http\Controllers\Instructor\TopicController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
@@ -14,7 +16,6 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Instructor\RegisterController as InstructorRegisterController;
-use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('profile/image', [ProfileController::class, 'updateImage'])->name('updateImage');
         Route::get('profile/getUploadUrl', [ProfileController::class, 'getUploadUrl'])->name('getUploadUrl');
         Route::get('my-courses', [CourseController::class, 'getMyCourses'])->name('my-courses');
+        Route::get('survey-form', [LoginController::class, 'survey'])->name('survey-form');
         Route::get('register', [InstructorRegisterController::class, 'index'])->name('register');
         Route::post('send-mail', [InstructorRegisterController::class, 'submitRegisterForm'])->name('sendMail');
         Route::get('comfirm-instructor/{id}', [InstructorRegisterController::class, 'updateRole'])->name('comfirm')->middleware('signed');
@@ -59,6 +61,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('courses/create/getUploadUrl/{courseId}', [InstructorCourseController::class, 'getUploadUrl'])->name('courses.getUrl');
             Route::put('courses/create/updateUrl/{courseId}', [InstructorCourseController::class, 'updateUrl'])->name('courses.updateUrl');
             Route::get('courses/create/upload-file/{courseId}', [InstructorCourseController::class, 'upload'])->name('courses.upload');
+            Route::get('courses/{courseId}/curriculum', [InstructorCourseController::class, 'showCurriculum'])->name('curriculum.show');
+            Route::get('/courses/{courseId}/curriculum/topics/create', [TopicController::class, 'create'])
+                ->name('topics.create');
+            Route::post('/courses/{courseId}/curriculum/topics', [TopicController::class, 'store'])->name('topics.store');
         });
     });
 
