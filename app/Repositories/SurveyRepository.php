@@ -26,9 +26,8 @@ class SurveyRepository extends BaseRepository implements SurveyRepositoryInterfa
      */
     public function getCategories($userId)
     {
-        /** @var Survey */
-        $survey = $this->model;
-        return $survey->owner($userId)->select('category_id')->get();
+        /** @phpstan-ignore-next-line */
+        return $this->model->owner($userId)->select('category_id')->get();
     }
 
     /**
@@ -37,9 +36,8 @@ class SurveyRepository extends BaseRepository implements SurveyRepositoryInterfa
      */
     public function getLanguage($userId)
     {
-        /** @var Survey */
-        $survey = $this->model;
-        return $survey->owner($userId)->value('languages');
+        /** @phpstan-ignore-next-line */
+        return $this->model->owner($userId)->value('languages');
     }
 
     /**
@@ -48,8 +46,7 @@ class SurveyRepository extends BaseRepository implements SurveyRepositoryInterfa
      */
     public function getLevel($userId)
     {
-        /** @var Survey */
-        $survey = $this->model;
-        return $survey->owner($userId)->value('level');
+        /** @phpstan-ignore-next-line */
+        return $this->model->owner($userId)->value('level');
     }
 }
