@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Course: ' . $course->title)
 @section('meta-tags')
-<!-- Facebook OG tags -->
+    <!-- Facebook OG tags -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ $course->title }}" />
     <meta property="og:description" content="{!! $course->introduction !!}" />
