@@ -9,9 +9,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
-
+use Illuminate\Support\Facades\Redis;
 class CourseService
 {
+    const CACHE_EXPIRATION = 600;
+
     /**
      * @var CourseRepositoryInterface
      */
@@ -43,7 +45,17 @@ class CourseService
      */
     public function getCourses(GetCoursesRequest $request): LengthAwarePaginator
     {
-        return $this->courseRepo->getCourses($request);
+        $cacheKey = 'courses_' . md5(serialize($request->validated()));
+
+        if (Redis::exists($cacheKey)) {
+            $serializedData = Redis::get($cacheKey);
+            return unserialize($serializedData);
+        }
+
+        $courses = $this->courseRepo->getCourses($request);
+        Redis::setex($cacheKey, self::CACHE_EXPIRATION, serialize($courses));
+
+        return $courses;
     }
 
     /**
