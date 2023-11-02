@@ -10,9 +10,10 @@ use App\Models\Course;
 use App\Models\Enrollment;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
 use Illuminate\Support\Facades\Redis;
+
 class CourseService
 {
-    const CACHE_EXPIRATION = 600;
+    protected const CACHE_EXPIRATION = 600;
 
     /**
      * @var CourseRepositoryInterface
@@ -49,7 +50,9 @@ class CourseService
 
         if (Redis::exists($cacheKey)) {
             $serializedData = Redis::get($cacheKey);
-            return unserialize($serializedData);
+            if ($serializedData) {
+                return unserialize($serializedData);
+            }
         }
 
         $courses = $this->courseRepo->getCourses($request);
