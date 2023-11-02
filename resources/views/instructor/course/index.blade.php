@@ -9,7 +9,7 @@
             <div>
                 <div class="card">
                     <div class="card-body">
-                        <a href="#" class="btn btn-primary d-inline-block m-2">
+                        <a href="{{ route('instructor.courses.create') }}" class="btn btn-primary d-inline-block m-2">
                             Add Course
                             <i class="bi bi-plus"></i>
                         </a>
