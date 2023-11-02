@@ -44,6 +44,7 @@ class Course extends Model
         'poster_url' => '',
         'average_rating' => 0,
         'num_reviews' => 0,
+        'discount' => 0,
         'total_students' => 0,
         'total_lessons' => 0,
         'total_time' => 0,
@@ -114,7 +115,7 @@ class Course extends Model
 
     /**
      * @return HasMany<Review>
-    */
+     */
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class, 'course_id');
@@ -134,6 +135,14 @@ class Course extends Model
     public function enrollments(): HasMany
     {
         return $this->hasMany(Enrollment::class, 'course_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo<User, Course>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'instructor_id ', 'id');
     }
 
     /**
@@ -234,21 +243,21 @@ class Course extends Model
             $query->when(in_array('short', $durations), function ($query) {
                 $query->orWhere(function (Builder $query) {
                     $query->where('total_time', '>', self::VIDEO_DURATION_EXTRA_SHORT)
-                    ->where('total_time', '<=', self::VIDEO_DURATION_SHORT);
+                        ->where('total_time', '<=', self::VIDEO_DURATION_SHORT);
                 });
             });
 
             $query->when(in_array('medium', $durations), function ($query) {
                 $query->orWhere(function (Builder $query) {
                     $query->where('total_time', '>', self::VIDEO_DURATION_SHORT)
-                    ->where('total_time', '<=', self::VIDEO_DURATION_MEDIUM);
+                        ->where('total_time', '<=', self::VIDEO_DURATION_MEDIUM);
                 });
             });
 
             $query->when(in_array('long', $durations), function ($query) {
                 $query->orWhere(function (Builder $query) {
                     $query->where('total_time', '>', self::VIDEO_DURATION_MEDIUM)
-                    ->where('total_time', '<=', self::VIDEO_DURATION_LONG);
+                        ->where('total_time', '<=', self::VIDEO_DURATION_LONG);
                 });
             });
 

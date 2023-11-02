@@ -59,9 +59,14 @@ return [
         ],
     ],
     'instructor' => [
-        'error' => [
-            'request' => 'Wait for 1 minutes to send again!'
+        'success' => [
+            'send' => 'Send mail successfully',
+            'register' => 'Register instructor successfully',
         ],
+        'error' => [
+            'request' => 'Please waiting 1 minutes to send email again',
+            'register' => 'You have register instructor',
+        ]
     ],
     'checkout' => [
         'error' => [
@@ -71,6 +76,14 @@ return [
     'order' => [
         'error' => [
             'create_order' => 'The course has been purchased'
+        ]
+    ],
+    'topic' => [
+        'success' => [
+            'create' => 'Create topic was successful',
+        ],
+        'error' => [
+            'create' => 'Create comment was failed'
         ]
     ],
     'file' => [

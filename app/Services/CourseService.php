@@ -4,12 +4,14 @@ namespace App\Services;
 
 use App\Http\Requests\GetCoursesRequest;
 use App\Http\Requests\StatisticsStudentRequest;
+use App\Http\Requests\RevenueReportRequest;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class CourseService
@@ -46,6 +48,15 @@ class CourseService
     public function getCourses(GetCoursesRequest $request): LengthAwarePaginator
     {
         return $this->courseRepo->getCourses($request);
+    }
+
+    /**
+     * @param int $id
+     * @return LengthAwarePaginator<Model>
+     */
+    public function getInstructorCourses($id): LengthAwarePaginator
+    {
+        return $this->courseRepo->getInstructorCourses($id);
     }
 
     /**
@@ -118,9 +129,35 @@ class CourseService
         $courseId = $request->input('course_id');
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
-        $type = $request->input('type');
+        $type = $this->getSelectExpression($request->input('type'));
 
-        return $this->courseRepo->totalStudentsByTime($instructorId, $courseId, $startDate, $endDate, $this->getSelectExpression($type));
+        return $this->courseRepo->totalStudentsByTime($instructorId, $courseId, $startDate, $endDate, $type);
+    }
+
+    /**
+     * @param RevenueReportRequest $request
+     *
+     * @return Collection
+     */
+    public function getCourseRevenueStatistics(RevenueReportRequest $request): Collection
+    {
+        $startDate = Carbon::createFromFormat('Y/m/d', $request->input('startDate'));
+        $endDate = Carbon::createFromFormat('Y/m/d', $request->input('endDate'));
+        $statisBy = $request->input('statisBy');
+        $dateFormats = [
+            'year' => "%Y",
+            'month' => "%Y-%m",
+            'week' => "%Y-%u",
+        ];
+        $dateFormat = $dateFormats[$statisBy] ?? "%Y-%m-%d";
+
+        return $this->courseRepo->getCourseRevenueStatistics(
+            $startDate,
+            $endDate,
+            $dateFormat,
+            $request->input('instructorId'),
+            $request->input('courseId')
+        );
     }
 
     /**
