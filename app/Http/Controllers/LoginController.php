@@ -62,4 +62,12 @@ class LoginController extends Controller
 
         return redirect()->route('home');
     }
+
+    /**
+     * @return View
+     */
+    public function survey()
+    {
+        return view('common.survey');
+    }
 }

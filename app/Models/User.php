@@ -50,6 +50,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @return HasOne<Survey>
+     */
+    public function survey(): HasOne
+    {
+        return $this->hasOne(Survey::class, 'user_id');
+    }
+
+    /**
      * @return HasMany<Cart>
      */
     public function carts(): HasMany
