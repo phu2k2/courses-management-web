@@ -65,7 +65,7 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      */
     public function getInstructorCourses($id): LengthAwarePaginator
     {
-        return $this->model->with('user:id')->where('instructor_id', $id)->paginate(self::PAGESIZE);
+        return $this->model->with('category:id,name')->where('instructor_id', $id)->paginate(self::PAGESIZE);
     }
 
     /**
