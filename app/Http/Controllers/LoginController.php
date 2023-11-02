@@ -36,12 +36,15 @@ class LoginController extends Controller
         $credentials = $request->validated();
 
         if (Auth::attempt($credentials)) {
-            if (auth()->user()?->is_active == ActiveUserEnum::active) {
+            if (auth()->user()?->is_active == ActiveUserEnum::Active) {
                 $request->session()->regenerate();
 
                 return redirect()->route('home');
             }
-            $this->emailService->verifyMail((int) auth()->id(), (string) auth()->user()?->email, (string) auth()->user()?->username);
+            $userId = (int) auth()->id();
+            $email = (string) auth()->user()?->email;
+            $username = (string) auth()->user()?->username;
+            $this->emailService->verifyMail($userId, $email, $username);
             auth()->logout();
 
             return redirect()->back()->with('error', __('messages.user.error.active'))->withInput();

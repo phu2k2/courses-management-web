@@ -51,10 +51,20 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      * @param string $token
      * @param string $timeSubmit
      *
-     * @return Model|null
+     * @return bool
      */
     public function isExpiredToken($token, $timeSubmit)
     {
-        return $this->model->where('token', $token)->where('expired_at', '>', $timeSubmit)->first();
+        return $this->model->where('token_authentication', $token)->where('expired_at', '>', $timeSubmit)->exists();
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return Model|null
+     */
+    public function findUser($token)
+    {
+        return $this->model->where('token_authentication', $token)->first();
     }
 }

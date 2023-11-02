@@ -56,10 +56,9 @@ class EmailService
      */
     public function verifyMail($userId, $email, $username): void
     {
-        $token = Str::random(60);
+        $token = md5($email) . '.' . (now()->addDays(1)->toDateTimeString());
         $data = [];
-        $data['token'] = $token;
-        $data['expired_at'] = now()->addDays(1)->toDateTimeString();
+        $data['token_authentication'] = $token;
         $this->userService->updateUser($userId, $data);
 
         Mail::send("auth.verify-email", ['username' => $username, 'token' => $token], function ($message) use ($email) {

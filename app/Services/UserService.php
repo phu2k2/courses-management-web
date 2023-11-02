@@ -95,10 +95,20 @@ class UserService
      * @param string $token
      * @param string $timeSubmit
      *
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @return bool
      */
     public function isExpiredToken($token, $timeSubmit)
     {
         return $this->userRepository->isExpiredToken($token, $timeSubmit);
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return Model|null
+     */
+    public function findUser($token)
+    {
+        return $this->userRepository->findUser($token);
     }
 }

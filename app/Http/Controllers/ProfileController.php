@@ -84,17 +84,15 @@ class ProfileController extends Controller
      *
      * @return RedirectResponse
      */
-    public function updateActive($token)
+    public function activeUser($token)
     {
-        $user = $this->userService->isExpiredToken($token, now());
-        if ($this->userService->isExpiredToken($token, now())) {
-            $data = [];
-            $data['is_active'] = ActiveUserEnum::active;
-            $this->userService->updateUser($user?->id, $data);
-            session()->flash('message', __('messages.user.verify_email.success'));
+        abort_if(! $this->userService->isExpiredToken($token, now()), 419);
 
-            return redirect()->route('login.show');
-        }
-        abort(419);
+        $user = $this->userService->findUser($token);
+        $user['is_active'] = ActiveUserEnum::Active;
+        $user->save();
+        session()->flash('message', __('messages.user.verify_email.success'));
+
+        return redirect()->route('login.show');
     }
 }

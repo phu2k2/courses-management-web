@@ -4,6 +4,6 @@ namespace App\Enums;
 
 enum ActiveUserEnum: int
 {
-    case block = 0;
-    case active = 1;
+    case UnActive = 0;
+    case Active = 1;
 }

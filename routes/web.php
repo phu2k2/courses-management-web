@@ -85,7 +85,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
     Route::post('/reset-password', [ResetPasswordController::class, 'submitResetPasswordForm'])->name('password.update');
 });
-Route::get('/verify-email/{token}', [ProfileController::class, 'updateActive'])->name('verify-email');
+Route::get('/verify-email/{token}', [ProfileController::class, 'activeUser'])->name('verify-email');
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
 
