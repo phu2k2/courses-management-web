@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redis;
 class CategoryService
 {
     protected const CACHE_KEY = 'categories_all';
+    protected const CACHE_EXPIRATION = 600;
 
     /**
      * @var CategoryRepositoryInterface
@@ -35,7 +36,7 @@ class CategoryService
 
         $categories = $this->categoryRepo->getAll($columns);
 
-        Redis::set(self::CACHE_KEY, serialize($categories));
+        Redis::setex(self::CACHE_KEY, self::CACHE_EXPIRATION, serialize($categories));
 
         return $categories;
     }
