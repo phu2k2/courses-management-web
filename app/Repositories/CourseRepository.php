@@ -6,9 +6,10 @@ use App\Http\Requests\GetCoursesRequest;
 use App\Models\Course;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CourseRepository extends BaseRepository implements CourseRepositoryInterface
 {
@@ -61,6 +62,15 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     }
 
     /**
+     * @param int $id
+     * @return LengthAwarePaginator<Model>
+     */
+    public function getInstructorCourses($id): LengthAwarePaginator
+    {
+        return $this->model->with('category:id,name')->where('instructor_id', $id)->paginate(self::PAGESIZE);
+    }
+
+    /**
      * Find a record by its primary key.
      *
      * @param int $id The primary key value.
@@ -69,6 +79,36 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     public function findOrFail($id): Model
     {
         return $this->model->with(['category:id,name', 'topics.lessons:id,topic_id,title'])->findOrFail($id);
+    }
+
+    /**
+     * @param Carbon|false $startDate.
+     * @param Carbon|false $endDate
+     * @param string $dateFormat
+     * @param int $instructorId
+     * @param int $courseId
+     *gi
+     * @return Collection
+     */
+    public function getCourseRevenueStatistics($startDate, $endDate, $dateFormat, $instructorId, $courseId): Collection
+    {
+        $orderStatusSuccess = 2;
+
+        return $this->model::selectRaw('DATE_FORMAT(orders.created_at, ?) AS date_order, SUM(orders.price) AS total_price')
+            ->join('orders', 'orders.course_id', '=', 'courses.id')
+            ->where('orders.status', $orderStatusSuccess)
+            ->when($instructorId, function ($query) use ($instructorId) {
+                return $query->where('courses.instructor_id', $instructorId);
+            })
+            ->when($courseId, function ($query) use ($courseId) {
+                return $query->where('courses.id', $courseId);
+            })
+            ->when(isset($startDate) && isset($endDate), function ($query) use ($startDate, $endDate) {
+                return $query->whereBetween('orders.created_at', [$startDate, $endDate]);
+            })
+            ->groupBy('date_order')
+            ->addBinding($dateFormat, 'select')
+            ->get();
     }
 
     /**

@@ -18,7 +18,7 @@ class CourseController extends Controller
     protected $categoryService;
 
     /**
-     * @var CourseService;
+     * @var CourseService
      */
     protected $courseService;
 
@@ -27,6 +27,16 @@ class CourseController extends Controller
         $this->categoryService = $categoryService;
         $this->courseService = $courseService;
     }
+
+    /**
+     * @return View
+     */
+    public function index(): View
+    {
+        $courses = $this->courseService->getInstructorCourses((int)auth()->id());
+        return view('instructor.course.index', compact('courses'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -75,7 +85,8 @@ class CourseController extends Controller
 
         return response()->json([
             'urlImage' => AmazonS3::getPreSignedUploadUrl($pathImage),
-            'urlVideo' => AmazonS3::getPreSignedUploadUrl($pathVideo)]);
+            'urlVideo' => AmazonS3::getPreSignedUploadUrl($pathVideo)
+        ]);
     }
 
     /**

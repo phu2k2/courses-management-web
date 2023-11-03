@@ -2,9 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Enums\UserRoleEnum;
 use App\Models\User;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -34,5 +36,14 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function updatePassword($email, $password)
     {
         return $this->model->where("email", $email)->update(["password" => $password]);
+    }
+
+    /**
+     * @param int $userId
+     * @return Model|null
+     */
+    public function findRoleInstructor($userId)
+    {
+        return $this->model->where('id', $userId)->where('role_id', UserRoleEnum::Instructor)->first();
     }
 }

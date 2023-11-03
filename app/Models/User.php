@@ -46,11 +46,27 @@ class User extends Authenticatable
     }
 
     /**
+     * @return HasOne<Survey>
+     */
+    public function survey(): HasOne
+    {
+        return $this->hasOne(Survey::class, 'user_id');
+    }
+
+    /**
      * @return HasMany<Cart>
      */
     public function carts(): HasMany
     {
         return $this->hasMany(Cart::class, 'user_id');
+    }
+
+    /**
+     * @return HasMany<Course>
+     */
+    public function courses(): HasMany
+    {
+        return $this->hasMany(Course::class, 'instructor_id');
     }
 
     /**
