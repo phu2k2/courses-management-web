@@ -40,4 +40,12 @@ interface CourseRepositoryInterface extends RepositoryInterface
      * @return int
      */
     public function addStudentInCourse($courseIds);
+
+    /**
+     * @param array $categoryIds
+     * @param string $language
+     * @param string $level
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function recommnedCourse($categoryIds, $language, $level);
 }

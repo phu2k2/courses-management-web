@@ -2,16 +2,19 @@
 
 namespace App\Services;
 
-use App\Http\Requests\GetCoursesRequest;
-use App\Http\Requests\RevenueReportRequest;
-use App\Repositories\Interfaces\CourseRepositoryInterface;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Carbon\Carbon;
 use App\Models\Course;
 use App\Models\Enrollment;
+use App\Http\Requests\GetCoursesRequest;
+use App\Http\Requests\RevenueReportRequest;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
-use Carbon\Carbon;
+use App\Repositories\Interfaces\SurveyRepositoryInterface;
+use App\Repositories\Interfaces\CourseRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+
+
 
 class CourseService
 {
@@ -25,10 +28,19 @@ class CourseService
      */
     protected $enrollmentRepo;
 
-    public function __construct(CourseRepositoryInterface $courseRepo, EnrollmentRepositoryInterface $enrollmentRepo)
-    {
+    /**
+     * @var SurveyRepositoryInterface
+     */
+    protected $surveyRepo;
+
+    public function __construct(
+        CourseRepositoryInterface $courseRepo,
+        EnrollmentRepositoryInterface $enrollmentRepo,
+        SurveyRepositoryInterface $surveyRepo
+    ) {
         $this->courseRepo = $courseRepo;
         $this->enrollmentRepo = $enrollmentRepo;
+        $this->surveyRepo = $surveyRepo;
     }
 
     /**
@@ -132,5 +144,20 @@ class CourseService
     public function update($courseId, $data)
     {
         return $this->courseRepo->update($courseId, $data);
+    }
+
+    /**
+     * @param int $userId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function recommnedCourse($userId)
+    {
+        $recommend = $this->surveyRepo->getRecommendCourse($userId);
+
+        $categoryIds = $recommend->pluck('category_id')->toArray();
+        $language = $recommend->first()->languages;
+        $level = $recommend->first()->level;
+
+        return $this->courseRepo->recommnedCourse($categoryIds, $language, $level);
     }
 }
