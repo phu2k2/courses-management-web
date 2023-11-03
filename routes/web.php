@@ -54,12 +54,12 @@ Route::middleware(['auth'])->group(function () {
             Route::get('courses/create/upload-file/{courseId}', [InstructorCourseController::class, 'upload'])->name('courses.upload');
             Route::get('courses/create/getUploadUrl/{courseId}', [InstructorCourseController::class, 'getUploadUrl'])->name('courses.getUrl');
             Route::put('courses/create/updateUrl/{courseId}', [InstructorCourseController::class, 'updateUrl'])->name('courses.updateUrl');
-            Route::get('/curriculum/show/courses/{courseId}', [InstructorCourseController::class, 'showCurriculum'])->name('curriculum.show');
-            Route::get('/curriculum/show/courses/{courseId}/topics/create', [InstructorCourseController::class, 'createTopic'])
+            Route::get('courses/{courseId}/curriculum', [InstructorCourseController::class, 'showCurriculum'])->name('curriculum.show');
+            Route::get('/courses/{courseId}/curriculum/topics/create', [TopicController::class, 'create'])
                 ->name('topics.create');
-            Route::post('/curriculum/show/courses/topics/store', [InstructorCourseController::class, 'storeTopic'])->name('topics.store');
+            Route::post('/courses/{courseId}/curriculum/topics', [TopicController::class, 'store'])->name('topics.store');
             Route::get('/courses/{courseId}/topics/{topicId}/lessons/create', [InstructorLessonController::class, 'create'])->name('lessons.create');
-            Route::post('/lessons/store', [InstructorLessonController::class, 'store'])->name('lessons.store');
+            Route::post('/lessons', [InstructorLessonController::class, 'store'])->name('lessons.store');
             Route::get('/lessons/getUploadUrl/{lessonId}', [InstructorLessonController::class, 'getUploadUrl'])->name('lessons.getUrl');
             Route::put('/lessons/updateUrl/{lessonId}', [InstructorLessonController::class, 'updateUrl'])->name('lessons.updateUrl');
         });
