@@ -105,4 +105,11 @@ class CourseController extends Controller
 
         return response()->json(['message' => __('messages.file.success.upload')]);
     }
+
+    public function showCurriculum(int $id): View
+    {
+        $course = $this->courseService->getCourse($id);
+
+        return view('instructor.course.curriculum', compact('course'));
+    }
 }

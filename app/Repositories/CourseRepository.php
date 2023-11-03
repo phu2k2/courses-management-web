@@ -6,8 +6,10 @@ use App\Http\Requests\GetCoursesRequest;
 use App\Models\Course;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Carbon\Carbon;
 
 class CourseRepository extends BaseRepository implements CourseRepositoryInterface
 {
@@ -65,7 +67,7 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      */
     public function getInstructorCourses($id): LengthAwarePaginator
     {
-        return $this->model->with('user:id')->where('instructor_id', $id)->paginate(self::PAGESIZE);
+        return $this->model->with('category:id,name')->where('instructor_id', $id)->paginate(self::PAGESIZE);
     }
 
     /**
@@ -77,6 +79,60 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     public function findOrFail($id): Model
     {
         return $this->model->with(['category:id,name', 'topics.lessons:id,topic_id,title'])->findOrFail($id);
+    }
+
+    /**
+     * Sum totalStudent in course by instructor
+     *
+     * @param int $instructorId
+     * @param int $courseId
+     * @param string $startDate
+     * @param string $endDate
+     * @param string $type
+     * @return Collection
+     */
+    public function totalStudentsByTime($instructorId, $courseId, $startDate, $endDate, $type): Collection
+    {
+        return $this->model->join('enrollments as e', 'courses.id', '=', 'e.course_id')
+            ->selectRaw($type . ' as enrollment_date, COUNT(*) as total_student')
+            ->where('courses.instructor_id', $instructorId)
+            ->when(isset($courseId), function ($query) use ($courseId) {
+                return $query->where('courses.id', $courseId);
+            })
+            ->where('e.created_at', '>=', $startDate)
+            ->where('e.created_at', '<=', $endDate)
+            ->groupBy('enrollment_date')
+            ->orderBy('enrollment_date')->get();
+    }
+
+    /**
+     * @param Carbon|false $startDate.
+     * @param Carbon|false $endDate
+     * @param string $dateFormat
+     * @param int $instructorId
+     * @param int $courseId
+     *
+     * @return Collection
+     */
+    public function getCourseRevenueStatistics($startDate, $endDate, $dateFormat, $instructorId, $courseId): Collection
+    {
+        $orderStatusSuccess = 2;
+
+        return $this->model::selectRaw('DATE_FORMAT(orders.created_at, ?) AS date_order, SUM(orders.price) AS total_price')
+            ->join('orders', 'orders.course_id', '=', 'courses.id')
+            ->where('orders.status', $orderStatusSuccess)
+            ->when($instructorId, function ($query) use ($instructorId) {
+                return $query->where('courses.instructor_id', $instructorId);
+            })
+            ->when($courseId, function ($query) use ($courseId) {
+                return $query->where('courses.id', $courseId);
+            })
+            ->when(isset($startDate) && isset($endDate), function ($query) use ($startDate, $endDate) {
+                return $query->whereBetween('orders.created_at', [$startDate, $endDate]);
+            })
+            ->groupBy('date_order')
+            ->addBinding($dateFormat, 'select')
+            ->get();
     }
 
     /**

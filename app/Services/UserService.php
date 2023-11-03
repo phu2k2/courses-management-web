@@ -90,4 +90,14 @@ class UserService
     {
         return $this->userRepository->updatePassword($email, Hash::make($password));
     }
+
+    /**
+     * @param string $token
+     *
+     * @return Model|null
+     */
+    public function findUser($token)
+    {
+        return $this->userRepository->findUser($token);
+    }
 }

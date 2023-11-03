@@ -9,7 +9,7 @@
             <div>
                 <div class="card">
                     <div class="card-body">
-                        <a href="#" class="btn btn-primary d-inline-block m-2">
+                        <a href="{{ route('instructor.courses.create') }}" class="btn btn-primary d-inline-block m-2">
                             Add Course
                             <i class="bi bi-plus"></i>
                         </a>
@@ -51,10 +51,11 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm" type="button" aria-expanded="false"
-                                                style=" width: 100%; text-align : center">
+                                            <a class="btn btn-primary btn-sm" aria-expanded="false"
+                                                style=" width: 100%; text-align : center"
+                                                href="{{ route('instructor.curriculum.show', ['courseId' => $course->id]) }}">
                                                 Access
-                                            </button>
+                                            </a>
                                         </td>
                                         <td>
                                             <input class="form-check-input header-checkbox" type="checkbox"
