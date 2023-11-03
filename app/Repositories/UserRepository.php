@@ -46,4 +46,14 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return $this->model->where('id', $userId)->where('role_id', UserRoleEnum::Instructor)->first();
     }
+
+    /**
+     * @param string $token
+     *
+     * @return Model|null
+     */
+    public function findUser($token)
+    {
+        return $this->model->where('token_authentication', $token)->first();
+    }
 }
