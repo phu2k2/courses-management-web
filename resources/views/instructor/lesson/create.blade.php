@@ -55,8 +55,7 @@
                                                 src="{{ asset('assets/img/icons/show-change-image.jpg') }}" alt="">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="file" name="trailer_url" id="trailer" class="form-control"
-                                                onchange="readURL(this);" accept="video/*">
+                                            <input type="file" name="trailer_url" id="trailer" class="form-control">
                                         </div>
                                     </div>
                                 </div>
