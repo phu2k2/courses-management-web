@@ -14,7 +14,7 @@ use App\Repositories\Interfaces\SurveyRepositoryInterface;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
-
+use function PHPUnit\Framework\isNull;
 
 class CourseService
 {
@@ -153,6 +153,10 @@ class CourseService
     public function recommnedCourse($userId)
     {
         $recommend = $this->surveyRepo->getRecommendCourse($userId);
+
+        if (is_null($recommend->first())) {
+            return new Collection();
+        }
 
         $categoryIds = $recommend->pluck('category_id')->toArray();
         $language = $recommend->first()->languages;
