@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\GetCoursesRequest;
+use App\Http\Requests\StatisticsStudentRequest;
 use App\Http\Requests\RevenueReportRequest;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
@@ -95,6 +96,42 @@ class CourseService
     public function isEnrolled($userId, $courseId)
     {
         return (bool) $this->enrollmentRepo->isEnrolled($userId, $courseId);
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return string
+     */
+    private function getSelectExpression($type)
+    {
+        switch ($type) {
+            case 'year':
+                return 'YEAR(e.created_at)';
+            case 'month':
+                return 'DATE_FORMAT(e.created_at, "%Y-%m")';
+            case 'week':
+                return 'DATE_FORMAT(e.created_at, "%Y-%u")';
+            default:
+                return '';
+        }
+    }
+
+    /**
+     * Sum totalStudent in course by instructor
+     *
+     * @param StatisticsStudentRequest $request
+     * @return Collection
+     */
+    public function totalStudentsByTime(StatisticsStudentRequest $request): Collection
+    {
+        $instructorId = (int)auth()->id();
+        $courseId = $request->input('course_id');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $type = $this->getSelectExpression($request->input('type'));
+
+        return $this->courseRepo->totalStudentsByTime($instructorId, $courseId, $startDate, $endDate, $type);
     }
 
     /**

@@ -19,6 +19,18 @@ interface CourseRepositoryInterface extends RepositoryInterface
     public function getCourses($request): LengthAwarePaginator;
 
     /**
+     * Sum totalStudent in course by instructor
+     *
+     * @param int $instructorId
+     * @param int $courseId
+     * @param string $startDate
+     * @param string $endDate
+     * @param string $type
+     * @return Collection
+     */
+    public function totalStudentsByTime($instructorId, $courseId, $startDate, $endDate, $type): Collection;
+
+    /**
      * @param Carbon|false $startDate.
      * @param Carbon|false $endDate
      * @param string $dateFormat
