@@ -75,6 +75,7 @@ class CourseService
      */
     public function create($data)
     {
+        $data['discount'] = $data['discount'] ?? 0;
         return $this->courseRepo->create($data);
     }
 

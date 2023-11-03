@@ -60,6 +60,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('courses/create/upload-file/{courseId}', [InstructorCourseController::class, 'upload'])->name('courses.upload');
             Route::get('courses/create/getUploadUrl/{courseId}', [InstructorCourseController::class, 'getUploadUrl'])->name('courses.getUrl');
             Route::put('courses/create/updateUrl/{courseId}', [InstructorCourseController::class, 'updateUrl'])->name('courses.updateUrl');
+            Route::get('courses/create/upload-file/{courseId}', [InstructorCourseController::class, 'upload'])->name('courses.upload');
             Route::get('courses/{courseId}/curriculum', [InstructorCourseController::class, 'showCurriculum'])->name('curriculum.show');
             Route::get('/courses/{courseId}/curriculum/topics/create', [TopicController::class, 'create'])
                 ->name('topics.create');
