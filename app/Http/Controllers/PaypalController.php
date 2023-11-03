@@ -37,6 +37,8 @@ class PaypalController extends Controller
         if (!$cart) {
             abort(404);
         }
+
+        session()->put('cart_payment', $cart);
         $totalAmount = $this->paypalService->calculateTotalAmount($cart);
 
         $response = $this->paypalService->createOrder($totalAmount);
@@ -53,23 +55,18 @@ class PaypalController extends Controller
      * Store a newly created resource in storage.
      * @return RedirectResponse
      */
-    public function paymentSuccess(Request $request): RedirectResponse
+    public function afterPayment(Request $request): RedirectResponse
     {
         $token = $request->input('token');
-
         if (!$token) {
             abort(404);
         }
         $response = $this->paypalService->capturePaymentOrder($token);
 
-        if (array_key_exists('error', $response)) {
-            abort(404);
-        }
-
         if ($response['status'] == 'COMPLETED') {
             try {
                 $userId = (int) auth()->id();
-                $cart = session()->get('cart');
+                $cart = session()->get('cart_payment');
                 $this->orderService->buyCourses($userId, $cart);
             } catch (Exception $e) {
                 session()->flash('error', __('messages.order.error.create_order'));

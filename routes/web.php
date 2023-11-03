@@ -45,11 +45,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
     Route::resource('orders', OrderController::class)->only(['index', 'store']);
 
-    Route::controller(PaypalController::class)
-        ->prefix('paypal')->name('paypal.')
+    Route::controller(PaypalController::class)->prefix('paypal')->name('paypal.')
         ->group(function () {
             Route::get('handle', 'handlePayment')->name('payment');
-            Route::get('success', 'paymentSuccess')->name('success');
+            Route::get('success', 'afterPayment')->name('after');
         });
 
     //admin and instructor can access

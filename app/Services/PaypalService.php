@@ -27,7 +27,7 @@ class PaypalService
         $response = $this->provider->createOrder([
             "intent" => "CAPTURE",
             "application_context" => [
-                "return_url" => route('paypal.success'),
+                "return_url" => route('paypal.after'),
                 "cancel_url" => route('checkouts.index'),
             ],
             "purchase_units" => [

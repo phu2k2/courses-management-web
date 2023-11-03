@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\OrderService;
-use App\Services\PaypalService;
-use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -26,9 +24,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = session()->get('cart');
+        $orders = session()->get('cart_payment');
         if ($orders) {
             session()->forget('cart');
+            session()->forget('cart_payment');
             return view('order.index', compact('orders'));
         }
         return redirect()->route('carts.index');
@@ -48,15 +47,7 @@ class OrderController extends Controller
             //implement
         }
 
-        try {
-            $userId = (int) auth()->id();
-            $cart = session()->get('cart');
-            $this->orderService->buyCourses($userId, $cart);
-        } catch (Exception $e) {
-            session()->flash('error', __('messages.order.error.create_order'));
-            return redirect()->route('carts.index');
-        }
-
-        return redirect()->route('orders.index');
+        session()->flash('error', __('messages.order.error.create_order'));
+        return redirect()->route('carts.index');
     }
 }
