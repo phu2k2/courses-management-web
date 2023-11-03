@@ -36,7 +36,7 @@ class LessonController extends Controller
     /**
      * Function store lesson
      *
-     * @param Request $request
+     * @param StoreLessonRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreLessonRequest $request)
