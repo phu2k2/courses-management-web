@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Survey;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\SurveyRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class SurveyRepository extends BaseRepository implements SurveyRepositoryInterface
 {
@@ -20,21 +21,10 @@ class SurveyRepository extends BaseRepository implements SurveyRepositoryInterfa
 
     /**
      * @param int $userId
-     * @return array
+     * @return Collection
      */
     public function getRecommendCourse($userId)
     {
-        /** @phpstan-ignore-next-line */
-        $categories = $this->model->owner($userId)->select('category_id')->get();
-        /** @phpstan-ignore-next-line */
-        $language = $this->model->owner($userId)->value('languages');
-        /** @phpstan-ignore-next-line */
-        $level = $this->model->owner($userId)->value('level');
-
-        return [
-            'categories' => $categories,
-            'language' => $language,
-            'level' => $level,
-        ];
+        return $this->model->owner($userId)->select('category_id', 'languages', 'level')->get();
     }
 }
