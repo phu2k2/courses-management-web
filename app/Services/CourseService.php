@@ -9,6 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
+use App\Repositories\Interfaces\SurveyRepositoryInterface;
 
 class CourseService
 {
@@ -22,10 +23,19 @@ class CourseService
      */
     protected $enrollmentRepo;
 
-    public function __construct(CourseRepositoryInterface $courseRepo, EnrollmentRepositoryInterface $enrollmentRepo)
-    {
+    /**
+     * @var SurveyRepositoryInterface
+     */
+    protected $surveyRepo;
+
+    public function __construct(
+        CourseRepositoryInterface $courseRepo,
+        EnrollmentRepositoryInterface $enrollmentRepo,
+        SurveyRepositoryInterface $surveyRepo
+    ) {
         $this->courseRepo = $courseRepo;
         $this->enrollmentRepo = $enrollmentRepo;
+        $this->surveyRepo = $surveyRepo;
     }
 
     /**
@@ -103,5 +113,20 @@ class CourseService
     public function update($courseId, $data)
     {
         return $this->courseRepo->update($courseId, $data);
+    }
+
+    /**
+     * @param int $userId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function recommnedCourse($userId)
+    {
+        $recommend = $this->surveyRepo->getRecommendCourse($userId);
+
+        $categoryIds = $recommend->pluck('category_id')->toArray();
+        $language = $recommend->first()->languages;
+        $level = $recommend->first()->level;
+
+        return $this->courseRepo->recommnedCourse($categoryIds, $language, $level);
     }
 }

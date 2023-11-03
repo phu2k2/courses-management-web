@@ -11,6 +11,8 @@ parameters:
 
     ignoreErrors:
     - '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model#'
+    - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model#'
+
     excludePaths:
         - ./*/*/FileToBeExcluded.php
 
