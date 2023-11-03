@@ -121,9 +121,11 @@ class CourseService
      */
     public function recommnedCourse($userId)
     {
-        $categoryIds = $this->surveyRepo->getCategories($userId)->toArray();
-        $language = $this->surveyRepo->getLanguage($userId);
-        $level = $this->surveyRepo->getLevel($userId);
+        $recommend = $this->surveyRepo->getRecommendCourse($userId);
+
+        $categoryIds = $recommend['categories'];
+        $language = $recommend['language'];
+        $level = $recommend['level'];
 
         return $this->courseRepo->recommnedCourse($categoryIds, $language, $level);
     }

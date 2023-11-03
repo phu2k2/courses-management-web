@@ -96,13 +96,14 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
      */
     public function recommnedCourse($categoryIds, $language, $level)
     {
-        $limit = 10;
-
-        return $this->model->whereIn('category_id', $categoryIds)
-            ->orWhere('languages', $language)
-            ->orWhere('level', $level)
+        return $this->model->with('category')
+            ->where(function ($query) use ($categoryIds, $language, $level) {
+                $query->whereIn('category_id', $categoryIds)
+                    ->orWhere('languages', $language)
+                    ->orWhere('level', $level);
+            })
             ->inRandomOrder()
-            ->take($limit)
+            ->take(self::PAGESIZE)
             ->get();
     }
 }
