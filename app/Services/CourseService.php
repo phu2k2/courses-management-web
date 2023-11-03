@@ -124,8 +124,8 @@ class CourseService
         $recommend = $this->surveyRepo->getRecommendCourse($userId);
 
         $categoryIds = $recommend->pluck('category_id')->toArray();
-        $language = $recommend->pluck('languages')->first();
-        $level = $recommend->pluck('level')->first();
+        $language = $recommend->first()->languages;
+        $level = $recommend->first()->level;
 
         return $this->courseRepo->recommnedCourse($categoryIds, $language, $level);
     }
