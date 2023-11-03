@@ -28,14 +28,6 @@ interface UserRepositoryInterface extends RepositoryInterface
 
     /**
      * @param string $token
-     * @param string $timeSubmit
-     *
-     * @return bool
-     */
-    public function isExpiredToken($token, $timeSubmit);
-
-    /**
-     * @param string $token
      *
      * @return Model|null
      */

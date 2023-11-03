@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use AmazonS3;
 use App\Enums\ActiveUserEnum;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -86,8 +87,12 @@ class ProfileController extends Controller
      */
     public function activeUser($token)
     {
-        abort_if(! $this->userService->isExpiredToken($token, now()), 419);
+        $tokens = explode('.', $token);
+        abort_if(($tokens[1] < now()), 419);
 
+        /**
+         * @var User
+         */
         $user = $this->userService->findUser($token);
         $user['is_active'] = ActiveUserEnum::Active;
         $user->save();
