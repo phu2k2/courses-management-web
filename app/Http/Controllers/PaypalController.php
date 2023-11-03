@@ -38,7 +38,6 @@ class PaypalController extends Controller
             abort(404);
         }
 
-        session()->put('cart_payment', $cart);
         $totalAmount = $this->paypalService->calculateTotalAmount($cart);
 
         $response = $this->paypalService->createOrder($totalAmount);
@@ -64,9 +63,17 @@ class PaypalController extends Controller
         $response = $this->paypalService->capturePaymentOrder($token);
 
         if ($response['status'] == 'COMPLETED') {
+            $cart = session()->get('cart');
+            $totalAmount = $this->paypalService->calculateTotalAmount($cart);
+            $amount = $response['purchase_units'][0]['payments']['captures'][0]['amount']['value'];
+
+            if ($totalAmount !== $amount) {
+                return redirect()->route('carts.index')->with('error', __('messages.payment.paypal.error'));
+            }
+
+
             try {
                 $userId = (int) auth()->id();
-                $cart = session()->get('cart_payment');
                 $this->orderService->buyCourses($userId, $cart);
             } catch (Exception $e) {
                 session()->flash('error', __('messages.order.error.create_order'));
@@ -75,6 +82,6 @@ class PaypalController extends Controller
             return redirect()->route('orders.index');
         }
 
-        return redirect()->route('checkouts.index')->with('error', $response['message'] ?? __('messages.payment.paypal.error'));
+        return redirect()->route('cart.index')->with('error', $response['message'] ?? __('messages.payment.paypal.error'));
     }
 }

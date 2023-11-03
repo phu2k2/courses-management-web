@@ -1,13 +1,7 @@
 @extends('layouts.app')
 @section('title', 'checkout')
-@section('script')
-    <script src="{{ asset('assets/js/toast.js') }}"></script>
-@endsection
-@section('style')
-    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
-@endsection
+
 @section('content')
-@include('layouts.message')
     <div class="bg-white woocommerce-order-received">
         <!-- SHOP ORDER COMPLETED
                                                                                                                                                                                         ================================================== -->

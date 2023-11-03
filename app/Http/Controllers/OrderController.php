@@ -27,7 +27,6 @@ class OrderController extends Controller
         $orders = session()->get('cart_payment');
         if ($orders) {
             session()->forget('cart');
-            session()->forget('cart_payment');
             return view('order.index', compact('orders'));
         }
         return redirect()->route('carts.index');
