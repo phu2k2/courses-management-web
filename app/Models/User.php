@@ -66,11 +66,11 @@ class User extends Authenticatable
     }
 
     /**
-     * @return HasMany<User>
+     * @return HasMany<Course>
      */
-    public function users(): HasMany
+    public function courses(): HasMany
     {
-        return $this->hasMany(User::class, 'instructor_id');
+        return $this->hasMany(Course::class, 'instructor_id');
     }
 
     /**

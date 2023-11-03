@@ -83,6 +83,14 @@ return [
             'create_order' => 'The course has been purchased'
         ]
     ],
+    'topic' => [
+        'success' => [
+            'create' => 'Create topic was successful',
+        ],
+        'error' => [
+            'create' => 'Create comment was failed'
+        ]
+    ],
     'file' => [
         'success' => [
             'upload' => 'Upload files were successful',
