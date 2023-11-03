@@ -93,7 +93,6 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/forgot-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('password.email');
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
     Route::post('/reset-password', [ResetPasswordController::class, 'submitResetPasswordForm'])->name('password.update');
-    Route::get('courses/create/upload-file', [InstructorCourseController::class, 'upload'])->name('courses.upload');
 });
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
