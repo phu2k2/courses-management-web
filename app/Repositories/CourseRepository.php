@@ -143,4 +143,23 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     {
         return $this->model->whereIn('id', $courseIds)->increment('total_students');
     }
+
+    /**
+     * @param array $categoryIds
+     * @param string $language
+     * @param string $level
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function recommnedCourse($categoryIds, $language, $level)
+    {
+        return $this->model->with('category')
+            ->where(function ($query) use ($categoryIds, $language, $level) {
+                $query->whereIn('category_id', $categoryIds)
+                    ->orWhere('languages', $language)
+                    ->orWhere('level', $level);
+            })
+            ->inRandomOrder()
+            ->take(self::PAGESIZE)
+            ->get();
+    }
 }

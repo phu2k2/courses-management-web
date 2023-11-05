@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
 
 class Survey extends Model
 {
@@ -34,5 +35,17 @@ class Survey extends Model
     public function categories()
     {
         return $this->hasMany(Category::class, 'category_id', 'id');
+    }
+
+    /**
+     * Scope the query to filter courses by languages.
+     *
+     * @param  Builder  $query
+     * @param  int  $userId
+     * @return Builder
+     */
+    public function scopeOwner($query, $userId)
+    {
+        return $query->where('user_id', $userId);
     }
 }
