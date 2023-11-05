@@ -69,14 +69,16 @@ class CourseController extends Controller
      */
     public function show(int $id): View
     {
+        $userId = (int) auth()->id();
         $course = $this->courseService->getCourse($id);
         $reviews = $this->reviewService->getReviewsByCourse($id);
+        $recommend = $this->courseService->recommnedCourse($userId);
         $enrolled = false;
         if (auth()->check()) {
             $enrolled = $this->courseService->isEnrolled((int) auth()->id(), $id);
         }
 
-        return view('course.show', compact('course', 'reviews', 'enrolled'));
+        return view('course.show', compact('course', 'reviews', 'enrolled', 'recommend'));
     }
 
     /**
