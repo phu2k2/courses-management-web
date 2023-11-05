@@ -27,12 +27,13 @@ class SurveyService
         $currentTime  = Carbon::now();
 
         $data = [];
-        $level = $request->input("level");
-        $language = $request->input("languages");
+        $useId = auth()->id();
+        $level = $request->input('level');
+        $language = $request->input('languages');
 
-        foreach ($request->input("name") as $category) {
+        foreach ($request->input('name') as $category) {
             $data[] = [
-                'user_id' => auth()->id(),
+                'user_id' => $useId,
                 'category_id' => $category,
                 'languages' => $language,
                 'level' => $level,
