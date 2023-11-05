@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('courses/create/upload-file/{courseId}', [InstructorCourseController::class, 'upload'])->name('courses.upload');
             Route::get('courses/create/getUploadUrl/{courseId}', [InstructorCourseController::class, 'getUploadUrl'])->name('courses.getUrl');
             Route::put('courses/create/updateUrl/{courseId}', [InstructorCourseController::class, 'updateUrl'])->name('courses.updateUrl');
+            Route::get('courses/create/upload-file/{courseId}', [InstructorCourseController::class, 'upload'])->name('courses.upload');
             Route::get('courses/{courseId}/curriculum', [InstructorCourseController::class, 'showCurriculum'])->name('curriculum.show');
             Route::get('/courses/{courseId}/curriculum/topics/create', [TopicController::class, 'create'])
                 ->name('topics.create');
@@ -91,7 +92,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
     Route::post('/reset-password', [ResetPasswordController::class, 'submitResetPasswordForm'])->name('password.update');
 });
-
+Route::get('/verify-email/{token}', [ProfileController::class, 'activeUser'])->name('verify-email');
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::resource('courses', CourseController::class)->only(['index', 'show']);
 

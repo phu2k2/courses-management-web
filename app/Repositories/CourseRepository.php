@@ -82,12 +82,36 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     }
 
     /**
+     * Sum totalStudent in course by instructor
+     *
+     * @param int $instructorId
+     * @param int $courseId
+     * @param string $startDate
+     * @param string $endDate
+     * @param string $type
+     * @return Collection
+     */
+    public function totalStudentsByTime($instructorId, $courseId, $startDate, $endDate, $type): Collection
+    {
+        return $this->model->join('enrollments as e', 'courses.id', '=', 'e.course_id')
+            ->selectRaw($type . ' as enrollment_date, COUNT(*) as total_student')
+            ->where('courses.instructor_id', $instructorId)
+            ->when(isset($courseId), function ($query) use ($courseId) {
+                return $query->where('courses.id', $courseId);
+            })
+            ->where('e.created_at', '>=', $startDate)
+            ->where('e.created_at', '<=', $endDate)
+            ->groupBy('enrollment_date')
+            ->orderBy('enrollment_date')->get();
+    }
+
+    /**
      * @param Carbon|false $startDate.
      * @param Carbon|false $endDate
      * @param string $dateFormat
      * @param int $instructorId
      * @param int $courseId
-     *gi
+     *
      * @return Collection
      */
     public function getCourseRevenueStatistics($startDate, $endDate, $dateFormat, $instructorId, $courseId): Collection
