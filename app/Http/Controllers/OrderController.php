@@ -42,10 +42,9 @@ class OrderController extends Controller
 
         if ($paymentMethod === 'paypal') {
             return redirect()->route('paypal.payment');
-        } elseif ($paymentMethod === 'momo') {
-            //implement
+        } elseif ($paymentMethod === 'vnpay') {
+            return redirect()->route('vnPay.payment');
         }
-
         session()->flash('error', __('messages.order.error.create_order'));
         return redirect()->route('carts.index');
     }

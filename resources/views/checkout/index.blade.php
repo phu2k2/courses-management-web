@@ -58,7 +58,7 @@
                                                         <div class="form-group">
                                                             <select class="form-control" id="paymentMethod" name="payment_method">
                                                                 <option value="paypal">Paypal</option>
-                                                                <option value="momo">Momo</option>
+                                                                <option value="vnpay">VN Pay</option>
                                                             </select>
                                                         </div>
                                                     </td>
