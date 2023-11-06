@@ -25,4 +25,11 @@ interface UserRepositoryInterface extends RepositoryInterface
      * @return Model|null
      */
     public function findRoleInstructor($userId);
+
+    /**
+     * @param string $token
+     *
+     * @return Model|null
+     */
+    public function findUser($token);
 }

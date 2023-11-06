@@ -9,6 +9,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use AmazonS3;
+use App\Enums\ActiveUserEnum;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -76,5 +78,26 @@ class ProfileController extends Controller
         $path = "profile/{$userId}/avatar.jpg";
 
         return response()->json(['url' => AmazonS3::getPreSignedUploadUrl($path)]);
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return RedirectResponse
+     */
+    public function activeUser($token)
+    {
+        $tokens = explode('.', $token);
+        abort_if(($tokens[1] < now()), 419);
+
+        /**
+         * @var User
+         */
+        $user = $this->userService->findUser($token);
+        $user['is_active'] = ActiveUserEnum::Active;
+        $user->save();
+        session()->flash('message', __('messages.user.verify_email.success'));
+
+        return redirect()->route('login.show');
     }
 }

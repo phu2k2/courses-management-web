@@ -2,11 +2,16 @@
 
 return [
     'user' => [
+        'verify_email' => [
+            'success' => 'Email authentication successful',
+            'error' => 'Email authentication failed'
+        ],
         'success' => [
-            'create' => 'Register account was successful',
+            'create' => 'Register account was successful. Please check your email to verify your account.',
         ],
         'error' => [
-            'login' => 'Login error, please check your email or password'
+            'login' => 'Login error, please check your email or password',
+            'active' => 'Your account has not been activated, please check your email for authentication.'
         ]
     ],
     'profile' => [
@@ -76,6 +81,14 @@ return [
     'order' => [
         'error' => [
             'create_order' => 'The course has been purchased'
+        ]
+    ],
+    'topic' => [
+        'success' => [
+            'create' => 'Create topic was successful',
+        ],
+        'error' => [
+            'create' => 'Create comment was failed'
         ]
     ],
     'file' => [

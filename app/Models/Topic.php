@@ -15,7 +15,7 @@ class Topic extends Model
 
     protected $table = 'topics';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','course_id'];
 
     /**
      * @return BelongsTo<Course, Topic>
