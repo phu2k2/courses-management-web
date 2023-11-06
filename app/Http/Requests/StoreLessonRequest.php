@@ -11,7 +11,7 @@ class StoreLessonRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,9 @@ class StoreLessonRequest extends FormRequest
     {
         return [
             'title' => ['bail', 'required', 'unique:lessons,title', 'string', 'max:255'],
+            'lesson_duration' => 'required',
+            'topic_id' => 'required',
+            'lesson_url' => 'bail'
         ];
     }
 }

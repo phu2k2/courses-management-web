@@ -7,7 +7,7 @@
 @section('script')
     <script src="{{ asset('assets/js/toast.js') }}"></script>
     <script src="{{ asset('assets/js/instructor/create.lesson.js') }}"></script>
-    <script src="{{ asset('assets/js/instructor/change.image.js') }}"></script>
+    <script src="{{ asset('assets/js/instructor/change.image.lesson.js') }}"></script>
 @endsection
 @section('content')
     <main id="main" class="main">

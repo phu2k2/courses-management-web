@@ -41,7 +41,8 @@ class LessonController extends Controller
      */
     public function store(StoreLessonRequest $request)
     {
-        $lesson = $this->lessonService->create($request->all());
+        $data = $request->validated();
+        $lesson = $this->lessonService->create($data);
         $lessonId = $lesson->id;
 
         return response()->json(['message' => __('message.file.success.upload'), 'lessonId' => $lessonId]);
