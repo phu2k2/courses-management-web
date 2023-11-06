@@ -3,6 +3,7 @@
 namespace App\Repositories\Interfaces;
 
 use App\Repositories\RepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 interface UserRepositoryInterface extends RepositoryInterface
 {
@@ -18,4 +19,17 @@ interface UserRepositoryInterface extends RepositoryInterface
      * @return int|bool
      */
     public function updatePassword($email, $password);
+
+    /**
+     * @param int $userId
+     * @return Model|null
+     */
+    public function findRoleInstructor($userId);
+
+    /**
+     * @param string $token
+     *
+     * @return Model|null
+     */
+    public function findUser($token);
 }

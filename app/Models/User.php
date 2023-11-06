@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Enums\ActiveUserEnum;
 use App\Enums\UserRoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -26,15 +27,18 @@ class User extends Authenticatable
         'password',
         'is_active',
         'role_id',
+        'token_authentication',
     ];
 
     protected $attributes = [
-        'is_active' => 1,
-        'role_id' => 1
+        'is_active' => 0,
+        'role_id' => 1,
+        'token_authentication' => ''
     ];
 
     protected $casts = [
-        'role_id' => UserRoleEnum::class
+        'role_id' => UserRoleEnum::class,
+        'is_active' => ActiveUserEnum::class
     ];
 
     /**
@@ -46,11 +50,27 @@ class User extends Authenticatable
     }
 
     /**
+     * @return HasOne<Survey>
+     */
+    public function survey(): HasOne
+    {
+        return $this->hasOne(Survey::class, 'user_id');
+    }
+
+    /**
      * @return HasMany<Cart>
      */
     public function carts(): HasMany
     {
         return $this->hasMany(Cart::class, 'user_id');
+    }
+
+    /**
+     * @return HasMany<Course>
+     */
+    public function courses(): HasMany
+    {
+        return $this->hasMany(Course::class, 'instructor_id');
     }
 
     /**

@@ -6,6 +6,9 @@ use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use AmazonS3;
+use App\Enums\UserRoleEnum;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 
 class UserService
 {
@@ -53,12 +56,48 @@ class UserService
     }
 
     /**
+     * @param int $userId
+     * @return bool
+     */
+    public function updateRole($userId)
+    {
+        $roleId = UserRoleEnum::Instructor;
+
+        return $this->userRepository->findOrFail($userId)->update([
+            'role_id' => $roleId,
+        ]);
+    }
+
+    /**
+     * @param int $userId
+     * @return bool
+     */
+    public function findRoleInstructor($userId)
+    {
+        if ($this->userRepository->findRoleInstructor($userId)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * @param string $email
      * @param string $password
-     * @return int|bool
+     * @return bool|int
      */
     public function updatePassword($email, $password)
     {
         return $this->userRepository->updatePassword($email, Hash::make($password));
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return Model|null
+     */
+    public function findUser($token)
+    {
+        return $this->userRepository->findUser($token);
     }
 }

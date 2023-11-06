@@ -16,8 +16,8 @@
              </a>
              <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="forms-layouts.html">
-                        <i class="bi bi-book"></i><span>Courses(To do)</span>
+                    <a href="{{ route('instructor.courses.index') }}">
+                        <i class="bi bi-book"></i><span>Courses</span>
                     </a>
                 </li>
              </ul>
