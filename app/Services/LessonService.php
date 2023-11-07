@@ -25,4 +25,23 @@ class LessonService
     {
         return $this->lessonRepo->findOrFail($lessonId);
     }
+
+    /**
+     * @param array $data
+     * @return Model
+     */
+    public function create($data)
+    {
+        return $this->lessonRepo->create($data);
+    }
+
+    /**
+     * @param int $lessonId
+     * @param array $data
+     * @return int|bool|Model
+     */
+    public function update($lessonId, $data)
+    {
+        return $this->lessonRepo->update($lessonId, $data);
+    }
 }

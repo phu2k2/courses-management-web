@@ -7,6 +7,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
+use App\Http\Controllers\Instructor\LessonController as InstructorLessonController;
 use App\Http\Controllers\Instructor\TopicController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
@@ -68,6 +69,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/courses/{courseId}/curriculum/topics/create', [TopicController::class, 'create'])
                 ->name('topics.create');
             Route::post('/courses/{courseId}/curriculum/topics', [TopicController::class, 'store'])->name('topics.store');
+            Route::get('/courses/{courseId}/topics/{topicId}/lessons/create', [InstructorLessonController::class, 'create'])->name('lessons.create');
+            Route::post('/lessons', [InstructorLessonController::class, 'store'])->name('lessons.store');
+            Route::get('/lessons/getUploadUrl/{lessonId}', [InstructorLessonController::class, 'getUploadUrl'])->name('lessons.getUrl');
+            Route::put('/lessons/updateUrl/{lessonId}', [InstructorLessonController::class, 'updateUrl'])->name('lessons.updateUrl');
         });
     });
 

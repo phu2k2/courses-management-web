@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="text-center" style="margin-top: 40px;">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="cancel" class="btn btn-secondary">Cancel</button>
+                                        <a href = {{route('instructor.curriculum.show', ['courseId' => $courseId])}}  class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </form>
                             </div>
