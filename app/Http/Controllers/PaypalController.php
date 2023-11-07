@@ -34,9 +34,7 @@ class PaypalController extends Controller
     {
         $cart = session()->get('cart');
 
-        if (!$cart) {
-            abort(404);
-        }
+        abort_if(!$cart, 404);
 
         $totalAmount = $this->paypalService->calculateTotalAmount($cart);
 
@@ -57,9 +55,9 @@ class PaypalController extends Controller
     public function afterPayment(Request $request): RedirectResponse
     {
         $token = $request->input('token');
-        if (!$token) {
-            abort(404);
-        }
+
+        abort_if(!$token, 404);
+
         $response = $this->paypalService->capturePaymentOrder($token);
 
         if ($response['status'] == 'COMPLETED') {
@@ -70,7 +68,6 @@ class PaypalController extends Controller
             if ($totalAmount !== $amount) {
                 return redirect()->route('carts.index')->with('error', __('messages.payment.paypal.error'));
             }
-
 
             try {
                 $userId = (int) auth()->id();
