@@ -41,7 +41,7 @@ class OrderController extends Controller
     {
         $paymentMethod = $request->input('payment_method');
 
-        if ($paymentMethod === 'paypal') {
+        if ($paymentMethod === config('payment.paypal')) {
             return redirect()->route('paypal.payment');
         }
 
