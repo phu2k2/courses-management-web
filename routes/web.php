@@ -7,6 +7,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Instructor\CourseController as InstructorCourseController;
+use App\Http\Controllers\Instructor\LessonController as InstructorLessonController;
 use App\Http\Controllers\Instructor\TopicController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
@@ -15,6 +16,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\VNPayController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\Instructor\RegisterController as InstructorRegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('carts/{id}', [CartController::class, 'destroy'])->name('carts.destroy');
     Route::resource('checkouts', CheckoutController::class)->only(['index', 'store']);
     Route::resource('orders', OrderController::class)->only(['index', 'store']);
+    Route::resource('surveys', SurveyController::class)->only(['index', 'store']);
     //admin and instructor can access
     Route::middleware(['instructor'])->group(function () {
         Route::prefix('instructor')->name('instructor.')->group(function () {
@@ -65,6 +69,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/courses/{courseId}/curriculum/topics/create', [TopicController::class, 'create'])
                 ->name('topics.create');
             Route::post('/courses/{courseId}/curriculum/topics', [TopicController::class, 'store'])->name('topics.store');
+            Route::get('/courses/{courseId}/topics/{topicId}/lessons/create', [InstructorLessonController::class, 'create'])->name('lessons.create');
+            Route::post('/lessons', [InstructorLessonController::class, 'store'])->name('lessons.store');
+            Route::get('/lessons/getUploadUrl/{lessonId}', [InstructorLessonController::class, 'getUploadUrl'])->name('lessons.getUrl');
+            Route::put('/lessons/updateUrl/{lessonId}', [InstructorLessonController::class, 'updateUrl'])->name('lessons.updateUrl');
         });
     });
 
@@ -101,3 +109,6 @@ Route::resource('orders', OrderController::class)->only(['index', 'store']);
 Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('{courseId}/lessons/{lessonId}', [LessonController::class, 'show'])->name('lessons.show')->middleware('verifyUserAccessCourse');
 });
+
+Route::get('/payments/vn-pay', [VNPayController::class,'index'])->name('vnPay.payment');
+Route::get('/payments/vn-pay/process', [VNPayController::class,'processPaymentAndOrder'])->name('vnPay.processPaymentAndOrder');

@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else if (index > 1) {
                     $('#next').text('Submit');
                     document.getElementById("next").type = "submit";
+                    $("#next").bind('click', function () {
+                        $('#formSurvey').trigger('submit');
+                    })
                 }
             }
 
