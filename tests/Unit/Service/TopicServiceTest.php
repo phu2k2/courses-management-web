@@ -46,5 +46,7 @@ class TopicServiceTest extends TestCase
         $topic = $this->topicService->create($request);
 
         $this->assertInstanceOf(Topic::class, $topic);
+
+        $this->assertEquals(new Topic($validatedData), $topic);
     }
 }
