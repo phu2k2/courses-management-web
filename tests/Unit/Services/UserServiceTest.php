@@ -18,10 +18,6 @@ class UserServiceTest extends TestCase
     {
         parent::setUp();
         $this->userRepo = Mockery::mock('App\Repositories\Interfaces\UserRepositoryInterface')->makePartial();
-
-        // Hash::shouldReceive('make')->andReturnUsing(function ($value) {
-        //     return bcrypt($value);
-        // });
     }
 
     public function tearDown(): void
@@ -44,11 +40,18 @@ class UserServiceTest extends TestCase
             'password' => Hash::make('thanhvu123'),
         ]);
 
-        $this->userRepo->shouldReceive('create')->with($userData)->andReturn($expectedUser);
+        $this->userRepo->shouldReceive('create')
+            ->with(Mockery::on(function ($data) use ($userData) {
+                return $data['username'] === $userData['username'] &&
+                    $data['email'] === $userData['email'] &&
+                    Hash::check($userData['password'], $data['password']);
+            }))
+            ->andReturn($expectedUser);
+
         $userService = new UserService($this->userRepo);
 
-        $userModel = $userService->create($userData);
+        $results = $userService->create($userData);
 
-        $this->assertEquals($userModel, $expectedUser);
+        $this->assertEquals($results, $expectedUser);
     }
 }
