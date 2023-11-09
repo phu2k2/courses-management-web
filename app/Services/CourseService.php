@@ -11,14 +11,15 @@ use App\Http\Requests\RevenueReportRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Repositories\Interfaces\EnrollmentRepositoryInterface;
+use Illuminate\Support\Facades\Redis;
 use App\Repositories\Interfaces\SurveyRepositoryInterface;
 use App\Repositories\Interfaces\CourseRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
-use function PHPUnit\Framework\isNull;
-
 class CourseService
 {
+    protected const CACHE_EXPIRATION = 600;
+
     /**
      * @var CourseRepositoryInterface
      */
@@ -59,7 +60,19 @@ class CourseService
      */
     public function getCourses(GetCoursesRequest $request): LengthAwarePaginator
     {
-        return $this->courseRepo->getCourses($request);
+        $cacheKey = 'courses_' . md5(serialize($request->validated()));
+
+        if (Redis::exists($cacheKey)) {
+            $serializedData = Redis::get($cacheKey);
+            if ($serializedData) {
+                return unserialize($serializedData);
+            }
+        }
+
+        $courses = $this->courseRepo->getCourses($request);
+        Redis::setex($cacheKey, self::CACHE_EXPIRATION, serialize($courses));
+
+        return $courses;
     }
 
     /**
