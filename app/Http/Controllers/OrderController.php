@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrderRequest;
 use App\Services\OrderService;
-use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -37,24 +37,14 @@ class OrderController extends Controller
      * Store a newly created resource in storage.
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request)
     {
         $paymentMethod = $request->input('payment_method');
 
-        if ($paymentMethod === 'paypal') {
-        } elseif ($paymentMethod === 'vnpay') {
-            return redirect()->route('vnPay.payment');
+        if ($paymentMethod === config('payment.paypal')) {
+            return redirect()->route('paypal.payment');
         }
 
-        try {
-            $userId = (int) auth()->id();
-            $cart = session()->get('cart');
-            $this->orderService->buyCourses($userId, $cart);
-        } catch (Exception $e) {
-            session()->flash('error', __('messages.order.error.create_order'));
-            return redirect()->route('carts.index');
-        }
-
-        return redirect()->route('orders.index');
+        return redirect()->route('vnPay.payment');
     }
 }

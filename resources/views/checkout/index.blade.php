@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'checkout')
+
 @section('content')
     <div class="bg-white woocommerce-order-received">
         <!-- SHOP ORDER COMPLETED
@@ -64,7 +65,8 @@
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Total:</th>
-                                                    <td><span class="woocommerce-Price-amount amount"><span
+                                                    <td>
+                                                        <span class="woocommerce-Price-amount amount"><span
                                                                 class="woocommerce-Price-currencySymbol">$</span>{{ number_format($total, 2) }}</span>
                                                     </td>
                                                 </tr>
